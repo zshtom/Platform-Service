@@ -7,7 +7,6 @@ CREATE TABLE `{freetrial}` (
   `phone`        VARCHAR(11)             NOT NULL DEFAULT '',
 
 
-  PRIMARY KEY        (`id`),
-  UNIQUE KEY         (`name`)
+  PRIMARY KEY        (`id`)
 
 );
