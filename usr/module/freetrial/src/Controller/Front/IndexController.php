@@ -61,7 +61,7 @@ class IndexController extends ActionController
 
             // $this->view()->setTemplate('register-success');
             $this->view()->setTemplate(false);
-            $this->view()->assign('content', __('成功试用!'));
+            $this->view()->assign('content', __('Successful trial!'));
             $this->view()->assign('info', $data);
             return ;
 
