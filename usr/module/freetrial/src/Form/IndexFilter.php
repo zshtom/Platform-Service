@@ -16,7 +16,11 @@ class IndexFilter extends InputFilter
         $this->add(array(
             'name'          => 'username',
             'options'       => array(
+<<<<<<< HEAD
                 'label'     => __('Name'),
+=======
+                'label'     => __('name*'),
+>>>>>>> upstream/master
             ),
             'attributes'    => array(
 
@@ -27,7 +31,11 @@ class IndexFilter extends InputFilter
         $this->add(array(
             'name'          => 'work',
             'options'       => array(
+<<<<<<< HEAD
                 'label'     => __('Title*'),
+=======
+                'label'     => __('title*'),
+>>>>>>> upstream/master
             ),
             'attributes'    => array(
 
@@ -37,7 +45,11 @@ class IndexFilter extends InputFilter
         $this->add(array(
             'name'          => 'company',
             'options'       => array(
+<<<<<<< HEAD
                 'label'     => __('Company*'),
+=======
+                'label'     => __('company*'),
+>>>>>>> upstream/master
             ),
             'attributes'    => array(
 
@@ -47,7 +59,11 @@ class IndexFilter extends InputFilter
         $this->add(array(
             'name'          => 'comp_mail',
             'options'       => array(
+<<<<<<< HEAD
                 'label'     => __('Email*'),
+=======
+                'label'     => __('email*'),
+>>>>>>> upstream/master
             ),
             'attributes'    => array(
 
@@ -57,7 +73,11 @@ class IndexFilter extends InputFilter
         $this->add(array(
             'name'          => 'phonenum',
             'options'       => array(
+<<<<<<< HEAD
                 'label'     => __('Phone*'),
+=======
+                'label'     => __('phone*'),
+>>>>>>> upstream/master
             ),
             'attributes'    => array(
 
@@ -67,7 +87,11 @@ class IndexFilter extends InputFilter
         $this->add(array(
             'name'          => 'submit',
             'attributes'    => array(
+<<<<<<< HEAD
                 'value'     => __('Freetrial'),
+=======
+                'value'     => __('freetrial'),
+>>>>>>> upstream/master
                 'type'          => 'submit',
             ),
 
