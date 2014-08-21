@@ -7,8 +7,8 @@
  */
 return array(
     'freetrial'  => array(
-        'title'           => __('免费试用'),
-        'description'     => __('免费试用'),
+        'title'           => __('Freetrial'),
+        'description'     => __('Freetrial'),
         'template'        => 'freetrial-index',
     ),
 );
