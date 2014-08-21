@@ -6,8 +6,6 @@ CREATE TABLE `{freetrial}` (
   `email`        VARCHAR(64)             NOT NULL DEFAULT '',
   `phone`        VARCHAR(11)             NOT NULL DEFAULT '',
 
-
   PRIMARY KEY        (`id`)
-
 
 );
