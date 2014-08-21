@@ -1,9 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: admin
- * Date: 14-8-19
- * Time: 下午5:11
+ * Pi Engine (http://www.social-touch.com/)
+ *
+ * @link      http://www.social-touch.com/ for the Pi Engine source repository
+ * @copyright Copyright (c) Pi Engine (http://www.social-touch.com/)
  */
 return array(
     // Module meta
@@ -52,21 +52,12 @@ return array(
             'sqlfile'   => 'sql/mysql.sql',
             'schema'       => array(
                 'freetrial'      => 'table',
-
             ),
         ),
-
         'maintenance' => array(
             'resource'      => array(
-
                 'block'         => 'block.php',
-
-
             ),
         ),
-
-
-
     ),
-
 );

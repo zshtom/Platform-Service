@@ -1,76 +1,87 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: admin
- * Date: 14-8-19
- * Time: 下午5:25
+ * Pi Engine (http://www.social-touch.com/)
+ *
+ * @link      http://www.social-touch.com/ for the Pi Engine source repository
+ * @copyright Copyright (c) Pi Engine (http://www.social-touch.com/)
  */
 namespace Module\Freetrial\Form;
 
 use Zend\InputFilter\InputFilter;
 
+/**
+ * Feature list:
+ * 1.Filter file
+ *
+ * @author Author Name <[songshixin_songshixin@social-touch.com]>
+ */
 class IndexFilter extends InputFilter
 {
+    /**
+     * Filter file
+     */
     public function __construct()
     {
         $this->add(array(
-            'name'          => 'username',
+            'name'          => 'name',
             'options'       => array(
-                'label'     => __('姓名*'),
+                'label'     => __('Name*'),
             ),
             'attributes'    => array(
-
                 'type'      => 'text',
             ),
         ));
 
         $this->add(array(
-            'name'          => 'work',
+            'name'          => 'title',
             'options'       => array(
-                'label'     => __('职务*'),
+                'label'     => __('Title*'),
             ),
             'attributes'    => array(
 
                 'type'      => 'text',
             ),
         ));
+
         $this->add(array(
             'name'          => 'company',
             'options'       => array(
-                'label'     => __('公司*'),
+                'label'     => __('Company*'),
             ),
             'attributes'    => array(
 
                 'type'      => 'text',
             ),
         ));
+
         $this->add(array(
-            'name'          => 'comp_mail',
+            'name'          => 'email',
             'options'       => array(
-                'label'     => __('企业邮箱*'),
+                'label'     => __('Email*'),
             ),
             'attributes'    => array(
 
                 'type'      => 'text',
             ),
         ));
+
         $this->add(array(
-            'name'          => 'phonenum',
+            'name'          => 'phone',
             'options'       => array(
-                'label'     => __('电话*'),
+                'label'     => __('Phone*'),
             ),
             'attributes'    => array(
 
                 'type'      => 'text',
             ),
         ));
+
         $this->add(array(
             'name'          => 'submit',
             'attributes'    => array(
-                'value'     => __('免费试用'),
+                'value'     => __('Freetrial'),
                 'type'          => 'submit',
             ),
-
         ));
     }
 }
