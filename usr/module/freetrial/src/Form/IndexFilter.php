@@ -1,31 +1,43 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: admin
- * Date: 14-8-19
- * Time: 下午5:25
+ * Pi Engine (http://www.social-touch.com/)
+ *
+ * @link      http://www.social-touch.com/ for the Pi Engine source repository
+ * @copyright Copyright (c) Pi Engine (http://www.social-touch.com/)
  */
 namespace Module\Freetrial\Form;
 
 use Zend\InputFilter\InputFilter;
 
+/**
+ * Feature list:
+ * 1.Filter file
+ *
+ * @author Author Name <[songshixin_songshixin@social-touch.com]>
+ */
 class IndexFilter extends InputFilter
 {
+    /**
+     * Filter file
+     */
     public function __construct()
     {
         $this->add(array(
-            'name'          => 'username',
+            'name'          => 'name',
             'options'       => array(
+<<<<<<< HEAD
+                'label'     => __('Name*'),
+=======
                 'label'     => __('Name'),
+>>>>>>> upstream/master
             ),
             'attributes'    => array(
-
                 'type'      => 'text',
             ),
         ));
 
         $this->add(array(
-            'name'          => 'work',
+            'name'          => 'title',
             'options'       => array(
                 'label'     => __('Title*'),
             ),
@@ -34,6 +46,7 @@ class IndexFilter extends InputFilter
                 'type'      => 'text',
             ),
         ));
+
         $this->add(array(
             'name'          => 'company',
             'options'       => array(
@@ -44,8 +57,9 @@ class IndexFilter extends InputFilter
                 'type'      => 'text',
             ),
         ));
+
         $this->add(array(
-            'name'          => 'comp_mail',
+            'name'          => 'email',
             'options'       => array(
                 'label'     => __('Email*'),
             ),
@@ -54,8 +68,9 @@ class IndexFilter extends InputFilter
                 'type'      => 'text',
             ),
         ));
+
         $this->add(array(
-            'name'          => 'phonenum',
+            'name'          => 'phone',
             'options'       => array(
                 'label'     => __('Phone*'),
             ),
@@ -64,13 +79,13 @@ class IndexFilter extends InputFilter
                 'type'      => 'text',
             ),
         ));
+
         $this->add(array(
             'name'          => 'submit',
             'attributes'    => array(
                 'value'     => __('Freetrial'),
                 'type'          => 'submit',
             ),
-
         ));
     }
 }

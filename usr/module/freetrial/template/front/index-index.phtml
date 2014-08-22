@@ -1,19 +1,18 @@
-
 <?php if (isset($error)) {
     echo $error;
 } ?>
 
 <?php echo $this->form()->openTag($form) ?>
-<div id="member-freetrial-username">
-    <?php $element = $form->get('username'); ?>
+<div id="member-freetrial-name">
+    <?php $element = $form->get('name'); ?>
     <div><?php echo $this->formLabel($element),$this->formElement($element); ?></div>
     <div><?php
         echo $this->formElementErrors($element); ?>
     </div>
 </div>
 
-<div id="member-freetrial-work">
-    <?php $element = $form->get('work'); ?>
+<div id="member-freetrial-title">
+    <?php $element = $form->get('title'); ?>
     <div><?php echo $this->formLabel($element), $this->formElement($element); ?></div>
     <div><?php
         echo $this->formElementErrors($element); ?>
@@ -28,16 +27,16 @@
     </div>
 </div>
 
-<div id="member-freetrial-comp_mail">
-    <?php $element = $form->get('comp_mail'); ?>
+<div id="member-freetrial-email">
+    <?php $element = $form->get('email'); ?>
     <div><?php echo $this->formLabel($element),$this->formElement($element); ?></div>
     <div><?php
         echo $this->formElementErrors($element); ?>
     </div>
 </div>
 
-<div id="member-freetrial-phonenum">
-    <?php $element = $form->get('phonenum'); ?>
+<div id="member-freetrial-phone">
+    <?php $element = $form->get('phone'); ?>
     <div><?php echo $this->formLabel($element),$this->formElement($element); ?></div>
     <div><?php
         echo $this->formElementErrors($element); ?>

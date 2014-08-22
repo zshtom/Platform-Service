@@ -6,5 +6,13 @@ CREATE TABLE `{freetrial}` (
   `email`        VARCHAR(64)             NOT NULL DEFAULT '',
   `phone`        VARCHAR(11)             NOT NULL DEFAULT '',
 
+<<<<<<< HEAD
+
+  PRIMARY KEY        (`id`),
+  UNIQUE KEY         (`name`)
+
+);
+=======
   PRIMARY KEY        (`id`)
 );
+>>>>>>> upstream/master

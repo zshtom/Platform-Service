@@ -1,10 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: admin
- * Date: 14-8-20
- * Time: 上午10:15
+ * Pi Engine (http://www.social-touch.com/)
+ *
+ * @link      http://www.social-touch.com/ for the Pi Engine source repository
+ * @copyright Copyright (c) Pi Engine (http://www.social-touch.com/)
  */
+
 return array(
     'freetrial'  => array(
         'title'           => __('Freetrial'),
