@@ -14,5 +14,6 @@ CREATE TABLE `{freetrial}` (
 );
 =======
   PRIMARY KEY        (`id`)
+
 );
 >>>>>>> upstream/master
