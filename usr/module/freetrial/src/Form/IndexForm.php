@@ -1,9 +1,16 @@
 <?php
 /**
+<<<<<<< HEAD
  * Pi Engine (http://www.social-touch.com/)
  *
  * @link      http://www.social-touch.com/ for the Pi Engine source repository
  * @copyright Copyright (c) Pi Engine (http://www.social-touch.com/)
+=======
+ * Pi Engine (http://pialog.org/)
+ *
+ * @link      http://code.pialog.org for the Pi Engine source repository
+ * @copyright Copyright (c) Pi Engine (http://pialog.org/)
+>>>>>>> upstream/master
  */
 
 namespace Module\Freetrial\Form;
@@ -26,7 +33,11 @@ class IndexForm extends BaseForm
         $this->add(array(
             'name'          => 'name',
             'options'       => array(
+<<<<<<< HEAD
                 'label'     => __('Name*'),
+=======
+                'label'     => __('Name'),
+>>>>>>> upstream/master
             ),
             'attributes'    => array(
                 'type'      => 'text',
@@ -36,7 +47,11 @@ class IndexForm extends BaseForm
         $this->add(array(
             'name'          => 'title',
             'options'       => array(
+<<<<<<< HEAD
                 'label'     => __('Title*'),
+=======
+                'label'     => __('Title'),
+>>>>>>> upstream/master
             ),
             'attributes'    => array(
                 'type'      => 'text',
