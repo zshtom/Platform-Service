@@ -25,11 +25,7 @@ class IndexFilter extends InputFilter
         $this->add(array(
             'name'          => 'name',
             'options'       => array(
-<<<<<<< HEAD
                 'label'     => __('Name*'),
-=======
-                'label'     => __('Name'),
->>>>>>> upstream/master
             ),
             'attributes'    => array(
                 'type'      => 'text',

@@ -61,11 +61,9 @@ class IndexController extends ActionController
             $row->save();
             $module = $this->getModule();
             $this->view()->setTemplate(false);
-<<<<<<< HEAD
-            $this->view()->assign('content', __('Success!'));
-=======
+
             $this->view()->assign('content', __('Successful trial!'));
->>>>>>> upstream/master
+
             $this->view()->assign('info', $data);
             return ;
         }
