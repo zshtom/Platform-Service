@@ -33,11 +33,7 @@ class IndexForm extends BaseForm
         $this->add(array(
             'name'          => 'name',
             'options'       => array(
-<<<<<<< HEAD
                 'label'     => __('Name*'),
-=======
-                'label'     => __('Name'),
->>>>>>> upstream/master
             ),
             'attributes'    => array(
                 'type'      => 'text',
@@ -47,11 +43,7 @@ class IndexForm extends BaseForm
         $this->add(array(
             'name'          => 'title',
             'options'       => array(
-<<<<<<< HEAD
                 'label'     => __('Title*'),
-=======
-                'label'     => __('Title'),
->>>>>>> upstream/master
             ),
             'attributes'    => array(
                 'type'      => 'text',
