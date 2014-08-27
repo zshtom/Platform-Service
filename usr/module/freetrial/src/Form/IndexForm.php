@@ -1,36 +1,44 @@
 <?php
 /**
- * Pi Engine (http://pialog.org/)
+ * Pi Engine (http://www.social-touch.com/)
  *
- * @link      http://code.pialog.org for the Pi Engine source repository
- * @copyright Copyright (c) Pi Engine (http://pialog.org/)
+ * @link      http://www.social-touch.com/ for the Pi Engine source repository
+ * @copyright Copyright (c) Pi Engine (http://www.social-touch.com/)
  */
+
 namespace Module\Freetrial\Form;
 
 use Pi\Form\Form as BaseForm;
 
+/**
+ * Feature list:
+ * 1.Create Freetrial module forms
+ *
+ * @author Author Name <[songshixin_songshixin@social-touch.com]>
+ */
 class IndexForm extends BaseForm
 {
+    /**
+     * Create Freetrial module forms
+     */
     public function init()
     {
         $this->add(array(
-            'name'          => 'username',
+            'name'          => 'name',
             'options'       => array(
-                'label'     => __('Name'),
+                'label'     => __('Name*'),
             ),
             'attributes'    => array(
-
                 'type'      => 'text',
             ),
         ));
 
         $this->add(array(
-            'name'          => 'work',
+            'name'          => 'title',
             'options'       => array(
-                'label'     => __('Title'),
+                'label'     => __('Title*'),
             ),
             'attributes'    => array(
-
                 'type'      => 'text',
             ),
         ));
@@ -40,12 +48,11 @@ class IndexForm extends BaseForm
                 'label'     => __('Company*'),
             ),
             'attributes'    => array(
-
                 'type'      => 'text',
             ),
         ));
         $this->add(array(
-            'name'          => 'comp_mail',
+            'name'          => 'email',
             'options'       => array(
                 'label'     => __('Email*'),
             ),
@@ -55,12 +62,11 @@ class IndexForm extends BaseForm
             ),
         ));
         $this->add(array(
-            'name'          => 'phonenum',
+            'name'          => 'phone',
             'options'       => array(
                 'label'     => __('Phone*'),
             ),
             'attributes'    => array(
-
                 'type'      => 'text',
             ),
         ));
@@ -71,9 +77,6 @@ class IndexForm extends BaseForm
             ),
             'type'          => 'submit',
         ));
-
-
-
     }
 
 }
