@@ -38,8 +38,7 @@ class Nav extends AbstractRegistry
         $rowset = $model->selectWith($select);
         foreach ($rowset as $row) {
             $id = (int) $row['id'];
-//             $name = $row['slug'] ?: $row['name'];
-            $name = $row['name'];
+            $name = $row['slug'] ?: $row['name'];
             $url = Pi::service('url')->assemble('apps', array(
                 'module'    => $this->module,
                 'name'      => $name,

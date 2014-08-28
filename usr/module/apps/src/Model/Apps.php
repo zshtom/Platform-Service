@@ -7,12 +7,12 @@
  * @license      http://pialog.org/license.txt BSD 3-Clause License
  */
 
-namespace Module\Appas\Model;
+namespace Module\Apps\Model;
 
 use Pi\Application\Model\Model;
 
 /**
- * Model class for Apps
+ * Model class for Page
  *
  * @author Taiwen Jiang <taiwenjiang@tsinghua.org.cn>
  */
@@ -22,9 +22,9 @@ class Apps extends Model
      * {@inheritDoc}
      */
     protected $columns = array(
-        'id', 'name', 'title', 'summery', 'content', 'markup', 'active',
-        'uid', 'time_release', 'time_created', 'time_updated',
-        'icon',
-        'nav_order'
+        'id', 'name', 'title', 'slug', 'content', 'markup', 'active',
+        'user', 'time_created', 'time_updated', 'seo_title', 'seo_keywords', 'seo_description',
+        'nav_order', 'theme', 'layout',
+        'icon', 'summery', 'time_release',
     );
 }

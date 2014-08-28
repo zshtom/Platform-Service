@@ -11,39 +11,27 @@ namespace Module\Apps\Form;
 
 use Pi;
 use Pi\Form\Form as BaseForm;
-use Zend\Form\Element\File;
 
-class AppForm extends BaseForm
+class AppsForm extends BaseForm
 {
-    protected $markup = 'html';
+    protected $markup = 'text';
 
     /**
      * Constructor
      *
      * @param null|string|int $name Optional name for the element
-     * @param string $markup App type: text, html, markdown
+     * @param string $markup Apps type: html
      */
     public function __construct($name = null, $markup = null)
     {
         $this->markup = $markup ?: $this->markup;
-        $this->addElements();
         parent::__construct($name);
-    }
-
-    // http://framework.zend.com/manual/2.1/en/modules/zend.form.file-upload.html
-    public function addElements()
-    {
-        // File Input
-        $file = new File('image-file');
-        $file->setLabel('Avatar Image Upload')
-        ->setAttribute('id', 'image-file');
-        //$this->add($file);
     }
 
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new AppFilter;
+            $this->filter = new AppsFilter;
         }
 
         return $this->filter;
@@ -73,54 +61,92 @@ class AppForm extends BaseForm
         ));
 
         $this->add(array(
-            'name'          => 'time_release',
-            'options'       => array(
-                    'label' => _a('Release Time'),
-            ),
-            'attributes'    => array(
-                    'type'  => 'text',
-                    'description'   => _a(''),
-            ),
-        ));
-
-        $this->add(array(
             'name'          => 'summery',
             'options'       => array(
-                    'label' => _a('Summery'),
+                'label' => _a('App Summery'),
             ),
             'attributes'    => array(
-                    'type'  => 'textarea',
-                    'description'   => _a('255 Charts limit.'),
-            ),
+                'type'  => 'textarea',
+            )
         ));
-
-        $set = '';
-        switch ($this->markup) {
-            case 'html':
-                $editor         = 'html';
-                break;
-            case 'markdown':
-                $editor         = 'markitup';
-                $set            = 'markdown';
-                break;
-            case 'text':
-            default:
-                $editor         = 'textarea';
-                break;
-        }
 
         $this->add(array(
-            'name'          => 'content',
-            'type'          => 'editor',
+            'name'          => 'icon',
             'options'       => array(
-                'label'     => _a('Content'),
-                'editor'    => $editor,
-                'set'       => $set,
+                'label' => _a('Icon file name.'),
             ),
             'attributes'    => array(
-                'rows'         => 5,
+                'type'  => 'hidden',
+                'id'    => 'icon-url'
+            )
+        ));
+
+        $this->add(array(
+            'name'          => 'slug',
+            'options'       => array(
+                'label' => _a('SEO slug'),
+            ),
+            'attributes'    => array(
+                'type'          => 'text',
+                'description'   => _a('Unique slug for SEO URL.'),
+            )
+        ));
+
+        $this->add(array(
+            'name'          => 'theme',
+            'type'          => 'theme',
+            'options'       => array(
+                'allow_auto'    => true,
             ),
         ));
+
+        $this->add(array(
+            'name'          => 'layout',
+            'type'          => 'layout',
+            'options'       => array(
+                'theme' => '', // Specify theme name here
+            ),
+        ));
+
+        if ('phtml' == $this->markup) {
+            $this->add(array(
+                'name'          => 'content',
+                'options'       => array(
+                    'label' => _a('Template name'),
+                ),
+                'attributes'    => array(
+                    'description'   => _a('Select a template from `usr/custom/module/apps/template/front/` w/o extension.'),
+                ),
+            ));
+        } else {
+            $set = '';
+            switch ($this->markup) {
+                case 'html':
+                    $editor         = 'html';
+                    break;
+                case 'markdown':
+                    $editor         = 'markitup';
+                    $set            = 'markdown';
+                    break;
+                case 'text':
+                default:
+                    $editor         = 'textarea';
+                    break;
+            }
+
+            $this->add(array(
+                'name'          => 'content',
+                'type'          => 'editor',
+                'options'       => array(
+                    'label'     => _a('Content'),
+                    'editor'    => $editor,
+                    'set'       => $set,
+                ),
+                'attributes'    => array(
+                    'rows'         => 5,
+                ),
+            ));
+        }
 
         // extra_seo
         $this->add(array(

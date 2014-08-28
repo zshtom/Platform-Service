@@ -33,13 +33,13 @@ class Apps extends AbstractRegistry
         $model  = Pi::model('apps', $this->module);
         $select = $model->select();
         $select->where(array('active' => 1));
-        $select->columns(array('id', 'name', 'title'));
+        $select->columns(array('id', 'name', 'slug'));
         $rowset = $model->selectWith($select);
         foreach ($rowset as $row) {
             $id = (int) $row['id'];
             $item = array(
                 'name'  => $row['name'],
-                'title'  => $row['title'],
+                'slug'  => $row['slug'],
             );
             $list[$id] = $item;
         }

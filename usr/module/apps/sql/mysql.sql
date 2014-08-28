@@ -6,7 +6,7 @@
 
 CREATE TABLE IF NOT EXISTS `{apps}` (
   `id`              int(10)     unsigned    NOT NULL AUTO_INCREMENT,
-  `uid`             int(10)     unsigned    NOT NULL DEFAULT '0',
+  `user`             int(10)     unsigned    NOT NULL DEFAULT '0',
   `name`            varchar(64)             DEFAULT NULL,
   `title`           varchar(255)            NOT NULL DEFAULT '',
   `time_release`    int(10)     unsigned    NOT NULL DEFAULT '0',
@@ -25,6 +25,10 @@ CREATE TABLE IF NOT EXISTS `{apps}` (
   `seo_title`       varchar(255)            NOT NULL default '',
   `seo_keywords`    varchar(255)            NOT NULL default '',
   `seo_description` varchar(255)            NOT NULL default '',
+  
+  -- For rendering
+  `theme`           varchar(64)             NOT NULL default '',
+  `layout`          varchar(64)             NOT NULL default '',
   
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)

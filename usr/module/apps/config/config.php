@@ -24,7 +24,7 @@ return array(
             'filter'        => 'text',
             'value'         => 'upload/apps/'
         ),
-        'icon_size' => array(
+        'icon_max_size' => array(
             'category'      => 'icon',
             'title'         => _t('Upload file size limit'),
             'description'   => '',
@@ -32,7 +32,7 @@ return array(
             'filter'        => 'int',
             'value'         => 2048
         ),
-        'icon_width' => array(
+        'icon_max_width' => array(
             'category'      => 'icon',
             'title'         => _t('Upload picture width limit'),
             'description'   => '',
@@ -40,7 +40,7 @@ return array(
             'filter'        => 'int',
             'value'         => 80
         ),
-        'icon_height' => array(
+        'icon_max_height' => array(
             'category'      => 'icon',
             'title'         => _t('Upload picture height limit'),
             'description'   => '',

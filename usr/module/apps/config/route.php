@@ -9,14 +9,13 @@
 
 return array(
     // route name
-    'app'  => array(
+    'apps'  => array(
         'name'      => 'apps',
         'section'   => 'front',
         'priority'  => 10,
 
         'type'      => 'Module\Apps\Route\Apps',
         'options'   => array(
-            //'route'     => '/apps',
             'defaults'  => array(
                 'module'        => 'apps',
                 'controller'    => 'index',

@@ -18,7 +18,7 @@ return array(
         'front'     => false,
         'admin'     => array(
             'list'     => array(
-                'label'         => _t('Apps list'),
+                'label'         => _t('Product list'),
                 'route'         => 'admin',
                 'controller'    => 'index',
                 'action'        => 'index',
@@ -45,6 +45,12 @@ return array(
                 'route'         => 'admin',
                 'controller'    => 'index',
                 'action'        => 'add',
+            ),
+            'template'  => array(
+                'label'         => _t('Template list'),
+                'route'         => 'admin',
+                'controller'    => 'template',
+                'action'        => 'index',
             ),
         ),
 

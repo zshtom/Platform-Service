@@ -15,7 +15,7 @@ return array(
         // Description, for admin, optional
         'description'   => _a('Product module description.'),
         // Version number, required
-        'version'       => '0.0.1',
+        'version'       => '1.0.2',
         // Distribution license, required
         'license'       => 'New BSD',
         // Logo image, for admin, optional

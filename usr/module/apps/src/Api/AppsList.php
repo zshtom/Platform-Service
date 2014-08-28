@@ -38,7 +38,7 @@ class AppsList extends AbstractApi
                 'title' => $row['title'],
                 'icon'  => $config['icon_upload_path'] . '/' . $row['icon'],
                 'url'   => Pi::service('url')->assemble(
-                            'app',
+                            'apps',
                             array('module' => 'apps', 'id' => $row['id'])
                            ),
             );

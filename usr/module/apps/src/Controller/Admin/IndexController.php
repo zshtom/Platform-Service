@@ -11,8 +11,10 @@ namespace Module\Apps\Controller\Admin;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Module\Apps\Form\AppForm;
-use Module\Apps\Form\AppFilter;
+use Module\Apps\Form\AppsForm;
+use Module\Apps\Form\AppsFilter;
+
+use Pi\File\Transfer\Upload;
 
 /**
  * Index action controller
@@ -41,8 +43,8 @@ class IndexController extends ActionController
         $apps = array_merge($menu, $apps);
 
         $this->view()->assign('apps', $apps);
-        $this->view()->assign('title', _a('Apps list'));
-        $this->view()->setTemplate('apps-list');
+        $this->view()->assign('title', _a('App list'));
+        $this->view()->setTemplate('app-list');
     }
 
     /**
@@ -55,14 +57,11 @@ class IndexController extends ActionController
             $data = $this->request->getPost();
             $markup = $data['markup'];
 
-            // Set slug
-            if (!empty($data['slug'])) {
-                $data['slug'] = Pi::api('text', 'apps')->slug($data['slug']);
-            }
+            print('get post data: <pre>' . print_r($data, TRUE) . '</pre>');
 
             // Set form
-            $form = new AppForm('app-form', $markup);
-            $form->setInputFilter(new AppFilter);
+            $form = new AppsForm('app-form', $markup);
+            $form->setInputFilter(new AppsFilter);
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
@@ -70,11 +69,20 @@ class IndexController extends ActionController
                 if (empty($values['name'])) {
                     $values['name'] = null;
                 }
-
+                if (empty($values['slug'])) {
+                    $values['slug'] = null;
+                }
                 $values['active'] = 1;
-                $values['uid'] = Pi::service('user')->getUser()->id;
+                $values['user'] = Pi::service('user')->getUser()->id;
                 $values['time_created'] = time();
                 unset($values['id']);
+
+                // Fix upload icon url
+                $iconImages = $this->setIconPath(array($data));
+
+                if (isset($iconImages[0]['image'])) {
+                    $values['icon'] = $iconImages[0]['image'];
+                }
 
                 // Save
                 $id = Pi::api('api', $this->getModule())->add($values);
@@ -89,21 +97,53 @@ class IndexController extends ActionController
                 $message = _a('Invalid data, please check and re-submit.');
             }
         } else {
-            // Get markup type, default set html.
-            $markup = $this->params('type', 'html');
-            $form = new AppForm('app-form', $markup);
+            $markup = $this->params('type', 'text');
+            $form = new AppsForm('app-form', $markup);
             $form->setAttribute(
                 'action',
                 $this->url('', array('action' => 'add'))
             );
+            if ('phtml' == $markup) {
+                $template = $this->params('template');
+                if ($template) {
+                    $form->setData(array(
+                        'content'   => $template,
+                    ));
+                }
+            }
             $message = '';
         }
 
         $this->view()->assign('markup', $markup);
         $this->view()->assign('form', $form);
-        $this->view()->assign('title', _a('Add a App'));
+        $this->view()->assign('title', _a('Add a app'));
         $this->view()->assign('message', $message);
         $this->view()->setTemplate('app-add');
+    }
+
+    protected function setIconPath($list) {
+        $rootPath   = $this->rootPath();
+        $rootUrl    = $this->rootUrl();
+        $uploadPath = $this->tmpPath();
+        $uploadUrl  = $this->tmpUrl() . '/';
+        $prefixLen  = strlen($uploadUrl);
+
+        $items = array();
+        foreach ($list as $item) {
+            if ($uploadUrl == substr($item['icon'], 0, $prefixLen)) {
+                $imgName = substr($item['icon'], $prefixLen);
+                $renamed = rename(
+                        $uploadPath . '/' . $imgName,
+                        $rootPath . '/' . $imgName
+                );
+                if ($renamed) {
+                    $item['image'] = $rootUrl . '/' . $imgName;
+                }
+            }
+            $items[] = $item;
+        }
+
+        return $items;
     }
 
     /**
@@ -118,8 +158,8 @@ class IndexController extends ActionController
             $row = $this->getModel('apps')->find($id);
 
             // Set form
-            $form = new AppForm('app-form', $row->markup);
-            $form->setInputFilter(new AppFilter);
+            $form = new AppsForm('app-form', $row->markup);
+            $form->setInputFilter(new AppsFilter);
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
@@ -127,7 +167,15 @@ class IndexController extends ActionController
                 if (empty($values['name'])) {
                     $values['name'] = null;
                 }
-
+                if (empty($values['slug'])) {
+                    $values['slug'] = null;
+                }
+                if (!$values['name'] || $row->name != $values['name']) {
+                    $this->removeApp($row->name);
+                }
+                if ($values['name']) {
+                    $this->setApp($values['name'], $values['title']);
+                }
                 $values['time_updated'] = time();
 
                 // Save
@@ -144,16 +192,21 @@ class IndexController extends ActionController
             $id = $this->params('id');
             $row = $this->getModel('apps')->find($id);
             $data = $row->toArray();
-            $form = new AppForm('app-form', $row->markup);
+            $form = new AppsForm('app-form', $row->markup);
             $form->setData($data);
             $form->setAttribute(
                 'action',
                 $this->url('', array('action' => 'edit'))
             );
             $message = '';
+
+            $data['image'] = $data['icon'];
+//             print('Row data: <pre>' . print_r($data, TRUE) . '</pre>');
+            $json_data = json_encode($data);
         }
 
         $this->view()->assign('form', $form);
+        $this->view()->assign('content', $json_data);
         $this->view()->assign('title', _a('App edit'));
         $this->view()->assign('message', $message);
         $this->view()->setTemplate('app-edit');
@@ -169,7 +222,6 @@ class IndexController extends ActionController
         $row = $this->getModel('apps')->find($id);
         if ($row) {
 //             if ($row->name) {
-//                 // Replace condition by name to id when remove.
 //                 $this->removeApp($row->name);
 //             }
             $row->delete();
@@ -195,9 +247,9 @@ class IndexController extends ActionController
         if ($row) {
             $row->active = $row->active ? 0 : 1;
             $row->save();
-            Pi::registry('apps')->clear($this->getModule());
+//             Pi::registry('apps')->clear($this->getModule());
         }
-        Pi::registry('apps', $this->getModule())->flush();
+//         Pi::registry('apps', $this->getModule())->flush();
         Pi::registry('nav', $this->getModule())->flush();
 
         return $this->jump(
@@ -212,7 +264,7 @@ class IndexController extends ActionController
      */
     public function menuAction()
     {
-        $orders = $this->params('nav_order');
+        $orders = $this->params('order');
         $model = $this->getModel('apps');
         foreach ($orders as $id => $value) {
             $model->update(
@@ -249,9 +301,20 @@ class IndexController extends ActionController
         $row = Pi::model('apps')->select($app)->current();
         if ($row) {
             $row->title = $title;
+        } else {
+            $app = array(
+                'section'       => 'front',
+                'module'        => $this->getModule(),
+                'controller'    => 'index',
+                'action'        => $name,
+                'title'         => $title,
+                'block'         => 1,
+                'custom'        => 0,
+            );
+            $row = Pi::model('apps')->createRow($app);
         }
         $row->save();
-        Pi::registry('apps', $this->getModule())->flush();
+//         Pi::registry('apps', $this->getModule())->flush();
 
         return $row->id;
     }
@@ -273,5 +336,101 @@ class IndexController extends ActionController
         $count = Pi::model('apps')->delete($where);
 
         return $count;
+    }
+
+    /**
+     * Get root URL
+     *
+     * @return string
+     */
+    protected function rootUrl()
+    {
+        return Pi::url('upload') . '/' . $this->getModule();
+    }
+
+    /**
+     * Get root path for upload
+     *
+     * @return string
+     */
+    protected function rootPath()
+    {
+        return Pi::path('upload') . '/' . $this->getModule();
+    }
+
+    /**
+     * Get tmp upload URL
+     *
+     * @return string
+     */
+    protected function tmpUrl()
+    {
+        return Pi::url('upload/_tmp');
+    }
+
+    /**
+     * Get tmp upload path
+     *
+     * @return string
+     */
+    protected function tmpPath()
+    {
+        return Pi::path('upload/_tmp');
+    }
+
+    /**
+     * Upload image files
+     *
+     * Store files to a tmp dir and will be moved to regular dir on submission
+     */
+    public function uploadAction()
+    {
+        $return = array(
+                'status'    => 1,
+                'message'   => '',
+                'image'     => '',
+        );
+        $rename         = '%random%';
+        $destination    = $this->tmpPath();
+        $uploadUrl      = $this->tmpUrl();
+
+        $config         = Pi::config('', $module);
+        if ($config['icon_media']) {
+            $exts = explode(',', $config['icon_media']);
+            $exts = array_filter(array_walk($exts, 'trim'));
+            $extensions = implode(',', $exts);
+        }
+        $extensions     = $extensions ?: 'jpg,png,gif';
+        $maxFile        = (int) $config['icon_max_size']  * 1024;
+        $maxSize        = array();
+        if ($config['icon_max_width']) {
+            $maxSize['width'] = (int) $config['icon_max_width'];
+        }
+        if ($config['icon_max_height']) {
+            $maxSize['height'] = (int) $config['icon_max_height'];
+        }
+
+        $uploader = new Upload(array('rename' => $rename));
+        $uploader->setDestination($destination)->setExtension($extensions);
+        if ($maxFile) {
+            $uploader->setSize($maxFile);
+        }
+        if ($maxSize) {
+            $uploader->setImageSize($maxSize);
+        }
+        if ($uploader->isValid()) {
+            $uploader->receive();
+            $file = $uploader->getUploaded('image');
+            $return['image'] = $uploadUrl . '/' . $file;
+        } else {
+            $messages = $uploader->getMessages();
+            $return = array(
+                    'status'    => 0,
+                    'image'     => '',
+                    'message'   => implode('; ', $messages),
+            );
+        }
+
+        return $return;
     }
 }

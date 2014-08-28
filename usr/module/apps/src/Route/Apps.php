@@ -9,68 +9,18 @@
 
 namespace Module\Apps\Route;
 
-use Pi\Mvc\Router\Http\Standard;
-// use Zend\Mvc\Router\Http\RouteMatch;
-use Zend\Stdlib\RequestInterface as Request;
 use Pi;
-
-// use Pi;
-// use Pi\Mvc\Router\Http\Standard;
+use Pi\Mvc\Router\Http\Standard;
 
 /**
  * Route for apps
  *
- *  1. ID: /url/app/123
- *  2. Slug: /url/app/my-slug
- *  3. Name: /url/app/myname
+ *  1. ID: /url/apps/123
+ *  2. Slug: /url/apps/my-slug
+ *  3. Name: /url/apps/myname
  */
 class Apps extends Standard
 {
-
-    // https://github.com/pi-engine/pi/wiki/Dev.Module-Route
-//     protected $prefix = '';
-
-//     protected $defaults = array(
-//             'module'     => 'apps',
-//             'controller' => 'index',
-//             'action'     => 'index',
-//     );
-
-//     public function match(Request $request, $pathOffset = null)
-//     {
-//         $result = $this->canonizePath($request, $pathOffset);
-//         // Route not match
-//         if (null === $result) {
-//             return null;
-//         }
-//         list($path, $pathLength) = $result;
-
-//         // https://github.com/pi-engine/pi/wiki/Dev.Module-Route
-//         if (false === ($pos = strpos($path, '-'))) {
-//             if (is_numeric($path)) {
-//                 $id = $path;
-//             } else {
-//                 $slug = $path;
-//             }
-//         } else {
-//             list($id, $slug) = explode('-', $path, 2);
-//             if (!is_numeric($id)) {
-//                 $id = null;
-//                 $slug = $path;
-//             }
-//         }
-
-//         // Assigning match parameters
-//         $matches = array(
-//                 'action'        => (null === $slug) ? 'id' : 'apps',
-//                 'id'            => $id,
-//                 'apps'          => urldecode($slug),
-//         );
-
-//         // Route matched
-//         return new RouteMatch(array_merge($this->defaults, $matches), $pathLength);
-//     }
-
     /**
      * {@inheritDoc}
      */
@@ -111,7 +61,7 @@ class Apps extends Standard
             }
         } else {
             $pName = empty($matches['name']) ? $name : $matches['name'];
-//             $pSlug = empty($matches['slug']) ? $name : $matches['slug'];
+            $pSlug = empty($matches['slug']) ? $name : $matches['slug'];
             if ($pName || $pSlug) {
                 foreach ($appsList as $id => $app) {
                     if ($pName && $pName == $app['name']) {
@@ -119,11 +69,11 @@ class Apps extends Standard
                         $matches['id'] = $id;
                         break;
                     }
-//                     if ($pSlug && $pSlug == $app['slug']) {
-//                         $action = $app['name'];
-//                         $matches['id'] = $id;
-//                         break;
-//                     }
+                    if ($pSlug && $pSlug == $app['slug']) {
+                        $action = $app['name'];
+                        $matches['id'] = $id;
+                        break;
+                    }
                 }
             }
         }
