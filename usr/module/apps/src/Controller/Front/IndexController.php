@@ -82,6 +82,7 @@ class IndexController extends ActionController
         } elseif ($slug) {
             $row = $this->getModel('apps')->find($name, 'slug');
         }
+
         if ($row && $row->active) {
             $nav = Pi::registry('nav', $this->getModule())->read();
             if (isset($nav[$row->id])) {

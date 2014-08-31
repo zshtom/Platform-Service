@@ -27,7 +27,6 @@ class Apps extends Standard
     public function parse($path)
     {
         $module = $this->defaults['module'];
-
         $name = '';
         if ($path) {
             if (false !== ($pos = strpos($path, $this->paramDelimiter))) {
@@ -37,6 +36,7 @@ class Apps extends Standard
                 $path = '';
             }
         }
+
         $params  = $path
             ? explode($this->paramDelimiter, trim($path, $this->paramDelimiter))
             : array();
@@ -55,6 +55,7 @@ class Apps extends Standard
         // Set action
         $action = '';
         $appsList = Pi::registry('apps', $module)->read();
+
         if (!empty($matches['id'])) {
             if (isset($appsList[$matches['id']])) {
                 $action = $appsList[$matches['id']]['name'];
@@ -62,6 +63,7 @@ class Apps extends Standard
         } else {
             $pName = empty($matches['name']) ? $name : $matches['name'];
             $pSlug = empty($matches['slug']) ? $name : $matches['slug'];
+
             if ($pName || $pSlug) {
                 foreach ($appsList as $id => $app) {
                     if ($pName && $pName == $app['name']) {

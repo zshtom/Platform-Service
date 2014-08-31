@@ -53,11 +53,14 @@ class IndexController extends ActionController
     public function addAction()
     {
 
+        $module  = $this->getModule();
+        $config         = Pi::config('', $module);
+
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
             $markup = $data['markup'];
 
-            print('get post data: <pre>' . print_r($data, TRUE) . '</pre>');
+//             print('get post data: <pre>' . print_r($data, TRUE) . '</pre>');
 
             // Set form
             $form = new AppsForm('app-form', $markup);
@@ -97,7 +100,7 @@ class IndexController extends ActionController
                 $message = _a('Invalid data, please check and re-submit.');
             }
         } else {
-            $markup = $this->params('type', 'text');
+            $markup = $this->params('type', 'html');
             $form = new AppsForm('app-form', $markup);
             $form->setAttribute(
                 'action',
@@ -225,8 +228,8 @@ class IndexController extends ActionController
 //                 $this->removeApp($row->name);
 //             }
             $row->delete();
-//             Pi::registry('apps')->clear($this->getModule());
-//             Pi::registry('apps', $this->getModule())->flush();
+            Pi::registry('apps')->clear($this->getModule());
+            Pi::registry('apps', $this->getModule())->flush();
             Pi::registry('nav', $this->getModule())->flush();
         }
 
@@ -292,28 +295,28 @@ class IndexController extends ActionController
         if (!$name) {
             return;
         }
-        $app = array(
-            'section'       => 'front',
-            'module'        => $this->getModule(),
-            'controller'    => 'index',
-            'action'        => $name,
-        );
-        $row = Pi::model('apps')->select($app)->current();
-        if ($row) {
-            $row->title = $title;
-        } else {
-            $app = array(
-                'section'       => 'front',
-                'module'        => $this->getModule(),
-                'controller'    => 'index',
-                'action'        => $name,
-                'title'         => $title,
-                'block'         => 1,
-                'custom'        => 0,
-            );
-            $row = Pi::model('apps')->createRow($app);
-        }
-        $row->save();
+//         $app = array(
+//             'section'       => 'front',
+//             'module'        => $this->getModule(),
+//             'controller'    => 'index',
+//             'action'        => $name,
+//         );
+//         $row = Pi::model('apps')->select($app)->current();
+//         if ($row) {
+//             $row->title = $title;
+//         } else {
+//             $app = array(
+//                 'section'       => 'front',
+//                 'module'        => $this->getModule(),
+//                 'controller'    => 'index',
+//                 'action'        => $name,
+//                 'title'         => $title,
+//                 'block'         => 1,
+//                 'custom'        => 0,
+//             );
+//             $row = Pi::model('apps')->createRow($app);
+//         }
+//         $row->save();
 //         Pi::registry('apps', $this->getModule())->flush();
 
         return $row->id;
@@ -394,7 +397,9 @@ class IndexController extends ActionController
         $destination    = $this->tmpPath();
         $uploadUrl      = $this->tmpUrl();
 
+        $module         = $this->getModule();
         $config         = Pi::config('', $module);
+
         if ($config['icon_media']) {
             $exts = explode(',', $config['icon_media']);
             $exts = array_filter(array_walk($exts, 'trim'));
@@ -412,22 +417,26 @@ class IndexController extends ActionController
 
         $uploader = new Upload(array('rename' => $rename));
         $uploader->setDestination($destination)->setExtension($extensions);
+
         if ($maxFile) {
             $uploader->setSize($maxFile);
         }
         if ($maxSize) {
             $uploader->setImageSize($maxSize);
         }
+
         if ($uploader->isValid()) {
             $uploader->receive();
             $file = $uploader->getUploaded('image');
             $return['image'] = $uploadUrl . '/' . $file;
+            $return['uploader'] = '<pre>' . print_r($uploader, TRUE) . '</pre>';
         } else {
             $messages = $uploader->getMessages();
             $return = array(
                     'status'    => 0,
                     'image'     => '',
                     'message'   => implode('; ', $messages),
+                    'uploader'  => '<pre>' . print_r($uploader, TRUE) . '</pre>',
             );
         }
 

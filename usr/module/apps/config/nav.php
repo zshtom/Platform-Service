@@ -46,12 +46,6 @@ return array(
                 'controller'    => 'index',
                 'action'        => 'add',
             ),
-            'template'  => array(
-                'label'         => _t('Template list'),
-                'route'         => 'admin',
-                'controller'    => 'template',
-                'action'        => 'index',
-            ),
         ),
 
     ),

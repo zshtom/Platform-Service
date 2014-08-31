@@ -25,7 +25,7 @@ return array(
 
         'icon'          => 'fa-file-text-o',
 
-        'clonable'      => true,
+        'clonable'      => false,
     ),
     // Author information
     'author'    => array(

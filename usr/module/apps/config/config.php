@@ -51,10 +51,10 @@ return array(
         'icon_media' => array(
             'category'      => 'icon',
             'title'         => _t('Upload files types'),
-            'description'   => '',
+            'description'   => _t('Extensions for images to upload, separate `,`.'),
             'edit'          => 'textarea',
             'filter'        => 'text',
-            'value'         => 'jpg, jpeg, png, gif'
+            'value'         => 'jpg,png,gif',
         ),
     ),
 );
