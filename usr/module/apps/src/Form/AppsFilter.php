@@ -27,6 +27,16 @@ class AppsFilter extends InputFilter
         ));
 
         $this->add(array(
+            'name'          => 'nav_order',
+            'required'      => false,
+            'filters'       => array(
+                array(
+                    'name'  => 'StringTrim',
+                ),
+            ),
+        ));
+
+        $this->add(array(
             'name'          => 'name',
             'required'      => false,
             'filters'       => array(

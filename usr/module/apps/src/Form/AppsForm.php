@@ -50,6 +50,16 @@ class AppsForm extends BaseForm
         ));
 
         $this->add(array(
+            'name'          => 'nav_order',
+            'options'       => array(
+                'label' => _a('Navigation Order'),
+            ),
+            'attributes'    => array(
+                'type'  => 'text',
+            ),
+        ));
+
+        $this->add(array(
             'name'          => 'name',
             'options'       => array(
                 'label' => _a('Unique name'),

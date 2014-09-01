@@ -177,7 +177,7 @@ class IndexController extends ActionController
                 // Save
                 $row->assign($values);
                 $row->save();
-                Pi::registry('apps')->clear($this->getModule());
+//                 Pi::registry('apps')->clear($this->getModule());
                 Pi::service('cache')->flush('module', $this->getModule());
                 $message = _a('App data saved successfully.');
                 return $this->jump(array('action' => 'index'), $message);
@@ -309,7 +309,7 @@ class IndexController extends ActionController
 //             );
 //             $row = Pi::model('apps')->createRow($app);
 //         }
-        $row->save();
+//         $row->save();
 //         Pi::registry('apps', $this->getModule())->flush();
 
         return $row->id;

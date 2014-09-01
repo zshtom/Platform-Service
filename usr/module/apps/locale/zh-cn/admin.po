@@ -69,3 +69,27 @@ msgstr "模块简介"
 
 msgid "App Content"
 msgstr "产品模块说明"
+
+msgid "Navigation Order"
+msgstr "导航排序"
+
+msgid "Only alphabet, number and underscore allowed."
+msgstr "只允许字母、数字和下划线。" 
+
+msgid "SEO settings"
+msgstr "SEO 设置"
+
+msgid "SEO Title"
+msgstr "SEO 标题"
+
+msgid "SEO Keywords"
+msgstr "SEO 关键词"
+
+msgid "SEO Description"
+msgstr "SEO 描述"
+
+msgid "To be used for HTML head meta."
+msgstr "将被添加到HTML的meta数据中。"
+
+msgid "Unique slug for SEO URL."
+msgstr "用于URL的SEO，唯一字符串。"

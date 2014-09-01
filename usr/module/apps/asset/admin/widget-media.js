@@ -46,6 +46,8 @@
             this.remove();
             console.log("initialize Backbone view.");
             $(".widget-item-add").show();
+            // Remove hidden icon url.
+            $("#icon-url").val("");
         }
     });
 
