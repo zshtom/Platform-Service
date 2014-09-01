@@ -10,7 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-namespace Module\Page\Api;
+namespace Module\Apps\Api;
 
 use Pi\Application\Api\AbstractApi;
 
@@ -58,14 +58,14 @@ class Text extends AbstractApi
      * @param  string $description
      * @return string
      */
-    public function description($description) 
+    public function description($description)
     {
-        $description = _strip($description); 
+        $description = _strip($description);
         $description = strtolower(trim($description));
         $description = preg_replace('/[\s]+/', ' ', $description);
 
         return $description;
-    }   
+    }
 
     /**
      * Invoke as a functor
@@ -75,9 +75,9 @@ class Text extends AbstractApi
      * @param  string $title
      * @return string
      */
-    public function title($title) 
+    public function title($title)
     {
-        $title = _strip($title); 
+        $title = _strip($title);
         $title = strtolower(trim($title));
         $title = preg_replace('/[\s]+/', ' ', $title);
 
@@ -116,5 +116,5 @@ class Text extends AbstractApi
         $name = implode('-', $name);
 
         return $name;
-    }              
+    }
 }

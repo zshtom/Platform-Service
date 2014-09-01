@@ -22,23 +22,6 @@ return array(
                 'route'         => 'admin',
                 'controller'    => 'index',
                 'action'        => 'index',
-
-                'apps' => array(
-                    'edit'   => array(
-                        'label'         => _t('Edit app'),
-                        'route'         => 'admin',
-                        'controller'    => 'index',
-                        'action'        => 'edit',
-                        'visible'       => 0,
-                    ),
-                    'delete'   => array(
-                        'label'         => _t('Delete app'),
-                        'route'         => 'admin',
-                        'controller'    => 'index',
-                        'action'        => 'delete',
-                        'visible'       => 0,
-                    ),
-                ),
             ),
             'add'   => array(
                 'label'         => _t('Add a app'),

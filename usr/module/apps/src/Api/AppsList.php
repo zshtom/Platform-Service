@@ -25,8 +25,8 @@ class AppsList extends AbstractApi
      */
     public function appsList($active = 1)
     {
-        $model  = Pi::model('apps', $this->module);
-        $config = Pi::config('', $this->getModule());
+        $module  = $this->getModule();
+        $config  = Pi::config('', $module);
         $select = $model->select();
         $select->where(array('active' => $active));
         $select->columns(array('id', 'name', 'title', 'icon'));
@@ -38,8 +38,8 @@ class AppsList extends AbstractApi
                 'title' => $row['title'],
                 'icon'  => $config['icon_upload_path'] . '/' . $row['icon'],
                 'url'   => Pi::service('url')->assemble(
-                            'apps',
-                            array('module' => 'apps', 'id' => $row['id'])
+                                'apps',
+                                array($this->module, 'id' => $row['id'])
                            ),
             );
             $list[$id] = $item;

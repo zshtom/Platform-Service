@@ -13,7 +13,7 @@ return array(
         // Module title, required
         'title'         => _a('Product Module'),
         // Description, for admin, optional
-        'description'   => _a('Product module description.'),
+        'description'   => _a('Product module description'),
         // Version number, required
         'version'       => '1.0.2',
         // Distribution license, required
@@ -22,9 +22,7 @@ return array(
         'logo'          => 'image/apps-logo.png',
         // Demo site link, optional
         'demo'          => 'http://demo.pialog.org/demo',
-
         'icon'          => 'fa-file-text-o',
-
         'clonable'      => false,
     ),
     // Author information

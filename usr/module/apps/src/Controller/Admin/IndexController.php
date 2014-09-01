@@ -106,14 +106,7 @@ class IndexController extends ActionController
                 'action',
                 $this->url('', array('action' => 'add'))
             );
-            if ('phtml' == $markup) {
-                $template = $this->params('template');
-                if ($template) {
-                    $form->setData(array(
-                        'content'   => $template,
-                    ));
-                }
-            }
+
             $message = '';
         }
 
@@ -184,7 +177,7 @@ class IndexController extends ActionController
                 // Save
                 $row->assign($values);
                 $row->save();
-//                 Pi::registry('apps')->clear($this->getModule());
+                Pi::registry('apps')->clear($this->getModule());
                 Pi::service('cache')->flush('module', $this->getModule());
                 $message = _a('App data saved successfully.');
                 return $this->jump(array('action' => 'index'), $message);
@@ -316,7 +309,7 @@ class IndexController extends ActionController
 //             );
 //             $row = Pi::model('apps')->createRow($app);
 //         }
-//         $row->save();
+        $row->save();
 //         Pi::registry('apps', $this->getModule())->flush();
 
         return $row->id;
@@ -389,9 +382,9 @@ class IndexController extends ActionController
     public function uploadAction()
     {
         $return = array(
-                'status'    => 1,
-                'message'   => '',
-                'image'     => '',
+            'status'    => 1,
+            'message'   => '',
+            'image'     => '',
         );
         $rename         = '%random%';
         $destination    = $this->tmpPath();
@@ -433,10 +426,10 @@ class IndexController extends ActionController
         } else {
             $messages = $uploader->getMessages();
             $return = array(
-                    'status'    => 0,
-                    'image'     => '',
-                    'message'   => implode('; ', $messages),
-                    'uploader'  => '<pre>' . print_r($uploader, TRUE) . '</pre>',
+                'status'    => 0,
+                'image'     => '',
+                'message'   => implode('; ', $messages),
+                'uploader'  => '<pre>' . print_r($uploader, TRUE) . '</pre>',
             );
         }
 

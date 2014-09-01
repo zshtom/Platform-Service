@@ -31,8 +31,8 @@ class Search extends AbstractSearch
         'id'            => 'id',
         'title'         => 'title',
         'content'       => 'content',
-        'time_created'  => 'time',
-        'user'          => 'uid',
+        'time_created'  => 'time_created',
+        'user'          => 'user',
     );
 
     /**

@@ -138,7 +138,7 @@ class AppsForm extends BaseForm
                 'name'          => 'content',
                 'type'          => 'editor',
                 'options'       => array(
-                    'label'     => _a('Content'),
+                    'label'     => _a('App Content'),
                     'editor'    => $editor,
                     'set'       => $set,
                 ),

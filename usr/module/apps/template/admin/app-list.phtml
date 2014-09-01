@@ -6,12 +6,12 @@
     <table class="table">
         <thead>
         <tr>
-            <th><?php echo _a('Page title'); ?></th>
-            <th style="width: 5%;"><?php echo _a('Name'); ?></th>
-            <th style="width: 5%;"><?php echo _a('Slug'); ?></th>
-            <th style="width: 5%;"><?php echo _a('Type'); ?></th>
-            <th style="width: 15%;"><?php echo _a('Time published'); ?></th>
-            <th style="width: 15%;"><?php echo _a('Last Update'); ?></th>
+            <th><?php echo _a('App title'); ?></th>
+            <!-- <th style="width: 5%;"><?php echo _a('Name'); ?></th> -->
+            <th style="width: 10%;"><?php echo _a('App Icon'); ?></th>
+            <th style="width: 30%;"><?php echo _a('App Summery'); ?></th>
+            <th style="width: 10%;"><?php echo _a('Time Created'); ?></th>
+            <th style="width: 5%;"><?php echo _a('Nav Order'); ?></th>
             <th><?php echo _a('Action'); ?></th>
             <th style="width: 5%;"></th>
         </tr>
@@ -24,21 +24,26 @@
                     <?php echo _escape($app['title']); ?>
                     </a>
                 </td>
+                <!--
                 <td>
                     <?php echo _escape($app['name']); ?>
                 </td>
+                -->
                 <td>
-                    <?php echo _escape($app['slug']); ?>
+                    <img src="<?php echo _escape($app['icon']); ?>" width="80px" />
                 </td>
                 <td>
-                    <?php echo _escape($app['markup']); ?>
+                    <?php echo _escape($app['summery']); ?>
                 </td>
                 <td>
-                    <?php echo _date($app['time_created']); ?>
+                    <?php echo _date($app['time_created'], null, 'NULL', 'NULL',
+                            null, null, null, 'Y-m-d'); ?>
                 </td>
-                <td>
-                    <?php echo $app['time_updated'] ? _date($app['time_updated']) : ''; ?>
+
+                <td width="2%">
+                    <input type="text" name="order[<?php echo $app['id']; ?>]" value="<?php echo $app['nav_order']; ?>" size="5" class="form-control">
                 </td>
+
                 <td>
                     <div class="btn-group">
                         <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'edit', 'id' => $app['id'])); ?>"><?php echo _a('Edit'); ?></a>
@@ -49,9 +54,6 @@
                             <a class="btn btn-sm btn-warning" href="<?php echo $this->url('', array('action' => 'activate', 'id' => $app['id'])); ?>"><?php echo _a('Enable'); ?></a>
                         <?php }?>
                     </div>
-                </td>
-                <td>
-                    <input type="text" name="order[<?php echo $app['id']; ?>]" value="<?php echo $app['nav_order']; ?>" class="form-control">
                 </td>
             </tr>
         <?php } ?>

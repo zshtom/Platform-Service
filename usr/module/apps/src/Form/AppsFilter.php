@@ -41,7 +41,7 @@ class AppsFilter extends InputFilter
                         'pattern'   => '/[a-z0-9_]/',
                     ),
                 ),
-//                 new Validator\AppsNameDuplicate(),
+                new Validator\AppsNameDuplicate(),
             ),
         ));
 
