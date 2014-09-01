@@ -221,8 +221,8 @@ class IndexController extends ActionController
 //                 $this->removeApp($row->name);
 //             }
             $row->delete();
-            Pi::registry('apps')->clear($this->getModule());
-            Pi::registry('apps', $this->getModule())->flush();
+//             Pi::registry('apps')->clear($this->getModule());
+//             Pi::registry('apps', $this->getModule())->flush();
             Pi::registry('nav', $this->getModule())->flush();
         }
 
