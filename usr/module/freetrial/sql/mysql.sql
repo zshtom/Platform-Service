@@ -5,7 +5,11 @@ CREATE TABLE `{freetrial}` (
   `company`      VARCHAR(64)             NOT NULL DEFAULT '',
   `email`        VARCHAR(64)             NOT NULL DEFAULT '',
   `phone`        VARCHAR(11)             NOT NULL DEFAULT '',
+  `flag`          tinyint(1) unsigned     NOT NULL default '0',
 
-  PRIMARY KEY        (`id`)
+
+
+  PRIMARY KEY        (`id`),
+  UNIQUE KEY         (`name`)
 
 );

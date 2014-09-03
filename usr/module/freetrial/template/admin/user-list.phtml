@@ -1,0 +1,34 @@
+<form action="<?php $this->url('admin', array('action' => 'list')) ?>" method="POST">
+    <label><?php echo __('All: ') ?></label>
+    <select name="type">
+        <option value="name" <?php echo $type == 'name' ? 'selected' : ''; ?>><?php echo __('Name') ?></option>
+        <option value="company" <?php echo $type == 'company' ? 'selected' : ''; ?>><?php echo __('Company') ?></option>
+        <option value="phone" <?php echo $type == 'phone' ? 'selected' : ''; ?>><?php echo __('Phone') ?></option>
+    </select>
+    <input name="keyword" type="text" value="<?php echo $keyword ?>" />
+    <input name="submit" type="submit" value="Search" />
+</form>
+
+<table>
+    <tr>
+        <th><?php echo __('Id') ?></th>
+        <th><?php echo __('Name') ?></th>
+        <th><?php echo __('Title') ?></th>
+        <th><?php echo __('Company') ?></th>
+        <th><?php echo __('Email') ?></th>
+        <th><?php echo __('Phone') ?></th>
+    </tr>
+    <?php foreach ($items as $item) { ?>
+        <tr>
+            <td><?php echo $item['id'] ?></td>
+            <td><?php echo $item['name'] ?></td>
+            <td><?php echo $item['title'] ?></td>
+            <td><?php echo $item['company'] ?></td>
+            <td><?php echo $item['email'] ?></td>
+            <td><?php echo $item['phone'] ?></td>
+            <td>
+                <a href="<?php echo $this->url('admin', array('action' => 'delete', 'id' => $item['id'])) ?>"><?php echo __('Delete') ?></a>
+            </td>
+        </tr>
+    <?php } ?>
+</table>

@@ -1,9 +1,9 @@
 <?php
 /**
- * Pi Engine (http://www.social-touch.com/)
+ * Pi Engine (http://pialog.org/)
  *
- * @link      http://www.social-touch.com/ for the Pi Engine source repository
- * @copyright Copyright (c) Pi Engine (http://www.social-touch.com/)
+ * @link      http://code.pialog.org for the Pi Engine source repository
+ * @copyright Copyright (c) Pi Engine (http://pialog.org/)
  */
 
 namespace Module\Freetrial\Form;

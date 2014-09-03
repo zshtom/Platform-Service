@@ -1,0 +1,81 @@
+<?php
+$this->jquery();
+?>
+<!--<script  type="text/javascript" src="jquery-2.1.1.min.js"></script>-->
+<script language="JavaScript">
+    $("document").ready(function(){
+        $("#btn1").click(function(){
+            $("input[name='checkbox']").each(function(){
+//                this.checked = true;
+                $(this).attr("checked",true);
+            })
+        })
+        $("#btn2").click(function(){
+            $("input[name='checkbox']").each(function(){
+               $(this).attr("checked",false);
+            })
+        })
+        $("#btn3").click(function(){
+            var str="";
+            var ids="";
+            $("[name='checkbox'][checked]").each(function(){
+                str+=$(this).val()+",";
+            })
+            alert(str) ;
+
+            $.post(
+                'http://localhost/Platform-Service/www/admin/freetrial/user/batchdelete/',
+                {
+                    ids:str
+                },
+                function (data) //回传函数
+                {
+                    alert(data.msg);
+                }, 'json'
+            );
+        })
+    })
+</script>
+<form action="<?php $this->url('admin', array('action' => 'index')) ?>" method="POST">
+    <select name="type">
+        <option value="name" <?php echo $type == 'name' ? 'selected' : ''; ?>><?php echo __('Name') ?></option>
+        <option value="company" <?php echo $type == 'company' ? 'selected' : ''; ?>><?php echo __('Company') ?></option>
+        <option value="phone" <?php echo $type == 'phone' ? 'selected' : ''; ?>><?php echo __('Phone') ?></option>
+    </select>
+
+    <input name="keyword" type="text" value="<?php echo $keyword ?>" />
+    <input name="submit" type="submit" value="Search" /><br>
+
+    <input type="button" id="btn1" value="全选">
+    <input type="button" id="btn2" value="反选">
+   <input type="button" id="btn3" value="批量删除">
+</form>
+<table>
+    <tr>
+        <th><?php echo __('Id') ?></th>
+        <th><?php echo __('Name') ?></th>
+        <th><?php echo __('Title') ?></th>
+        <th><?php echo __('Company') ?></th>
+        <th><?php echo __('Email') ?></th>
+        <th><?php echo __('Phone') ?></th>
+    </tr>
+    <?php foreach ($pages as $page) { ?>
+        <tr>
+            <td> <input type="checkbox" name="checkbox" value="<?php echo $page['id'] ?>"></td>
+            <td><?php echo $page['id'] ?></td>
+            <td><?php echo $page['name'] ?></td>
+            <td><?php echo $page['title'] ?></td>
+            <td><?php echo $page['company'] ?></td>
+            <td><?php echo $page['email'] ?></td>
+            <td><?php echo $page['phone'] ?></td>
+            <td>
+                <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $page['id'])); ?>"><?php echo _a('Delete'); ?></a>
+            </td>
+        </tr>
+    <?php } ?>
+</table>
+<?php
+if (!empty($paginator)) {
+    echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml');
+}
+?>

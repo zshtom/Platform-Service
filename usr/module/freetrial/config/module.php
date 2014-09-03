@@ -8,13 +8,13 @@
 return array(
     // Module meta
     // 'acl'       =>'acl.php',
-    'meta'  => [
+    'meta'  => array(
         // Module title, required
         'title'         => _a('Freetrial'),
         // Description, for admin, optional
         'description'   => _a('Freetrial'),
         // Version number, required
-        'version'       => '0.1',
+        'version'       => '1.1.0',
         // Distribution license, required
         'license'       => 'New BSD',
         // Logo image, for admin, optional
@@ -28,7 +28,7 @@ return array(
 
         // Module is ready for clone? Default as false
         'clonable'      => true,
-    ],
+    ),
     // Author information
     'author'    => array(
         // Author full name, required
@@ -45,19 +45,35 @@ return array(
     ),
 
     'resource' => array(
-        'block'         => 'block.php',
-        // Database meta
+
+
         'database'  => array(
             // SQL schema/data file
             'sqlfile'   => 'sql/mysql.sql',
-            'schema'       => array(
-                'freetrial'      => 'table',
-            ),
         ),
-        'maintenance' => array(
-            'resource'      => array(
-                'block'         => 'block.php',
-            ),
+        // Module configs
+        'config'    => 'config.php',
+        // Permission specs
+        'permission'    => 'permission.php',
+        // Block definition
+        'block'     => 'block.php',
+        // Bootstrap, priority
+        'bootstrap' => 1,
+        // Event specs
+        //'search'    => array('callback' =>
+        'event'     => 'event.php',
+        // Search registry, 'class:method'array('search', 'index')),
+        // View pages
+        'page'      => 'page.php',
+        // Navigation definition
+        'navigation'    => 'navigation.php',
+        // Routes, first in last out; bigger priority earlier out
+        'route'     => 'route.php',
+        // Callback for stats and monitoring
+        'monitor'   => array('callback' => array('monitor', 'index')),
+        // Additional custom extension
+        'test'      => array(
+            'config'    => 'For test',
         ),
     ),
 );
