@@ -11,7 +11,7 @@ return array(
             'pagea'   => array(
                 'label'      => __('List Member'),
                 'route'      => 'admin',
-                'controller' => 'user',
+                'controller' => 'index',
                 'action'     => 'index',
             )
         ),
