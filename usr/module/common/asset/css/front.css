@@ -1,0 +1,36 @@
+.indexTab .tab-pane img {
+    float: left;
+}
+.indexTab .tab-pane h3{
+    padding-top: 22px;
+    margin-bottom: 20px;
+}
+.indexTab .nav-tabs {
+    margin-bottom: 70px;
+    border:  none;
+    background-color: #f8f8f8;
+    font-size: 24px;
+}
+.indexTab .nav-tabs > li.active > a, .indexTab .nav-tabs > li.active > a:hover,.indexTab .nav-tabs > li.active > a:focus{
+    background-color: transparent;
+    border: none;
+    color: #FF0000;
+    border-bottom: 1px solid red;
+}
+.indexTab .nav-tabs > li.active > span{
+    display: block;
+}
+
+.indexTab a {
+    color: #444444;
+    text-decoration: none;
+    padding: 10px 100px;
+}
+.indexTab .nav > li > a{
+    padding: 10px 100px;
+}
+.indexTab .pi-navbar-caret-tab{
+    border-bottom: 8px solid red;
+    bottom: 0;
+    z-index: 1001;
+}
