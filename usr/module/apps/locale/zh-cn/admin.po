@@ -76,6 +76,9 @@ msgstr "导航排序"
 msgid "Only alphabet, number and underscore allowed."
 msgstr "只允许字母、数字和下划线。" 
 
+msgid "SEO slug"
+msgstr "SEO 短词"
+
 msgid "SEO settings"
 msgstr "SEO 设置"
 
