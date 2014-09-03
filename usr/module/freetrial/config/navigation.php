@@ -13,7 +13,7 @@ return array(
                 'route'      => 'admin',
                 'controller' => 'index',
                 'action'     => 'index',
-            )
+            ),
 	    'pageb'   => array(
                 'label'      => __('Export List'),
                 'route'      => 'admin',
