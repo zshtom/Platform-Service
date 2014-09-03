@@ -1,7 +1,6 @@
 <?php
 /**
  * Pi Engine (http://www.social-touch.com/)
- *
  * @link      http://www.social-touch.com/ for the Pi Engine source repository
  * @copyright Copyright (c) Pi Engine (http://www.social-touch.com/)
  */
@@ -16,11 +15,13 @@ use Zend\Db\Sql\Predicate;
 /**
  * Feature list:
  * 1.Show freetrial user information
- *
- * @author Author Name <[songshixin_songshixin@social-touch.com]>
+ * @author Author Name <[lichunhui_lichunhui@social-touch.com]>
  */
 class IndexController extends ActionController
 {
+    /**
+     * @return array|void
+     */
     public function indexAction()
     {
         $type = $this->params('type',null);
@@ -85,6 +86,9 @@ class IndexController extends ActionController
         $this -> view()->setTemplate('test-list');
     }
 
+    /**
+     * @return mixed
+     */
     public function deleteAction()
     {
         $id = $this->params('id');
@@ -97,6 +101,9 @@ class IndexController extends ActionController
         );
     }
 
+    /**
+     *
+     */
     public function batchdeleteAction(){
         echo json_encode(array('msg' => 'ok'));
         $all = trim($this->params('ids'), ',');
