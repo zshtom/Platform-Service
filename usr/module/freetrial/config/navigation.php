@@ -14,6 +14,12 @@ return array(
                 'controller' => 'index',
                 'action'     => 'index',
             )
+	    'pageb'   => array(
+                'label'      => __('Export List'),
+                'route'      => 'admin',
+                'controller' => 'export',
+                'action'     => 'index',
+            ),
         ),
     ),
 );
