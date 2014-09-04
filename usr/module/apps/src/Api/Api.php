@@ -99,4 +99,54 @@ class Api extends AbstractApi
 
         return true;
     }
+
+    /**
+     * Get Apps List.
+     *
+     * @param array $active
+     *
+     * @return array $list
+     */
+    public function appsList($active = 1)
+    {
+        $list = array();
+
+
+        $where = array(
+            'active'  => $active,
+        );
+
+        // Get article result set
+        $module    = $this->getModule();
+        $rowset = Pi::model('apps', $module)->select($where);
+
+
+//         $rowset = Pi::model('apps', $this->getModule())->select($active, 'active');
+
+//         $select = $model->select();
+//         $select->where(array('active' => $active));
+//         $select->columns(array('id'));
+//         $select->order(array('nav_order ASC'));
+//         print('Select: <pre>' . print_r($select, TRUE) . '</pre>');
+//         $rowset = $model->selectWith($select);
+//         print('Select: <pre>' . print_r($rowset, TRUE) . '</pre>');
+        foreach ($rowset as $row) {
+//             print('Get module from API: <pre>' . print_r($row['id'], TRUE) . '</pre>');
+            $id = (int) $row['id'];
+            $item = array(
+                'id'    => $id,
+                'name'  => $row['name'],
+                'title' => $row['title'],
+                'icon'  => $config['icon_upload_path'] . '/' . $row['icon'],
+                'url'   => Pi::service('url')->assemble(
+                    'apps',
+                    array($this->module, 'id' => $row['id'])
+                ),
+            );
+            $list[$id] = $item;
+        }
+
+        return $list;
+    }
+
 }

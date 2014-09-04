@@ -34,6 +34,14 @@ class AppsFilter extends InputFilter
                     'name'  => 'StringTrim',
                 ),
             ),
+            'validators'    => array(
+                array(
+                    'name'      => 'Regex',
+                    'options'   => array(
+                        'pattern'   => '/[0-9]/',
+                    ),
+                ),
+            ),
         ));
 
         $this->add(array(

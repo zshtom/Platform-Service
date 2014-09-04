@@ -19,6 +19,7 @@ class Install extends BasicInstall
     {
         $events = $this->events;
         $events->attach('install.post', array($this, 'postInstall'), 1);
+        $events->attach('install.post', array($this, 'createBlock'));
         parent::attachDefaultListeners();
         return $this;
     }
@@ -35,10 +36,31 @@ class Install extends BasicInstall
         $apiHandler = Pi::api('api', 'page')->setModule($module);
 
         $result = array(
-                'status'    => true,
-                'message'   => _a('Pages added.'),
+            'status'    => $status,
+            'message'   => _a('Pages added.'),
         );
+
         $this->setResult('post-install', $result);
+    }
+
+    /**
+     * Create blocks
+     *
+     * @param Event $e
+     */
+    public function createBlock(Event $e)
+    {
+        // Spotlight block
+        $block = array(
+            'module'        => 'widget',
+            'name'          => 'apps_desc_block',
+            'title'         => _a('Apps Description'),
+            'description'   => _a('Apps Description content admin.'),
+            'type'          => 'html',
+            'content'   => _a('Apps Description content admin.'),
+        );
+
+        $result = Pi::api('block', 'widget')->add($block);
     }
 
 }
