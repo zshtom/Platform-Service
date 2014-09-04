@@ -29,6 +29,7 @@ class IndexController extends ActionController
         $model  = $this->getModel('apps');
         $select = $model->select()->order(array('active DESC', 'nav_order ASC', 'id DESC'));
         $rowset = $model->selectWith($select);
+        print('Get rowset line 32: <pre>' . print_r($rowset, TRUE) . '</pre>');
         $apps  = array();
         $menu   = array();
         foreach ($rowset as $row) {
@@ -75,7 +76,9 @@ class IndexController extends ActionController
                 if (empty($values['slug'])) {
                     $values['slug'] = null;
                 }
-                $values['active'] = 1;
+
+//                 $values['active'] = 1;
+
                 $values['user'] = Pi::service('user')->getUser()->id;
                 $values['time_created'] = time();
                 unset($values['id']);
@@ -166,12 +169,7 @@ class IndexController extends ActionController
                 if (empty($values['slug'])) {
                     $values['slug'] = null;
                 }
-                if (!$values['name'] || $row->name != $values['name']) {
-                    $this->removeApp($row->name);
-                }
-                if ($values['name']) {
-                    $this->setApp($values['name'], $values['title']);
-                }
+
                 $values['time_updated'] = time();
 
                 // Save
@@ -182,6 +180,9 @@ class IndexController extends ActionController
                 $message = _a('App data saved successfully.');
                 return $this->jump(array('action' => 'index'), $message);
             } else {
+                $data['image'] = $data['icon'];
+                //             print('Row data: <pre>' . print_r($data, TRUE) . '</pre>');
+                $json_data = json_encode($data);
                 $message = _a('Invalid data, please check and re-submit.');
             }
         } else {

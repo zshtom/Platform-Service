@@ -59,7 +59,11 @@ class IndexController extends ActionController
             }
             $row = $this->getModel('freetrial')->createRow($data);
             $row->save();
-            $module = $this->getModule();
+            $model  = $this->getModel('freetrial');
+            $date=date('Y-m-d H:i:s',time());
+            $row = $model->find($data['name'], 'name');
+            $row->date = $date;
+            $row->save();
             $this->view()->setTemplate(false);
 
             $this->view()->assign('content', __('Successful trial!'));

@@ -47,7 +47,7 @@
                 <td>
                     <div class="btn-group">
                         <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'edit', 'id' => $app['id'])); ?>"><?php echo _a('Edit'); ?></a>
-                        <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $app['id'])); ?>"><?php echo _a('Delete'); ?></a>
+                        <a onclick="return confirm('<?php print _t('Delete it?')?>')" class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $app['id'])); ?>"><?php echo _a('Delete'); ?></a>
                         <?php if ($app['active']) { ?>
                         <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'activate', 'id' => $app['id'])); ?>"><?php echo _a('Disable'); ?></a>
                         <?php } else { ?>

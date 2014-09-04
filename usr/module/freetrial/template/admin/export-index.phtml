@@ -1,0 +1,77 @@
+<?php
+    $this->jQuery('extension/fileupload-min.js');
+    $locale = Pi::config('locale');
+    if (false !== strpos('-', $locale)) {
+        $list = explode('-', $locale, 2);
+        $locale = $list[0] . '-' . strtoupper($list[1]);
+    }
+    $datepickerLocale = sprintf('datepicker/locales/bootstrap-datepicker.%s.js', $locale);
+    $this->bootstrap(array(
+        'datepicker/datepicker.css',
+        'datepicker/bootstrap-datepicker.js',
+        $datepickerLocale,
+        'js/bootstrap-typeahead.js',
+    ));
+    $this->css($this->assetModule('script/front.css'));
+    $this->Backbone();
+    $uid = Pi::user()->getId();
+?>
+<?php
+    echo __("Application Period<br>");
+    echo __("From：　　　　　　　　To： <br>");
+?>
+<form action="<?php $this->url('admin', array('action' => 'index')) ?>" method="POST">
+    <input type="text" id="start" name="start">
+    <input type="text" id="end" name="end">
+    <input name="submit" type="submit" value="Search"  onclick=""/>
+</form>
+<script>
+   $(document).ready(function(){
+     $('#start').datepicker({
+        dateFormat:'yy-mm-dd',
+        onSelect: function( startDate ) {
+            var $startDate = $( "#js-start-time" );
+            var $endDate = $('#js-end-time');
+            var endDate = $endDate.datepicker( 'getDate' );
+            if(endDate < startDate){
+                $endDate.datepicker('setDate', startDate - 3600*1000*24);
+            }
+            $endDate.datepicker( "option", "minDate", startDate );
+        }
+     });
+     $('#end').datepicker({
+        dateFormat:'yy-mm-dd',
+        onSelect: function( endDate ) {
+            var $startDate = $( "#js-start-time" );
+            var $endDate = $('#js-end-time');
+            var startDate = $startDate.datepicker( "getDate" );
+            if(endDate < startDate){
+                $startDate.datepicker('setDate', startDate + 3600*1000*24);
+            }
+            $startDate.datepicker( "option", "maxDate", endDate );
+        }
+     });
+   });
+</script>
+<a href="<?php echo $this->url('admin', array('action' => 'export')) ?>"><?php echo __('Export') ?></a>
+<table>
+    <tr>
+        <th><?php echo __('Id') ?></th>
+        <th><?php echo __('Name') ?></th>
+        <th><?php echo __('Title') ?></th>
+        <th><?php echo __('Company') ?></th>
+        <th><?php echo __('Email') ?></th>
+        <th><?php echo __('Phone') ?></th>
+    </tr>
+    <?php foreach ($items as $item) {?>
+        <tr>
+            <td><?php echo $item['id'] ?></td>
+            <td><?php echo $item['name'] ?></td>
+            <td><?php echo $item['title'] ?></td>
+            <td><?php echo $item['company'] ?></td>
+            <td><?php echo $item['email'] ?></td>
+            <td><?php echo $item['phone'] ?></td>
+        </tr>
+    <?php }
+    ?>
+</table>

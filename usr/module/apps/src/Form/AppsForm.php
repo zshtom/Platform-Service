@@ -108,6 +108,9 @@ class AppsForm extends BaseForm
             'options'       => array(
                 'allow_auto'    => true,
             ),
+//             'attributes'    => array(
+//                 'class'     => 'hidden'
+//             ),
         ));
 
         $this->add(array(
@@ -116,6 +119,9 @@ class AppsForm extends BaseForm
             'options'       => array(
                 'theme' => '', // Specify theme name here
             ),
+//             'attributes'    => array(
+//                 'class'     => 'hidden'
+//             ),
         ));
 
         if ('phtml' == $this->markup) {
