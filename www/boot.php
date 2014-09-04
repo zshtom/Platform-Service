@@ -10,57 +10,21 @@
  * @author          Taiwen Jiang <taiwenjiang@tsinghua.org.cn>
  */
 
-define('PI_IN_SETUP_BOOT', true);
+// Physical path to host configuration file
+// For performance consideration it is recommended to be specified
+// if there is only one host;
+// Otherwise it will be automatically looked up in central host specifications
+define('PI_PATH_HOST', 'D:/software/wamp/www/Platform-Service/var/config/host.php');
 
-if (!defined('PI_IN_SETUP')) {
-    // Look up setup entrance
-    $script = $_SERVER['SCRIPT_NAME'];
-    $filename = $_SERVER['SCRIPT_FILENAME'];
-    $redirect = '';
-    do {
-        $script = str_replace('\\', '/', dirname($script));
-        $filename = str_replace('\\', '/', dirname($filename));
-        if (is_file($filename . '/boot.php') && is_dir($filename . '/setup/')) {
-            $redirect = rtrim($script, '/') . '/setup/';
-            break;
-        }
-    } while ($script);
+// Physical path to default library directory WITHOUT trailing slash
+define('PI_PATH_LIB', 'D:/software/wamp/www/Platform-Service/lib');
 
-    // URI scheme
-    $ssl = false;
-    if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-        || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
-    ) {
-        $scheme = 'https';
-        $ssl    = true;
-    } else {
-        $scheme = 'http';
-    }
+// Set default timezone if not available in php.ini
+if (!ini_get('date.timezone')) {
+    date_default_timezone_set('UTC');
+}
 
-    // URI host
-    if (!empty($_SERVER['HTTP_HOST'])) {
-        $host = $_SERVER['HTTP_HOST'];
-    } else {
-        $host = $_SERVER['SERVER_NAME'];
-    }
-
-    // URI port
-    $port = '';
-    if (!empty($_SERVER['SERVER_PORT'])) {
-        $portNum = (int) $_SERVER['SERVER_PORT'];
-        if (($ssl && 443 != $portNum)
-            || (!$ssl && 80 != $portNum)) {
-            $port = ':' . $portNum;
-        }
-    }
-
-    // Assemble redirect URI
-    $redirect = sprintf(
-        '%s://%s%s/%s',
-        $scheme,
-        $host,
-        $port,
-        ltrim($redirect, '/')
-    );
-    header('location: ' . $redirect);
+include PI_PATH_LIB . '/Pi.php';
+if (defined('PI_BOOT_ENABLE') && constant('PI_BOOT_ENABLE')) {
+    return Pi::boot();
 }
