@@ -73,7 +73,7 @@ $module = Pi::service('module')->current();
     <!-- Header: brand, slogan, user bar -->
     <div class="page-header">
         <div class="container">
-              <div class="navbar-right has-icon-right">
+              <div class="navbar-right">
                   <?php echo $this->widget('search-search'); ?>
               </div>
               <label class="control-label">
@@ -245,7 +245,9 @@ $module = Pi::service('module')->current();
                 echo $footer;
             } else {
             ?>
+                Copyright © 2014 Social Touch Co.,Ltd. All rights reserved. 京IC
 
+            <!--
             <ul class="pi-footer-links muted">
                 <li>
                     <a href="<?php echo Pi::url('www'); ?>" title="<?php echo _escape($sitename); ?>">
@@ -267,6 +269,7 @@ $module = Pi::service('module')->current();
                 <li>·</li>
                 <li><a title="<?php echo sprintf(__('Execution time: %.4f s'), microtime(true) - Pi::startTime()); ?>"><i class="fa fa-spinner fa-spin"></i></a></li>      
             </ul>
+            -->
             <?php } ?>
         </div>    
     </div>

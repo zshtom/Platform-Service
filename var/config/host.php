@@ -25,11 +25,11 @@ return array(
     // If URI is a relative one then www root URI will be prepended
     'uri'       => array(
         // WWW root URI
-        'www'       => 'http://pi.tld',
+        'www'       => 'http://localhost/Platform-Service/www',
         // URI to access uploads directory
-        'upload'    => 'http://pi.tld/upload',
+        'upload'    => 'http://localhost/Platform-Service/www/upload',
         // URI to access static files directory
-        'static'    => 'http://pi.tld/static',
+        'static'    => 'http://localhost/Platform-Service/www/static',
     ),
 
     // Paths to resources
@@ -37,35 +37,35 @@ return array(
     'path'      => array(
         // Sharable paths
         // WWW root path, dependent sub folders: `script`, `public`
-        'www'       => 'path/to/pi-application/www',
+        'www'       => 'D:/software/wamp/www/Platform-Service/www',
         // Library directory
-        'lib'       => 'path/to/pi-framework/lib',
+        'lib'       => 'D:/software/wamp/www/Platform-Service/lib',
         // User extension directory
-        'usr'       => 'path/to/pi-framework/usr',
+        'usr'       => 'D:/software/wamp/www/Platform-Service/usr',
         // Application module directory
-        'module'    => 'path/to/pi-framework/usr/module',
+        'module'    => 'D:/software/wamp/www/Platform-Service/usr/module',
         // Theme directory
-        'theme'     => 'path/to/pi-framework/usr/theme',
+        'theme'     => 'D:/software/wamp/www/Platform-Service/usr/theme',
         // Path to static files directory
-        'static'    => 'path/to/pi-framework/www/static',
+        'static'    => 'D:/software/wamp/www/Platform-Service/www/static',
         // Path to vendor library directory: default as `lib/vendor`
-        'vendor'    => 'path/to/pi-framework/lib/vendor',
+        'vendor'    => 'D:/software/wamp/www/Platform-Service/lib/vendor',
         // Path to module custom directory: default as `usr/custom`
-        'custom'    => 'path/to/pi-framework/usr/custom',
+        'custom'    => 'D:/software/wamp/www/Platform-Service/usr/custom',
 
         // Application specific paths
         // Path to uploads directory
-        'upload'    => 'path/to/pi-application/www/upload',
+        'upload'    => 'D:/software/wamp/www/Platform-Service/www/upload',
         // User data directory
-        'var'       => 'path/to/pi-application/var',
+        'var'       => 'D:/software/wamp/www/Platform-Service/var',
 
         // Sub-paths of var
         // Path to global collective configuration directory
-        'config'    => 'path/to/pi-application/var/config',
+        'config'    => 'D:/software/wamp/www/Platform-Service/var/config',
         // Path to cache files directory
-        'cache'     => 'path/to/pi-application/var/cache',
+        'cache'     => 'D:/software/wamp/www/Platform-Service/var/cache',
         // Path to logs directory
-        'log'       => 'path/to/pi-application/var/log',
+        'log'       => 'D:/software/wamp/www/Platform-Service/var/log',
     ),
 
     // Paths dependent on upper paths
