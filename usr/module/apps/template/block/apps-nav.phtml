@@ -1,0 +1,20 @@
+<div class="apps-nav-tree">
+    <ul class="apps-nav">
+    <?php
+        $index = 0;
+//         print('<pre>' . print_r($block['items'], TRUE) . '</pre>');
+        foreach ($block['items'] as $app) {
+    ?>
+    <li>
+        <a href="<?php print $app['url']; ?>">
+            <?php print $app['title']; ?>
+        </a>
+    </li>
+    <?php
+    }
+    ?>
+    </ul>
+</div>
+<script>
+    $('.article-all-category').parent().addClass('block-nopadding');
+</script>

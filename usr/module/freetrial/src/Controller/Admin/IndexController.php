@@ -55,6 +55,7 @@ class IndexController extends ActionController
                 'company'   => $row['company'],
                 'email'     => $row['email'],
                 'phone'     => $row['phone'],
+                'date'      => $row['date'],
                 'id'         => $row['id'],
                 'url'   => $this->url('', array(
                         'action'    => 'view',

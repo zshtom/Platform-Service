@@ -70,6 +70,7 @@ $this->jquery();
         <th><?php echo __('Company') ?></th>
         <th><?php echo __('Email') ?></th>
         <th><?php echo __('Phone') ?></th>
+        <th><?php echo __('Date') ?></th>
     </tr>
     <?php foreach ($pages as $page) { ?>
         <tr id="list_<?php echo $page['id'] ?>">
@@ -80,6 +81,7 @@ $this->jquery();
             <td><?php echo $page['company'] ?></td>
             <td><?php echo $page['email'] ?></td>
             <td><?php echo $page['phone'] ?></td>
+            <td><?php echo $page['date'] ?></td>
             <td>
                 <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $page['id'])); ?>"><?php echo _a('Delete'); ?></a>
             </td>
