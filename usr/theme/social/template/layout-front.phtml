@@ -76,10 +76,10 @@ $module = Pi::service('module')->current();
               <div class="navbar-right">
                   <?php echo $this->widget('search-search'); ?>
               </div>
-              <label class="control-label">
+              <p class="control-label">
                  <span class="glyphicon glyphicon-earphone"></span>
                  <span class="contact">400-691-1961</span>
-              </label>
+              </p>
         </div>
     </div>
 
@@ -245,8 +245,10 @@ $module = Pi::service('module')->current();
                 echo $footer;
             } else {
             ?>
-                Copyright © 2014 Social Touch Co.,Ltd. All rights reserved. 京IC
-
+                <p>Copyright © 2014 Social Touch Co.,Ltd. All rights reserved. 京IC
+                <img src="<?php echo Pi::service('asset')->getAssetUrl('theme/social', 'image/sina.png');?>" alt="sina" />
+                <img src="<?php echo Pi::service('asset')->getAssetUrl('theme/social', 'image/weixin.png');?>" alt="weixin" />
+                </p>
             <!--
             <ul class="pi-footer-links muted">
                 <li>
