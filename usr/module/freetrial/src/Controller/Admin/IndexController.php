@@ -106,7 +106,6 @@ class IndexController extends ActionController
      *
      */
     public function batchdeleteAction(){
-        echo json_encode(array('msg' => 'ok'));
         $all = trim($this->params('ids'), ',');
         $ids = explode(",",$all);
         $model = $this->getModel('freetrial');
@@ -115,5 +114,7 @@ class IndexController extends ActionController
             $row = $model->find($val);
             $row->delete();
         }
+        echo json_encode(array('msg' => 'ok'));
+        exit;
     }
 }
