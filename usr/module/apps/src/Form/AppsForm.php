@@ -70,15 +70,6 @@ class AppsForm extends BaseForm
             ),
         ));
 
-        $this->add(array(
-            'name'          => 'summery',
-            'options'       => array(
-                'label' => _a('App Summery'),
-            ),
-            'attributes'    => array(
-                'type'  => 'textarea',
-            )
-        ));
 
         $this->add(array(
             'name'          => 'icon',
@@ -103,26 +94,36 @@ class AppsForm extends BaseForm
         ));
 
         $this->add(array(
-            'name'          => 'theme',
-            'type'          => 'theme',
+            'name'          => 'summery',
             'options'       => array(
-                'allow_auto'    => true,
+                'label' => _a('App Summery'),
             ),
-//             'attributes'    => array(
-//                 'class'     => 'hidden'
-//             ),
+            'attributes'    => array(
+                'type'  => 'textarea',
+            )
         ));
 
-        $this->add(array(
-            'name'          => 'layout',
-            'type'          => 'layout',
-            'options'       => array(
-                'theme' => '', // Specify theme name here
-            ),
+//         $this->add(array(
+//             'name'          => 'theme',
+//             'type'          => 'theme',
+//             'options'       => array(
+//                 'allow_auto'    => true,
+//             ),
 //             'attributes'    => array(
 //                 'class'     => 'hidden'
 //             ),
-        ));
+//         ));
+
+//         $this->add(array(
+//             'name'          => 'layout',
+//             'type'          => 'layout',
+//             'options'       => array(
+//                 'theme' => '', // Specify theme name here
+//             ),
+//             'attributes'    => array(
+//                 'class'     => 'hidden'
+//             ),
+//         ));
 
         if ('phtml' == $this->markup) {
             $this->add(array(

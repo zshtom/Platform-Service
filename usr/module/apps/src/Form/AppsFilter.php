@@ -109,15 +109,15 @@ class AppsFilter extends InputFilter
             'name'          => 'active',
         ));
 
-        $this->add(array(
-            'name'          => 'theme',
-            'required'      => false,
-        ));
+//         $this->add(array(
+//             'name'          => 'theme',
+//             'required'      => false,
+//         ));
 
-        $this->add(array(
-            'name'          => 'layout',
-            'required'      => false,
-        ));
+//         $this->add(array(
+//             'name'          => 'layout',
+//             'required'      => false,
+//         ));
 
         $this->add(array(
             'name'          => 'content',
