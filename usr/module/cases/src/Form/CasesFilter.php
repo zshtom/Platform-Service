@@ -63,26 +63,7 @@ class CasesFilter extends InputFilter
         ));
 
         $this->add(array(
-            'name'          => 'markup',
-            'filters'       => array(
-                array(
-                    'name'  => 'StringTrim',
-                ),
-            ),
-        ));
-
-        $this->add(array(
             'name'          => 'active',
-        ));
-
-        $this->add(array(
-            'name'          => 'theme',
-            'required'      => false,
-        ));
-
-        $this->add(array(
-            'name'          => 'layout',
-            'required'      => false,
         ));
 
         $this->add(array(
@@ -109,6 +90,11 @@ class CasesFilter extends InputFilter
         // seo_description
         $this->add(array(
             'name' => 'seo_description',
+            'required' => false,
+        ));
+        
+        $this->add(array(
+            'name'     => 'id',
             'required' => false,
         ));
     }

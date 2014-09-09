@@ -14,7 +14,6 @@ use Pi\Form\Form as BaseForm;
 
 class CasesForm extends BaseForm
 {
-    protected $markup = 'text';
 
     /**
      * Constructor
@@ -22,9 +21,8 @@ class CasesForm extends BaseForm
      * @param null|string|int $name Optional name for the element
      * @param string $markup Cases type: html
      */
-    public function __construct($name = null, $markup = null)
+    public function __construct($name = null)
     {
-        $this->markup = $markup ?: $this->markup;
         parent::__construct($name);
     }
 
@@ -76,48 +74,16 @@ class CasesForm extends BaseForm
             ),
             'attributes'    => array(
                 'type'  => 'hidden',
-                'id'    => 'icon-url'
+                'class'    => 'icon-url'
             )
         ));
-
-        $this->add(array(
-            'name'          => 'theme',
-            'type'          => 'theme',
-            'options'       => array(
-                'allow_auto'    => true,
-            ),
-        ));
-
-        $this->add(array(
-            'name'          => 'layout',
-            'type'          => 'layout',
-            'options'       => array(
-                'theme' => '', // Specify theme name here
-            ),
-        ));
-        
-        $set = '';
-        switch ($this->markup) {
-            case 'html':
-                $editor         = 'html';
-                break;
-            case 'markdown':
-                $editor         = 'markitup';
-                $set            = 'markdown';
-                break;
-            case 'text':
-            default:
-                $editor         = 'textarea';
-                break;
-        }
 
         $this->add(array(
             'name'          => 'content',
             'type'          => 'editor',
             'options'       => array(
                 'label'     => _a('Case Content'),
-                'editor'    => $editor,
-                'set'       => $set,
+                'editor'    => 'html',
             ),
             'attributes'    => array(
                 'rows'         => 5,
@@ -180,12 +146,11 @@ class CasesForm extends BaseForm
                 'value'     => '1',
             )
         ));
-
         $this->add(array(
-            'name'          => 'markup',
+            'name'          => 'id',
             'attributes'    => array(
                 'type'  => 'hidden',
-                'value' => $this->markup,
+                'value' => 0,
             )
         ));
 

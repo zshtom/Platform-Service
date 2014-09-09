@@ -45,6 +45,8 @@ return array(
     ),
 
     'resource' => array(
+        // Module Config
+        'config'        => 'config.php',
         'block'         => 'block.php',
         // Database meta
         'database'  => array(
