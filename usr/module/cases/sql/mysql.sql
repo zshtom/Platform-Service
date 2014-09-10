@@ -1,5 +1,5 @@
 CREATE TABLE `{cases}` (
-  `id`              INT(10)                 NOT NULL DEFAULT '0' COMMENT 'AUTO_INCREMENT',
+  `id`              INT(10)                 NOT NULL AUTO_INCREMENT,
   `uid`             INT(10)                 unsigned NOT NULL DEFAULT '0' COMMENT 'Operatior ID',
   `title`           VARCHAR(255)            NOT NULL DEFAULT '' COMMENT 'Case Title',
   `summery`         VARCHAR(255)            NOT NULL DEFAULT '' COMMENT 'Case summery',
@@ -13,9 +13,5 @@ CREATE TABLE `{cases}` (
   `seo_title`       varchar(255)            NOT NULL DEFAULT '',
   `seo_keywords`    varchar(255)            NOT NULL DEFAULT '',
   `seo_description` varchar(255)            NOT NULL DEFAULT '',
-  
-  -- For rendering
-  `theme`           varchar(64)             NOT NULL DEFAULT '',
-  `layout`          varchar(64)             NOT NULL DEFAULT '',
   PRIMARY KEY             (`id`)
 );

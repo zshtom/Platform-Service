@@ -35,20 +35,7 @@ class IndexController extends ActionController
     {
         $model  = $this->getModel('cases');
         $select = $model->select()->order(array('active DESC', 'order ASC', 'id DESC'));
-        $rowset = $model->selectWith($select);
-        $cases  = array();
-        $menu   = array();
-        foreach ($rowset as $row) {
-            $case           = $row->toArray();
-            $case['url']    = $this->url('cases', $case);
-            if ($case['order'] && $case['active']) {
-                $menu[] = $case;
-            } else {
-                $cases[] = $case;
-            }
-        }
-        $cases = array_merge($menu, $cases);
-
+        $cases = $model->selectWith($select);
         $this->view()->assign('cases', $cases);
         $this->view()->assign('title', _a('Case list'));
         $this->view()->setTemplate('case-list');
@@ -65,29 +52,22 @@ class IndexController extends ActionController
 
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
-            $markup = $data['markup'];
             // Set form
-            $form = new CasesForm('case-form', $markup);
+            $form = new CasesForm('case-form');
             $form->setInputFilter(new CasesFilter);
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-
-                if (empty($values['name'])) {
-                    $values['name'] = null;
-                }
                 $values['active'] = 1;
-                $values['user'] = Pi::service('user')->getUser()->id;
+                $values['uid'] = Pi::service('user')->getUser()->id;
                 $values['time_created'] = time();
                 unset($values['id']);
-
                 // Fix upload icon url
                 $iconImages = $this->setIconPath(array($data));
 
                 if (isset($iconImages[0]['image'])) {
                     $values['icon'] = $iconImages[0]['image'];
                 }
-
                 // Save
                 $id = Pi::api('api', $this->getModule())->add($values);
 
@@ -101,8 +81,7 @@ class IndexController extends ActionController
                 $message = _a('Invalid data, please check and re-submit.');
             }
         } else {
-            $markup = $this->params('type', 'html');
-            $form = new CasesForm('case-form', $markup);
+            $form = new CasesForm('case-form');
             $form->setAttribute(
                 'action',
                 $this->url('', array('action' => 'add'))
@@ -111,11 +90,11 @@ class IndexController extends ActionController
             $message = '';
         }
 
-        $this->view()->assign('markup', $markup);
         $this->view()->assign('form', $form);
-        $this->view()->assign('title', _a('Add a case'));
+        $this->view()->assign('title', _a('Add a case'));        
+        $this->view()->assign('content', '');
         $this->view()->assign('message', $message);
-        $this->view()->setTemplate('case-add');
+        $this->view()->setTemplate('case-edit');
     }
 
     protected function setIconPath($list) {
@@ -155,15 +134,11 @@ class IndexController extends ActionController
             $row = $this->getModel('cases')->find($id);
 
             // Set form
-            $form = new CasesForm('case-form', $row->markup);
+            $form = new CasesForm('case-form');
             $form->setInputFilter(new CasesFilter);
             $form->setData($data);
             if ($form->isValid()) {
-                $values = $form->getData();
-
-                if (empty($values['name'])) {
-                    $values['name'] = null;
-                }
+                $values = $form->getData();               
                 $values['time_updated'] = time();
 
                 // Save
@@ -179,7 +154,7 @@ class IndexController extends ActionController
             $id = $this->params('id');
             $row = $this->getModel('cases')->find($id);
             $data = $row->toArray();
-            $form = new CasesForm('case-form', $row->markup);
+            $form = new CasesForm('case-form');
             $form->setData($data);
             $form->setAttribute(
                 'action',
