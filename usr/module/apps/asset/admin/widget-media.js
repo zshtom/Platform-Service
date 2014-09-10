@@ -99,15 +99,6 @@
                         console.log(res);
                         $(".widget-item-add").hide();
 
-                        /* Add Magnific Popup to uploaded image */
-//                        self.$('.image-popup').magnificPopup({
-//                            type: 'image',
-//                            closeOnContentClick: true,
-//                            image: {
-//                                verticalFit: false
-//                            }
-//                        });
-
                     } else {
                         alert(res.message);
                     }

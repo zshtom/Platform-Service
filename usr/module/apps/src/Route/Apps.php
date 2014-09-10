@@ -54,7 +54,7 @@ class Apps extends Standard
 
         // Set action
         $action = '';
-        $appsList = Pi::registry('apps', $module)->read();
+        $appsList  = Pi::api('api', $module)->getAppsList();
 
         if (!empty($matches['id'])) {
             if (isset($appsList[$matches['id']])) {

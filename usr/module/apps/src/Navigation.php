@@ -13,21 +13,28 @@ use Pi;
 
 class Navigation
 {
-    public static function modules($module)
+    public static function apps($module)
     {
         $nav = array(
-            'apps'     => array(),
+            'apps' => array(),
         );
 
-        $modules = Pi::registry('modulelist')->read('active');
-        unset($modules['system']);
-        foreach ($modules as $key => $data) {
-            $nav['apps'][$key] = array(
+        d($module);
+
+        // Get the nav from list because active not set in registry.
+        $apps_list  = Pi::api('api', $module)->getAppsList(1);
+
+//         $apps_list = Pi::registry($module, $module)->read();
+
+        foreach ($apps_list as $key => $data) {
+            $nav['pages'][$key] = array(
                 'label'     => $data['title'],
-                'module'    => $key,
-                'route'     => 'admin',
+                'module'    => 'apps',
+                'uri'     => '/' . $module . '/' . $data['name'],
             );
         }
+
+
 
         return $nav;
     }

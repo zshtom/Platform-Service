@@ -22,23 +22,10 @@ class Update extends BasicUpdate
     protected function attachDefaultListeners()
     {
         $events = $this->events;
-        $events->attach('update.pre', array($this, 'updateSchema'));
         parent::attachDefaultListeners();
 
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function updateSchema(Event $e)
-    {
-        $moduleVersion  = $e->getParam('version');
-        $model          = Pi::model('page', $this->module);
-        $table          = $model->getTable();
-        $adapter        = $model->getAdapter();
-
-        return true;
-    }
 
 }

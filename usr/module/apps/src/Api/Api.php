@@ -15,12 +15,6 @@ use Pi\Application\Api\AbstractApi;
 class Api extends AbstractApi
 {
     protected $module = 'apps';
-    /*
-    protected $appColumns = array(
-        'name', 'title', 'slug', 'content', 'markup', 'active',
-        'user', 'time_created', 'seo_title', 'seo_keywords', 'seo_description'
-    );
-    */
 
     /**
      * Add a new app and register to system app settings if name is available
@@ -46,22 +40,11 @@ class Api extends AbstractApi
             return $id;
         }
 
+//         $apps_list = Pi::registry('apps')->read('active');
+
         if (!$row->name) {
             return $id;
         }
-//         $app = array(
-//             'section'       => 'front',
-//             'module'        => $this->getModule(),
-//             'controller'    => 'index',
-//             'action'        => $row->name,
-//             'title'         => $row->title,
-//             'block'         => 1,
-//             'custom'        => 0,
-//         );
-//         $row = Pi::model('page')->createRow($app);
-//         $row->save();
-
-//         Pi::registry('apps')->clear($this->getModule());
 
         return $id;
     }
@@ -87,15 +70,6 @@ class Api extends AbstractApi
         if (!$row->name) {
             return true;
         }
-//         $where = array(
-//             'section'       => 'front',
-//             'module'        => $this->getModule(),
-//             'controller'    => 'index',
-//             'action'        => $row->name,
-//         );
-//         Pi::model('page')->delete($where);
-
-//         Pi::registry('apps')->clear($this->getModule());
 
         return true;
     }
@@ -107,38 +81,36 @@ class Api extends AbstractApi
      *
      * @return array $list
      */
-    public function appsList($active = 1)
+    public function getAppsList($active = 1)
     {
         $list = array();
-
 
         $where = array(
             'active'  => $active,
         );
 
-        // Get article result set
-        $module    = $this->getModule();
-        $rowset = Pi::model('apps', $module)->select($where);
+        $module = $this->getModule();
+        $config = Pi::config('', $module);
+
+        $model  = Pi::model('apps', $this->getModule());
+        $select = $model->select()->order(array('active DESC', 'nav_order ASC', 'id DESC'));
+        $select = $model->select()->where($where);
+        $rowset = $model->selectWith($select);
+
+//         $select = $model->select()->order(array('active DESC', 'nav_order ASC', 'id DESC'));
+//         $rowset = Pi::model($module, $module)->select($where);
 
 
-//         $rowset = Pi::model('apps', $this->getModule())->select($active, 'active');
-
-//         $select = $model->select();
-//         $select->where(array('active' => $active));
-//         $select->columns(array('id'));
-//         $select->order(array('nav_order ASC'));
-//         print('Select: <pre>' . print_r($select, TRUE) . '</pre>');
-//         $rowset = $model->selectWith($select);
-//         print('Select: <pre>' . print_r($rowset, TRUE) . '</pre>');
         foreach ($rowset as $row) {
-//             print('Get module from API: <pre>' . print_r($row['id'], TRUE) . '</pre>');
             $id = (int) $row['id'];
             $item = array(
-                'id'    => $id,
-                'name'  => $row['name'],
-                'title' => $row['title'],
-                'icon'  => $config['icon_upload_path'] . '/' . $row['icon'],
-                'url'   => Pi::service('url')->assemble(
+                'id'        => $id,
+                'name'      => $row['name'],
+                'title'     => $row['title'],
+                'summery'   => $row['summery'],
+                'icon'      => $row['icon'],
+                'slug'      => $row['slug'],
+                'url'       => Pi::service('url')->assemble(
                     'apps',
                     array($this->module, 'id' => $row['id'])
                 ),
