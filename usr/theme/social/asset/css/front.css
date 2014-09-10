@@ -17,24 +17,25 @@ html {
 }
 
 /*page header start*/
-.page-header{
+.social-header{
     padding-bottom: 0;
     margin: 0;
     border-bottom: 0;
+    background-color: #f1f1f1;
 }
-.page-header .control-label{
+.social-header .control-label{
     line-height: 53px;
     float: right;
     display: inline-block;
     margin-bottom: 0px;
 }
-.page-header .contact{
+.social-header .contact{
     padding: 0 5px;
 }
-.page-header form{
+.social-header form{
     padding: 9px 0;
 }
-.page-header .input-group-btn{
+.social-header .input-group-btn{
     width: 17%;
 }
 /*page header end*/
@@ -98,6 +99,9 @@ html {
         padding-top: 6px;
         padding-bottom: 6px;
         border-radius: 3px;
+    }
+    .navbar-nav.navbar-right:last-child{
+        margin-right: 0px;
     }
 
     .pi-navbar-nav li {
@@ -168,11 +172,14 @@ html {
     width: 299px;
     display: inline-block;
 }
-.nav-tabs > li.active > a, .indexTab .nav-tabs > li.active > a:hover,.indexTab .nav-tabs > li.active > a:focus{
+.nav-tabs > li.active > a,
+.indexTab .nav-tabs > li.active > a:hover,
+.indexTab .nav-tabs > li.active > a:focus{
     background-color: transparent;
     border: none;
     color: #FF0000;
     border-bottom: 1px solid red;
+    background: url(../image/triangle-red.png) no-repeat bottom;
 }
 .nav-tabs > li.active > span{
     display: block;
@@ -182,16 +189,19 @@ html {
     text-decoration: none;
     padding: 15px 100px;
 }
+/*
+选项卡选中状态 红色三角形
 .nav-tabs .pi-navbar-caret-tab{
     border-bottom: 8px solid red;
     bottom: 0;
     z-index: 1001;
 }
+*/
 /* tab end*/
 
 
 /* Footer start*/
-.pi-footer {
+.social-footer {
     position: absolute;
     left: 0;
     right: 0;
@@ -201,17 +211,17 @@ html {
     color: #444444;
 }
 
-.pi-footer img{
+.social-footer img{
     padding: 0 0 0 10px;
 }
 
-.pi-footer-links {
+.social-footer {
     font-size: 14px;
     padding-top: 10px;
     padding-left: 0;
     color: #444444;
 }
-.pi-footer-links li {
+.social-footer li {
     display: inline;
     padding: 0 2px;
 }
