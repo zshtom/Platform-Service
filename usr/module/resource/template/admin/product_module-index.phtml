@@ -1,0 +1,65 @@
+<?php
+//$this->css($this->assetModule('admin/admin.css', 'system'));
+?>
+<div class="table-responsive">
+    <form action="<?php echo $this->url('', array('action' => 'edit')); ?>">
+        <table class="table">
+            <thead>
+            <tr>
+                <th><?php echo _a('App title'); ?></th>
+                <!-- <th style="width: 5%;"><?php echo _a('Name'); ?></th> -->
+                <th style="width: 10%;"><?php echo _a('Resource Icon'); ?></th>
+                <th style="width: 30%;"><?php echo _a('Resource Summery'); ?></th>
+                <th style="width: 10%;"><?php echo _a('Time Created'); ?></th>
+                <th style="width: 10%;"><?php echo _a('Nav Order'); ?></th>
+                <th><?php echo _a('Action'); ?></th>
+                <th style="width: 5%;"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($items as $item) { ?>
+                <tr>
+                    <td>
+                        <a href="<?php echo $item['url']; ?>" target="_blank">
+                            <?php echo _escape($item['title']); ?>
+                        </a>
+                    </td>
+                    <!--
+                <td>
+                    <?php echo _escape($item['name']); ?>
+                </td>
+                -->
+                    <td>
+                        <img src="<?php echo _escape($item['icon']); ?>" width="80px" />
+                    </td>
+                    <td>
+                        <?php echo _escape($item['description']); ?>
+                    </td>
+                    <td>
+                        <?php echo _date($item['case_time'], null, 'NULL', 'NULL',null, null, null, 'Y-m-d'); ?>
+                    </td>
+
+                    <td width="2%">
+                        <input type="text" name="order[<?php echo $item['id']; ?>]" value="<?php echo $item['sid']; ?>" size="5" class="form-control">
+                    </td>
+
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'edit', 'id' => $item['id'])); ?>"><?php echo _a('Edit'); ?></a>
+                            <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $item['id'])); ?>"><?php echo _a('Delete'); ?></a>
+                            <?php if ($item['active']) { ?>
+                                <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'activate', 'id' => $item['id'])); ?>"><?php echo _a('Disable'); ?></a>
+                            <?php } else { ?>
+<!--                                <a class="btn btn-sm btn-warning" href="--><?php //echo $this->url('', array('action' => 'activate', 'id' => $item['id'])); ?><!--">--><?php //echo _a('Enable'); ?><!--</a>-->
+                            <?php }?>
+                        </div>
+                    </td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+<!--        <div class="text-right">-->
+<!--            <input type="submit" value="--><?php //echo _a('Add to menu'); ?><!--" class="btn btn-primary">-->
+<!--        </div>-->
+    </form>
+</div>
