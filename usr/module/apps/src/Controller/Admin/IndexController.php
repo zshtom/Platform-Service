@@ -19,6 +19,8 @@ use Module\Apps\Form\DescFilter;
 
 use Pi\File\Transfer\Upload;
 
+// use Module\Apps\Registry;
+
 /**
  * Index action controller
  */
@@ -30,9 +32,9 @@ class IndexController extends ActionController
     public function indexAction()
     {
         $model  = $this->getModel('apps');
-        $select = $model->select()->order(array('active DESC', 'nav_order ASC', 'id DESC'));
+        $select = $model->select()->order(array('nav_order ASC', 'id DESC'));
         $rowset = $model->selectWith($select);
-        print('Get rowset line 32: <pre>' . print_r($rowset, TRUE) . '</pre>');
+
         $apps  = array();
         $menu   = array();
         foreach ($rowset as $row) {
@@ -91,6 +93,7 @@ class IndexController extends ActionController
 
                 // Save
                 $id = Pi::api('api', $this->getModule())->add($values);
+                Pi::registry('nav', $this->getModule())->flush();
 
                 if ($id) {
                     $message = _a('App data saved successfully.');
@@ -174,7 +177,11 @@ class IndexController extends ActionController
                 // Save
                 $row->assign($values);
                 $row->save();
+
                 Pi::service('cache')->flush('module', $this->getModule());
+                Pi::registry('apps', $this->getModule())->clear($this->getModule());
+
+                Pi::registry('nav', $this->getModule())->flush();
                 $message = _a('App data saved successfully.');
                 return $this->jump(array('action' => 'index'), $message);
             } else {
@@ -211,11 +218,18 @@ class IndexController extends ActionController
      */
     public function deleteAction()
     {
+
         $id = $this->params('id');
         $row = $this->getModel('apps')->find($id);
         if ($row) {
 
             $row->delete();
+            // Clear cache
+            Pi::registry('apps', 'apps')->clear($this->getModule());
+            Pi::registry('apps', 'apps')->flush();
+
+            Pi::service('cache')->flush('module', $this->getModule());
+
             Pi::registry('nav', $this->getModule())->flush();
         }
 
@@ -236,9 +250,10 @@ class IndexController extends ActionController
         if ($row) {
             $row->active = $row->active ? 0 : 1;
             $row->save();
-//             Pi::registry('apps')->clear($this->getModule());
+            Pi::registry('apps', 'apps')->clear($this->getModule());
         }
-//         Pi::registry('apps', $this->getModule())->flush();
+        Pi::service('cache')->flush('module', $this->getModule());
+        Pi::registry('apps', 'apps')->flush();
         Pi::registry('nav', $this->getModule())->flush();
 
         return $this->jump(
@@ -435,7 +450,7 @@ class IndexController extends ActionController
         } else {
             $data['description'] = Pi::user()->data->get(0, 'apps_description');
             if (empty($data['description'])) {
-                $data['description'] = '<div style="font-size: 20px;">Test data.</div>';
+                $data['description'] = '<div style="font-size: 20px;">Content is empty.</div>';
             }
             $form = new DescForm('app-desc-form', 'html');
             $form->setData($data);

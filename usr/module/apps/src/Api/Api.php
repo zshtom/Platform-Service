@@ -40,6 +40,8 @@ class Api extends AbstractApi
             return $id;
         }
 
+//         $apps_list = Pi::registry('apps')->read('active');
+
         if (!$row->name) {
             return $id;
         }
@@ -89,7 +91,15 @@ class Api extends AbstractApi
 
         $module = $this->getModule();
         $config = Pi::config('', $module);
-        $rowset = Pi::model($module, $module)->select($where);
+
+        $model  = Pi::model('apps', $this->getModule());
+        $select = $model->select()->order(array('active DESC', 'nav_order ASC', 'id DESC'));
+        $select = $model->select()->where($where);
+        $rowset = $model->selectWith($select);
+
+//         $select = $model->select()->order(array('active DESC', 'nav_order ASC', 'id DESC'));
+//         $rowset = Pi::model($module, $module)->select($where);
+
 
         foreach ($rowset as $row) {
             $id = (int) $row['id'];
@@ -99,6 +109,7 @@ class Api extends AbstractApi
                 'title'     => $row['title'],
                 'summery'   => $row['summery'],
                 'icon'      => $row['icon'],
+                'slug'      => $row['slug'],
                 'url'       => Pi::service('url')->assemble(
                     'apps',
                     array($this->module, 'id' => $row['id'])

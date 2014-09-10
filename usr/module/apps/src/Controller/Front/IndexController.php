@@ -85,9 +85,9 @@ class IndexController extends ActionController
 
         // Apps home page.
         $nav_main[0] = array(
-                'id'       => 0,
-                'title'    => _t('Apps Description'),
-                'url'      => '/' . $this->getModule(),
+            'id'       => 0,
+            'title'    => __('Apps Description'),
+            'url'      => '/' . $this->getModule(),
         );
 
         // Apps nav list.

@@ -10,12 +10,12 @@
 return array(
     'meta'  => array(
         'site'  => array(
-            'title'     => _t('Custom site navigation'),
+            'title'     => _t('Custom site navigation in Apps module'),
             'section'   => 'front',
         ),
     ),
     'item'  => array(
-        'front'     => false,
+        'front'     => true,
         'admin'     => array(
             'description' => array(
         	   'label'          => _t('Apps Description'),
@@ -35,6 +35,29 @@ return array(
                 'controller'    => 'index',
                 'action'        => 'add',
             ),
+        ),
+
+        // Custom navigation
+        'site' => array(
+            'home'     => array(
+                'label'         => _a('Home'),
+                'route'         => 'home',
+            ),
+            'apps'       => array(
+                'label'         => _a('Apps'),
+                'uri'           => '',
+                'callback'      => 'Module\\Apps\\Navigation::apps',
+            ),
+            'solution'          => array(
+                'label'         => _a('Solution'),
+                'uri'           => '',
+                'callback'      => array('navigation', 'apps'),
+            ),
+//             'apps'       => array(
+//                 'label'         => _a('Apps'),
+//                 'uri'           => '',
+//                 'callback'      => 'Module\\Apps\\Navigation::apps',
+//             ),
         ),
 
     ),
