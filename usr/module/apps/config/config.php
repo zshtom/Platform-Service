@@ -13,9 +13,29 @@ return array(
             'title' => __('Icon Setting'),
             'name' => 'icon'
         ),
+        array(
+            'name'  => 'general',
+            'title' => _t('General'),
+        )
     ),
     'item' => array(
-        // Social
+        'description' => array(
+            'category'      => 'general',
+            'title'         => _t('Description'),
+            'description'   => _t('Apps description content'),
+            'edit'          => 'input',
+            'filter'        => 'textarea',
+            'value'         => _a('Apps Description')
+        ),
+        'nav_block_name' => array(
+            'category'      => 'general',
+            'title'         => _a('Block name for widget'),
+            'description'   => _a('Apps description block name on widget'),
+            'edit'          => 'input',
+            'filter'        => 'text',
+            'value'         => 'apps_desc_block'
+        ),
+        // Icon
         'icon_upload_path' => array(
             'category'      => 'icon',
             'title'         => _t('Icon Upload Path'),

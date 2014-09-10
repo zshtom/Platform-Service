@@ -415,8 +415,6 @@ class IndexController extends ActionController
         $module = $this->getModule();
         $config = Pi::config('', $module);
 
-        $description = Pi::user()->data->get(0, 'apps_description');
-
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
 

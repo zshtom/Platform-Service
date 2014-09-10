@@ -20,19 +20,25 @@ class IndexController extends ActionController
     protected function render($row)
     {
         $this->view()->setTemplate('app-view');
+        $apps_list = array();
 
         if (!$row instanceof RowGateway || !$row->active) {
-            $title      = __('App request');
-            $content    = __('The app requested does not exist.');
-            $markup     = '';
+            $description = Pi::user()->data->get(0, 'apps_description');
+            $apps_list = Pi::api('api', $this->getModule())->getAppsList(1);
+
+            $content = Pi::service('markup')->render(
+                    $description,
+                    'html'
+            );
+
+            $title      = __('Apps Description');
+            $content    = $content;
         } else {
             $content    = $row->content;
-            $markup     = $row->markup ?: 'text';
             if ($content && 'pthml' != $markup) {
                 $content = Pi::service('markup')->render(
                     $content,
-                    'html',
-                    $markup
+                    'html'
                 );
             }
             $title = $row->title;
@@ -47,20 +53,14 @@ class IndexController extends ActionController
             $this->view()->headdescription($row->seo_description, 'set');
             $this->view()->headkeywords($row->seo_keywords, 'set');
             $this->view()->assign('config', $config);
-            if ($row->theme) {
-                $this->view()->setTheme($row->theme);
-            }
-            if ($row->layout) {
-                $this->view()->setLayout($row->layout);
-            }
         }
 
         $this->view()->assign(array(
             'title'     => $title,
             'content'   => $content,
-            'markup'    => $markup,
+            'apps_list' => $apps_list,
         ));
-        //return $content;
+
     }
 
     /**
@@ -83,15 +83,26 @@ class IndexController extends ActionController
             $row = $this->getModel('apps')->find($name, 'slug');
         }
 
+        // Apps home page.
+        $nav_main[0] = array(
+                'id'       => 0,
+                'title'    => _t('Apps Description'),
+                'url'      => '/' . $this->getModule(),
+        );
+
+        // Apps nav list.
+        $nav = Pi::registry('nav', $this->getModule())->read();
+
+        // Add home page ontop list.
+        $nav = $nav_main + $nav;
+
         if ($row && $row->active) {
-            $nav = Pi::registry('nav', $this->getModule())->read();
             if (isset($nav[$row->id])) {
                 $nav[$row->id]['active'] = 1;
-            } else {
-                $nav = array();
             }
+
         } else {
-            $nav = array();
+            $nav[0]['active'] = 1;
         }
         $this->view()->assign('nav', $nav);
 

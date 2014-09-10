@@ -11,7 +11,7 @@ return array(
         'name'          => 'apps_nav',
         'title'         => _b('Apps Nav List'),
         'description'   => _b('Apps nav list on app page.'),
-        'render'        => array('block', 'appsList'),
+        'render'        => array('block', 'appsNav'),
         'template'      => 'apps-nav',
     ),
 );

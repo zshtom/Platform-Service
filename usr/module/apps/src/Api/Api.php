@@ -79,7 +79,7 @@ class Api extends AbstractApi
      *
      * @return array $list
      */
-    public function appsList($active = 1)
+    public function getAppsList($active = 1)
     {
         $list = array();
 
@@ -87,19 +87,20 @@ class Api extends AbstractApi
             'active'  => $active,
         );
 
-        // Get article result set
-        $module    = $this->getModule();
-        $rowset = Pi::model('apps', $module)->select($where);
+        $module = $this->getModule();
+        $config = Pi::config('', $module);
+        $rowset = Pi::model($module, $module)->select($where);
 
         foreach ($rowset as $row) {
             $id = (int) $row['id'];
             $item = array(
-                'id'    => $id,
-                'name'  => $row['name'],
-                'title' => $row['title'],
-                'icon'  => $config['icon_upload_path'] . '/' . $row['icon'],
-                'url'   => Pi::service('url')->assemble(
-                    '',
+                'id'        => $id,
+                'name'      => $row['name'],
+                'title'     => $row['title'],
+                'summery'   => $row['summery'],
+                'icon'      => $row['icon'],
+                'url'       => Pi::service('url')->assemble(
+                    'apps',
                     array($this->module, 'id' => $row['id'])
                 ),
             );

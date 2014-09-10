@@ -17,6 +17,12 @@ return array(
     'item'  => array(
         'front'     => false,
         'admin'     => array(
+            'description' => array(
+        	   'label'          => _t('Apps Description'),
+               'route'          => 'admin',
+               'controller'     => 'index',
+               'action'         => 'description',
+            ),
             'list'     => array(
                 'label'         => _t('Product list'),
                 'route'         => 'admin',
