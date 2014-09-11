@@ -11,23 +11,39 @@
     </div>
     <div class="col-md-10">
     <?php } ?>
-    <?php if ('phtml' == $markup && $content) { ?>
-        <h2 class="article-header headline"><?php echo $this->escape($title); ?></h2>
-        <div class="article-body">
-            <?php include $this->template('front/' . $content); ?> 
-        </div>
-        <div class="article-footer">
-            <?php if ($config['social_facebook']) { echo $this->facebook(); } ?>
-            <?php if ($config['social_twitter']) { echo $this->twitter(); } ?>
-            <?php if ($config['social_gplus']) { echo $this->plusone(); } ?>
-        </div>
-    <?php } else {  ?>
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title"><?php echo $this->escape($title); ?></h3>
             </div>
             <div class="panel-body clearfix">
-                <?php echo $content; ?> 
+                <?php echo $content; ?>
+
+                <div class="app-body">
+                    <?php //print('Apps list: <pre>' . print_r($apps_list, TRUE) . '</pre>');?>
+
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="row">
+                        <?php foreach ($apps_list as $item) { ?>
+                          <div class="col-xs-8 col-sm-6">
+                            <div class="media">
+                                <img style="width: 80px; height: 80px;" class="pull-left" src="<?php echo $this->escape($item['icon']); ?>">
+                                <div class="media-body">
+                                    <a href="<?php echo $this->escape($item['url']); ?>" class="app-front-title">
+                                        <?php echo $this->escape($item['title']); ?>
+                                    </a>
+                                    <div class="muted app-size12" style="margin-top: 5px;">
+                                        <?php echo $this->escape($item['summery']); ?>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        <?php } ?>
+                        </div>
+                      </div>
+                    </div>
+                </div>
             </div>
             <div class="panel-footer">
                 <div class="social-list text-left">
@@ -45,7 +61,7 @@
                 </div>
             </div>
         </div>
-    <?php } ?>
+
     <?php if (!empty($nav)) { ?>
     </div>
     <?php } ?>

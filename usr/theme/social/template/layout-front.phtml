@@ -71,7 +71,7 @@ $module = Pi::service('module')->current();
 </head>
 <body id="social-<?php echo $module; ?>" class="social-locale-<?php echo $locale; ?>">
     <!-- Header: brand, slogan, user bar -->
-    <div class="page-header">
+    <div class="social-header">
         <div class="container">
               <div class="navbar-right">
                   <?php echo $this->widget('search-search'); ?>
@@ -237,7 +237,7 @@ $module = Pi::service('module')->current();
     </div>
 
     <!-- Footer: sitelink -->
-    <div class="pi-footer text-center">
+    <div class="social-footer text-center">
         <div class="container">
             <?php
             $footer = Pi::config('footer');
@@ -246,8 +246,8 @@ $module = Pi::service('module')->current();
             } else {
             ?>
                 <p>Copyright © 2014 Social Touch Co.,Ltd. All rights reserved. 京IC
-                <img src="<?php echo Pi::service('asset')->getAssetUrl('theme/social', 'image/sina.png');?>" alt="sina" />
-                <img src="<?php echo Pi::service('asset')->getAssetUrl('theme/social', 'image/weixin.png');?>" alt="weixin" />
+                <a href="http://weibo.com/socialtouch" title="新浪微博"><img src="<?php echo Pi::service('asset')->getAssetUrl('theme/social', 'image/sina.png');?>" alt="sina" /></a>
+                <img id="weixin" src="<?php echo Pi::service('asset')->getAssetUrl('theme/social', 'image/weixin.png');?>" alt="weixin" />
                 </p>
             <!--
             <ul class="pi-footer-links muted">
@@ -277,5 +277,26 @@ $module = Pi::service('module')->current();
     </div>
 
     <?php $this->footScript()->appendFile($this->assetTheme('js/front.js')); ?>
+    <script>
+        $(function(){
+            $('#weixin').popover({
+                title: "时趣社会化",
+                content:"<img src= '<?php echo Pi::service('asset')->getAssetUrl('theme/social', 'image/s-erWm.jpg');?>'/>",
+                html: true,
+                placement: "top",
+                trigger: "click",
+            });
+            $('#weixin').on("mouseover",function(){
+                $(this).popover('show');
+            });
+            $('#weixin').on("mouseout",function(){
+                $(this).popover('hide');
+            });
+            $('#weixin').on("click",function(){
+                //$(this).popover('show');
+            });
+        })
+
+    </script>
 </body>
 </html>
