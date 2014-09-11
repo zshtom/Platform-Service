@@ -31,15 +31,19 @@ class IndexController extends ActionController
      */
     public function indexAction()
     {
-        $model  = $this->getModel('apps');
+        $module  = $this->getModule();
+        $model  = $this->getModel($module);
         $select = $model->select()->order(array('nav_order ASC', 'id DESC'));
         $rowset = $model->selectWith($select);
+
+        $rootUrl    = $this->rootUrl();
 
         $apps  = array();
         $menu   = array();
         foreach ($rowset as $row) {
             $app           = $row->toArray();
             $app['url']    = $this->url('apps', $app);
+            $app['icon']   = $rootUrl . '/' . $app['icon'];
             if ($app['nav_order'] && $app['active']) {
                 $menu[] = $app;
             } else {
@@ -50,7 +54,7 @@ class IndexController extends ActionController
 
         $this->view()->assign('apps', $apps);
         $this->view()->assign('title', _a('App list'));
-        $this->view()->setTemplate('app-list');
+        $this->view()->setTemplate('apps-list');
     }
 
     /**
@@ -59,7 +63,7 @@ class IndexController extends ActionController
     public function addAction()
     {
 
-        $module = $this->getModule();
+        $module = $this->getModule('apps');
         $config = Pi::config('', $module);
 
         if ($this->request->isPost()) {
@@ -80,16 +84,19 @@ class IndexController extends ActionController
                     $values['slug'] = null;
                 }
 
-                $values['user'] = Pi::service('user')->getUser()->id;
+                $values['uid'] = Pi::service('user')->getUser()->id;
                 $values['time_created'] = time();
                 unset($values['id']);
 
                 // Fix upload icon url
                 $iconImages = $this->setIconPath(array($data));
+                d($iconImages);
 
-                if (isset($iconImages[0]['image'])) {
-                    $values['icon'] = $iconImages[0]['image'];
+                if (isset($iconImages[0]['filename'])) {
+                    $values['icon'] = $iconImages[0]['filename'];
                 }
+
+                d($values);
 
                 // Save
                 $id = Pi::api('api', $this->getModule())->add($values);
@@ -122,6 +129,14 @@ class IndexController extends ActionController
         $this->view()->setTemplate('app-add');
     }
 
+    /**
+     * setIconPath()
+     *   - Set the icon full path.
+     *
+     * @param array $list
+     *
+     * @return multitype:string
+     */
     protected function setIconPath($list) {
         $rootPath   = $this->rootPath();
         $rootUrl    = $this->rootUrl();
@@ -139,6 +154,7 @@ class IndexController extends ActionController
                 );
                 if ($renamed) {
                     $item['image'] = $rootUrl . '/' . $imgName;
+                    $item['filename'] = $imgName;
                 }
             }
             $items[] = $item;
@@ -174,6 +190,15 @@ class IndexController extends ActionController
 
                 $values['time_updated'] = time();
 
+                // Fix upload icon url
+                $iconImages = $this->setIconPath(array($data));
+
+                if (isset($iconImages[0]['filename'])) {
+                    $values['icon'] = $iconImages[0]['filename'];
+                }
+
+                d($values);
+
                 // Save
                 $row->assign($values);
                 $row->save();
@@ -193,7 +218,7 @@ class IndexController extends ActionController
             $id = $this->params('id');
             $row = $this->getModel('apps')->find($id);
             $data = $row->toArray();
-            $form = new AppsForm('app-form', $row->markup);
+            $form = new AppsForm('app-form');
             $form->setData($data);
             $form->setAttribute(
                 'action',
@@ -201,7 +226,8 @@ class IndexController extends ActionController
             );
             $message = '';
 
-            $data['image'] = $data['icon'];
+            $rootUrl    = $this->rootUrl();
+            $data['image'] = $rootUrl . '/' . $data['icon'];
             $json_data = json_encode($data);
         }
 
@@ -268,8 +294,9 @@ class IndexController extends ActionController
      */
     public function menuAction()
     {
+        $module  = $this->getModule();
+        $model  = $this->getModel($module);
         $orders = $this->params('order');
-        $model = $this->getModel('apps');
         foreach ($orders as $id => $value) {
             $model->update(
                 array('nav_order' => (int) $value),

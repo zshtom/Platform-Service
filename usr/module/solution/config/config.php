@@ -8,7 +8,6 @@
  */
 
 return array(
-        //分类
     'category' => array(
         array(
             'title' => __('Icon Setting'),
@@ -16,14 +15,13 @@ return array(
         ),
     ),
     'item' => array(
-        // Social
         'icon_upload_path' => array(
             'category'      => 'icon',
             'title'         => _t('Icon Upload Path'),
             'description'   => '',
             'edit'          => 'input',
             'filter'        => 'text',
-            'value'         => 'upload/apps/'
+            'value'         => 'solution'
         ),
         'icon_max_size' => array(
             'category'      => 'icon',

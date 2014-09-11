@@ -15,12 +15,6 @@ use Pi\Application\Api\AbstractApi;
 class Api extends AbstractApi
 {
     protected $module = 'solution';
-    /*
-    protected $app_itemColumns = array(
-        'name', 'title', 'slug', 'content', 'markup', 'active',
-        'user', 'time_created', 'seo_title', 'seo_keywords', 'seo_description'
-    );
-    */
 
     /**
      * Add a new app and register to system app settings if name is available
@@ -49,19 +43,9 @@ class Api extends AbstractApi
         if (!$row->name) {
             return $id;
         }
-//         $app_item = array(
-//             'section'       => 'front',
-//             'module'        => $this->getModule(),
-//             'controller'    => 'index',
-//             'action'        => $row->name,
-//             'title'         => $row->title,
-//             'block'         => 1,
-//             'custom'        => 0,
-//         );
-//         $row = Pi::model('page')->createRow($app_item);
-//         $row->save();
 
-//         Pi::registry('solution')->clear($this->getModule());
+//         Pi::registry('solution', $module)->clear($this->getModule());
+        Pi::registry('solution', $module)->clear($module);
 
         return $id;
     }
@@ -87,16 +71,48 @@ class Api extends AbstractApi
         if (!$row->name) {
             return true;
         }
-//         $where = array(
-//             'section'       => 'front',
-//             'module'        => $this->getModule(),
-//             'controller'    => 'index',
-//             'action'        => $row->name,
-//         );
-//         Pi::model('page')->delete($where);
-
-//         Pi::registry('solution')->clear($this->getModule());
 
         return true;
+    }
+
+    /**
+     * Get Solution List.
+     *
+     * @param array $active
+     *
+     * @return array $list
+     */
+    public function getSolutionList($active = 1)
+    {
+        $where = array(
+            'active'  => $active,
+        );
+
+        $module = $this->getModule();
+        $config = Pi::config('', $module);
+
+        $model  = Pi::model($module, $this->getModule());
+        $select = $model->select()->order(array('active DESC', 'nav_order ASC', 'id DESC'));
+        $select = $model->select()->where($where);
+        $rowset = $model->selectWith($select);
+
+        foreach ($rowset as $row) {
+            $id = (int) $row['id'];
+            $item = array(
+                'id'        => $id,
+                'name'      => $row['name'],
+                'title'     => $row['title'],
+                'summery'   => $row['summery'],
+                'icon'      => $row['icon'],
+                'slug'      => $row['slug'],
+                'url'       => Pi::service('url')->assemble(
+                                'solution',
+                                array($this->module, 'id' => $row['id'])
+                               ),
+            );
+            $list[$id] = $item;
+        }
+
+        return $list;
     }
 }

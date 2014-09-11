@@ -38,8 +38,16 @@ class Solution extends AbstractRegistry
         foreach ($rowset as $row) {
             $id = (int) $row['id'];
             $item = array(
-                'name'  => $row['name'],
-                'slug'  => $row['slug'],
+                'id'        => $id,
+                'name'      => $row['name'],
+                'title'     => $row['title'],
+                'summery'   => $row['summery'],
+                'icon'      => $row['icon'],
+                'slug'      => $row['slug'],
+                'url'       => Pi::service('url')->assemble(
+                                'solution',
+                                array($this->module, 'id' => $row['id'])
+                               ),
             );
             $list[$id] = $item;
         }

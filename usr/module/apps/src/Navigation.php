@@ -16,17 +16,61 @@ class Navigation
     public static function apps($module)
     {
         $nav = array(
-            'apps' => array(),
+            'pages' => array(),
         );
 
-        d($module);
-
         // Get the nav from list because active not set in registry.
-        $apps_list  = Pi::api('api', $module)->getAppsList(1);
+        try {
+            $apps_list  = Pi::api('api', $module)->getAppsList(1);
+        } catch (\Exception $exception) {
+            return '';
+        }
 
 //         $apps_list = Pi::registry($module, $module)->read();
 
         foreach ($apps_list as $key => $data) {
+            $nav['pages'][$key] = array(
+                'label'     => $data['title'],
+                'module'    => 'apps',
+                'uri'     => $data['url'],
+            );
+        }
+
+
+
+        return $nav;
+    }
+
+    /**
+     * @TODO Move it to solution module?
+     * solutionList()
+     *   - Try get solution list for nav from solution module.
+     *
+     * @param string $module
+     *   - Current module name.
+     *
+     * @return array
+     *   - <multitype:multitype: , multitype:string unknown >
+     */
+    public static function solutions($module)
+    {
+        $nav = array(
+            'pages' => array(),
+        );
+
+        $nav_list = array();
+
+        // Get the nav from list because active not set in registry.
+        try {
+//             $nav_list  = Pi::api('api')->solution->getSolutionList();
+            $nav_list = Pi::registry('solution', 'solution')->read();
+        } catch (\Exception $exception) {
+            return false;
+        }
+
+        d($nav_list);
+
+        foreach ($nav_list as $key => $data) {
             $nav['pages'][$key] = array(
                 'label'     => $data['title'],
                 'module'    => 'apps',
@@ -36,6 +80,6 @@ class Navigation
 
 
 
-        return $nav;
+//         return $nav;
     }
 }

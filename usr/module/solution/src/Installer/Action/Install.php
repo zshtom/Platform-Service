@@ -18,27 +18,8 @@ class Install extends BasicInstall
     protected function attachDefaultListeners()
     {
         $events = $this->events;
-        $events->attach('install.post', array($this, 'postInstall'), 1);
         parent::attachDefaultListeners();
         return $this;
-    }
-
-    /**
-     * Pre-install pages for: Terms of service, Privacy,
-     * About us, Contact us, Join us, Help, Sitemap
-     *
-     * @param Event $e
-     */
-    public function postInstall(Event $e)
-    {
-        $module = $e->getParam('module');
-        $apiHandler = Pi::api('api', 'page')->setModule($module);
-
-        $result = array(
-                'status'    => true,
-                'message'   => _a('Pages added.'),
-        );
-        $this->setResult('post-install', $result);
     }
 
 }

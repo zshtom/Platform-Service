@@ -23,7 +23,7 @@ class Apps extends Model
      */
     protected $columns = array(
         'id', 'name', 'title', 'slug', 'content', 'markup', 'active',
-        'user', 'time_created', 'time_updated', 'seo_title', 'seo_keywords', 'seo_description',
+        'uid', 'time_created', 'time_updated', 'seo_title', 'seo_keywords', 'seo_description',
         'nav_order', 'theme', 'layout',
         'icon', 'summery', 'time_release',
     );

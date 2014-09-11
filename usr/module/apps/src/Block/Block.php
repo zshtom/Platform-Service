@@ -42,7 +42,7 @@ class Block
             $item = array(
                 'name'  => $row['name'],
                 'title' => $row['title'],
-                'icon'  => $config['icon_upload_path'] . '/' . $row['icon'],
+                'icon'  => $row['icon'],
                 'url'   => Pi::service('url')->assemble(
                                 '',
                                 array('', 'id' => $row['id'])

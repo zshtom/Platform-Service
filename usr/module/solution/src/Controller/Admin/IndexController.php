@@ -26,15 +26,16 @@ class IndexController extends ActionController
      */
     public function indexAction()
     {
-        $model  = $this->getModel('solution');
+        $module  = $this->getModule();
+        $model  = $this->getModel($module);
         $select = $model->select()->order(array('active DESC', 'nav_order ASC', 'id DESC'));
         $rowset = $model->selectWith($select);
-        print('get <pre> '.print_r($rowset , TRUE). '</pre>');
+
         $solutions  = array();
         $menu   = array();
         foreach ($rowset as $row) {
             $app_item           = $row->toArray();
-            $app_item['url']    = $this->url('solution', $app_item);
+            $app_item['url']    = $this->url($module, $app_item);
             if ($app_item['nav_order'] && $app_item['active']) {
                 $menu[] = $app_item;
             } else {
@@ -55,16 +56,13 @@ class IndexController extends ActionController
     {
 
         $module  = $this->getModule();
-        $config         = Pi::config('', $module);
+        $config  = Pi::config('', $module);
 
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
-            $markup = $data['markup'];
-
-//             print('get post data: <pre>' . print_r($data, TRUE) . '</pre>');
 
             // Set form
-            $form = new SolutionForm('solution-form', $markup);
+            $form = new SolutionForm('solution-form');
             $form->setInputFilter(new SolutionFilter);
             $form->setData($data);
             if ($form->isValid()) {
@@ -83,9 +81,10 @@ class IndexController extends ActionController
 
                 // Fix upload icon url
                 $iconImages = $this->setIconPath(array($data));
+                d($iconImages);
 
-                if (isset($iconImages[0]['image'])) {
-                    $values['icon'] = $iconImages[0]['image'];
+                if (isset($iconImages[0]['filename'])) {
+                    $values['icon'] = $iconImages[0]['filename'];
                 }
 
                 // Save
@@ -93,7 +92,7 @@ class IndexController extends ActionController
 
                 if ($id) {
                     $message = _a('Solution data saved successfully.');
-                    return $this->jump(array('action' => 'index'), $message);
+//                     return $this->jump(array('action' => 'index'), $message);
                 } else {
                     $message = _a('Solution data not saved.');
                 }
@@ -118,6 +117,11 @@ class IndexController extends ActionController
         $this->view()->setTemplate('solution-add');
     }
 
+    /**
+     * Set icon full url;
+     * @param unknown $list
+     * @return multitype:string
+     */
     protected function setIconPath($list) {
         $rootPath   = $this->rootPath();
         $rootUrl    = $this->rootUrl();
@@ -135,6 +139,7 @@ class IndexController extends ActionController
                 );
                 if ($renamed) {
                     $item['image'] = $rootUrl . '/' . $imgName;
+                    $item['filename'] = $imgName;
                 }
             }
             $items[] = $item;
@@ -170,7 +175,7 @@ class IndexController extends ActionController
                 //if (!$values['name'] || $row->name != $values['name']) {
                 //    $this->removeSolution($row->name);
                 //}
-               
+
                 $values['time_updated'] = time();
 
                 // Save
@@ -254,7 +259,7 @@ class IndexController extends ActionController
     }
 
     /**
-     * Add apps to navigation menu
+     * Add solution to navigation menu
      *
      */
     public function menuAction()

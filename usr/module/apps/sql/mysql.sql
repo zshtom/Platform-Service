@@ -6,7 +6,7 @@
 
 CREATE TABLE IF NOT EXISTS `{apps}` (
   `id`              int(10)     unsigned    NOT NULL AUTO_INCREMENT,
-  `user`             int(10)     unsigned    NOT NULL DEFAULT '0',
+  `uid`             int(10)     unsigned    NOT NULL DEFAULT '0',
   `name`            varchar(64)             DEFAULT NULL,
   `title`           varchar(255)            NOT NULL DEFAULT '',
   `time_release`    int(10)     unsigned    NOT NULL DEFAULT '0',
