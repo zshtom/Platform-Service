@@ -32,7 +32,7 @@ class Search extends AbstractSearch
         'title'         => 'title',
         'content'       => 'content',
         'time_created'  => 'time_created',
-        'user'          => 'user',
+        'uid'          => 'uid',
     );
 
     /**

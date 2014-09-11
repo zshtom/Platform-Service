@@ -46,7 +46,7 @@ class DescForm extends BaseForm
             'name'          => 'description',
             'type'          => 'editor',
             'options'       => array(
-                'label'     => _a('App Description'),
+                'label'     => _a('Apps Description'),
                 'editor'    => 'html',
                 'set'       => $set,
             ),

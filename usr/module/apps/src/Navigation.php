@@ -16,21 +16,23 @@ class Navigation
     public static function apps($module)
     {
         $nav = array(
-            'apps' => array(),
+            'pages' => array(),
         );
 
-        d($module);
-
         // Get the nav from list because active not set in registry.
-        $apps_list  = Pi::api('api', $module)->getAppsList(1);
+        try {
+            $apps_list  = Pi::api('api', $module)->getAppsList(1);
+        } catch (\Exception $exception) {
+            return '';
+        }
 
 //         $apps_list = Pi::registry($module, $module)->read();
 
         foreach ($apps_list as $key => $data) {
-            $nav['apps'][$key] = array(
+            $nav['pages'][$key] = array(
                 'label'     => $data['title'],
                 'module'    => 'apps',
-                'uri'     => '/' . $module . '/' . $data['name'],
+                'uri'     => $data['url'],
             );
         }
 
@@ -50,21 +52,26 @@ class Navigation
      * @return array
      *   - <multitype:multitype: , multitype:string unknown >
      */
-    public static function solutionList($module)
+    public static function solutions($module)
     {
         $nav = array(
-            'solution' => array(),
+            'pages' => array(),
         );
 
-        d($module);
+        $nav_list = array();
 
         // Get the nav from list because active not set in registry.
-        $nav_list = Pi::service('api')->solution->solutionList();
+        try {
+//             $nav_list  = Pi::api('api')->solution->getSolutionList();
+            $nav_list = Pi::registry('solution', 'solution')->read();
+        } catch (\Exception $exception) {
+            return false;
+        }
 
         d($nav_list);
 
         foreach ($nav_list as $key => $data) {
-            $nav['solution'][$key] = array(
+            $nav['pages'][$key] = array(
                 'label'     => $data['title'],
                 'module'    => 'apps',
                 'uri'     => '/' . $module . '/' . $data['name'],
@@ -73,6 +80,6 @@ class Navigation
 
 
 
-        return $nav;
+//         return $nav;
     }
 }

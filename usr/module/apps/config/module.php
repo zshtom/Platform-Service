@@ -51,6 +51,6 @@ return array(
         // Navigation definition
         'navigation'    => 'nav.php',
         // Block.
-        'block'         => 'block.php',
+        // 'block'         => 'block.php',
     ),
 );

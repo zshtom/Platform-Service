@@ -101,17 +101,20 @@ class Api extends AbstractApi
 //         $rowset = Pi::model($module, $module)->select($where);
 
 
+        $upload_path = Pi::url('upload') . '/' . $this->getModule();
+
         foreach ($rowset as $row) {
             $id = (int) $row['id'];
             $item = array(
-                'id'        => $id,
-                'name'      => $row['name'],
-                'title'     => $row['title'],
-                'summery'   => $row['summery'],
-                'icon'      => $row['icon'],
-                'slug'      => $row['slug'],
-                'url'       => Pi::service('url')->assemble(
-                    'apps',
+                'id'            => $id,
+                'time_created'  => $row['time_created'],
+                'name'          => $row['name'],
+                'title'         => $row['title'],
+                'summery'       => $row['summery'],
+                'icon'          => $upload_path . '/' .$row['icon'],
+                'slug'          => $row['slug'],
+                'url'           => Pi::service('url')->assemble(
+                    '',
                     array($this->module, 'id' => $row['id'])
                 ),
             );

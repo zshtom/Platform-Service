@@ -46,18 +46,15 @@ return array(
             'apps'       => array(
                 'label'         => _a('Apps'),
                 'uri'           => '',
-                'callback'      => 'Module\\Apps\\Navigation::apps',
+                'callback'      => array('navigation', 'apps'),
+//                 'callback'      => 'Module\\Apps\\Navigation::apps',
             ),
             'solution'          => array(
                 'label'         => _a('Solution'),
                 'uri'           => '',
-                'callback'      => array('navigation', 'apps'),
-            ),
-//             'apps'       => array(
-//                 'label'         => _a('Apps'),
-//                 'uri'           => '',
+                'callback'      => array('navigation', 'solutions'),
 //                 'callback'      => 'Module\\Apps\\Navigation::apps',
-//             ),
+            ),
         ),
 
     ),
