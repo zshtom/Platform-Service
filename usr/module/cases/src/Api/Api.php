@@ -58,12 +58,11 @@ class Api extends AbstractApi
      *
      * @return array $list
      */
-    public function caseList($active = 1)
+    public function caseList()
     {
         $config  = Pi::config('', $this->module);
         $model  = $this->getModel($this->module);
         $select = $model->select();
-        $select->where(array('active' => $active));
         $select->columns(array('id', 'title', 'summery', 'icon'));
         $select->order(array('order ASC'));
         $rowset = $model->selectWith($select);
