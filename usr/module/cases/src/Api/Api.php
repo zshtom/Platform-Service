@@ -21,7 +21,7 @@ class Api extends AbstractApi
      *
      * @param array $data
      *
-     * @return int  case id
+     * @return int  Case id
      */
     public function add($data)
     {
@@ -42,7 +42,7 @@ class Api extends AbstractApi
      * Delete a case
      *
      * @param int $id
-     * @return boolean
+     * @return bool
      */
     public function delete($id)
     {
@@ -52,4 +52,39 @@ class Api extends AbstractApi
         }
         return $row->delete();
     }
+
+    /**
+     * Get case List.
+     *
+     * @return array $list
+     */
+    public function caseList()
+    {
+        $config  = Pi::config('', $this->module);
+        $model  = $this->getModel($this->module);
+        $select = $model->select();
+        $select->where(array('active' => $active));
+        $select->columns(array('id', 'title', 'summery', 'icon'));
+        $select->order(array('order ASC'));
+        $rowset = $model->selectWith($select);
+        $list = array();
+        if($rowset){
+            foreach ($rowset as $row) {
+                $id = (int) $row['id'];
+                $item = array(
+                    'id'        => $row['id'],
+                    'title'     => $row['title'],
+                    'summery'   => $row['summery'],
+                    'icon'      => $config['icon_upload_path'] . '/' . $row['icon'],
+                    'url'       => Pi::service('url')->assemble(
+                                    'cases',
+                                    array($this->module, 'id' => $row['id'])
+                               ),
+                );
+                $list[$id] = $item;
+            }
+        }
+        return $list;
+    }
+
 }

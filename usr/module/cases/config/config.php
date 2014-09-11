@@ -15,6 +15,14 @@ return array(
         ),
     ),
     'item' => array(
+        // General
+        'page_limit'      => array(
+            'category'    => 'general',
+            'title'       => _t('List page limit'),
+            'description' => _t('Maximum count of case on a list page.'),
+            'value'       => 20,
+            'filter'      => 'int',
+        ),
         // Social
         'icon_upload_path' => array(
             'category'      => 'icon',
@@ -22,7 +30,7 @@ return array(
             'description'   => '',
             'edit'          => 'input',
             'filter'        => 'text',
-            'value'         => 'upload/apps/'
+            'value'         => 'upload/cases/'
         ),
         'icon_max_size' => array(
             'category'      => 'icon',
