@@ -58,7 +58,7 @@ class Api extends AbstractApi
      *
      * @return array $list
      */
-    public function caseList()
+    public function caseList($active = 1)
     {
         $config  = Pi::config('', $this->module);
         $model  = $this->getModel($this->module);
