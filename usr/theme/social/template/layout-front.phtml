@@ -245,8 +245,8 @@ $module = Pi::service('module')->current();
                 echo $footer;
             } else {
             ?>
-                <p>Copyright © 2014 Social Touch Co.,Ltd. All rights reserved. 京IC
-                <a href="http://weibo.com/socialtouch" title="新浪微博"><img src="<?php echo Pi::service('asset')->getAssetUrl('theme/social', 'image/sina.png');?>" alt="sina" /></a>
+                <p><?php echo _e('sitename') ?>
+                <a href="http://weibo.com/socialtouch" title="<?php _e('sina')?>"><img src="<?php echo Pi::service('asset')->getAssetUrl('theme/social', 'image/sina.png');?>" alt="sina" /></a>
                 <img id="weixin" src="<?php echo Pi::service('asset')->getAssetUrl('theme/social', 'image/weixin.png');?>" alt="weixin" />
                 </p>
             <!--
@@ -280,21 +280,15 @@ $module = Pi::service('module')->current();
     <script>
         $(function(){
             $('#weixin').popover({
-                title: "时趣社会化",
+                title: "<?php _e('socialization') ?>",
                 content:"<img src= '<?php echo Pi::service('asset')->getAssetUrl('theme/social', 'image/s-erWm.jpg');?>'/>",
                 html: true,
                 placement: "top",
-                trigger: "click",
-            });
-            $('#weixin').on("mouseover",function(){
-                $(this).popover('show');
-            });
-            $('#weixin').on("mouseout",function(){
+                trigger: "click hover",
+            }).on("mouseout",function(){
                 $(this).popover('hide');
             });
-            $('#weixin').on("click",function(){
-                //$(this).popover('show');
-            });
+
         })
 
     </script>
