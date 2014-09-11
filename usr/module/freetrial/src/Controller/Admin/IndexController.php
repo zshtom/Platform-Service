@@ -6,9 +6,9 @@
  */
 namespace Module\Freetrial\Controller\Admin;
 
+use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Pi;
 use Zend\Db\Sql\Predicate;
 
 
@@ -55,7 +55,7 @@ class IndexController extends ActionController
                 'company'   => $row['company'],
                 'email'     => $row['email'],
                 'phone'     => $row['phone'],
-                'date'      => $row['date'],
+                'time'      => $row['time'],
                 'id'         => $row['id'],
                 'url'   => $this->url('', array(
                         'action'    => 'view',
@@ -105,7 +105,9 @@ class IndexController extends ActionController
     /**
      *
      */
-    public function batchdeleteAction(){
+    public function batchdeleteAction()
+    {
+        echo json_encode(array('msg' => 'ok'));
         $all = trim($this->params('ids'), ',');
         $ids = explode(",",$all);
         $model = $this->getModel('freetrial');
@@ -114,7 +116,5 @@ class IndexController extends ActionController
             $row = $model->find($val);
             $row->delete();
         }
-        echo json_encode(array('msg' => 'ok'));
-        exit;
     }
 }
