@@ -114,7 +114,7 @@ class Api extends AbstractApi
                 'icon'          => $upload_path . '/' .$row['icon'],
                 'slug'          => $row['slug'],
                 'url'           => Pi::service('url')->assemble(
-                    '',
+                    $module,
                     array($this->module, 'id' => $row['id'])
                 ),
             );

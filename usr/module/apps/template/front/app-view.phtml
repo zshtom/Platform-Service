@@ -3,7 +3,7 @@
     <div class="col-md-2">
         <ul class="nav nav-pills">
         <?php foreach ($nav as $id => $item) { ?>
-            <li<?php if (!empty($item['active'])) { echo ' class="active"'; } ?>>
+            <li <?php if (!empty($item['active'])) { echo ' class="active col-md-12"'; } else { echo ' class="col-md-12" '; }?>>
                 <a href="<?php echo $item['url']; ?>"><?php echo _escape($item['title']); ?></a>
             </li>
         <?php } ?>
