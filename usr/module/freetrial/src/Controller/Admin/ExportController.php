@@ -10,7 +10,6 @@ namespace Module\Freetrial\Controller\Admin;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Zend\Db\Sql\Predicate;
-use Pi\File\Transfer\Download;
 
 /**
  * Feature list:
@@ -37,8 +36,6 @@ class ExportController extends ActionController
         }
         $columns = array('id', 'name', 'title','company','email', 'phone','time');
         $model  = $this->getModel('freetrial');
-        $select = $model->select();
-        $rowset = $model->selectWith($select);
         $select = $model->select()
             ->columns($columns)
             ->where("time<$end")->where("time>$start")
@@ -62,29 +59,30 @@ class ExportController extends ActionController
         $end = $this->params('end', null);
         $columns = array('id', 'name', 'title','company','email', 'phone','time');
         $model  = $this->getModel('freetrial');
+
         $select = $model->select()
             ->columns($columns)
-            ->where("time < $end")->where("time > $start")
+           // ->where("time<$end")->where("time>$start")
             ->order('id ASC');
-        $rowset = $model->selectWith($select);
+        $data = $model->selectWith($select);
+        $value = $data->toArray();
+        $items  = array();
         $name='down';
         header( "Cache-Control: public" );
         header( "Pragma: public" );
         header("Content-type:application/vnd.ms-excel");
         header("Content-Disposition:attachment;filename=".$name.".xls");
         header('Content-Type:APPLICATION/OCTET-STREAM');
-/*          $options = array(
-            // Required
-            'type'          => 'raw',
-            // Optional
-            'filename'      => 'pi-download',
-            // Optional
-            'content_type'   => 'application/vnd.ms-excel',
-           ); $source ='path/to/file';
-            $downloader->send($source, $options);
-        $downloader = new Download;*/
-        foreach ($rowset as $row) {
-            $items[$row->id] = $row->toArray();
+        foreach ($value as $row) {
+            $items[] = array(
+                'id' => $row['id'],
+                'name' => $row['name'],
+                'title' => $row['title'],
+                'company' => $row['company'],
+                'email' => $row['email'],
+                'phone' => $row['phone'],
+                'time' => $row['time']
+            );
         }
         echo "<table>";
         echo "<tr>";
