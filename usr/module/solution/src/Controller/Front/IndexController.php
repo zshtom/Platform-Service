@@ -21,7 +21,7 @@ class IndexController extends ActionController
     protected function render($row)
     {
         $module = $this->getModule();
-        $this->view()->setTemplate('app-view');
+        $this->view()->setTemplate('solution-view');
         $solutions_list = array();
 
         if (!$row instanceof RowGateway || !$row->active) {
@@ -29,8 +29,8 @@ class IndexController extends ActionController
             $solutions_list = Pi::api('api', $this->getModule())->getSolutionList(1);
 
             $content = Pi::service('markup')->render(
-                    $description,
-                    'html'
+                $description,
+                'html'
             );
 
             $title      = __('Solutions Description');

@@ -95,6 +95,9 @@ class Api extends AbstractApi
         $select = $model->select()->where($where);
         $rowset = $model->selectWith($select);
 
+        // @TODO set the upload path by settings.
+        $upload_path = Pi::url('upload') . '/' . $this->getModule();
+
         foreach ($rowset as $row) {
             $id = (int) $row['id'];
             $item = array(
@@ -103,7 +106,7 @@ class Api extends AbstractApi
                 'title'     => $row['title'],
                 'summery'   => $row['summery'],
                 'slug'      => $row['slug'],
-                'icon'      => $row['icon'],
+                'icon'      => $upload_path . $row['icon'],
                 'url'       => Pi::service('url')->assemble(
                     '',
                     array($this->module, 'id' => $row['id'])

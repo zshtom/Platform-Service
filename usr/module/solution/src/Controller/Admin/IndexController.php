@@ -67,19 +67,7 @@ class IndexController extends ActionController
         $apps = Pi::api('api', APPS)->getAppsList(1);
         $data = array();
 
-//         $module = $this->getModule();
-//         $model  = $this->getModel('solution_app');
-//         $select = $model->select()->order(array('nav_order ASC', 'id DESC'));
-//         $select->where($where);
-//         $rowset = $model->selectWith($select);
-
-        $rootUrl    = $this->rootUrl();
-
-        $solutions  = array();
-        $menu   = array();
-        foreach ($rowset as $row) {
-        }
-//         d($appsRow);
+        $appsRow = $this->_getSolutionApps(10);
 
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
@@ -88,8 +76,6 @@ class IndexController extends ActionController
             $form = new SolutionForm('solution-form');
             $form->setInputFilter(new SolutionFilter);
             $form->setData($data);
-
-            d($data);
 
             if ($form->isValid()) {
                 $values = $form->getData();
@@ -120,12 +106,33 @@ class IndexController extends ActionController
                     $message = _a('Solution data saved successfully.');
 
                     // Try save apps.
-                    $apps = array_keys($data['solution_app']);
+                    $apps = $data['solution_app'];
+                    d($apps);
+                    foreach ($apps as $app) {
+                        if ($app['id']) {
+                            $app = array(
+                                'solution'      => $id,
+                                'app'           => $app['app'],
+                                'title'         => $app['title'],
+                                'icon'          => $app['icon_url'],
+                                'description'   => $app['description'],
+                                'time_created'  => time(),
+                            );
 
-                    $appsRow = $this->getModel('app')->find($id, 'solution');
-                    d($appsRow);
+                            try {
+                                $appRow = Pi::model('solution_app', $this->getModule())->createRow($app);
+                                $appRow->save();
+                            } catch (\Exception $exception) {
+                                $message .= '<li>' . $app['title'] . _a(' can\'t not save:') . '</li>';
+                                $message .= $exception->getMessage();
+                            }
+                        }
+                    }
 
-//                     return $this->jump(array('action' => 'index'), $message);
+//                     $appsRow = $this->getModel('solution_app')->find($id, 'solution');
+//                     d($appsRow);
+
+                    return $this->jump(array('action' => 'index'), $message);
                 } else {
                     $message = _a('Solution data not saved.');
                 }
@@ -238,14 +245,10 @@ class IndexController extends ActionController
         foreach ($list as $item) {
             if ($uploadUrl == substr($item['icon'], 0, $prefixLen)) {
                 $imgName = substr($item['icon'], $prefixLen);
-//                 d($imgName);
-                d($uploadPath . '/' . $imgName);
-                d($rootPath . '/' . $imgName);
                 $renamed = rename(
                     $uploadPath . $imgName,
                     $rootPath . $imgName
                 );
-                d((int)$renamed);
                 if ($renamed) {
                     $item['image'] = $rootUrl . '/' . $imgName;
                     $item['filename'] = $imgName;
@@ -253,8 +256,6 @@ class IndexController extends ActionController
             }
             $items[] = $item;
         }
-
-        d($items);
 
         return $items;
     }
@@ -548,13 +549,13 @@ class IndexController extends ActionController
                 $values = $form->getData();
 
                 // Save
-                $description = Pi::user()->data->set(0, 'solution_description', $values['description']);
+                $description = Pi::user()->data->set(0, 'solutions_description', $values['description']);
 
             } else {
                 $message = _a('Invalid data, please check and re-submit.');
             }
         } else {
-            $data['description'] = Pi::user()->data->get(0, 'solution_description');
+            $data['description'] = Pi::user()->data->get(0, 'solutions_description');
             if (empty($data['description'])) {
                 $data['description'] = '<div style="font-size: 20px;">Content is empty.</div>';
             }
@@ -636,7 +637,7 @@ class IndexController extends ActionController
 
                 array(
                     'class'      => 'self-class',
-                    'name'       => 'solution_app[title][' . $key . ']',
+                    'name'       => 'solution_app[' . $key . '][title]',
                     'options'    => array(
                         'class' => 'inline',
                         'label'     => ' ',
@@ -659,7 +660,16 @@ class IndexController extends ActionController
                         'value' => '<img src="' . $app['icon'] . '" style="width: 80px;">',
                     ),
                     'type'          => 'html',
+                ),
 
+                array(
+                    'name'       => 'solution_app[' . $key . '][icon_url]',
+                    'attributes' => array(
+                        'class' => 'inline',
+                        'value' => $app['icon'],
+                        'readonly' => 'readonly'
+                    ),
+                    'type'          => 'hidden',
                 ),
 
                 array(
@@ -692,6 +702,33 @@ class IndexController extends ActionController
         }
 
         return $form;
+    }
+
+    /**
+     * _getSolutionApps()
+     *   - Get solutions app.
+     *
+     * @param array $solution
+     */
+    protected function _getSolutionApps($solution) {
+
+        $module = $this->getModule();
+        $model  = $this->getModel('solution_app');
+
+        $where = array(
+                'solution' => $solution,
+        );
+
+        $select = $model->select()->order(array('id DESC'));
+        $select->where($where);
+        $rowset = $model->selectWith($select);
+
+        foreach ($rowset as $row) {
+            $app = $row->toArray();
+            $solutionsApp[$app['id']] = $app;
+        }
+
+        return $solutionsApp;
     }
 
 }

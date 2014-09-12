@@ -32,6 +32,12 @@
                         $appApp = 'solution_app[' . $i . '][app]';
                         $appElementApp = $form->get($appApp);
                         echo $this->formElement($appElementApp);
+                        $appTitle = 'solution_app[' . $i . '][title]';
+                        $appElementTitle = $form->get($appTitle);
+                        echo $this->formElement($appElementTitle);
+                        $appIconUrl = 'solution_app[' . $i . '][icon_url]';
+                        $appElementIconUrl = $form->get($appIconUrl);
+                        echo $this->formElement($appElementIconUrl);
                         ?>
                     </td>
                     <td>

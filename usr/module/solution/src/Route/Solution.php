@@ -54,7 +54,7 @@ class Solution extends Standard
 
         // Set action
         $action = '';
-        $solutionsList  = Pi::api('api', $module)->getSolutionsList();
+        $solutionsList  = Pi::api('api', $module)->getSolutionList();
 
         if (!empty($matches['id'])) {
             if (isset($solutionsList[$matches['id']])) {

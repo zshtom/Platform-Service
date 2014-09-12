@@ -63,7 +63,7 @@ class Navigation
         // Get the nav from list because active not set in registry.
         try {
 //             $nav_list  = Pi::api('api')->solution->getSolutionList();
-            $nav_list = Pi::registry('solution', 'solution')->read();
+            $nav_list = Pi::api('api', 'solution')->getSolutionList(1);
         } catch (\Exception $exception) {
             return false;
         }
@@ -74,12 +74,10 @@ class Navigation
             $nav['pages'][$key] = array(
                 'label'     => $data['title'],
                 'module'    => 'apps',
-                'uri'     => '/' . $module . '/' . $data['name'],
+                'uri'     => $data['url'],
             );
         }
 
-
-
-//         return $nav;
+        return $nav;
     }
 }
