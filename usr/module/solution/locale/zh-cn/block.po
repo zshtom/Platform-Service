@@ -13,3 +13,6 @@ msgstr ""
 "X-Poedit-KeywordsList: _b\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: C:\\code\\pi\\usr\\module\\page\n"
+
+msgid "Apps Description"
+msgstr "产品概述"

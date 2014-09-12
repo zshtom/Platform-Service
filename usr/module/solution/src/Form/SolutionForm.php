@@ -14,13 +14,13 @@ use Pi\Form\Form as BaseForm;
 
 class SolutionForm extends BaseForm
 {
-    protected $markup = 'text';
+    protected $markup = 'html';
 
     /**
      * Constructor
      *
      * @param null|string|int $name Optional name for the element
-     * @param string $markup Solution type: html
+     * @param string $markup Solutions type: html
      */
     public function __construct($name = null, $markup = null)
     {
@@ -37,16 +37,44 @@ class SolutionForm extends BaseForm
         return $this->filter;
     }
 
+    public function getInputElements(){
+        return array('title', 'nav_order', 'name', 'slug', 'summery', 'content');
+    }
+
+    public function getSeoElements(){
+        return array('seo_title', 'seo_keywords', 'seo_description');
+    }
+
+    public function getHiddenElements() {
+        return array('id', 'icon');
+    }
+
+    public function getCheckboxElements() {
+        return array('active');
+    }
+
     public function init()
     {
+        $this->add(
+            array(
+                'name'          => 'title',
+                'options'       => array(
+                    'label' => _a('Solution title'),
+                ),
+                'attributes'    => array(
+                    'type'  => 'text',
+                )
+            )
+        );
+
         $this->add(array(
-            'name'          => 'title',
+            'name'          => 'nav_order',
             'options'       => array(
-                'label' => _a('Solution title'),
+                'label' => _a('Navigation Order'),
             ),
             'attributes'    => array(
                 'type'  => 'text',
-            )
+            ),
         ));
 
         $this->add(array(
@@ -60,15 +88,6 @@ class SolutionForm extends BaseForm
             ),
         ));
 
-        $this->add(array(
-            'name'          => 'summery',
-            'options'       => array(
-                'label' => _a('Solution Summery'),
-            ),
-            'attributes'    => array(
-                'type'  => 'textarea',
-            )
-        ));
 
         $this->add(array(
             'name'          => 'icon',
@@ -92,45 +111,30 @@ class SolutionForm extends BaseForm
             )
         ));
 
-        if ('phtml' == $this->markup) {
-            $this->add(array(
-                'name'          => 'content',
-                'options'       => array(
-                    'label' => _a('Template name'),
-                ),
-                'attributes'    => array(
-                    'description'   => _a('Select a template from `usr/custom/module/solution/template/front/` w/o extension.'),
-                ),
-            ));
-        } else {
-            $set = '';
-            switch ($this->markup) {
-                case 'html':
-                    $editor         = 'html';
-                    break;
-                case 'markdown':
-                    $editor         = 'markitup';
-                    $set            = 'markdown';
-                    break;
-                case 'text':
-                default:
-                    $editor         = 'textarea';
-                    break;
-            }
+        $this->add(array(
+            'name'          => 'summery',
+            'options'       => array(
+                'label' => _a('Solution Summery'),
+            ),
+            'attributes'    => array(
+                'type'  => 'textarea',
+            )
+        ));
 
-            $this->add(array(
-                'name'          => 'content',
-                'type'          => 'editor',
-                'options'       => array(
-                    'label'     => _a('Solution Content'),
-                    'editor'    => $editor,
-                    'set'       => $set,
-                ),
-                'attributes'    => array(
-                    'rows'         => 5,
-                ),
-            ));
-        }
+
+        $set = '';
+        $this->add(array(
+            'name'          => 'content',
+            'type'          => 'editor',
+            'options'       => array(
+                'label'     => _a('Solution Content'),
+                'editor'    => 'html',
+                'set'       => $set,
+            ),
+            'attributes'    => array(
+                'rows'         => 5,
+            ),
+        ));
 
         // extra_seo
         $this->add(array(
@@ -194,14 +198,6 @@ class SolutionForm extends BaseForm
             'attributes'    => array(
                 'type'  => 'hidden',
                 'value' => 0,
-            )
-        ));
-
-        $this->add(array(
-            'name'          => 'markup',
-            'attributes'    => array(
-                'type'  => 'hidden',
-                'value' => $this->markup,
             )
         ));
 

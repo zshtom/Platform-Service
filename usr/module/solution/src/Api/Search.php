@@ -7,7 +7,7 @@
  * @license         http://pialog.org/license.txt BSD 3-Clause License
  */
 
-namespace Module\Solution\Api;
+namespace Module\Apps\Api;
 
 use Pi;
 use Pi\Search\AbstractSearch;
@@ -22,7 +22,7 @@ class Search extends AbstractSearch
     /**
      * {@inheritDoc}
      */
-    protected $table = 'solutions';
+    protected $table = 'solution';
 
     /**
      * {@inheritDoc}
@@ -32,7 +32,7 @@ class Search extends AbstractSearch
         'title'         => 'title',
         'content'       => 'content',
         'time_created'  => 'time_created',
-        'user'          => 'user',
+        'user'          => 'uid',
     );
 
     /**
@@ -41,7 +41,7 @@ class Search extends AbstractSearch
     protected function buildLink(array $item)
     {
         $link = Pi::service('url')->assemble(
-            'solutions',
+            'solution',
             array('module' => $this->module, 'id' => $item['id'])
         );
 

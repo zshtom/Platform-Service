@@ -14,7 +14,7 @@ use Pi;
 use Pi\Application\Registry\AbstractRegistry;
 
 /**
- * Solution list
+ * Solutions list
  *
  * @author Taiwen Jiang <taiwenjiang@tsinghua.org.cn>
  */
@@ -33,8 +33,13 @@ class Solution extends AbstractRegistry
         $model  = Pi::model('solution', $this->module);
         $select = $model->select();
         $select->where(array('active' => 1));
-        $select->columns(array('id', 'name', 'slug'));
+        $select->columns(array('id', 'name', 'title', 'summery', 'icon', 'slug'));
+
+        // Add order by.
+        $select->order(array('nav_order ASC', 'id DESC'));
+
         $rowset = $model->selectWith($select);
+
         foreach ($rowset as $row) {
             $id = (int) $row['id'];
             $item = array(
@@ -43,11 +48,10 @@ class Solution extends AbstractRegistry
                 'title'     => $row['title'],
                 'summery'   => $row['summery'],
                 'icon'      => $row['icon'],
-                'slug'      => $row['slug'],
                 'url'       => Pi::service('url')->assemble(
-                                'solution',
-                                array($this->module, 'id' => $row['id'])
-                               ),
+                    'solution',
+                    array($this->module, 'id' => $row['id'])
+                ),
             );
             $list[$id] = $item;
         }

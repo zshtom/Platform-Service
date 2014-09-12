@@ -1,0 +1,71 @@
+
+<table>
+    <tbody>
+    <?php foreach ($formGroups as $key => $group) {
+        if ($key == 'general') {
+    ?>
+    <?php   foreach ($group as $el) { ?>
+        <tr>
+        <?php
+//         d($el);
+        if ($el == 'submit' || $el == 'active') {
+            continue;
+        }
+            $element = $form->get($el);
+            $attributes = $element->getAttributes();
+            $options = $element->getOptions();
+
+            $type = $attributes['type'];
+            if ($type == 'hidden') {
+                echo $this->formElement($element);
+                continue;
+            }
+
+        ?>
+            <td>
+                <label class="control-label">
+                    <?php
+                    if (isset($options['label'])) {
+                        echo $this->formLabel($element);
+                    }
+                    ?>
+                </label>
+            </td>
+            <td>
+                <div class="col-md-4">
+                <?php
+
+                    switch ($type) {
+                        case 'text':
+                        case 'textarea':
+                        case 'editor':
+                            $element->setAttribute("class", "form-control control-word");
+                            $element->setAttribute("style", "width: 100%");
+                            break;
+
+//                         default:
+
+//                             break;
+                    }
+
+                    echo $this->formElement($element);
+
+                ?>
+                </div>
+                <div class="col-md-4 help-block">
+                    <?php echo $this->formElementErrors($element); ?>
+                </div>
+            </td>
+        </tr>
+    <?php   }
+        }
+        elseif ($key == 'apps') {
+            $apps = $group;
+            $appsCont = count($apps) / 7;
+
+            include('apps-list.phtml');
+        }
+    } ?>
+        </tr>
+    </tbody>
+</table>

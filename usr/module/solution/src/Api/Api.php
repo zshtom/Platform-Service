@@ -19,21 +19,21 @@ class Api extends AbstractApi
     /**
      * Add a new app and register to system app settings if name is available
      *
-     * @param array $app_item
+     * @param array $app
      *
      * @return int  App id
      */
-    public function add($app_item)
+    public function add($app)
     {
         $id = 0;
 
         // Set time_created
-        if (!isset($app_item['time_created'])) {
-            $app_item['time_created'] = time();
+        if (!isset($app['time_created'])) {
+            $app['time_created'] = time();
         }
 
         // Save
-        $row = Pi::model('solution', $this->getModule())->createRow($app_item);
+        $row = Pi::model('solution', $this->getModule())->createRow($app);
         $row->save();
         $id = (int) $row->id;
         if (!$id) {
@@ -43,9 +43,6 @@ class Api extends AbstractApi
         if (!$row->name) {
             return $id;
         }
-
-//         Pi::registry('solution', $module)->clear($this->getModule());
-        Pi::registry('solution', $module)->clear($module);
 
         return $id;
     }
@@ -76,7 +73,7 @@ class Api extends AbstractApi
     }
 
     /**
-     * Get Solution List.
+     * Get Solutions List.
      *
      * @param array $active
      *
@@ -84,6 +81,8 @@ class Api extends AbstractApi
      */
     public function getSolutionList($active = 1)
     {
+        $list = array();
+
         $where = array(
             'active'  => $active,
         );
@@ -91,10 +90,13 @@ class Api extends AbstractApi
         $module = $this->getModule();
         $config = Pi::config('', $module);
 
-        $model  = Pi::model($module, $this->getModule());
+        $model  = Pi::model('solution', $this->getModule());
         $select = $model->select()->order(array('active DESC', 'nav_order ASC', 'id DESC'));
         $select = $model->select()->where($where);
         $rowset = $model->selectWith($select);
+
+        // @TODO set the upload path by settings.
+        $upload_path = Pi::url('upload') . '/' . $this->getModule();
 
         foreach ($rowset as $row) {
             $id = (int) $row['id'];
@@ -103,16 +105,51 @@ class Api extends AbstractApi
                 'name'      => $row['name'],
                 'title'     => $row['title'],
                 'summery'   => $row['summery'],
-                'icon'      => $row['icon'],
                 'slug'      => $row['slug'],
+                'icon'      => $upload_path . $row['icon'],
                 'url'       => Pi::service('url')->assemble(
-                                'solution',
-                                array($this->module, 'id' => $row['id'])
-                               ),
+                    '',
+                    array($this->module, 'id' => $row['id'])
+                ),
             );
             $list[$id] = $item;
         }
 
         return $list;
     }
+
+    /**
+     * Get Solutions List.
+     *
+     * @param array $active
+     *
+     * @return array $list
+     */
+    public function getCasesList($solution = 0)
+    {
+        $list = array();
+
+        $where = array(
+            'solution'  => $solution,
+        );
+
+        $module = $this->getModule('solution/solution_case');
+        $config = Pi::config('', $module);
+
+        $model  = Pi::model('solution', $this->getModule());
+        $select = $model->select()->order(array('id DESC'));
+        $select = $model->select()->where($where);
+        $rowset = $model->selectWith($select);
+
+        foreach ($rowset as $row) {
+            $id = (int) $row['id'];
+            $item = array(
+                'id' => $id,
+            );
+            $list[$id] = $item;
+        }
+
+        return $list;
+    }
+
 }

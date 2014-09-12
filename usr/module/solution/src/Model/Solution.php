@@ -22,9 +22,9 @@ class Solution extends Model
      * {@inheritDoc}
      */
     protected $columns = array(
-        'id', 'user', 'name', 'title', 'icon', 'summery', 'content', 'markup', 'nav_order',
-        'time_created', 'time_updated', 'active',
-        'slug', 'seo_title', 'seo_keywords', 'seo_description',
-        'theme', 'layout',
+        'id', 'name', 'title', 'slug', 'content', 'active',
+        'uid', 'time_created', 'time_updated', 'seo_title', 'seo_keywords', 'seo_description',
+        'nav_order',
+        'icon', 'summery', 'time_release',
     );
 }

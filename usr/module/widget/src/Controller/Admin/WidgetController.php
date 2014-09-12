@@ -71,6 +71,7 @@ abstract class WidgetController extends ActionController
         if (empty($block['type'])) {
             $block['type'] = $this->type;
         }
+
         $id = Pi::api('block', $module)->add($block);
         if ($id) {
             $status = 1;

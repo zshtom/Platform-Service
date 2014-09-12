@@ -6,7 +6,9 @@
         init: function() {
             
             if (typeof options.items !== 'string') {
-                $(".widget-item-add").hide();  
+                if (options.items.image) {
+                    $(".widget-item-add").hide();  
+                }
             }
             
             this.form.submit(function() {
@@ -20,6 +22,8 @@
                     content.push({
                         "image":    el.find("img").attr("src")
                     });
+                    
+                    console.log("Image init in 24 line..");
 
                 });
                 page.form.find("[name=content]").val(JSON.stringify(content));
@@ -44,8 +48,9 @@
         },
         cancel: function() {
             this.remove();
-            console.log("initialize Backbone view.");
             $(".widget-item-add").show();
+            // Remove hidden icon url.
+            $("#icon-url").val("");
         }
     });
 
@@ -61,7 +66,9 @@
             this.render();
         },
         render: function() {
-            this.collection.forEach(this.addOne, this);
+            if (options.items.image) {
+                this.collection.forEach(this.addOne, this);
+            }
             this.upload();
             this.sortable();
         },
@@ -92,19 +99,8 @@
                         });
                         
                         $("#icon-url").val(res.image);
-                        
-                        console.log("Upload done.");
-                        console.log(res);
-                        $(".widget-item-add").hide();
 
-                        /* Add Magnific Popup to uploaded image */
-//                        self.$('.image-popup').magnificPopup({
-//                            type: 'image',
-//                            closeOnContentClick: true,
-//                            image: {
-//                                verticalFit: false
-//                            }
-//                        });
+                        $(".widget-item-add").hide();
 
                     } else {
                         alert(res.message);

@@ -6,7 +6,7 @@ use Zend\Validator\AbstractValidator;
 
 class SolutionNameDuplicate extends AbstractValidator
 {
-    const TAKEN        = 'solutionExists';
+    const TAKEN = 'solutionExists';
 
     public function __construct()
     {
