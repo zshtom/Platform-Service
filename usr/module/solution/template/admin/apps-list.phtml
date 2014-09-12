@@ -1,56 +1,114 @@
 <?php
-//$this->css($this->assetModule('admin/admin.css', 'system'));
+    $this->jQuery();
+    $this->Backbone();
 ?>
-<div class="table-responsive">
-    <form action="<?php echo $this->url('', array('action' => 'menu')); ?>">
-    <table class="table">
-        <thead>
-        <tr>
-            <th><?php echo _a('App title'); ?></th>
-            <th style="width: 5%;"><?php echo _a('Name'); ?></th>
-            <th style="width: 15%;"><?php echo _a('Time published'); ?></th>
-            <th style="width: 15%;"><?php echo _a('Last Update'); ?></th>
-            <th><?php echo _a('Action'); ?></th>
-            <th style="width: 5%;"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($solution as $app_item) { ?>
-            <tr>
-                <td>
-                    <a href="<?php echo $app_item['url']; ?>" target="_blank">
-                    <?php echo _escape($app_item['title']); ?>
-                    </a>
-                </td>
-                <td>
-                    <?php echo _escape($app_item['name']); ?>
-                </td>
-                <td>
-                    <?php echo _date($app_item['time_created']); ?>
-                </td>
-                <td>
-                    <?php echo $app_item['time_updated'] ? _date($app_item['time_updated']) : ''; ?>
-                </td>
-                <td>
-                    <div class="btn-group">
-                        <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'edit', 'id' => $app_item['id'])); ?>"><?php echo _a('Edit'); ?></a>
-                        <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $app_item['id'])); ?>"><?php echo _a('Delete'); ?></a>
-                        <?php if ($app_item['active']) { ?>
-                        <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'activate', 'id' => $app_item['id'])); ?>"><?php echo _a('Disable'); ?></a>
-                        <?php } else { ?>
-                            <a class="btn btn-sm btn-warning" href="<?php echo $this->url('', array('action' => 'activate', 'id' => $app_item['id'])); ?>"><?php echo _a('Enable'); ?></a>
-                        <?php }?>
-                    </div>
-                </td>
-                <td>
-                    <input type="text" name="order[<?php echo $app_item['id']; ?>]" value="<?php echo $app_item['nav_order']; ?>" class="form-control">
-                </td>
-            </tr>
-        <?php } ?>
-        </tbody>
-    </table>
-        <div class="text-right">
-        <input type="submit" value="<?php echo _a('Add to menu'); ?>" class="btn btn-primary">
+
+<div class="row-fluid">
+    <div class="span12">
+        <div id="pi-js-list">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th style="width:25%;">
+                    <?php echo _a('Title'); ?></th>
+                    <th style="width: 15%"><?php echo _a('Icon'); ?></th>
+                    <th style="width: 40%"><?php echo _a('App Description'); ?></th>
+                    <th><?php echo _a('Time published'); ?></th>
+                </tr>
+                <?php $now = time(); ?>
+                <?php for ($i = 1; $i <= $appsCont; $i++) { ?>
+
+                <?php
+                // Get Id.
+                $appId = 'solution_app[' . $i . '][id]';
+                $appElementId = $form->get($appId);
+                $appElementId->setAttribute("class", "check-one");
+                ?>
+                <tr data-id="<?php echo $i; ?>">
+                    <td>
+                        <?php echo $this->formElement($appElementId);?>
+
+                        <?php
+                        $appApp = 'solution_app[' . $i . '][app]';
+                        $appElementApp = $form->get($appApp);
+                        echo $this->formElement($appElementApp);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        // Get Id.
+                        $appIcon = 'solution_app[' . $i . '][icon]';
+                        $appElementIcon = $form->get($appIcon);
+                        echo $this->formElement($appElementIcon);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        // Get Id.
+                        $appDescription = 'solution_app[' . $i . '][description]';
+                        $appElementDescription = $form->get($appDescription);
+                        $appElementDescription->setAttribute("style", "width: 100%;");
+                        echo $this->formElement($appElementDescription);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        // Get Id.
+                        $appPublish = 'solution_app[' . $i . '][publish]';
+                        $appElementPublish = $form->get($appPublish);
+                        echo $this->formElement($appElementPublish);
+                        ?>
+                    </td>
+                </tr>
+                <?php } ?>
+                </tbody>
+            </table>
         </div>
-    </form>
+    </div>
 </div>
+
+<script>
+(function($) {
+    var page = {
+        url     : "<?php echo $this->url('', array(
+            'controller' => 'solution',
+            'action'     => ''
+        )); ?>" . replace(/\/$/,""),
+        el      : $("#pi-js-list"),
+        $       : function(selector){
+            return this.el.find(selector);
+        },
+        init    : function() {
+            _.bindAll(this);
+            this.$(".check-all").click(this.checkAll);
+            this.$(".check-one").click(this.clickOne);
+
+        },
+        checkAll : function() {
+            var flag=this.$(".check-all").prop("checked");
+            this.$(".check-one").prop("checked",flag).each(function(){
+                var tr=$(this).parents("tr:first");
+                if(flag){
+                    tr.addClass("info");
+                }else{
+                    tr.removeClass("info");
+                }
+            });
+        },
+
+        encodeUrl   : function() {
+            return encodeURIComponent(location.href);
+        },
+
+        renderMessage : function(status, message) {
+            $('#message-box').html(
+                _.template($('#template-message').html(), {
+                    status      : status ? 'success' : 'error',
+                    message     : message
+                })
+            );
+        }
+    }
+    page.init();
+})(jQuery)
+</script>

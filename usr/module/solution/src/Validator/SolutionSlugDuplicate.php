@@ -6,7 +6,7 @@ use Zend\Validator\AbstractValidator;
 
 class SolutionSlugDuplicate extends AbstractValidator
 {
-    const TAKEN        = 'slugExists';
+    const TAKEN = 'slugExists';
 
     public function __construct()
     {

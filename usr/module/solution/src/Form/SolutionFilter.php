@@ -27,6 +27,24 @@ class SolutionFilter extends InputFilter
         ));
 
         $this->add(array(
+            'name'          => 'nav_order',
+            'required'      => false,
+            'filters'       => array(
+                array(
+                    'name'  => 'StringTrim',
+                ),
+            ),
+            'validators'    => array(
+                array(
+                    'name'      => 'Regex',
+                    'options'   => array(
+                        'pattern'   => '/[0-9]/',
+                    ),
+                ),
+            ),
+        ));
+
+        $this->add(array(
             'name'          => 'name',
             'required'      => false,
             'filters'       => array(
@@ -79,26 +97,7 @@ class SolutionFilter extends InputFilter
         ));
 
         $this->add(array(
-            'name'          => 'markup',
-            'filters'       => array(
-                array(
-                    'name'  => 'StringTrim',
-                ),
-            ),
-        ));
-
-        $this->add(array(
             'name'          => 'active',
-        ));
-
-        $this->add(array(
-            'name'          => 'theme',
-            'required'      => false,
-        ));
-
-        $this->add(array(
-            'name'          => 'layout',
-            'required'      => false,
         ));
 
         $this->add(array(
@@ -107,9 +106,6 @@ class SolutionFilter extends InputFilter
                 array(
                     'name'  => 'StringTrim',
                 ),
-            ),
-            'validators'    => array(
-                new Validator\SolutionTemplateAvailable(),
             ),
         ));
 

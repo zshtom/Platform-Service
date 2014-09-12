@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Pi-solutions\n"
+"Project-Id-Version: Pi-apps\n"
 "POT-Creation-Date: 2014-08-08 17:36+0800\n"
 "PO-Revision-Date: 2014-08-08 17:36+0800\n"
 "Last-Translator: Taiwen Jiang <taiwenjiang@tsinghua.org.cn>\n"
@@ -12,15 +12,21 @@ msgstr ""
 "X-Generator: Poedit 1.6.7\n"
 "X-Poedit-KeywordsList: _a;_t\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: C:\\code\\pi\\usr\\module\\solutions\n"
+"X-Poedit-SearchPath-0: C:\\code\\pi\\usr\\module\\apps\n"
 
-#: C:\code\pi\usr\module\solutions/config/config.php:21
+#: C:\code\pi\usr\module\apps/config/config.php:21
 
 msgid "Solution Module"
 msgstr "解决方案模块"
 
+msgid "Product Module"
+msgstr "产品模块"
+
 msgid "Solution module description"
-msgstr "解决方案说明"
+msgstr "解决方案模块说明"
+
+msgid "Product module description"
+msgstr "产品模块说明"
 
 msgid "Icon Setting"
 msgstr "缩略图设置"
@@ -43,16 +49,16 @@ msgstr "缩略图类型"
 msgid "Extensions for images to upload, separate `,`.'"
 msgstr "可上传图片扩展名，使用半角逗号 “,” 分隔 "
 
-msgid "Solution list"
-msgstr "解决方案列表"
+msgid "Product list"
+msgstr "产品模块列表"
 
-msgid "Add a solution"
-msgstr "新增解决方案"
+msgid "Add a app"
+msgstr "新增产品模块"
 
-msgid "solution title"
+msgid "App title"
 msgstr "模块标题"
 
-msgid "solution Icon"
+msgid "App Icon"
 msgstr "模块Icon"
 
 msgid "Time Created"
@@ -64,8 +70,44 @@ msgstr "排序"
 msgid "Action"
 msgstr "操作"
 
-msgid "solution Summery"
+msgid "App Summery"
 msgstr "模块简介"
 
-msgid "solution Content"
-msgstr "解决方案模块说明"
+msgid "App Content"
+msgstr "产品模块说明"
+
+msgid "Navigation Order"
+msgstr "导航排序"
+
+msgid "Only alphabet, number and underscore allowed."
+msgstr "只允许字母、数字和下划线。" 
+
+msgid "SEO slug"
+msgstr "SEO 短词"
+
+msgid "SEO settings"
+msgstr "SEO 设置"
+
+msgid "SEO Title"
+msgstr "SEO 标题"
+
+msgid "SEO Keywords"
+msgstr "SEO 关键词"
+
+msgid "SEO Description"
+msgstr "SEO 描述"
+
+msgid "To be used for HTML head meta."
+msgstr "将被添加到HTML的meta数据中。"
+
+msgid "Unique slug for SEO URL."
+msgstr "用于URL的SEO，唯一字符串。"
+
+msgid "Apps Description"
+msgstr "产品概述"
+
+msgid "Apps Description content admin."
+msgstr "产品概述内容维护"
+
+msgid "App data saved successfully."
+msgstr "成功保存产品模块数据."

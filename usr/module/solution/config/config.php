@@ -15,13 +15,14 @@ return array(
         ),
     ),
     'item' => array(
+        // Icon
         'icon_upload_path' => array(
             'category'      => 'icon',
             'title'         => _t('Icon Upload Path'),
             'description'   => '',
             'edit'          => 'input',
             'filter'        => 'text',
-            'value'         => 'solution'
+            'value'         => 'upload/solution/'
         ),
         'icon_max_size' => array(
             'category'      => 'icon',

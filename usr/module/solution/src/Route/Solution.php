@@ -54,7 +54,7 @@ class Solution extends Standard
 
         // Set action
         $action = '';
-        $solutionsList = Pi::registry('solution', $module)->read();
+        $solutionsList  = Pi::api('api', $module)->getSolutionsList();
 
         if (!empty($matches['id'])) {
             if (isset($solutionsList[$matches['id']])) {
@@ -65,14 +65,14 @@ class Solution extends Standard
             $pSlug = empty($matches['slug']) ? $name : $matches['slug'];
 
             if ($pName || $pSlug) {
-                foreach ($solutionsList as $id => $app_item) {
-                    if ($pName && $pName == $app_item['name']) {
-                        $action = $app_item['name'];
+                foreach ($solutionsList as $id => $solution) {
+                    if ($pName && $pName == $solution['name']) {
+                        $action = $solution['name'];
                         $matches['id'] = $id;
                         break;
                     }
-                    if ($pSlug && $pSlug == $app_item['slug']) {
-                        $action = $app_item['name'];
+                    if ($pSlug && $pSlug == $solution['slug']) {
+                        $action = $solution['name'];
                         $matches['id'] = $id;
                         break;
                     }

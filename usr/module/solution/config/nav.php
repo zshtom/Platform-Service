@@ -10,13 +10,19 @@
 return array(
     'meta'  => array(
         'site'  => array(
-            'title'     => _t('Custom site navigation'),
+            'title'     => _t('Custom site navigation in Solution module'),
             'section'   => 'front',
         ),
     ),
     'item'  => array(
-        'front'     => false,
+        'front'     => true,
         'admin'     => array(
+            'description' => array(
+        	   'label'          => _t('Solution Description'),
+               'route'          => 'admin',
+               'controller'     => 'index',
+               'action'         => 'description',
+            ),
             'list'     => array(
                 'label'         => _t('Solution list'),
                 'route'         => 'admin',
@@ -30,6 +36,5 @@ return array(
                 'action'        => 'add',
             ),
         ),
-
     ),
 );
