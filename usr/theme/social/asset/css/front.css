@@ -4,6 +4,7 @@
 body {
     font-family: "微软雅黑";
     font-size: 16px;
+    background-color: #f8f8f8;
 }
 /* Base */
 html {
@@ -57,7 +58,7 @@ html {
     padding: 26px 0;
 }
 .navbar-default {
-    background-color: transparent;
+    background-color: #ffffff;
     border:0;
 }
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus{
@@ -206,21 +207,17 @@ html {
     left: 0;
     right: 0;
     bottom: 0;
-    margin: 20px 0;
     font-size: 14px;
     color: #444444;
+    padding-top: 16px;
+    padding-left: 0;
+    background-color: #ffffff;
 }
 
 .social-footer img{
     padding: 0 0 0 10px;
 }
 
-.social-footer {
-    font-size: 14px;
-    padding-top: 10px;
-    padding-left: 0;
-    color: #444444;
-}
 .social-footer li {
     display: inline;
     padding: 0 2px;
@@ -261,3 +258,41 @@ html {
     color: #000000;
 }
 */
+
+.module-container{
+    margin-top: 30px;
+    background-color: #ffffff;
+    padding: 0px 70px;
+}
+.module-container .row .col-md-6 {
+    border-right: 1px solid #eff2f5;
+}
+.module-title{
+    line-height: 30px;
+}
+.module-container h4{
+    line-height: 32px;
+    border-bottom: 1px solid #eff2f5;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+.module-container .left-prompt{
+    color: #1b2e42;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 20px;
+    display: inline-block;
+}
+
+.module-container .detail-read{
+    width: 280px;
+    height: 200px;
+    margin: 40px auto;
+    background: url("../image/detail-read.png");
+}
+.module-container .right-prompt{
+    color: #666666;
+}
+.module-container .right-prompt .prominent{
+    color: #fc8045;
+}
