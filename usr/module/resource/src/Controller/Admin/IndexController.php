@@ -72,7 +72,6 @@ class IndexController extends ActionController
                 $this->view()->assign('form', $form);
             }
             $data = $form->getData();
-d($uploader);
             $iconImages = $this->setIconPath(array($data));
 
             if (isset($iconImages[0]['image'])) {
