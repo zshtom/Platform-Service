@@ -49,18 +49,21 @@ class IndexController extends ActionController
 
         if ($this->request->isPost()) {
             $post = $this->request->getPost();
-            // d($post);
             $form->setData($post);
             $form->setInputFilter(new BootstrapFilter);
 
             $options = array(
-                'destination' => 'upload/resource',
+                'destination' => 'upload/resource/attach',
             );
-            $uploader = Pi::service('file')->upload($options, false);
+            $uploader = Pi::service('file')->upload($options, true);
             $uploader->setExtension('pdf,doc');
-            if ($uploader->isValid()) {
+            if (!$uploader->isValid()) {
                 $uploader->receive();
+                $savedFilename = $uploader->getUploaded('upload');
+            } else {
+                $errorMessages = $uploader->getMessages();
             }
+
 
             if ($form->isValid()) {
                 $messages[] = _a('Form submitted successfully.');
@@ -69,7 +72,7 @@ class IndexController extends ActionController
                 $this->view()->assign('form', $form);
             }
             $data = $form->getData();
-
+d($uploader);
             $iconImages = $this->setIconPath(array($data));
 
             if (isset($iconImages[0]['image'])) {
@@ -81,9 +84,9 @@ class IndexController extends ActionController
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'icon' => $data['icon'],
+                'filename' => $savedFilename,
                 'case_time' => time(),
             );
-
             $row = $this->getModel('resource')->createRow($values);
             $row->save();
             if ($row) {

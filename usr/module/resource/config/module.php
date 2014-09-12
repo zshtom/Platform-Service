@@ -28,7 +28,7 @@ return array(
         'icon'          => 'fa-code',
 
         // Module is ready for clone? Default as false
-        'clonable'      => true,
+        //'clonable'      => true,
     ),
     // Author information
     'author'    => array(
