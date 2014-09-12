@@ -13,10 +13,11 @@ use Pi\Mvc\Controller\ActionController;
 use Module\Resource\Form\BootstrapForm;
 use Module\Resource\Form\BootstrapFilter;
 use Pi\File\Transfer\Upload;
+use Pi\File\Transfer\Download;
 
 class IndexController extends ActionController
 {
-    public  function indexAction()
+    public function indexAction()
     {
         $model = $this->getModel('resource');
         $select = $model->select()
@@ -25,20 +26,20 @@ class IndexController extends ActionController
         $items = array();
         foreach ($rowset as $row) {
             $items[] = array(
-                'id'    => $row['id'],
+                'id' => $row['id'],
                 'title' => $row['title'],
                 'icon' => $row['icon'],
-                'description'   =>  $row['description'],
-                'case_time'     => $row['case_time'],
-                'sid'            => $row['sid'],
-                'url'   => $this->url('', array(
-                        'action'    => 'view',
-                        'id'        => $row['id'],
+                'description' => $row['description'],
+                'case_time' => $row['case_time'],
+                'sid' => $row['sid'],
+                'url' => $this->url('', array(
+                        'action' => 'view',
+                        'id' => $row['id'],
                     )),
             );
         }
-        $this -> view() -> assign('items',$items);
-        $this -> view() -> setTemplate('product_module-index');
+        $this->view()->assign('items', $items);
+        $this->view()->setTemplate('product_module-index');
     }
 
     public function addAction()
@@ -48,9 +49,22 @@ class IndexController extends ActionController
 
         if ($this->request->isPost()) {
             $post = $this->request->getPost();
-           // d($post);
             $form->setData($post);
             $form->setInputFilter(new BootstrapFilter);
+
+            $options = array(
+                'destination' => 'upload/resource/attach',
+            );
+            $uploader = Pi::service('file')->upload($options, true);
+            $uploader->setExtension('pdf,doc');
+            if (!$uploader->isValid()) {
+                $uploader->receive();
+                $savedFilename = $uploader->getUploaded('upload');
+            } else {
+                $errorMessages = $uploader->getMessages();
+            }
+
+
             if ($form->isValid()) {
                 $messages[] = _a('Form submitted successfully.');
             }
@@ -58,7 +72,7 @@ class IndexController extends ActionController
                 $this->view()->assign('form', $form);
             }
             $data = $form->getData();
-
+d($uploader);
             $iconImages = $this->setIconPath(array($data));
 
             if (isset($iconImages[0]['image'])) {
@@ -66,36 +80,38 @@ class IndexController extends ActionController
             }
 
             $values = array(
-                'sid'            => $data['sid'],
-                'title'          => $data['title'],
-                'description'   => $data['description'],
-                'icon'           => $data['icon'],
+                'sid' => $data['sid'],
+                'title' => $data['title'],
+                'description' => $data['description'],
+                'icon' => $data['icon'],
+                'filename' => $savedFilename,
                 'case_time' => time(),
             );
             $row = $this->getModel('resource')->createRow($values);
             $row->save();
-            if($row){
+            if ($row) {
                 $message = _a('Resource data saved successfully');
                 return $this->jump(array('action' => 'index'), $message);
             }
-            //$form = new BootstrapForm('bootstrap');
+            $form = new BootstrapForm('bootstrap');
             if (!$row->id) {
                 return false;
             }
         }
         $this->view()->assign(array(
-            'form'      => $form,
-            'messages'  => $messages,
+            'form' => $form,
+            'messages' => $messages,
         ));
         $this->view()->setTemplate('product_module-add');
     }
 
-    protected function setIconPath($list) {
-        $rootPath   = $this->rootPath();
-        $rootUrl    = $this->rootUrl();
+    protected function setIconPath($list)
+    {
+        $rootPath = $this->rootPath();
+        $rootUrl = $this->rootUrl();
         $uploadPath = $this->tmpPath();
-        $uploadUrl  = $this->tmpUrl() . '/';
-        $prefixLen  = strlen($uploadUrl);
+        $uploadUrl = $this->tmpUrl() . '/';
+        $prefixLen = strlen($uploadUrl);
 
         $items = array();
         foreach ($list as $item) {
@@ -158,10 +174,6 @@ class IndexController extends ActionController
 
     public function editAction()
     {
-//        $data = $this->request->getPost();
-//        $id = $data['id'];
-//        d($id);
-//        exit;
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
             $id = $data['id'];
@@ -217,29 +229,29 @@ class IndexController extends ActionController
     public function uploadAction()
     {
         $return = array(
-            'status'    => 1,
-            'message'   => '',
-            'image'     => '',
+            'status' => 1,
+            'message' => '',
+            'image' => '',
         );
-        $rename         = '%random%';
-        $destination    = $this->tmpPath();
-        $uploadUrl      = $this->tmpUrl();
-        $module         = $this->getModule();
-        $config         = Pi::config('', $module);
+        $rename = '%random%';
+        $destination = $this->tmpPath();
+        $uploadUrl = $this->tmpUrl();
+        $module = $this->getModule();
+        $config = Pi::config('', $module);
 
         if ($config['icon_media']) {
             $exts = explode(',', $config['icon_media']);
             $exts = array_filter(array_walk($exts, 'trim'));
             $extensions = implode(',', $exts);
         }
-        $extensions     = $extensions ?: 'jpg,png,gif';
-        $maxFile        = (int) $config['icon_max_size']  * 1024;
-        $maxSize        = array();
+        $extensions = $extensions ? : 'jpg,png,gif';
+        $maxFile = (int)$config['icon_max_size'] * 1024;
+        $maxSize = array();
         if ($config['icon_max_width']) {
-            $maxSize['width'] = (int) $config['icon_max_width'];
+            $maxSize['width'] = (int)$config['icon_max_width'];
         }
         if ($config['icon_max_height']) {
-            $maxSize['height'] = (int) $config['icon_max_height'];
+            $maxSize['height'] = (int)$config['icon_max_height'];
         }
 
         $uploader = new Upload(array('rename' => $rename));
@@ -260,10 +272,10 @@ class IndexController extends ActionController
         } else {
             $messages = $uploader->getMessages();
             $return = array(
-                'status'    => 0,
-                'image'     => '',
-                'message'   => implode('; ', $messages),
-                'uploader'  => '<pre>' . print_r($uploader, TRUE) . '</pre>',
+                'status' => 0,
+                'image' => '',
+                'message' => implode('; ', $messages),
+                'uploader' => '<pre>' . print_r($uploader, TRUE) . '</pre>',
             );
         }
 

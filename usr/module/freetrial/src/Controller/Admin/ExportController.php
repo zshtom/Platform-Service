@@ -7,67 +7,88 @@
  */
 namespace Module\Freetrial\Controller\Admin;
 
-use Pi\Mvc\Controller\ActionController;
 use Pi;
-use Module\Freetrial\My97DatePicker;
-//use Module\Freetrial\phpexcel;
+use Pi\Mvc\Controller\ActionController;
+use Zend\Db\Sql\Predicate;
+use Pi\File\Transfer\Download;
 
 /**
  * Feature list:
  * 1.Export freetrial user information
  *
- * @author Author Name <[songshixin_songshixin@social-touch.com]>
+ * @author songshixin <[songshixin@social-touch.com]>
  */
 class ExportController extends ActionController
 {
+
+    /**
+     * @return array|void
+     */
+
     public function indexAction()
     {
-        $columns = array('id', 'name', 'title','company','email', 'phone');
+        $start =$this->params('start', null);
+        $end = $this->params('end', null);
+        $end = strtotime($end);
+        $start= strtotime($start);
+        if (empty($start)&&empty($end)) {
+           $end=134217727;
+           $start=0;
+        }
+        $columns = array('id', 'name', 'title','company','email', 'phone','time');
         $model  = $this->getModel('freetrial');
         $select = $model->select();
         $rowset = $model->selectWith($select);
         $select = $model->select()
             ->columns($columns)
+            ->where("time<$end")->where("time>$start")
             ->order('id ASC');
         $rowset = $model->selectWith($select);
         $items  = array();
         foreach ($rowset as $row) {
             $items[$row->id] = $row->toArray();
         }
-
         $this->view()->assign('items', $items);
-
+        $this->view()->assign('start', $start);
+        $this->view()->assign('end', $end);
     }
-    public function exportAction(){
-          $start = $this->params('start', null);
-          $end   = $this->params('end', null);
-          $where    = array();
-           if (!empty($start)&&!empty($end)) {
-               $where['start'] = $start;
-               $where['end'] = $end;
-           }
+
+    /**
+     * export freetrial user-list by time
+     */
+    public function exportAction()
+    {
+        $start =$this->params('start', null);
+        $end = $this->params('end', null);
+        $columns = array('id', 'name', 'title','company','email', 'phone','time');
+        $model  = $this->getModel('freetrial');
+        $select = $model->select()
+            ->columns($columns)
+            ->where("time < $end")->where("time > $start")
+            ->order('id ASC');
+        $rowset = $model->selectWith($select);
         $name='down';
         header( "Cache-Control: public" );
         header( "Pragma: public" );
         header("Content-type:application/vnd.ms-excel");
         header("Content-Disposition:attachment;filename=".$name.".xls");
         header('Content-Type:APPLICATION/OCTET-STREAM');
-        $columns = array('id', 'name', 'title','company','email', 'phone');
-        $model  = $this->getModel('freetrial');
-        $select = $model->select();
-        $rowset = $model->selectWith($select);
-        $select = $model->select()
-            ->columns($columns)
-            ->where('date'>$where['start']&&'date'<$where['end'])
-            ->order('id ASC');
-        $rowset = $model->selectWith($select);
-        $items  = array();
+/*          $options = array(
+            // Required
+            'type'          => 'raw',
+            // Optional
+            'filename'      => 'pi-download',
+            // Optional
+            'content_type'   => 'application/vnd.ms-excel',
+           ); $source ='path/to/file';
+            $downloader->send($source, $options);
+        $downloader = new Download;*/
         foreach ($rowset as $row) {
             $items[$row->id] = $row->toArray();
         }
         echo "<table>";
         echo "<tr>";
-        echo "<td>","ID","</td>","<td>","Name","</td>","<td>","Title","</td>","<td>","Company","</td>","<td>","Email","</td>","<td>","Phone","</td>";
+        echo "<td>","ID","</td>","<td>","Name","</td>","<td>","Title","</td>","<td>","Company","</td>","<td>","Email","</td>","<td>","Phone","</td>","<td>","Time","</td>";
         echo "</tr>";
         foreach ($items as $item) {
             echo "<tr>";
@@ -77,6 +98,7 @@ class ExportController extends ActionController
             echo "<td>",$item['company'],"</td>";
             echo "<td>",$item['email'],"</td>";
             echo "<td>",$item['phone'],"</td>";
+            echo "<td>",_date($item['time']),"</td>";
             echo "</tr>";
         }
         echo "</table>";

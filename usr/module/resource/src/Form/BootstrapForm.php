@@ -67,6 +67,14 @@ class BootstrapForm extends BaseForm
         ));
 
         $this->add(array(
+            'name'          => 'upload',
+            'options'       => array(
+                'label' => __('File'),
+            ),
+            'type'  => 'file',
+        ));
+
+        $this->add(array(
             'name'          => 'case_time',
             'attributes'    => array(
                 'type'  => 'hidden',
@@ -151,14 +159,5 @@ class BootstrapForm extends BaseForm
                 'description'   => _a('To be used for HTML head meta.'),
             )
         ));
-
-        $this->add(array(
-            'name'          => 'upload_demo',
-            'options'       => array(
-                'label' => __('File'),
-            ),
-            'type'  => 'file',
-        ));
-
     }
 }

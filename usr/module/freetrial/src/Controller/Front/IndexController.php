@@ -7,17 +7,17 @@
  */
 namespace Module\Freetrial\Controller\Front;
 
+use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Module\Freetrial\Form\IndexForm;
 use Module\Freetrial\Form\IndexFilter;
-use Pi;
 
 /**
  * Feature list:
  * 1.Information store in the database
  * 2.Associate with the template
  *
- * @author Author Name <[songshixin_songshixin@social-touch.com]>
+ * @author songshixin <[songshixin@social-touch.com]>
  */
 class IndexController extends ActionController
 {
@@ -40,7 +40,6 @@ class IndexController extends ActionController
     public function indexAction()
     {
         Pi::service('i18n')->loadModule('form');
-
         $form = $this->renderForm();
         if ($this->request->isPost()) {
             $post = $this->request->getPost();
@@ -60,9 +59,9 @@ class IndexController extends ActionController
             $row = $this->getModel('freetrial')->createRow($data);
             $row->save();
             $model  = $this->getModel('freetrial');
-            $date=date('Y-m-d H:i:s',time());
+            $time=time();
             $row = $model->find($data['name'], 'name');
-            $row->date = $date;
+            $row->time = $time;
             $row->save();
             $this->view()->setTemplate(false);
 
