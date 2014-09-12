@@ -1,0 +1,50 @@
+<?php if (isset($error)) {
+    echo $error;
+} ?>
+
+<?php echo $this->form()->openTag($form) ?>
+<div id="member-freetrial-name">
+    <?php $element = $form->get('name'); ?>
+    <div><?php echo $this->formLabel($element),$this->formElement($element); ?></div>
+    <div><?php
+        echo $this->formElementErrors($element); ?>
+    </div>
+</div>
+
+<div id="member-freetrial-title">
+    <?php $element = $form->get('title'); ?>
+    <div><?php echo $this->formLabel($element), $this->formElement($element); ?></div>
+    <div><?php
+        echo $this->formElementErrors($element); ?>
+    </div>
+</div>
+
+<div id="member-freetrial-company">
+    <?php $element = $form->get('company'); ?>
+    <div><?php echo $this->formLabel($element),$this->formElement($element); ?></div>
+    <div><?php
+        echo $this->formElementErrors($element); ?>
+    </div>
+</div>
+
+<div id="member-freetrial-email">
+    <?php $element = $form->get('email'); ?>
+    <div><?php echo $this->formLabel($element),$this->formElement($element); ?></div>
+    <div><?php
+        echo $this->formElementErrors($element); ?>
+    </div>
+</div>
+
+<div id="member-freetrial-phone">
+    <?php $element = $form->get('phone'); ?>
+    <div><?php echo $this->formLabel($element),$this->formElement($element); ?></div>
+    <div><?php
+        echo $this->formElementErrors($element); ?>
+    </div>
+</div>
+
+<div id="login-login-submit">
+    <?php $element = $form->get('submit'); ?>
+    <div><?php echo $this->formElement($element) ?></div>
+</div>
+<?php echo $this->form()->closeTag() ?>

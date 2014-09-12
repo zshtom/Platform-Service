@@ -1,0 +1,56 @@
+<?php
+?>
+<div class="table-responsive">
+    <form action="<?php echo $this->url('', array('action' => 'menu')); ?>">
+    <table class="table">
+        <thead>
+        <tr>
+            <th><?php echo _a('Case title'); ?></th>
+            <th style="width: 10%;"><?php echo _a('Case Icon'); ?></th>
+            <th style="width: 30%;"><?php echo _a('Case Summery'); ?></th>
+            <th style="width: 10%;"><?php echo _a('Time Created'); ?></th>
+            <th style="width: 10%;"><?php echo _a('Order'); ?></th>
+            <th><?php echo _a('Action'); ?></th>
+            <th style="width: 5%;"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($cases as $case) { ?>
+            <tr>
+                <td>
+                    <a href="<?php echo $case['url']; ?>" target="_blank">
+                    <?php echo _escape($case['title']); ?>
+                    </a>
+                </td>
+                <td>
+                    <img src="<?php echo _escape($case['icon']); ?>" width="80px" />
+                </td>
+                <td>
+                    <?php echo _escape($case['summery']); ?>
+                </td>
+                <td>
+                    <?php echo _date($case['time_created'], null, 'NULL', 'NULL',
+                            null, null, null, 'Y-m-d'); ?>
+                </td>
+
+                <td width="2%">
+                    <input type="text" name="order[<?php echo $case['id']; ?>]" value="<?php echo $case['order']; ?>" size="5" class="form-control">
+                </td>
+
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'edit', 'id' => $case['id'])); ?>"><?php echo _a('Edit'); ?></a>
+                        <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $case['id'])); ?>"><?php echo _a('Delete'); ?></a>
+                        <?php if ($case['active']) { ?>
+                        <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'activate', 'id' => $case['id'])); ?>"><?php echo _a('Disable'); ?></a>
+                        <?php } else { ?>
+                            <a class="btn btn-sm btn-warning" href="<?php echo $this->url('', array('action' => 'activate', 'id' => $case['id'])); ?>"><?php echo _a('Enable'); ?></a>
+                        <?php }?>
+                    </div>
+                </td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+    </form>
+</div>
