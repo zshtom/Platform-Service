@@ -37,6 +37,10 @@ return array(
         'Credits'   => 'Ferrch'
     ),
 
+//     'dependency'    => array(
+//         'apps'  => _a('Product Module'),
+//     ),
+
     // Resource
     'resource' => array(
         // Database meta
@@ -50,5 +54,7 @@ return array(
         'route'         => 'route.php',
         // Navigation definition
         'navigation'    => 'nav.php',
+        // Block.
+        // 'block'         => 'block.php',
     ),
 );

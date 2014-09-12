@@ -17,3 +17,6 @@ msgstr ""
 #: C:\code\pi\usr\module\page/config/config.php:13
 msgid "Social networking"
 msgstr "社交工具"
+
+msgid "Apps Description"
+msgstr "产品概述"

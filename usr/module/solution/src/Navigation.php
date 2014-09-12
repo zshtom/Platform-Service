@@ -7,39 +7,12 @@
  * @license         http://pialog.org/license.txt BSD 3-Clause License
  */
 
-namespace Module\Apps;
+namespace Module\Solution;
 
 use Pi;
 
 class Navigation
 {
-    public static function apps($module)
-    {
-        $nav = array(
-            'pages' => array(),
-        );
-
-        // Get the nav from list because active not set in registry.
-        try {
-            $apps_list  = Pi::api('api', $module)->getAppsList(1);
-        } catch (\Exception $exception) {
-            return '';
-        }
-
-//         $apps_list = Pi::registry($module, $module)->read();
-
-        foreach ($apps_list as $key => $data) {
-            $nav['pages'][$key] = array(
-                'label'     => $data['title'],
-                'module'    => 'apps',
-                'uri'     => $data['url'],
-            );
-        }
-
-
-
-        return $nav;
-    }
 
     /**
      * @TODO Move it to solution module?
@@ -62,8 +35,7 @@ class Navigation
 
         // Get the nav from list because active not set in registry.
         try {
-//             $nav_list  = Pi::api('api')->solution->getSolutionList();
-            $nav_list = Pi::api('api', 'solution')->getSolutionList(1);
+            $nav_list  = Pi::api('api')->solution->getSolutionsList();
         } catch (\Exception $exception) {
             return false;
         }
@@ -73,11 +45,12 @@ class Navigation
         foreach ($nav_list as $key => $data) {
             $nav['pages'][$key] = array(
                 'label'     => $data['title'],
-                'module'    => 'apps',
-                'uri'     => $data['url'],
+                'module'    => 'solution',
+                'uri'     => '/' . $module . '/' . $data['name'],
             );
         }
 
         return $nav;
     }
+
 }

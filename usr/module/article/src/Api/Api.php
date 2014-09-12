@@ -16,8 +16,8 @@ use Module\Article\Installer\Resource\Route;
 
 /**
  * Public API for other module
- * 
- * @author Zongshu Lin <lin40553024@163.com> 
+ *
+ * @author Zongshu Lin <lin40553024@163.com>
  */
 class Api extends AbstractApi
 {
@@ -25,8 +25,8 @@ class Api extends AbstractApi
 
     /**
      * Get compose url
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getComposeUrl()
     {
@@ -36,18 +36,18 @@ class Api extends AbstractApi
             'action'     => 'add',
         ));
     }
-    
+
     /**
      * Get published article list of a submitter
-     * 
+     *
      * @param int|null  $submitter
      * @param int|null  $page
      * @param int|null  $limit
-     * @return array 
+     * @return array
      */
     public function getListBySubmitter(
-        $submitter = null, 
-        $page = null, 
+        $submitter = null,
+        $page = null,
         $limit = null
     ) {
         if (empty($submitter)) {
@@ -57,61 +57,61 @@ class Api extends AbstractApi
         if (!is_numeric($submitter)) {
             return array();
         }
-        
+
         if (!empty($limit)) {
             $page = $page ?: 1;
         }
         $order = 'time_publish DESC';
-        
+
         $where = array(
             'uid'  => $submitter,
         );
-        
+
         if (!empty($page) and empty($limit)) {
             $offset = ((int) $page - 1) * (int) $limit;
         }
-        
+
         // Get article result set
         $module    = $this->getModule();
         $resultSet = Pi::model('article', $module)->getSearchRows(
-            $where, 
-            $limit, 
-            isset($offset) ? $offset : null, 
-            Article::getDefaultColumns(), 
+            $where,
+            $limit,
+            isset($offset) ? $offset : null,
+            Article::getDefaultColumns(),
             $order
         );
-        
+
         if (empty($resultSet)) {
             return array();
         }
-        
+
         // Get article ID
         $articleIds = array();
         foreach ($resultSet as $set) {
             $articleIds[] = $set['id'];
         }
-        
+
         // Get stats data
         $staticSet = Pi::model('stats', $module)->getList(array(
             'article' => $articleIds,
         ));
-        
+
         foreach ($resultSet as &$row) {
-            $stats = isset($staticSet[$row['id']]) 
+            $stats = isset($staticSet[$row['id']])
                 ? $staticSet[$row['id']] : array();
             unset($stats['article']);
             unset($stats['id']);
             $row = array_merge($row, $stats);
         }
-        
+
         return $resultSet;
     }
-    
+
     /**
      * Read category data from cache
-     * 
+     *
      * @param array $where
-     * @return array 
+     * @return array
      */
     public function getCategoryList($where = array())
     {
@@ -124,15 +124,15 @@ class Api extends AbstractApi
         $rows   = Pi::service('registry')
             ->handler('category', $module)
             ->read($where, $isTree, $module);
-        
+
         return $rows;
     }
-    
+
     /**
      * Read author data from cache by ID
-     * 
+     *
      * @param array  $ids
-     * @return array 
+     * @return array
      */
     public function getAuthorList($ids = array())
     {
@@ -140,7 +140,7 @@ class Api extends AbstractApi
         $rows   = Pi::service('registry')
             ->handler('author', $module)
             ->read($module);
-        
+
         if (!empty($ids)) {
             foreach ($rows as $key => $row) {
                 if (!in_array($row['id'], $ids)) {
@@ -148,7 +148,7 @@ class Api extends AbstractApi
                 }
             }
         }
-        
+
         return $rows;
     }
 
@@ -178,7 +178,7 @@ class Api extends AbstractApi
         if (!file_exists($resPath)) {
             return $defaultRoute;
         }
-        
+
         $configs = include $resPath;
         $class   = '';
         $name    = '';
@@ -187,11 +187,11 @@ class Api extends AbstractApi
             $name  = $key;
             break;
         }
-        
+
         if (!class_exists($class)) {
             return $defaultRoute;
         }
-        
+
         // Check if the route is already in database
         $routeName = $module . '-' . $name;
         $cacheName = Pi::service('registry')
@@ -200,7 +200,7 @@ class Api extends AbstractApi
         if ($routeName != $cacheName) {
             return $defaultRoute;
         }
-        
+
         return $cacheName;
         */
     }

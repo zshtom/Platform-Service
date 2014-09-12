@@ -1,5 +1,5 @@
 <?php
-$this->css($this->assetModule('admin/admin.css', 'solution'));
+$this->css($this->assetModule('admin/admin.css', $module));
 $this->jQuery(array(
     'ui/jquery-ui.min.js',
     'extension/fileupload-min.js',
@@ -7,6 +7,9 @@ $this->jQuery(array(
     'extension/magnific-popup.css'
 ));
 $this->Backbone();
+
+// d($form->getElements());
+// d($form->getGroups());
 ?>
 
 <div class="page">
@@ -28,9 +31,27 @@ $this->Backbone();
         </div>
     </div>
 
-   <?php include $this->templateComponent('forms'); ?>
+    <?php //include $this->templateComponent('forms'); ?>
 
 </div>
+<?php echo $this->form()->openTag($form) ?>
+<?php include ('solution-form.phtml');?>
+
+<div>
+
+    <div></div>
+</div>
+
+<div>
+<?php $activeElement = $form->get('active'); ?>
+<?php $element = $form->get('submit'); ?>
+    <div>
+    <?php echo $this->formElement($activeElement) ?>
+    <?php echo $this->formElement($element) ?></div>
+</div>
+
+<?php echo $this->form()->closeTag() ?>
+
 
 <script id="widget-item-template" type="text/template">
 <div class="col-sm-6 col-md-3 widget-item">
@@ -42,12 +63,12 @@ $this->Backbone();
     </div>
 </div>
 </script>
-<script src="<?php echo $this->assetModule('admin/widget-media.js'); ?>"></script>
+<script src="<?php echo $this->assetModule('admin/solution-media.js'); ?>"></script>
 <script>
 widgetAction({
     prefix: "block-",
     uploadUrl: '<?php echo $this->url('', array('action' => 'upload')); ?>',
-    items: ""
+    items: <?php echo $content ?: json_encode(array()); ?>
 });
 $(document).ready(function() {
     $('.image-popup').magnificPopup({

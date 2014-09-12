@@ -1,5 +1,5 @@
 <?php
-$this->css($this->assetModule('admin/admin.css', 'solution'));
+$this->css($this->assetModule('admin/admin.css', $module));
 $this->jQuery(array(
     'ui/jquery-ui.min.js',
     'extension/fileupload-min.js',
@@ -42,7 +42,7 @@ $this->Backbone();
     </div>
 </div>
 </script>
-<script src="<?php echo $this->assetModule('admin/widget-media.js'); ?>"></script>
+<script src="<?php echo $this->assetModule('admin/solution-media.js'); ?>"></script>
 <script>
 widgetAction({
     prefix: "block-",

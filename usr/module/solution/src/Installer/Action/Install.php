@@ -7,7 +7,7 @@
  * @license         http://pialog.org/license.txt BSD 3-Clause License
  */
 
-namespace Module\Apps\Installer\Action;
+namespace Module\Solution\Installer\Action;
 
 use Pi;
 use Pi\Application\Installer\Action\Install as BasicInstall;
