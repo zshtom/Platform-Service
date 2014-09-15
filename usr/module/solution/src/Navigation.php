@@ -40,8 +40,6 @@ class Navigation
             return false;
         }
 
-        d($nav_list);
-
         foreach ($nav_list as $key => $data) {
             $nav['pages'][$key] = array(
                 'label'     => $data['title'],

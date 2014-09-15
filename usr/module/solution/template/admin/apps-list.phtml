@@ -1,8 +1,3 @@
-<?php
-    $this->jQuery();
-    $this->Backbone();
-?>
-
 <div class="row-fluid">
     <div class="span12">
         <div id="pi-js-list">
@@ -16,52 +11,75 @@
                     <th><?php echo _a('Time published'); ?></th>
                 </tr>
                 <?php $now = time(); ?>
-                <?php for ($i = 1; $i <= $appsCont; $i++) { ?>
+                <?php //for ($i = 1; $i <= $appsCont; $i++) { ?>
+
+                <?php foreach ($apps_list as $app_key => $solution_app) {?>
 
                 <?php
                 // Get Id.
-                $appId = 'solution_app[' . $i . '][id]';
+                $appId = 'solution_app[' . $app_key . '][id]';
                 $appElementId = $form->get($appId);
                 $appElementId->setAttribute("class", "check-one");
+
+                // App Id.
+                $appSolutionApp = 'solution_app[' . $app_key . '][solution_app_id]';
+                $appElementSolutionApp = $form->get($appSolutionApp);
+
+                // App Id.
+                $appApp = 'solution_app[' . $app_key . '][app]';
+                $appElementApp = $form->get($appApp);
+
+                $appIdValue = (int)$appElementApp->getValue();
+
+                // App title.
+                $appTitle = 'solution_app[' . $app_key . '][title]';
+                $appElementTitle = $form->get($appTitle);
+
+                // Get Icon.
+                $appIcon = 'solution_app[' . $app_key . '][icon]';
+                $appElementIcon = $form->get($appIcon);
+                // App Icon Url.
+                $appIconUrl = 'solution_app[' . $app_key . '][icon_url]';
+                $appElementIconUrl = $form->get($appIconUrl);
+
+                // Get description.
+                $appDescription = 'solution_app[' . $app_key . '][description]';
+                $appElementDescription = $form->get($appDescription);
+
+                // Get publish.
+                $appPublish = 'solution_app[' . $app_key . '][publish]';
+                $appElementPublish = $form->get($appPublish);
+
+                if (in_array($appIdValue, $solution_apps_keys)) {
+                    $appElementId->setValue(1);
+                    $appElementDescription->setValue($solution_apps[$appIdValue]['description']);
+                }
+
                 ?>
                 <tr data-id="<?php echo $i; ?>">
                     <td>
                         <?php echo $this->formElement($appElementId);?>
 
                         <?php
-                        $appApp = 'solution_app[' . $i . '][app]';
-                        $appElementApp = $form->get($appApp);
                         echo $this->formElement($appElementApp);
-                        $appTitle = 'solution_app[' . $i . '][title]';
-                        $appElementTitle = $form->get($appTitle);
                         echo $this->formElement($appElementTitle);
-                        $appIconUrl = 'solution_app[' . $i . '][icon_url]';
-                        $appElementIconUrl = $form->get($appIconUrl);
                         echo $this->formElement($appElementIconUrl);
+                        echo $this->formElement($appElementSolutionApp);
                         ?>
                     </td>
                     <td>
                         <?php
-                        // Get Id.
-                        $appIcon = 'solution_app[' . $i . '][icon]';
-                        $appElementIcon = $form->get($appIcon);
                         echo $this->formElement($appElementIcon);
                         ?>
                     </td>
                     <td>
                         <?php
-                        // Get Id.
-                        $appDescription = 'solution_app[' . $i . '][description]';
-                        $appElementDescription = $form->get($appDescription);
                         $appElementDescription->setAttribute("style", "width: 100%;");
                         echo $this->formElement($appElementDescription);
                         ?>
                     </td>
                     <td>
                         <?php
-                        // Get Id.
-                        $appPublish = 'solution_app[' . $i . '][publish]';
-                        $appElementPublish = $form->get($appPublish);
                         echo $this->formElement($appElementPublish);
                         ?>
                     </td>
@@ -72,49 +90,3 @@
         </div>
     </div>
 </div>
-
-<script>
-(function($) {
-    var page = {
-        url     : "<?php echo $this->url('', array(
-            'controller' => 'solution',
-            'action'     => ''
-        )); ?>" . replace(/\/$/,""),
-        el      : $("#pi-js-list"),
-        $       : function(selector){
-            return this.el.find(selector);
-        },
-        init    : function() {
-            _.bindAll(this);
-            this.$(".check-all").click(this.checkAll);
-            this.$(".check-one").click(this.clickOne);
-
-        },
-        checkAll : function() {
-            var flag=this.$(".check-all").prop("checked");
-            this.$(".check-one").prop("checked",flag).each(function(){
-                var tr=$(this).parents("tr:first");
-                if(flag){
-                    tr.addClass("info");
-                }else{
-                    tr.removeClass("info");
-                }
-            });
-        },
-
-        encodeUrl   : function() {
-            return encodeURIComponent(location.href);
-        },
-
-        renderMessage : function(status, message) {
-            $('#message-box').html(
-                _.template($('#template-message').html(), {
-                    status      : status ? 'success' : 'error',
-                    message     : message
-                })
-            );
-        }
-    }
-    page.init();
-})(jQuery)
-</script>

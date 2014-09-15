@@ -1,0 +1,91 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div id="pi-js-list">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th style="width:25%;">
+                    <?php echo _a('Title'); ?></th>
+                    <th style="width: 15%"><?php echo _a('Icon'); ?></th>
+                    <th><?php echo _a('Time published'); ?></th>
+                </tr>
+                <?php $now = time(); ?>
+                <?php //for ($i = 1; $i <= $appsCont; $i++) { ?>
+
+                <?php foreach ($cases_list as $case_key => $solution_case) {?>
+
+                <?php
+                // Get Id.
+                $appId = 'solution_app[' . $case_key . '][id]';
+                $caseElementId = $form->get($appId);
+                $caseElementId->setAttribute("class", "check-one");
+
+                // App Id.
+                $appSolutionApp = 'solution_app[' . $case_key . '][solution_app_id]';
+                $caseElementSolutionApp = $form->get($appSolutionApp);
+
+                // App Id.
+                $appApp = 'solution_app[' . $case_key . '][app]';
+                $caseElementApp = $form->get($appApp);
+
+                $appIdValue = (int)$caseElementApp->getValue();
+
+                // App title.
+                $appTitle = 'solution_app[' . $case_key . '][title]';
+                $caseElementTitle = $form->get($appTitle);
+
+                // Get Icon.
+                $appIcon = 'solution_app[' . $case_key . '][icon]';
+                $caseElementIcon = $form->get($appIcon);
+                // App Icon Url.
+                $appIconUrl = 'solution_app[' . $case_key . '][icon_url]';
+                $caseElementIconUrl = $form->get($appIconUrl);
+
+                // Get description.
+//                 $appDescription = 'solution_app[' . $case_key . '][description]';
+//                 $caseElementDescription = $form->get($appDescription);
+
+                // Get publish.
+                $appPublish = 'solution_app[' . $case_key . '][publish]';
+                $caseElementPublish = $form->get($appPublish);
+
+                if (in_array($appIdValue, $solution_cases_keys)) {
+                    $caseElementId->setValue(1);
+                    $caseElementDescription->setValue($solution_cases[$appIdValue]['description']);
+                }
+
+                ?>
+                <tr data-id="<?php echo $i; ?>">
+                    <td>
+                        <?php echo $this->formElement($caseElementId);?>
+
+                        <?php
+                        echo $this->formElement($caseElementApp);
+                        echo $this->formElement($caseElementTitle);
+                        echo $this->formElement($caseElementIconUrl);
+                        echo $this->formElement($caseElementSolutionApp);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        echo $this->formElement($caseElementIcon);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        $caseElementDescription->setAttribute("style", "width: 100%;");
+                        echo $this->formElement($caseElementDescription);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        echo $this->formElement($caseElementPublish);
+                        ?>
+                    </td>
+                </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

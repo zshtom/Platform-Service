@@ -133,10 +133,9 @@ class Api extends AbstractApi
             'solution'  => $solution,
         );
 
-        $module = $this->getModule('solution/solution_case');
-        $config = Pi::config('', $module);
+        $config = Pi::config('', $this->getModule());
 
-        $model  = Pi::model('solution', $this->getModule());
+        $model  = Pi::model('solution_case', $this->getModule());
         $select = $model->select()->order(array('id DESC'));
         $select = $model->select()->where($where);
         $rowset = $model->selectWith($select);

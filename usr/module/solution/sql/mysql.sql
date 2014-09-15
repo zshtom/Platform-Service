@@ -38,7 +38,6 @@ CREATE TABLE IF NOT EXISTS `{solution_app}` (
   `solution_description`         varchar(255)            NOT NULL,
   `time_created`    int(10)                 NOT NULL DEFAULT '0',
   `time_updated`    int(10)                 NOT NULL DEFAULT '0',
-  `active`          tinyint(1)              NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 )
 
@@ -48,9 +47,7 @@ CREATE TABLE IF NOT EXISTS `{solution_case}` (
   `case`            int(10)                 NOT NULL DEFAULT '0',
   `title`           varchar(255)            NOT NULL,
   `icon`            varchar(255)            NOT NULL,
-  `solution_description`         varchar(255)            NOT NULL,
   `time_created`    int(10)                 NOT NULL DEFAULT '0',
   `time_updated`    int(10)                 NOT NULL DEFAULT '0',
-  `active`          tinyint(1)              NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 )
