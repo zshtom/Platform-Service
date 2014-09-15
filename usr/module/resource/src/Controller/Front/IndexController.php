@@ -36,7 +36,6 @@ class IndexController extends ActionController
         $this->view()->setTemplate('index-list');
     }
 
-
     /**
      * Download a file
      */
