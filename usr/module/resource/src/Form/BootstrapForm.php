@@ -120,7 +120,7 @@ class BootstrapForm extends BaseForm
             'name' => 'extra_seo',
             'type' => 'fieldset',
             'options' => array(
-                'label' => _a('SEO settings'),
+                'label' => __('SEO settings'),
             ),
         ));
 
@@ -128,7 +128,7 @@ class BootstrapForm extends BaseForm
         $this->add(array(
             'name' => 'seo_title',
             'options' => array(
-                'label' => _a('SEO Title'),
+                'label' => __('SEO Title'),
             ),
             'attributes' => array(
                 'type'          => 'text',
@@ -140,7 +140,7 @@ class BootstrapForm extends BaseForm
         $this->add(array(
             'name' => 'seo_keywords',
             'options' => array(
-                'label' => _a('SEO Keywords'),
+                'label' => __('SEO Keywords'),
             ),
             'attributes' => array(
                 'type'          => 'text',
@@ -152,7 +152,7 @@ class BootstrapForm extends BaseForm
         $this->add(array(
             'name' => 'seo_description',
             'options' => array(
-                'label' => _a('SEO Description'),
+                'label' => __('SEO Description'),
             ),
             'attributes' => array(
                 'type'          => 'text',
