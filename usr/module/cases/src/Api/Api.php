@@ -66,6 +66,7 @@ class Api extends AbstractApi
         $select->columns(array('id', 'title', 'summery', 'icon'));
         $select->order(array('order ASC'));
         $rowset = $model->selectWith($select);
+        $upload_path = Pi::url('upload') . '/' . $this->getModule();
         $list = array();
         if($rowset) {
             foreach ($rowset as $row) {
@@ -74,7 +75,7 @@ class Api extends AbstractApi
                     'id'        => $row['id'],
                     'title'     => $row['title'],
                     'summery'   => $row['summery'],
-                    'icon'      => $row['icon'],
+                    'icon'      => $upload_path . $row['icon'],
                     'url'       => Pi::service('url')->assemble(
                                     '',
                                     array($this->getModule(), 'id' => $row['id'])

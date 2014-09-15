@@ -35,7 +35,14 @@ class IndexController extends ActionController
     {
         $model  = $this->getModel('cases');
         $select = $model->select()->order(array('active DESC', 'order ASC', 'id DESC'));
-        $cases = $model->selectWith($select);
+        $rowset = $model->selectWith($select);
+        $rootUrl    = $this->rootUrl();
+        $cases = array();
+        foreach ($rowset as $row) {
+            $row = $row->toArray();
+            $row['icon']   = $rootUrl . '/' . $row['icon'];
+            $cases[] = $row;
+        }
         $this->view()->assign('cases', $cases);
         $this->view()->assign('title', _a('Case list'));
         $this->view()->setTemplate('case-list');
@@ -65,8 +72,8 @@ class IndexController extends ActionController
                 // Fix upload icon url
                 $iconImages = $this->setIconPath(array($data));
 
-                if (isset($iconImages[0]['image'])) {
-                    $values['icon'] = $iconImages[0]['image'];
+                if (isset($iconImages[0]['filename'])) {
+                    $values['icon'] = $iconImages[0]['filename'];
                 }
                 // Save
                 $id = Pi::api('api', $this->getModule())->add($values);
@@ -98,27 +105,29 @@ class IndexController extends ActionController
     }
 
     protected function setIconPath($list) {
+       $module = $this->getModule();
+        $config = Pi::config('', $module);
+
         $rootPath   = $this->rootPath();
         $rootUrl    = $this->rootUrl();
         $uploadPath = $this->tmpPath();
-        $uploadUrl  = $this->tmpUrl() . '/';
+        $uploadUrl  = $this->tmpUrl();
         $prefixLen  = strlen($uploadUrl);
-
         $items = array();
         foreach ($list as $item) {
             if ($uploadUrl == substr($item['icon'], 0, $prefixLen)) {
                 $imgName = substr($item['icon'], $prefixLen);
                 $renamed = rename(
-                        $uploadPath . '/' . $imgName,
-                        $rootPath . '/' . $imgName
+                    $uploadPath . $imgName,
+                    $rootPath . $imgName
                 );
                 if ($renamed) {
                     $item['image'] = $rootUrl . '/' . $imgName;
+                    $item['filename'] = $imgName;
                 }
             }
             $items[] = $item;
         }
-
         return $items;
     }
 
