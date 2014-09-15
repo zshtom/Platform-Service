@@ -20,6 +20,9 @@ use Module\Solution\Form\DescFilter;
 use Pi\File\Transfer\Upload;
 
 define('APPS', 'apps');
+define('CASES', 'cases');
+define('SOLUTION_APP', 'solution_app');
+define('SOLUTION_CASE', 'solution_case');
 
 /**
  * Index action controller
@@ -64,10 +67,10 @@ class IndexController extends ActionController
     {
         $module = $this->getModule();
         $config = Pi::config('', $module);
-        $apps = Pi::api('api', APPS)->getAppsList(1);
-        $data = array();
+        $apps = $this->_getAppsList();
 
-        $appsRow = $this->_getSolutionApps(10);
+        $solution_apps = array();
+        $is_data = 0;
 
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
@@ -106,115 +109,49 @@ class IndexController extends ActionController
                     $message = _a('Solution data saved successfully.');
 
                     // Try save apps.
-                    $apps = $data['solution_app'];
-                    d($apps);
+                    $apps = $data[SOLUTION_APP];
                     foreach ($apps as $app) {
-                        if ($app['id']) {
-                            $app = array(
-                                'solution'      => $id,
-                                'app'           => $app['app'],
-                                'title'         => $app['title'],
-                                'icon'          => $app['icon_url'],
-                                'description'   => $app['description'],
-                                'time_created'  => time(),
-                            );
-
-                            try {
-                                $appRow = Pi::model('solution_app', $this->getModule())->createRow($app);
-                                $appRow->save();
-                            } catch (\Exception $exception) {
-                                $message .= '<li>' . $app['title'] . _a(' can\'t not save:') . '</li>';
-                                $message .= $exception->getMessage();
-                            }
+                        $result = $this->_saveSolutionApp($id, $app);
+                        if ($result['message']) {
+                            $message .= '<li>' . $app['title'] . _a(' can\'t not save;') . '</li>';
+                            $message .= $result['message'];
                         }
                     }
-
-//                     $appsRow = $this->getModel('solution_app')->find($id, 'solution');
-//                     d($appsRow);
 
                     return $this->jump(array('action' => 'index'), $message);
                 } else {
                     $message = _a('Solution data not saved.');
                 }
             } else {
-                $form = $this->_appsListForm($form, $data);
-
-                $formGroups['general'] = $form->getInputElements();
-                $formGroups['seo']  = $form->getSeoElements();
-                $formGroups['checkbox'] = $form->getCheckboxElements();
-                $formGroups['hidden'] = $form->getHiddenElements();
+                // Build form.
+                $form_info = $this->_newSolutionForm($form, $data);
+                $formGroups = $form_info['formGroups'];
 
                 $data['image'] = $data['icon'];
                 $json_data = json_encode($data);
                 $message = _a('Invalid data, please check and re-submit.');
             }
         } else {
+            // Build form.
             $form = new SolutionForm('solution-form');
-
-//             $formGroups['general']  = $form->getInputElements();
-//             $formGroups['seo']      = $form->getSeoElements();
-//             $formGroups['checkbox'] = $form->getCheckboxElements();
-//             $formGroups['hidden']   = $form->getHiddenElements();
-
-//             $form->setGroups( array(
-//                 'group1' => array(
-//                     'label' => _a('Group 1'),
-//                     'elemnts' => array(
-//                         'title', 'nav_order', 'name', 'icon', 'slug',
-//                         'summery', 'content',
-//                     ),
-//                 ),
-//                 'seo' => array(
-//                     'label' => _a('SEO Settings'),
-//                     'elemnts' => array(
-//                         'seo_title', 'seo_keywords', 'seo_description'
-//                     ),
-//                 ),
-//             ));
-
-//             $options = $form->getGroups();
-//             d($options);
-
-            foreach ($form as $ele) {
-                $eleAttributes = $ele->getAttributes();
-                if (isset($eleAttributes['type'])) {
-                    $formGroups['general'][$eleAttributes['name']] = $eleAttributes['name'];
-                }
-            }
-
-            // Add apps list.
-            $form = $this->_appsListForm($form, $data);
-
-            foreach ($form as $ele) {
-                $eleAttributes = $ele->getAttributes();
-                if (isset($eleAttributes['type'])) {
-                    if (!in_array($eleAttributes['name'], $formGroups['general'])) {
-                        $formGroups['apps'][$eleAttributes['name']] = $eleAttributes['name'];
-                    }
-                }
-            }
-
-//             d($formElements);
-//             d($formGroups);
-
-//             $form = $this->getForm($configs, $module);
+            $form_info = $this->_newSolutionForm($form);
+            $form = $form_info['form'];
+            $formGroups = $form_info['formGroups'];
 
             $form->setAttribute(
                 'action',
                 $this->url('', array('action' => 'add'))
             );
 
+            // Upload image url.
             $data['image'] = '';
             $json_data = json_encode($data);
 
             $message = '';
         }
 
-        $solution_apps = array();
-
         $this->view()->assign('formGroups', $formGroups);
         $this->view()->assign('solution_apps', $solution_apps);
-//         $this->view()->assign('apps', $apps);
         $this->view()->assign('module', $module);
         $this->view()->assign('form', $form);
         $this->view()->assign('content', $json_data);
@@ -266,6 +203,11 @@ class IndexController extends ActionController
     public function editAction()
     {
         $module = $this->getModule();
+        $config = Pi::config('', $module);
+
+        $apps = $this->_getAppsList();
+
+        $solution_apps = $data = array();
 
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
@@ -306,18 +248,41 @@ class IndexController extends ActionController
 
                 $message = _a('Solution data saved successfully.');
 
+                // Try save apps.
+                $apps = $data[SOLUTION_APP];
+                foreach ($apps as $app) {
+                    $result = $this->_saveSolutionApp($id, $app);
+                    if ($result['message']) {
+                        $message .= '<li>' . $app['title'] . _a(' can\'t not save;') . '</li>';
+                        $message .= $result['message'];
+                    }
+                }
+
                 return $this->jump(array('action' => 'index'), $message);
 
             } else {
+                $form_info = $this->_newSolutionForm($form, $data);
+                $formGroups = $form_info['formGroups'];
+
                 $data['image'] = $data['icon'];
                 $json_data = json_encode($data);
+
                 $message = _a('Invalid data, please check and re-submit.');
             }
         } else {
             $id = $this->params('id');
             $row = $this->getModel($module)->find($id);
             $data = $row->toArray();
-            $form = new SolutionForm('solution-form');
+            // Solution apps list.
+            $solution_apps = $this->_getSolutionApps($id);
+            $data['solution_app'] = $solution_apps;
+
+            $form = new SolutionForm('solution-edit-form');
+            // Rebuild form.
+            $form_info = $this->_newSolutionForm($form, $data);
+            $form = $form_info['form'];
+            $formGroups = $form_info['formGroups'];
+
             $form->setData($data);
             $form->setAttribute(
                 'action',
@@ -330,6 +295,8 @@ class IndexController extends ActionController
             $json_data = json_encode($data);
         }
 
+        $this->view()->assign('formGroups', $formGroups);
+        $this->view()->assign('solution_apps', $solution_apps);
         $this->view()->assign('module', $this->getModule());
         $this->view()->assign('form', $form);
         $this->view()->assign('content', $json_data);
@@ -579,10 +546,10 @@ class IndexController extends ActionController
      * @param array $sibling
      * @return \Module\Solution\Controller\Admin\Form
      */
-    protected function _appsListForm($form, $data)
+    protected function _appsListForm($form, $data = array())
     {
 
-        $apps = Pi::api('api', APPS)->getAppsList(1);
+        $apps = $this->_getAppsList();
 
         $appElementFieldSet = array(
             'name' => 'extra_apps',
@@ -596,6 +563,8 @@ class IndexController extends ActionController
                 'for'   => 'test-for',
             ),
         );
+
+        $solution_app = $data['solution_app'];
 
         $form->add($appElementFieldSet);
         $flags = 'apps-list';
@@ -613,20 +582,20 @@ class IndexController extends ActionController
                 ),
 
                 array(
-                    'name'       => 'solution_app[' . $key . '][id]',
+                    'name'       => SOLUTION_APP . '[' . $key . '][id]',
                     'options'    => array(
                         'class' => 'inline',
                         'label'     => $app['title'],
                     ),
                     'attributes' => array(
-                        'value' => $data['solution']['app']['id'][$key],
+                        'value' => $solution_app[$key]['id'],
                         'class' => 'inline',
                     ),
                     'type'          => 'checkbox',
                 ),
 
                 array(
-                    'name'       => 'solution_app[' . $key . '][app]',
+                    'name'       => SOLUTION_APP . '[' . $key . '][app]',
                     'attributes' => array(
                         'class' => 'inline',
                         'value' => $app['id'],
@@ -636,8 +605,18 @@ class IndexController extends ActionController
                 ),
 
                 array(
+                    'name'       => SOLUTION_APP . '[' . $key . '][solution_app_id]',
+                    'attributes' => array(
+                        'class' => 'inline',
+                        'value' => $solution_app[$key]['id'],
+                        'readonly' => 'readonly'
+                    ),
+                    'type'          => 'hidden',
+                ),
+
+                array(
                     'class'      => 'self-class',
-                    'name'       => 'solution_app[' . $key . '][title]',
+                    'name'       => SOLUTION_APP . '[' . $key . '][title]',
                     'options'    => array(
                         'class' => 'inline',
                         'label'     => ' ',
@@ -647,11 +626,11 @@ class IndexController extends ActionController
                         'class' => 'inline',
                         'readonly'  => 'readonly',
                     ),
-                    'type'          => 'input',
+                    'type'          => 'hidden',
                 ),
 
                 array(
-                    'name'       => 'solution_app[' . $key . '][icon]',
+                    'name'       => SOLUTION_APP . '[' . $key . '][icon]',
                     'options'    => array(
                         'class' => 'inline',
                     ),
@@ -663,7 +642,7 @@ class IndexController extends ActionController
                 ),
 
                 array(
-                    'name'       => 'solution_app[' . $key . '][icon_url]',
+                    'name'       => SOLUTION_APP . '[' . $key . '][icon_url]',
                     'attributes' => array(
                         'class' => 'inline',
                         'value' => $app['icon'],
@@ -673,19 +652,19 @@ class IndexController extends ActionController
                 ),
 
                 array(
-                    'name'       => 'solution_app[' . $key . '][description]',
+                    'name'       => SOLUTION_APP . '[' . $key . '][description]',
                     'options'    => array(
                         'label'     => ' ',
                     ),
                     'attributes' => array(
                         'class' => 'inline',
-                        'value' => $data['solution']['app']['description'][$key],
+                        'value' => $solution_app[$key]['description'],
                     ),
                     'type'          => 'textarea',
                 ),
 
                 array(
-                    'name'       => 'solution_app[' . $key . '][publish]',
+                    'name'       => SOLUTION_APP . '[' . $key . '][publish]',
                     'attributes' => array(
                         'class' => 'inline',
                         'value' => _date($app['time_created'], null, 'NULL', 'NULL',
@@ -705,6 +684,158 @@ class IndexController extends ActionController
     }
 
     /**
+     * _getAppsList()
+     *   - Try get apps list from apps module by API.
+     *
+     * @return array.
+     *   - Apps list.
+     */
+    protected function _getAppsList() {
+        if (Pi::service('module')->isActive(APPS)) {
+            try {
+                return $apps = Pi::api('api', APPS)->getAppsList(1);
+            } catch (\Exception $exception) {
+                return array();
+            }
+        }
+    }
+
+    /**
+     * _getCasesList()
+     *   - Try get apps list from apps module by API.
+     *
+     * @return array.
+     *   - Apps list.
+     */
+    protected function _getCasesList() {
+        if (Pi::service('module')->isActive(CASES)) {
+            try {
+                $cases = Pi::api('api', CASES)->caseList();
+                d($cases);
+                return $cases;
+            } catch (\Exception $exception) {
+                return array();
+            }
+        }
+    }
+
+    /**
+     * _appsListForm()
+     *   - Apps list form.
+     *
+     * @param unknown $from
+     * @param array $sibling
+     * @return \Module\Solution\Controller\Admin\Form
+     */
+    protected function _casesListForm($form, $data = array())
+    {
+        $cases = $this->_getCasesList();
+
+        $solution_case = $data['solution_case'];
+
+        foreach ($cases as $key => $case) {
+
+            $caseElements = array(
+                // extra_apps
+                array(
+                    'name' => 'extra_app_' . $key,
+                    'type' => 'fieldset',
+                    'options' => array(
+                        'label' => ' ',
+                    ),
+                ),
+
+                array(
+                    'name'       => SOLUTION_CASE . '[' . $key . '][id]',
+                    'options'    => array(
+                        'class' => 'inline',
+                        'label'     => $case['title'],
+                    ),
+                    'attributes' => array(
+                        'value' => $solution_case[$key]['id'],
+                        'class' => 'inline',
+                    ),
+                    'type'          => 'checkbox',
+                ),
+
+                array(
+                    'name'       => SOLUTION_CASE . '[' . $key . '][app]',
+                    'attributes' => array(
+                        'class' => 'inline',
+                        'value' => $case['id'],
+                        'readonly' => 'readonly'
+                    ),
+                    'type'          => 'hidden',
+                ),
+
+                array(
+                    'name'       => SOLUTION_CASE . '[' . $key . '][solution_case_id]',
+                    'attributes' => array(
+                        'class' => 'inline',
+                        'value' => $solution_case[$key]['id'],
+                        'readonly' => 'readonly'
+                    ),
+                    'type'          => 'hidden',
+                ),
+
+                array(
+                    'class'      => 'self-class',
+                    'name'       => SOLUTION_CASE . '[' . $key . '][title]',
+                    'options'    => array(
+                        'class' => 'inline',
+                        'label'     => ' ',
+                    ),
+                    'attributes' => array(
+                        'value' => $case['title'],
+                        'class' => 'inline',
+                        'readonly'  => 'readonly',
+                    ),
+                    'type'          => 'hidden',
+                ),
+
+                array(
+                    'name'       => SOLUTION_CASE . '[' . $key . '][icon]',
+                    'options'    => array(
+                        'class' => 'inline',
+                    ),
+                    'attributes' => array(
+                        'class' => 'inline',
+                        'value' => '<img src="' . $case['icon'] . '" style="width: 80px;">',
+                    ),
+                    'type'          => 'html',
+                ),
+
+                array(
+                    'name'       => SOLUTION_CASE . '[' . $key . '][icon_url]',
+                    'attributes' => array(
+                        'class' => 'inline',
+                        'value' => $case['icon'],
+                        'readonly' => 'readonly'
+                    ),
+                    'type'          => 'hidden',
+                ),
+
+                array(
+                    'name'       => SOLUTION_CASE . '[' . $key . '][publish]',
+                    'attributes' => array(
+                        'class' => 'inline',
+                        'value' => _date($case['time_created'], null, 'NULL', 'NULL',
+                            null, null, null, 'Y-m-d'),
+                        'readonly' => 'readonly'
+                    ),
+                    'type'          => 'html',
+                ),
+            );
+
+            foreach ($caseElements as $element) {
+                $form->add($element);
+            }
+        }
+
+        return $form;
+    }
+
+    /**
      * _getSolutionApps()
      *   - Get solutions app.
      *
@@ -713,10 +844,10 @@ class IndexController extends ActionController
     protected function _getSolutionApps($solution) {
 
         $module = $this->getModule();
-        $model  = $this->getModel('solution_app');
+        $model  = $this->getModel(SOLUTION_APP);
 
         $where = array(
-                'solution' => $solution,
+            'solution' => $solution,
         );
 
         $select = $model->select()->order(array('id DESC'));
@@ -725,10 +856,131 @@ class IndexController extends ActionController
 
         foreach ($rowset as $row) {
             $app = $row->toArray();
-            $solutionsApp[$app['id']] = $app;
+            $solutionsApp[$app['app']] = $app;
         }
 
         return $solutionsApp;
+    }
+
+    /**
+     * _newSolutionForm()
+     *   - Create new form with apps/cases;
+     *
+     * @param string $form_name
+     *   - Form name
+     *
+     * @return \Module\Solution\Controller\Admin\Form
+     */
+    protected function _newSolutionForm($form = array(), $data = array()) {
+
+        foreach ($form as $ele) {
+            $eleAttributes = $ele->getAttributes();
+            if (isset($eleAttributes['type'])) {
+                $formGroups['general'][$eleAttributes['name']] = $eleAttributes['name'];
+            }
+        }
+
+        if ($data) {
+            unset($formGroups['apps']);
+        }
+
+        // Add app list.
+        $form = $this->_appsListForm($form, $data);
+        foreach ($form as $ele) {
+            $eleAttributes = $ele->getAttributes();
+            if (isset($eleAttributes['type'])) {
+                if (!in_array($eleAttributes['name'], $formGroups['general'])) {
+                    $formGroups['apps'][$eleAttributes['name']] = $eleAttributes['name'];
+                }
+            }
+        }
+
+        // Add case list.
+        $form = $this->_casesListForm($form, $data);
+        foreach ($form as $ele) {
+            $eleAttributes = $ele->getAttributes();
+            if (isset($eleAttributes['type'])) {
+                if (!in_array($eleAttributes['name'], $formGroups['general'])) {
+                    $formGroups['cases'][$eleAttributes['name']] = $eleAttributes['name'];
+                }
+            }
+        }
+
+        return array(
+            'form'          => $form,
+            'formGroups'    => $formGroups,
+        );
+    }
+
+    /**
+     * _saveSolutionApp()
+     *   - Save solution app.
+     *
+     * @param array $apps
+     */
+    protected function _saveSolutionApp($solution, $app = array()) {
+
+        $id = $message = '';
+
+        if ($app['id']) {
+            $exists_app = Pi::Model(SOLUTION_APP, $this->getModule())->find($app['solution_app_id']);
+
+            d($exists_app['title'] . ' | ' . $exists_app['id'] . ' | ' . $exists_app['solution'] . ' | ' . $exists_app['app']);
+            $app = array(
+                    'id'            => $app['solution_app_id'],
+                    'solution'      => $solution,
+                    'app'           => $app['app'],
+                    'title'         => $app['title'],
+                    'icon'          => $app['icon_url'],
+                    'description'   => $app['description'],
+                    'time_created'  => time(),
+            );
+
+            if ($exists_app['id']) {
+                $app['time_updated'] = time();
+                $exists_app->assign($app);
+                $exists_app->save();
+                $id = (int) $exists_app->id;
+            }
+            else {
+                // Save
+                try {
+                    $new_app = Pi::model(SOLUTION_APP, $this->getModule())->createRow($app);
+                    $new_app->save();
+                } catch (\Exception $exception) {
+                    $message .= '<li>' . $app['title'] . _a(' can\'t not save:') . '</li>';
+                    $message .= $exception->getMessage();
+                }
+                $id = (int) $new_app->id;
+            }
+
+        }
+        else {
+//             d($app['solution_app_id']);
+            // Remove if uncheck.
+            $remove_id = $id = (int) $app['solution_app_id'];
+
+            if ($remove_id) {
+//                 d($remove_id);
+                $row[$remove_id] = $this->getModel('solution_app', $this->getModule())->find($remove_id);
+//                 d($row['title']);
+                if ($row[$remove_id]) {
+                    try {
+                        $row[$remove_id]->delete();
+                    } catch (\Exception $exception) {
+                        $message .= '<li>' . $app['title'] . _a(' can\'t not remove:') . '</li>';
+                        $message .= $exception->getMessage();
+                    }
+
+                }
+            }
+
+        }
+
+        return array(
+            'id' => $id,
+            'message' => $message,
+        );
     }
 
 }

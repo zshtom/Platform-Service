@@ -28,9 +28,22 @@ $this->Backbone();
         </div>
     </div>
 
-   <?php include $this->templateComponent('forms'); ?>
+   <?php //include $this->templateComponent('forms'); ?>
 
 </div>
+
+<?php echo $this->form()->openTag($form) ?>
+<?php include ('solution-form.phtml');?>
+
+<div>
+<?php $activeElement = $form->get('active'); ?>
+<?php $element = $form->get('submit'); ?>
+    <div>
+    <?php echo $this->formElement($activeElement) ?>
+    <?php echo $this->formElement($element) ?></div>
+</div>
+
+<?php echo $this->form()->closeTag() ?>
 
 <script id="widget-item-template" type="text/template">
 <div class="col-sm-6 col-md-3 widget-item">

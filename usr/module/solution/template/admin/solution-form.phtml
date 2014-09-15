@@ -32,7 +32,7 @@
                 </label>
             </td>
             <td>
-                <div class="col-md-4">
+                <div class="form-group col-md-8">
                 <?php
 
                     switch ($type) {
@@ -60,10 +60,35 @@
     <?php   }
         }
         elseif ($key == 'apps') {
-            $apps = $group;
-            $appsCont = count($apps) / 7;
 
+            foreach ($group as $akey => $solu_app) {
+                preg_match('/^solution_app\[([0-9])\]/i', $akey, $matchs);
+                if (isset($matchs[1])) {
+                    $apps['solution_app'][$matchs[1]][] = $solu_app;
+                }
+            }
+
+            $apps_list = $apps['solution_app'];
+            $solution_apps_keys = array_keys($solution_apps);
+
+
+            // Apps list form.
             include('apps-list.phtml');
+
+        }
+        elseif ($key == 'cases') {
+
+            foreach ($group as $ckey => $solu_case) {
+                preg_match('/^solution_app\[([0-9])\]/i', $ckey, $matchs);
+                if (isset($matchs[1])) {
+                    $cases['solution_app'][$matchs[1]][] = $solu_case;
+                }
+            }
+
+            $cases_list = $cases['solution_case'];
+            $solution_cases_keys = array_keys($solution_cases);
+            // Apps list form.
+            include('cases-list.phtml');
         }
     } ?>
         </tr>

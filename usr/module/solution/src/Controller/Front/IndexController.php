@@ -95,6 +95,7 @@ class IndexController extends ActionController
 
         // Solution nav list.
         $nav = Pi::registry('nav', $this->getModule())->read();
+//         $nav = Pi::api('api', 'solution')->getSolutionList();
 
         // Add home page ontop list.
         $nav = $nav_main + $nav;
@@ -107,6 +108,10 @@ class IndexController extends ActionController
         } else {
             $nav[0]['active'] = 1;
         }
+
+        d($row->id);
+        d($nav);
+
         $this->view()->assign('nav', $nav);
 
         $this->render($row);

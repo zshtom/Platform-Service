@@ -61,23 +61,23 @@ class Api extends AbstractApi
     public function caseList()
     {
         $config  = Pi::config('', $this->module);
-        $model  = $this->getModel($this->module);
+        $model  = Pi::model('cases', $this->getModule());
         $select = $model->select();
         $select->columns(array('id', 'title', 'summery', 'icon'));
         $select->order(array('order ASC'));
         $rowset = $model->selectWith($select);
         $list = array();
-        if($rowset){
+        if($rowset) {
             foreach ($rowset as $row) {
                 $id = (int) $row['id'];
                 $item = array(
                     'id'        => $row['id'],
                     'title'     => $row['title'],
                     'summery'   => $row['summery'],
-                    'icon'      => $config['icon_upload_path'] . '/' . $row['icon'],
+                    'icon'      => $row['icon'],
                     'url'       => Pi::service('url')->assemble(
-                                    'cases',
-                                    array($this->module, 'id' => $row['id'])
+                                    '',
+                                    array($this->getModule(), 'id' => $row['id'])
                                ),
                 );
                 $list[$id] = $item;

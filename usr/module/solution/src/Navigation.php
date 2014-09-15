@@ -35,12 +35,10 @@ class Navigation
 
         // Get the nav from list because active not set in registry.
         try {
-            $nav_list  = Pi::api('api')->solution->getSolutionsList();
+            $nav_list  = Pi::api('api', 'solution')->getSolutionList();
         } catch (\Exception $exception) {
             return false;
         }
-
-        d($nav_list);
 
         foreach ($nav_list as $key => $data) {
             $nav['pages'][$key] = array(

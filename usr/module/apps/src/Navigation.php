@@ -26,6 +26,8 @@ class Navigation
             return '';
         }
 
+        d($apps_list);
+
 //         $apps_list = Pi::registry($module, $module)->read();
 
         foreach ($apps_list as $key => $data) {
@@ -36,9 +38,10 @@ class Navigation
             );
         }
 
-
+        d($nav);
 
         return $nav;
+
     }
 
     /**
@@ -77,6 +80,8 @@ class Navigation
                 'uri'     => $data['url'],
             );
         }
+
+        d($nav);
 
         return $nav;
     }
