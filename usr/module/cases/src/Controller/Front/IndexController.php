@@ -7,7 +7,7 @@
  * @license         http://pialog.org/license.txt BSD 3-Clause License
  */
 
-namespace Module\Apps\Controller\Front;
+namespace Module\Cases\Controller\Front;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
@@ -25,6 +25,12 @@ use Zend\Db\Sql\Expression;
  */
 class IndexController extends ActionController
 {
+
+    public function indexAction()
+    {
+        $solutionId = $this->params('solution_id');
+        $solutionList = Pi::api('api', 'solution')->getSolutionList();        
+    }
     /**
      * case detail page
      *
@@ -34,5 +40,10 @@ class IndexController extends ActionController
     {
         $id = $this->params('id');
         $caseInfo = $this->getModel('cases')->find($id);
+        d($caseInfo->title);
+        $this->view()->assign(array(
+            'title'      => $caseInfo->title,
+            'content'    => $caseInfo->content,
+        ));
     }
 }
