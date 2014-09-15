@@ -13,10 +13,8 @@ use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Module\Solution\Form\SolutionForm;
 use Module\Solution\Form\SolutionFilter;
-
 use Module\Solution\Form\DescForm;
 use Module\Solution\Form\DescFilter;
-
 use Pi\File\Transfer\Upload;
 
 define('APPS', 'apps');
@@ -69,7 +67,7 @@ class IndexController extends ActionController
         $config = Pi::config('', $module);
         $apps = $this->_getAppsList();
 
-        $solution_apps = array();
+        $solution_apps = $solution_cases = array();
         $is_data = 0;
 
         if ($this->request->isPost()) {
@@ -113,7 +111,17 @@ class IndexController extends ActionController
                     foreach ($apps as $app) {
                         $result = $this->_saveSolutionApp($id, $app);
                         if ($result['message']) {
-                            $message .= '<li>' . $app['title'] . _a(' can\'t not save;') . '</li>';
+                            $message .= '<li>' . $app['title'] . _a(' can\'t save;') . '</li>';
+                            $message .= $result['message'];
+                        }
+                    }
+
+                    // Try save cases.
+                    $cases = $data[SOLUTION_CASE];
+                    foreach ($cases as $case) {
+                        $result = $this->_saveSolutionCase($id, $case);
+                        if ($result['message']) {
+                            $message .= '<li>' . $app['title'] . _a(' can\'t save;') . '</li>';
                             $message .= $result['message'];
                         }
                     }
@@ -152,6 +160,7 @@ class IndexController extends ActionController
 
         $this->view()->assign('formGroups', $formGroups);
         $this->view()->assign('solution_apps', $solution_apps);
+        $this->view()->assign('solution_cases', $solution_cases);
         $this->view()->assign('module', $module);
         $this->view()->assign('form', $form);
         $this->view()->assign('content', $json_data);
@@ -204,8 +213,8 @@ class IndexController extends ActionController
     {
         $module = $this->getModule();
         $config = Pi::config('', $module);
-
         $apps = $this->_getAppsList();
+        $cases = $this->_getCasesList();
 
         $solution_apps = $data = array();
 
@@ -253,7 +262,17 @@ class IndexController extends ActionController
                 foreach ($apps as $app) {
                     $result = $this->_saveSolutionApp($id, $app);
                     if ($result['message']) {
-                        $message .= '<li>' . $app['title'] . _a(' can\'t not save;') . '</li>';
+                        $message .= '<li>' . $app['title'] . _a(' can\'t save;') . '</li>';
+                        $message .= $result['message'];
+                    }
+                }
+
+                // Try save cases.
+                $cases = $data[SOLUTION_CASE];
+                foreach ($cases as $case) {
+                    $result = $this->_saveSolutionCase($id, $case);
+                    if ($result['message']) {
+                        $message .= '<li>' . $app['title'] . _a(' can\'t save;') . '</li>';
                         $message .= $result['message'];
                     }
                 }
@@ -275,7 +294,10 @@ class IndexController extends ActionController
             $data = $row->toArray();
             // Solution apps list.
             $solution_apps = $this->_getSolutionApps($id);
-            $data['solution_app'] = $solution_apps;
+            $data[SOLUTION_APP] = $solution_apps;
+            // Solution cases list.
+            $solution_cases = $this->_getSolutionCases($id);
+            $data[SOLUTION_CASE] = $solution_cases;
 
             $form = new SolutionForm('solution-edit-form');
             // Rebuild form.
@@ -297,6 +319,7 @@ class IndexController extends ActionController
 
         $this->view()->assign('formGroups', $formGroups);
         $this->view()->assign('solution_apps', $solution_apps);
+        $this->view()->assign('solution_cases', $solution_cases);
         $this->view()->assign('module', $this->getModule());
         $this->view()->assign('form', $form);
         $this->view()->assign('content', $json_data);
@@ -588,7 +611,7 @@ class IndexController extends ActionController
                         'label'     => $app['title'],
                     ),
                     'attributes' => array(
-                        'value' => $solution_app[$key]['id'],
+//                         'value' => $solution_app[$key]['id'],
                         'class' => 'inline',
                     ),
                     'type'          => 'checkbox',
@@ -608,7 +631,7 @@ class IndexController extends ActionController
                     'name'       => SOLUTION_APP . '[' . $key . '][solution_app_id]',
                     'attributes' => array(
                         'class' => 'inline',
-                        'value' => $solution_app[$key]['id'],
+                        'value' => (isset($solution_app[$key])) ? $solution_app[$key]['id'] : '',
                         'readonly' => 'readonly'
                     ),
                     'type'          => 'hidden',
@@ -658,7 +681,7 @@ class IndexController extends ActionController
                     ),
                     'attributes' => array(
                         'class' => 'inline',
-                        'value' => $solution_app[$key]['description'],
+                        'value' => (isset($solution_app[$key])) ? $solution_app[$key]['description'] : '',
                     ),
                     'type'          => 'textarea',
                 ),
@@ -711,7 +734,6 @@ class IndexController extends ActionController
         if (Pi::service('module')->isActive(CASES)) {
             try {
                 $cases = Pi::api('api', CASES)->caseList();
-                d($cases);
                 return $cases;
             } catch (\Exception $exception) {
                 return array();
@@ -730,7 +752,6 @@ class IndexController extends ActionController
     protected function _casesListForm($form, $data = array())
     {
         $cases = $this->_getCasesList();
-
         $solution_case = $data['solution_case'];
 
         foreach ($cases as $key => $case) {
@@ -752,14 +773,14 @@ class IndexController extends ActionController
                         'label'     => $case['title'],
                     ),
                     'attributes' => array(
-                        'value' => $solution_case[$key]['id'],
+                        'value' => (isset($solution_case[$key])) ? $solution_case[$key]['id'] : '',
                         'class' => 'inline',
                     ),
                     'type'          => 'checkbox',
                 ),
 
                 array(
-                    'name'       => SOLUTION_CASE . '[' . $key . '][app]',
+                    'name'       => SOLUTION_CASE . '[' . $key . '][case]',
                     'attributes' => array(
                         'class' => 'inline',
                         'value' => $case['id'],
@@ -772,7 +793,7 @@ class IndexController extends ActionController
                     'name'       => SOLUTION_CASE . '[' . $key . '][solution_case_id]',
                     'attributes' => array(
                         'class' => 'inline',
-                        'value' => $solution_case[$key]['id'],
+                        'value' => (isset($solution_case[$key])) ? $solution_case[$key]['id'] : '',
                         'readonly' => 'readonly'
                     ),
                     'type'          => 'hidden',
@@ -843,7 +864,7 @@ class IndexController extends ActionController
      */
     protected function _getSolutionApps($solution) {
 
-        $module = $this->getModule();
+        $solutionsApps = array();
         $model  = $this->getModel(SOLUTION_APP);
 
         $where = array(
@@ -856,10 +877,36 @@ class IndexController extends ActionController
 
         foreach ($rowset as $row) {
             $app = $row->toArray();
-            $solutionsApp[$app['app']] = $app;
+            $solutionsApps[$app['app']] = $app;
         }
 
-        return $solutionsApp;
+        return $solutionsApps;
+    }
+
+    /**
+     * _getSolutionCases()
+     *   - Get solutions cases.
+     *
+     * @param array $solution
+     */
+    protected function _getSolutionCases($solution) {
+
+        $solutionsCases = array();
+        $model  = $this->getModel(SOLUTION_CASE);
+        $where = array(
+            'solution' => $solution,
+        );
+
+        $select = $model->select()->order(array('id DESC'));
+        $select->where($where);
+        $rowset = $model->selectWith($select);
+
+        foreach ($rowset as $row) {
+            $case = $row->toArray();
+            $solutionsCases[$case['case']] = $case;
+        }
+
+        return $solutionsCases;
     }
 
     /**
@@ -897,10 +944,11 @@ class IndexController extends ActionController
 
         // Add case list.
         $form = $this->_casesListForm($form, $data);
+        $exist_form_elements = $formGroups['general'] + $formGroups['apps'];
         foreach ($form as $ele) {
             $eleAttributes = $ele->getAttributes();
             if (isset($eleAttributes['type'])) {
-                if (!in_array($eleAttributes['name'], $formGroups['general'])) {
+                if (!in_array($eleAttributes['name'], $exist_form_elements)) {
                     $formGroups['cases'][$eleAttributes['name']] = $eleAttributes['name'];
                 }
             }
@@ -925,8 +973,7 @@ class IndexController extends ActionController
         if ($app['id']) {
             $exists_app = Pi::Model(SOLUTION_APP, $this->getModule())->find($app['solution_app_id']);
 
-            d($exists_app['title'] . ' | ' . $exists_app['id'] . ' | ' . $exists_app['solution'] . ' | ' . $exists_app['app']);
-            $app = array(
+            $row = array(
                     'id'            => $app['solution_app_id'],
                     'solution'      => $solution,
                     'app'           => $app['app'],
@@ -937,18 +984,18 @@ class IndexController extends ActionController
             );
 
             if ($exists_app['id']) {
-                $app['time_updated'] = time();
-                $exists_app->assign($app);
+                $row['time_updated'] = time();
+                $exists_app->assign($row);
                 $exists_app->save();
                 $id = (int) $exists_app->id;
             }
             else {
                 // Save
                 try {
-                    $new_app = Pi::model(SOLUTION_APP, $this->getModule())->createRow($app);
+                    $new_app = Pi::model(SOLUTION_APP, $this->getModule())->createRow($row);
                     $new_app->save();
                 } catch (\Exception $exception) {
-                    $message .= '<li>' . $app['title'] . _a(' can\'t not save:') . '</li>';
+                    $message .= '<li>1001' . $app['title'] . _a(' can\'t save:') . '</li>';
                     $message .= $exception->getMessage();
                 }
                 $id = (int) $new_app->id;
@@ -956,19 +1003,84 @@ class IndexController extends ActionController
 
         }
         else {
-//             d($app['solution_app_id']);
             // Remove if uncheck.
             $remove_id = $id = (int) $app['solution_app_id'];
 
+            $model = Pi::Model(SOLUTION_CASE, $this->getModule());
             if ($remove_id) {
-//                 d($remove_id);
-                $row[$remove_id] = $this->getModel('solution_app', $this->getModule())->find($remove_id);
-//                 d($row['title']);
+                $row[$remove_id] = $model->find($remove_id);
+
+                if ($row[$remove_id]) {
+                    try {
+                        $row[$remove_id]->delete();
+//                         $message .= '<li>' . $app['title'] . _a(' remove from solution.') . '</li>';
+                    } catch (\Exception $exception) {
+                        $message .= '<li>' . $app['title'] . _a(' can\'t remove:') . '</li>';
+                        $message .= $exception->getMessage();
+                    }
+
+                }
+            }
+
+        }
+
+        return array(
+            'id' => $id,
+            'message' => $message,
+        );
+    }
+
+    /**
+     * _saveSolutionCase()
+     *   - Save solution case.
+     *
+     * @param array $case
+     */
+    protected function _saveSolutionCase($solution, $case = array()) {
+
+        $id = $message = '';
+
+        if ($case['id']) {
+            $exists_case = Pi::Model(SOLUTION_CASE, $this->getModule())->find($case['solution_case_id']);
+            $row = array(
+                'id'            => $case['solution_case_id'],
+                'solution'      => $solution,
+                'case'          => $case['case'],
+                'title'         => $case['title'],
+                'icon'          => $case['icon_url'],
+                'time_created'  => time(),
+            );
+
+            if ($exists_case['id']) {
+                $row['time_updated'] = time();
+                $exists_case->assign($row);
+                $exists_case->save();
+                $id = (int) $exists_case->id;
+            }
+            else {
+                // Save
+                try {
+                    $new_case = Pi::model(SOLUTION_CASE, $this->getModule())->createRow($row);
+                    $new_case->save();
+                } catch (\Exception $exception) {
+                    $message .= '<li>1070' . $row['title'] . _a(' can\'t save:') . '</li>';
+                    $message .= $exception->getMessage();
+                }
+                $id = (int) $new_case->id;
+            }
+
+        }
+        else {
+            // Remove if uncheck.
+            $remove_id = $id = (int) $case['solution_case_id'];
+            $model = Pi::Model(SOLUTION_CASE, $this->getModule());
+            if ($remove_id) {
+                $row[$remove_id] = $model->find($remove_id);
                 if ($row[$remove_id]) {
                     try {
                         $row[$remove_id]->delete();
                     } catch (\Exception $exception) {
-                        $message .= '<li>' . $app['title'] . _a(' can\'t not remove:') . '</li>';
+                        $message .= '<li>' . $case['title'] . _a(' can\'t remove:') . '</li>';
                         $message .= $exception->getMessage();
                     }
 

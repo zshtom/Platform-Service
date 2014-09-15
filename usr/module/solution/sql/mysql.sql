@@ -32,14 +32,14 @@ CREATE TABLE IF NOT EXISTS `{solution}` (
 CREATE TABLE IF NOT EXISTS `{solution_app}` (
   `id`              int(10)                 NOT NULL AUTO_INCREMENT,
   `solution`        int(10)                 NOT NULL DEFAULT '0',
-  `apps`            int(10)                 NOT NULL DEFAULT '0',
+  `app`             int(10)                 NOT NULL DEFAULT '0',
   `title`           varchar(255)            NOT NULL,
   `icon`            varchar(255)            NOT NULL,
-  `solution_description`         varchar(255)            NOT NULL,
+  `description`     varchar(255)            NOT NULL,
   `time_created`    int(10)                 NOT NULL DEFAULT '0',
   `time_updated`    int(10)                 NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-)
+);
 
 CREATE TABLE IF NOT EXISTS `{solution_case}` (
   `id`              int(10)                 NOT NULL AUTO_INCREMENT,
@@ -50,4 +50,4 @@ CREATE TABLE IF NOT EXISTS `{solution_case}` (
   `time_created`    int(10)                 NOT NULL DEFAULT '0',
   `time_updated`    int(10)                 NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-)
+);

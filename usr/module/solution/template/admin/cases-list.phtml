@@ -1,6 +1,8 @@
+<hr/>
 <div class="row-fluid">
     <div class="span12">
         <div id="pi-js-list">
+        <h2><?php echo __('Cases');?></h2>
             <table class="table table-striped">
                 <tbody>
                 <tr>
@@ -10,52 +12,51 @@
                     <th><?php echo _a('Time published'); ?></th>
                 </tr>
                 <?php $now = time(); ?>
-                <?php //for ($i = 1; $i <= $appsCont; $i++) { ?>
+                <?php //for ($i = 1; $i <= $casesCont; $i++) { ?>
 
                 <?php foreach ($cases_list as $case_key => $solution_case) {?>
 
                 <?php
                 // Get Id.
-                $appId = 'solution_app[' . $case_key . '][id]';
-                $caseElementId = $form->get($appId);
+                $caseId = 'solution_case[' . $case_key . '][id]';
+                $caseElementId = $form->get($caseId);
                 $caseElementId->setAttribute("class", "check-one");
 
                 // App Id.
-                $appSolutionApp = 'solution_app[' . $case_key . '][solution_app_id]';
-                $caseElementSolutionApp = $form->get($appSolutionApp);
+                $caseSolutionApp = 'solution_case[' . $case_key . '][solution_case_id]';
+                $caseElementSolutionApp = $form->get($caseSolutionApp);
 
                 // App Id.
-                $appApp = 'solution_app[' . $case_key . '][app]';
-                $caseElementApp = $form->get($appApp);
+                $caseApp = 'solution_case[' . $case_key . '][case]';
+                $caseElementApp = $form->get($caseApp);
 
-                $appIdValue = (int)$caseElementApp->getValue();
+                $caseIdValue = (int)$caseElementApp->getValue();
 
                 // App title.
-                $appTitle = 'solution_app[' . $case_key . '][title]';
-                $caseElementTitle = $form->get($appTitle);
+                $caseTitle = 'solution_case[' . $case_key . '][title]';
+                $caseElementTitle = $form->get($caseTitle);
 
                 // Get Icon.
-                $appIcon = 'solution_app[' . $case_key . '][icon]';
-                $caseElementIcon = $form->get($appIcon);
+                $caseIcon = 'solution_case[' . $case_key . '][icon]';
+                $caseElementIcon = $form->get($caseIcon);
                 // App Icon Url.
-                $appIconUrl = 'solution_app[' . $case_key . '][icon_url]';
-                $caseElementIconUrl = $form->get($appIconUrl);
+                $caseIconUrl = 'solution_case[' . $case_key . '][icon_url]';
+                $caseElementIconUrl = $form->get($caseIconUrl);
 
                 // Get description.
-//                 $appDescription = 'solution_app[' . $case_key . '][description]';
-//                 $caseElementDescription = $form->get($appDescription);
+//                 $caseDescription = 'solution_case[' . $case_key . '][description]';
+//                 $caseElementDescription = $form->get($caseDescription);
 
                 // Get publish.
-                $appPublish = 'solution_app[' . $case_key . '][publish]';
-                $caseElementPublish = $form->get($appPublish);
+                $casePublish = 'solution_case[' . $case_key . '][publish]';
+                $caseElementPublish = $form->get($casePublish);
 
-                if (in_array($appIdValue, $solution_cases_keys)) {
+                if (in_array($caseIdValue, $solution_cases_keys)) {
                     $caseElementId->setValue(1);
-                    $caseElementDescription->setValue($solution_cases[$appIdValue]['description']);
                 }
 
                 ?>
-                <tr data-id="<?php echo $i; ?>">
+                <tr data-id="<?php echo $caseIdValue; ?>">
                     <td>
                         <?php echo $this->formElement($caseElementId);?>
 
@@ -69,12 +70,6 @@
                     <td>
                         <?php
                         echo $this->formElement($caseElementIcon);
-                        ?>
-                    </td>
-                    <td>
-                        <?php
-                        $caseElementDescription->setAttribute("style", "width: 100%;");
-                        echo $this->formElement($caseElementDescription);
                         ?>
                     </td>
                     <td>

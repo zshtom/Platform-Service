@@ -141,7 +141,7 @@ class Api extends AbstractApi
         $rowset = $model->selectWith($select);
 
         foreach ($rowset as $row) {
-            $id = (int) $row['id'];
+            $id = (int) $row['case'];
             $item = array(
                 'id' => $id,
             );

@@ -1,6 +1,10 @@
+<hr/>
 <div class="row-fluid">
     <div class="span12">
         <div id="pi-js-list">
+            <legend>
+                <label for="extra_seo"><?php echo __('Apps');?></label>
+            </legend>
             <table class="table table-striped">
                 <tbody>
                 <tr>
@@ -51,12 +55,13 @@
                 $appElementPublish = $form->get($appPublish);
 
                 if (in_array($appIdValue, $solution_apps_keys)) {
+d($solution_apps[$appIdValue]);
                     $appElementId->setValue(1);
                     $appElementDescription->setValue($solution_apps[$appIdValue]['description']);
                 }
 
                 ?>
-                <tr data-id="<?php echo $i; ?>">
+                <tr data-id="<?php echo $appIdValue; ?>">
                     <td>
                         <?php echo $this->formElement($appElementId);?>
 

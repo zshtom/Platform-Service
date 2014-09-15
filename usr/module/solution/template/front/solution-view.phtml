@@ -23,7 +23,7 @@
 
                     <div class="row">
                       <div class="col-sm-12">
-                        <div class="row">
+
                         <?php foreach ($solutions_list as $item) { ?>
                           <div class="col-xs-8 col-sm-6">
                             <div class="media">
@@ -39,7 +39,43 @@
                             </div>
                           </div>
                         <?php } ?>
-                        </div>
+
+                        <?php
+                        if ($solution_apps) {
+                            echo '<h2>' . __('Apps') . '</h2>';
+                        }
+                        ?>
+                        <?php foreach ($solution_apps as $app) { ?>
+                        <div class="row">
+                               <div class="col-md-2">
+                                    <img style="width: 80px; height: 80px;" class="pull-left" src="<?php echo $this->escape($app['icon']); ?>">
+                               </div>
+                               <div class="col-md-10">
+                                    <h3><?php echo $this->escape($app['title']); ?></h3>
+                                    <p>
+                                        <?php echo $this->escape($app['description']); ?>
+                                    </p>
+                               </div>
+                       </div>
+                        <?php } ?>
+
+                        <?php
+                        if ($solution_cases) {
+                            echo '<h2>' . __('Cases') . '</h2>';
+                        }
+                        ?>
+                        <?php foreach ($solution_cases as $case) { ?>
+                          <div class="col-xs-8 col-sm-6">
+                            <div class="media">
+                                <div class="media-body">
+                                    <a title="<?php echo $this->escape($case['title']); ?>" href="<?php echo $this->escape($case['url']); ?>" class="solution-front-title">
+                                        <img style="width: 80px; height: 80px;" class="pull-left" src="<?php echo $this->escape($case['icon']); ?>">
+                                    </a>
+                                </div>
+                            </div>
+                          </div>
+                        <?php } ?>
+
                       </div>
                     </div>
                 </div>
