@@ -18,19 +18,21 @@ $this->jquery();
         $("#btn3").click(function(){
             var str="";
             var ids="";
+            var url="<?php echo $this->url("home") ?>";
             $("[name='checkbox'][checked]").each(function(){
                 str+=$(this).val()+",";
             })
-            alert(str) ;
+            //alert(usr) ;
 
             $.post(
-                'http://localhost/Platform-Service/www/admin/freetrial/index/batchdelete/',
+                url + 'freetrial/index/batchdelete/',
                 {
                     ids:str
                 },
                 function (data) //回传函数
                 {
                     alert(data.msg);
+                    window.location.href=url + 'freetrial/';
                 }, 'json'
             );
         })

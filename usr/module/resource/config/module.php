@@ -11,9 +11,9 @@ return array(
     // Module meta
     'meta'  => array(
         // Module title, required
-        'title'         => _a('White page'),
+        'title'         => _a('White paper'),
         // Description, for admin, optional
-        'description'   => _a('White page'),
+        'description'   => _a('White paper'),
         // Version number, required
         'version'       => '1.1.0',
         // Distribution license, required
@@ -33,9 +33,9 @@ return array(
     // Author information
     'author'    => array(
         // Author full name, required
-        'Name'      => 'Taiwen Jiang',
+        'Name'      => 'Chunhui Li',
         // Email address, optional
-        'Email'     => 'taiwenjiang@tsinghua.org.cn',
+        'Email'     => 'lichunhui@social-touch.com',
         // Website link, optional
         'Website'   => 'http://pialog.org',
         // Credits and aknowledgement, optional
