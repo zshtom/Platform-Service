@@ -1,0 +1,21 @@
+<?php if (isset($error)) {
+    echo $error;
+} ?>
+
+
+<div class="module-container">
+    <div class="row">
+        <div class="row text-center module-title"><h4>免费试用</h4></div>
+        <div class="row">
+            <div class="col-md-6">
+                <span class="left-prompt">以下信息均为必填项，如有问题，请 <a>联系我们</a></span>
+                <?php include $this->templateComponent('form'); ?>
+            </div>
+            <div class="col-md-6">
+                <div class="detail-read"></div>
+                <div class="right-prompt">如您想立即了解相关信息请拨打<span class="prominent">400-691-1961</span>与我们联系，亦或发送邮件至<span class="prominent">marketing@social-touch.com</span>进行沟通。</div>
+            </div>
+        </div>
+    </div>
+</div>
+

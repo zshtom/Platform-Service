@@ -7,42 +7,30 @@ $this->jquery();
         $("#btn1").click(function(){
             $("input[name='checkbox']").each(function(){
 //                this.checked = true;
-                $(this).prop("checked",true);
+                $(this).attr("checked",true);
             })
         })
         $("#btn2").click(function(){
             $("input[name='checkbox']").each(function(){
-               $(this).prop("checked",false);
+               $(this).attr("checked",false);
             })
         })
         $("#btn3").click(function(){
             var str="";
             var ids="";
-            $("[name='checkbox']:checked").each(function(){
+            $("[name='checkbox'][checked]").each(function(){
                 str+=$(this).val()+",";
-            });
-//            if(confirm("确定要删除所选项目？")) {
-//                var checkedList = new Array();
-//                $("input[name='checkbox']:checked").each(function() {
-//                    checkedList.push($(this).val());
-//                });
-                var url= "<?php $this->url("home")?>"
+            })
+            alert(str) ;
+
             $.post(
-                //'http://localhost/Platform-Service/www/admin/freetrial/index/batchdelete/',
-                url + 'index/batchdelete/',
+                'http://localhost/Platform-Service/www/admin/freetrial/index/batchdelete/',
                 {
                     ids:str
                 },
                 function (data) //回传函数
                 {
                     alert(data.msg);
-                    if (data.msg == 'ok') {
-                        $("[name='checkbox']:checked").each(function(){
-                           $('#list_' + $(this).val()).html('');
-                        })
-                    } else {
-                        // 删除失败
-                    }
                 }, 'json'
             );
         })
@@ -70,18 +58,18 @@ $this->jquery();
         <th><?php echo __('Company') ?></th>
         <th><?php echo __('Email') ?></th>
         <th><?php echo __('Phone') ?></th>
-        <th><?php echo __('Date') ?></th>
+        <th><?php echo __('Time') ?></th>
     </tr>
     <?php foreach ($pages as $page) { ?>
-        <tr id="list_<?php echo $page['id'] ?>">
+        <tr>
             <td> <input type="checkbox" name="checkbox" value="<?php echo $page['id'] ?>"></td>
-            <td><?php echo $page['id'] ?></td>
-            <td><?php echo $page['name'] ?></td>
-            <td><?php echo $page['title'] ?></td>
-            <td><?php echo $page['company'] ?></td>
-            <td><?php echo $page['email'] ?></td>
-            <td><?php echo $page['phone'] ?></td>
-            <td><?php echo $page['date'] ?></td>
+            <td><?php echo $this->escape($page['id']) ?></td>
+            <td><?php echo $this->escape($page['name']) ?></td>
+            <td><?php echo $this->escape($page['title']) ?></td>
+            <td><?php echo $this->escape($page['company']) ?></td>
+            <td><?php echo $this->escape($page['email']) ?></td>
+            <td><?php echo $this->escape($page['phone']) ?></td>
+            <td><?php echo $this->escape(_date($page['time'])) ?></td>
             <td>
                 <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $page['id'])); ?>"><?php echo _a('Delete'); ?></a>
             </td>

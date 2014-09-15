@@ -16,13 +16,22 @@ return array(
     ),
     'item' => array(
         // Social
+        'attach_upload_path' => array(
+            'category'      => 'icon',
+            'title'         => _t('A attachment upload Path'),
+            'description'   => '',
+            'edit'          => 'input',
+            'filter'        => 'text',
+            'value'         => 'upload/resource/attach'
+        ),
+        // Social
         'icon_upload_path' => array(
             'category'      => 'icon',
             'title'         => _t('Icon Upload Path'),
             'description'   => '',
             'edit'          => 'input',
             'filter'        => 'text',
-            'value'         => 'upload/resource/'
+            'value'         => 'upload/resource/thumbnail'
         ),
         'icon_max_size' => array(
             'category'      => 'icon',
