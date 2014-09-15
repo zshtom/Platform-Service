@@ -80,6 +80,7 @@ class Api extends AbstractApi
                                     '',
                                     array($this->getModule(), 'id' => $row['id'])
                                ),
+                    'time_created'  => $row['time_created'],
                 );
                 $list[$id] = $item;
             }

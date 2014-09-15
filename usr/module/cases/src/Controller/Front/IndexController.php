@@ -29,7 +29,41 @@ class IndexController extends ActionController
     public function indexAction()
     {
         $solutionId = $this->params('solution_id');
-        $solutionList = Pi::api('api', 'solution')->getSolutionList();        
+        $solutionList = Pi::api('api', 'solution')->getSolutionList();
+        if(!empty($solutionList)){
+            foreach ($solutionList as &$solution) {
+                $solution['url'] = $this->url('', array('action' => 'index','solution_id' => $solution['id']));
+                if(!empty($solutionId) && $solution['id'] == $solutionId){
+                    $solution['active'] = true;
+                }
+            }
+        }
+        if(empty($solutionId)) {
+            $solutionId = current(array_keys($solutionList));
+            $solutionList[$solutionId]['active'] = true;
+        }
+        $caseList = array();
+        $casesIdList = Pi::api('api', 'solution')->getCasesList($solutionId);
+        $iconPath = Pi::url('upload') . '/' . $this->getModule(); 
+        if(!empty($casesIdList)){
+            $model  = $this->getModel('cases');
+            $where = array('id' => array_keys($casesIdList));
+            $select = $model->select()->where($where);
+            $list = $model->selectWith($select);
+            if(!empty($list)){
+                foreach ($list as $item) {
+                    $item = $item->toArray();
+                    $item['url'] = $this->url('', array('action' => 'detail','id' => $item['id']));
+                    $item['icon'] = $iconPath . $item['icon'];
+                    $caseList[] = $item;
+                }
+            }
+        }
+        $this->view()->assign(array(
+            'solutionList'  => $solutionList,
+            'caseList'      => $caseList,
+            'iconPath'      => $iconPath,
+        ));
     }
     /**
      * case detail page
@@ -40,7 +74,6 @@ class IndexController extends ActionController
     {
         $id = $this->params('id');
         $caseInfo = $this->getModel('cases')->find($id);
-        d($caseInfo->title);
         $this->view()->assign(array(
             'title'      => $caseInfo->title,
             'content'    => $caseInfo->content,
