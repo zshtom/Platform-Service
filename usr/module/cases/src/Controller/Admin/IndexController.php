@@ -125,7 +125,10 @@ class IndexController extends ActionController
                     $item['image'] = $rootUrl . '/' . $imgName;
                     $item['filename'] = $imgName;
                 }
-            }
+            }elseif($rootUrl == substr($item['icon'], 0, strlen($rootUrl))){
+                $imgName = substr($item['icon'], strlen($rootUrl));
+                $item['filename'] = $imgName;
+            }            
             $items[] = $item;
         }
         return $items;
@@ -149,6 +152,11 @@ class IndexController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();               
                 $values['time_updated'] = time();
+                $iconImages = $this->setIconPath(array($data));
+
+                if (isset($iconImages[0]['filename'])) {
+                    $values['icon'] = $iconImages[0]['filename'];
+                }
 
                 // Save
                 $row->assign($values);
@@ -162,7 +170,11 @@ class IndexController extends ActionController
         } else {
             $id = $this->params('id');
             $row = $this->getModel('cases')->find($id);
-            $data = $row->toArray();
+            $data = $row->toArray();            
+            $rootUrl    = $this->rootUrl();
+            if(!empty($data['icon'])){
+                $data['icon'] = $rootUrl.$data['icon'];
+            }            
             $form = new CasesForm('case-form');
             $form->setData($data);
             $form->setAttribute(

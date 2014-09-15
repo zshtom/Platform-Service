@@ -15,7 +15,6 @@ return array(
         ),
     ),
     'item'  => array(
-        'front'     => false,
         'admin'     => array(
             'list'     => array(
                 'label'         => _t('Case list'),
