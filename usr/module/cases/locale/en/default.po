@@ -1,0 +1,160 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: cases\n"
+"POT-Creation-Date: 2014-09-12 18:11+0800\n"
+"PO-Revision-Date: 2014-09-12 18:13+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.7\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: _a\n"
+"X-Poedit-SearchPath-0: E:\\code\\Platform-Service\\usr\\module\\cases\n"
+
+#: E:\code\Platform-Service\usr\module\cases/config/block.php:23
+msgid "List Count"
+msgstr "List Count"
+
+#: E:\code\Platform-Service\usr\module\cases/config/block.php:24
+msgid "The max categories to display"
+msgstr "The max categories to display"
+
+#: E:\code\Platform-Service\usr\module\cases/config/block.php:29
+msgid "Target"
+msgstr "Target"
+
+#: E:\code\Platform-Service\usr\module\cases/config/block.php:30
+msgid "Open url in which window"
+msgstr "Open url in which window"
+
+#: E:\code\Platform-Service\usr\module\cases/config/module.php:13
+#: E:\code\Platform-Service\usr\module\cases/config/module.php:15
+msgid "Cases"
+msgstr "Cases"
+
+#: E:\code\Platform-Service\usr\module\cases/src/Controller/Admin/IndexController.php:40
+msgid "Case list"
+msgstr "Case list"
+
+#: E:\code\Platform-Service\usr\module\cases/src/Controller/Admin/IndexController.php:75
+#: E:\code\Platform-Service\usr\module\cases/src/Controller/Admin/IndexController.php:148
+msgid "Case data saved successfully."
+msgstr "Case data saved successfully."
+
+#: E:\code\Platform-Service\usr\module\cases/src/Controller/Admin/IndexController.php:78
+msgid "Case data not saved."
+msgstr "Case data not saved."
+
+#: E:\code\Platform-Service\usr\module\cases/src/Controller/Admin/IndexController.php:81
+#: E:\code\Platform-Service\usr\module\cases/src/Controller/Admin/IndexController.php:151
+msgid "Invalid data, please check and re-submit."
+msgstr "Invalid data, please check and re-submit."
+
+#: E:\code\Platform-Service\usr\module\cases/src/Controller/Admin/IndexController.php:94
+msgid "Add a case"
+msgstr "Add a case"
+
+#: E:\code\Platform-Service\usr\module\cases/src/Controller/Admin/IndexController.php:171
+msgid "Case edit"
+msgstr "Case edit"
+
+#: E:\code\Platform-Service\usr\module\cases/src/Controller/Admin/IndexController.php:190
+msgid "Case deleted successfully."
+msgstr "Case deleted successfully."
+
+#: E:\code\Platform-Service\usr\module\cases/src/Controller/Admin/IndexController.php:209
+msgid "Case updated successfully."
+msgstr "Case updated successfully."
+
+#: E:\code\Platform-Service\usr\module\cases/src/Form/CasesForm.php:43
+#: E:\code\Platform-Service\usr\module\cases/template/admin/case-list.phtml:8
+msgid "Case title"
+msgstr "Case title"
+
+#: E:\code\Platform-Service\usr\module\cases/src/Form/CasesForm.php:53
+#: E:\code\Platform-Service\usr\module\cases/template/admin/case-list.phtml:12
+msgid "Order"
+msgstr "Order"
+
+#: E:\code\Platform-Service\usr\module\cases/src/Form/CasesForm.php:63
+#: E:\code\Platform-Service\usr\module\cases/template/admin/case-list.phtml:10
+msgid "Case Summery"
+msgstr "Case Summery"
+
+#: E:\code\Platform-Service\usr\module\cases/src/Form/CasesForm.php:73
+msgid "Icon file name."
+msgstr "Icon file name."
+
+#: E:\code\Platform-Service\usr\module\cases/src/Form/CasesForm.php:85
+msgid "Case Content"
+msgstr "Case Content"
+
+#: E:\code\Platform-Service\usr\module\cases/src/Form/CasesForm.php:98
+msgid "SEO settings"
+msgstr "SEO settings"
+
+#: E:\code\Platform-Service\usr\module\cases/src/Form/CasesForm.php:106
+msgid "SEO Title"
+msgstr "SEO Title"
+
+#: E:\code\Platform-Service\usr\module\cases/src/Form/CasesForm.php:110
+#: E:\code\Platform-Service\usr\module\cases/src/Form/CasesForm.php:122
+#: E:\code\Platform-Service\usr\module\cases/src/Form/CasesForm.php:134
+msgid "To be used for HTML head meta."
+msgstr "To be used for HTML head meta."
+
+#: E:\code\Platform-Service\usr\module\cases/src/Form/CasesForm.php:118
+msgid "SEO Keywords"
+msgstr "SEO Keywords"
+
+#: E:\code\Platform-Service\usr\module\cases/src/Form/CasesForm.php:130
+msgid "SEO Description"
+msgstr "SEO Description"
+
+#: E:\code\Platform-Service\usr\module\cases/src/Form/CasesForm.php:143
+msgid "Active"
+msgstr "SEO Description"
+
+#: E:\code\Platform-Service\usr\module\cases/template/admin/case-edit.phtml:16
+msgid "Icon"
+msgstr "Icon"
+
+#: E:\code\Platform-Service\usr\module\cases/template/admin/case-edit.phtml:20
+msgid "Click to upload image then add item contents."
+msgstr "Click to upload image then add item contents."
+
+#: E:\code\Platform-Service\usr\module\cases/template/admin/case-edit.phtml:36
+msgid "Click to remove"
+msgstr "Click to remove"
+
+#: E:\code\Platform-Service\usr\module\cases/template/admin/case-list.phtml:9
+msgid "Case Icon"
+msgstr "Case Icon"
+
+#: E:\code\Platform-Service\usr\module\cases/template/admin/case-list.phtml:11
+msgid "Time Created"
+msgstr "Time Created"
+
+#: E:\code\Platform-Service\usr\module\cases/template/admin/case-list.phtml:13
+msgid "Action"
+msgstr "Action"
+
+#: E:\code\Platform-Service\usr\module\cases/template/admin/case-list.phtml:42
+msgid "Edit"
+msgstr "Edit"
+
+#: E:\code\Platform-Service\usr\module\cases/template/admin/case-list.phtml:43
+msgid "Delete"
+msgstr "Delete"
+
+#: E:\code\Platform-Service\usr\module\cases/template/admin/case-list.phtml:45
+msgid "Disable"
+msgstr "Disable"
+
+#: E:\code\Platform-Service\usr\module\cases/template/admin/case-list.phtml:47
+msgid "Enable"
+msgstr "Enable"
