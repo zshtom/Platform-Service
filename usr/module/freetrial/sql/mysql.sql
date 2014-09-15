@@ -6,7 +6,7 @@ CREATE TABLE `{freetrial}` (
   `email`        VARCHAR(64)             NOT NULL DEFAULT '',
   `phone`        VARCHAR(11)             NOT NULL DEFAULT '',
   `flag`          tinyint(1) unsigned     NOT NULL default '0',
-  `date`        VARCHAR(11)             NOT NULL DEFAULT '',
+  `time`        INT(10)             NOT NULL ,
 
 
   PRIMARY KEY        (`id`),

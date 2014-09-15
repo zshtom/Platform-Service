@@ -1,4 +1,5 @@
 <?php
+$this->css($this->assetModule('admin/admin.css', 'apps'));
 $this->jQuery(array(
     'ui/jquery-ui.min.js',
     'extension/fileupload-min.js',
@@ -29,7 +30,6 @@ $this->Backbone();
    <?php include $this->templateComponent('forms'); ?>
 
 </div>
-
 <script id="widget-item-template" type="text/template">
 <div class="col-sm-6 col-md-3 widget-item">
     <div class="thumbnail">
@@ -40,7 +40,7 @@ $this->Backbone();
     </div>
 </div>
 </script>
-<script src="<?php echo $this->assetModule('admin/widget-media.js','widget'); ?>"></script>
+<script src="<?php echo $this->assetModule('admin/widget-media.js'); ?>"></script>
 <script>
 widgetAction({
     prefix: "block-",

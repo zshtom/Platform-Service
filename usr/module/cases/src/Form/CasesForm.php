@@ -74,7 +74,7 @@ class CasesForm extends BaseForm
             ),
             'attributes'    => array(
                 'type'  => 'hidden',
-                'class'    => 'icon-url'
+                'id'    => 'icon-url'
             )
         ));
 

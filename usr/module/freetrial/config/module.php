@@ -46,6 +46,7 @@ return array(
 
     'resource' => array(
         'block'         => 'block.php',
+        'navigation'    => 'navigation.php',
         // Database meta
         'database'  => array(
             // SQL schema/data file
@@ -57,6 +58,7 @@ return array(
         'maintenance' => array(
             'resource'      => array(
                 'block'         => 'block.php',
+                'navigation'    => 'navigation.php',
             ),
         ),
     ),
