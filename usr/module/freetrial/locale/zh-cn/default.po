@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: freetrial\n"
-"POT-Creation-Date: 2014-09-03 13:03+0800\n"
-"PO-Revision-Date: 2014-09-03 13:04+0800\n"
+"POT-Creation-Date: 2014-09-15 10:08+0800\n"
+"PO-Revision-Date: 2014-09-15 10:10+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -44,7 +44,11 @@ msgstr ""
 msgid "List Member"
 msgstr "用户列表"
 
-#: D:\wamp\www\Platform-Service\usr\module\freetrial/src/Controller/Front/IndexController.php:65
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/config/navigation.php:18
+msgid "Export List"
+msgstr "导出列表"
+
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/src/Controller/Front/IndexController.php:68
 msgid "Successful trial!"
 msgstr "成功试用"
 
@@ -66,36 +70,58 @@ msgstr "公司"
 #: D:\wamp\www\Platform-Service\usr\module\freetrial/src/Form/IndexFilter.php:60
 #: D:\wamp\www\Platform-Service\usr\module\freetrial/src/Form/IndexForm.php:64
 msgid "Email*"
-msgstr ""
+msgstr "Email"
 
 #: D:\wamp\www\Platform-Service\usr\module\freetrial/src/Form/IndexFilter.php:71
 #: D:\wamp\www\Platform-Service\usr\module\freetrial/src/Form/IndexForm.php:74
 msgid "Phone*"
 msgstr "电话"
 
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/export-index.phtml:20
+msgid "Application Period<br>"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/export-index.phtml:21
+msgid "From：　　　　　　　　To： <br>"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/export-index.phtml:56
+msgid "Export"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/export-index.phtml:59
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/test-list.phtml:55
+msgid "Id"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/export-index.phtml:60
 #: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/test-list.phtml:41
 #: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/test-list.phtml:56
 msgid "Name"
 msgstr "姓名"
 
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/export-index.phtml:61
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/test-list.phtml:57
+msgid "Title"
+msgstr "职务"
+
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/export-index.phtml:62
 #: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/test-list.phtml:42
 #: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/test-list.phtml:58
 msgid "Company"
 msgstr "公司"
 
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/export-index.phtml:63
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/test-list.phtml:59
+msgid "Email"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/export-index.phtml:64
 #: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/test-list.phtml:43
 #: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/test-list.phtml:60
 msgid "Phone"
 msgstr "电话"
 
-#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/test-list.phtml:55
-msgid "Id"
-msgstr ""
-
-#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/test-list.phtml:57
-msgid "Title"
-msgstr "职务"
-
-#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/test-list.phtml:59
-msgid "Email"
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/test-list.phtml:61
+msgid "Time"
 msgstr ""

@@ -40,27 +40,18 @@ class IndexController extends ActionController
     public function downloadAction()
     {
         $id = $this->params('id', 0);
-        $rowset = $this->getModel('resource')->select($id);
-        foreach ($rowset as $row) {
-            $filename[] = $row->filename;
-        }
-        $filename = $filename['6'];
+        $rowset = $this->getModel('resource')->find($id);
+        $data = $rowset->toArray();
+        $filename = $data['filename'];
         $source = 'upload/resource/attach/' . $filename;
         $options = array(
             'filename' => $filename,
             'content_type' => 'application/octet-stream',
             'content_length' => 1234,
         );
-
-        Pi::service('file')->download($source, $options);
-    }
-
-    public function download($source, array $options = array())
-    {
         $downloader = new Download;
         $downloader->send($source, $options);
 
-        d($downloader);
-        return $downloader;
+        //Pi::service('file')->download($source, $options);
     }
-} 
+}
