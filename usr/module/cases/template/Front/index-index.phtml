@@ -1,0 +1,45 @@
+<div class="page">
+    <?php if (!empty($solutionList)) { ?>
+    <div>
+        <ul class="nav nav-pills">
+        <?php foreach ($solutionList as $id => $item) { ?>
+            <li <?php if (!empty($item['active'])) { echo ' class="active col-md-12"'; } else { echo ' class="col-md-12" '; }?>>
+                <a href="<?php echo $item['url']; ?>"><?php echo _escape($item['title']); ?></a>
+            </li>
+        <?php } ?>
+        </ul>
+    </div>
+    <?php } ?>
+
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-body clearfix">
+                <div class="app-body">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="row">
+                        <?php foreach ($caseList as $item) { ?>
+                          <div class="col-xs-8 col-sm-6">
+                            <div class="media">
+                                <img style="width: 80px; height: 80px;" class="pull-left" src="<?php echo $this->_escape($item['icon']); ?>">
+                                <div class="media-body">
+                                    <a href="<?php echo $this->_escape($item['url']); ?>" class="app-front-title">
+                                        <?php echo $this->_escape($item['title']); ?>
+                                    </a>
+                                    <div class="muted app-size12" style="margin-top: 5px;">
+                                        <?php echo $this->_escape($item['summery']); ?>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        <?php } ?>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="clearfix"></div>
