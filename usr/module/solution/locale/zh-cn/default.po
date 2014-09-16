@@ -20,3 +20,6 @@ msgstr "社交工具"
 
 msgid "Apps Description"
 msgstr "产品概述"
+
+msgid "Solutions Description"
+msgstr "解决方案概述"

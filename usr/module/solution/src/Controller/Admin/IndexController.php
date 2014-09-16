@@ -54,7 +54,7 @@ class IndexController extends ActionController
         $solutions = array_merge($menu, $solutions);
 
         $this->view()->assign('solutions', $solutions);
-        $this->view()->assign('title', _a('Solutions list'));
+        $this->view()->assign('title', _a('Solutions List'));
         $this->view()->setTemplate('solutions-list');
     }
 
@@ -323,7 +323,7 @@ class IndexController extends ActionController
         $this->view()->assign('module', $this->getModule());
         $this->view()->assign('form', $form);
         $this->view()->assign('content', $json_data);
-        $this->view()->assign('title', _a('Solution edit'));
+        $this->view()->assign('title', _a('Solution Edit'));
         $this->view()->assign('message', $message);
         $this->view()->setTemplate('solution-edit');
     }
@@ -1013,9 +1013,8 @@ class IndexController extends ActionController
                 if ($row[$remove_id]) {
                     try {
                         $row[$remove_id]->delete();
-//                         $message .= '<li>' . $app['title'] . _a(' remove from solution.') . '</li>';
                     } catch (\Exception $exception) {
-                        $message .= '<li>' . $app['title'] . _a(' can\'t remove:') . '</li>';
+                        $message .= '<li>' . $app['title'] . _a(' can\'t remove.') . '</li>';
                         $message .= $exception->getMessage();
                     }
 
@@ -1080,7 +1079,7 @@ class IndexController extends ActionController
                     try {
                         $row[$remove_id]->delete();
                     } catch (\Exception $exception) {
-                        $message .= '<li>' . $case['title'] . _a(' can\'t remove:') . '</li>';
+                        $message .= '<li>' . $case['title'] . _a(' can\'t remove.') . '</li>';
                         $message .= $exception->getMessage();
                     }
 

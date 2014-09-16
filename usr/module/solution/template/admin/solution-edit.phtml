@@ -32,18 +32,20 @@ $this->Backbone();
 
 </div>
 
-<?php echo $this->form()->openTag($form) ?>
-<?php include ('solution-form.phtml');?>
+<div style="clear: left">
+    <?php echo $this->form()->openTag($form) ?>
+    <?php include ('solution-form.phtml');?>
 
-<div>
-<?php $activeElement = $form->get('active'); ?>
-<?php $element = $form->get('submit'); ?>
     <div>
-    <?php echo $this->formElement($activeElement) ?>
-    <?php echo $this->formElement($element) ?></div>
-</div>
+    <?php $activeElement = $form->get('active'); ?>
+    <?php $element = $form->get('submit'); ?>
+        <div>
+        <?php echo $this->formElement($activeElement) ?>
+        <?php echo $this->formElement($element) ?></div>
+    </div>
 
-<?php echo $this->form()->closeTag() ?>
+    <?php echo $this->form()->closeTag() ?>
+</div>
 
 <script id="widget-item-template" type="text/template">
 <div class="col-sm-6 col-md-3 widget-item">

@@ -59,7 +59,7 @@ class SolutionForm extends BaseForm
             array(
                 'name'          => 'title',
                 'options'       => array(
-                    'label' => _a('Solution title'),
+                    'label' => _a('Solution Title'),
                 ),
                 'attributes'    => array(
                     'type'  => 'text',
