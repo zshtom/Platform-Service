@@ -1,16 +1,17 @@
 
-<table>
-    <tbody>
+
     <?php foreach ($formGroups as $key => $group) {
         if ($key == 'general') {
     ?>
+    <table>
+        <tbody>
     <?php   foreach ($group as $el) { ?>
         <tr>
         <?php
-//         d($el);
-        if ($el == 'submit' || $el == 'active') {
-            continue;
-        }
+            if ($el == 'submit' || $el == 'active') {
+                continue;
+            }
+
             $element = $form->get($el);
             $attributes = $element->getAttributes();
             $options = $element->getOptions();
@@ -42,10 +43,6 @@
                             $element->setAttribute("class", "form-control control-word");
                             $element->setAttribute("style", "width: 100%");
                             break;
-
-//                         default:
-
-//                             break;
                     }
 
                     echo $this->formElement($element);
@@ -57,7 +54,12 @@
                 </div>
             </td>
         </tr>
-    <?php   }
+    <?php   } ?>
+    </tr>
+    </tbody>
+    </table>
+
+    <?php
         }
         elseif ($key == 'apps') {
 
@@ -79,18 +81,16 @@
         elseif ($key == 'cases') {
 
             foreach ($group as $ckey => $solu_case) {
-                preg_match('/^solution_app\[([0-9])\]/i', $ckey, $matchs);
+                preg_match('/^solution_case\[([0-9])\]/i', $ckey, $matchs);
                 if (isset($matchs[1])) {
-                    $cases['solution_app'][$matchs[1]][] = $solu_case;
+                    $cases['solution_case'][$matchs[1]][] = $solu_case;
                 }
             }
 
             $cases_list = $cases['solution_case'];
             $solution_cases_keys = array_keys($solution_cases);
+
             // Apps list form.
             include('cases-list.phtml');
         }
     } ?>
-        </tr>
-    </tbody>
-</table>
