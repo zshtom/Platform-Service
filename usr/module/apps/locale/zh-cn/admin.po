@@ -97,6 +97,12 @@ msgstr "将被添加到HTML的meta数据中。"
 msgid "Unique slug for SEO URL."
 msgstr "用于URL的SEO，唯一字符串。"
 
+msgid "Apps"
+msgstr "产品模块"
+
+msgid "Solution"
+msgstr "解决方案"
+
 msgid "Apps Description"
 msgstr "产品概述"
 

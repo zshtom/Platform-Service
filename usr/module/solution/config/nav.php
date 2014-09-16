@@ -24,13 +24,13 @@ return array(
                'action'         => 'description',
             ),
             'list'     => array(
-                'label'         => _t('Solution list'),
+                'label'         => _t('Solution List'),
                 'route'         => 'admin',
                 'controller'    => 'index',
                 'action'        => 'index',
             ),
             'add'   => array(
-                'label'         => _t('Add a solution'),
+                'label'         => _t('Add a Solution'),
                 'route'         => 'admin',
                 'controller'    => 'index',
                 'action'        => 'add',

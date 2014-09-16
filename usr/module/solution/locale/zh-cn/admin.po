@@ -103,6 +103,9 @@ msgstr "将被添加到HTML的meta数据中。"
 msgid "Unique slug for SEO URL."
 msgstr "用于URL的SEO，唯一字符串。"
 
+msgid "Apps"
+msgstr "产品模块"
+
 msgid "Apps Description"
 msgstr "产品概述"
 
@@ -111,3 +114,57 @@ msgstr "产品概述内容维护"
 
 msgid "App data saved successfully."
 msgstr "成功保存产品模块数据."
+
+msgid " can't save"
+msgstr "未保存；"
+
+msgid "Solutions List"
+msgstr "解决方案列表"
+
+msgid "Solution data saved successfully."
+msgstr "解决方案数据保存成功。"
+
+msgid "Solution data not saved."
+msgstr "解决方案未保存！"
+
+msgid "Invalid data, please check and re-submit."
+msgstr "提交数据不正确，请检查后重新提交。"
+
+msgid "Add a solution"
+msgstr "添加解决方案"
+
+msgid "Solution Edit"
+msgstr "修改方案"
+
+msgid "Solutions navigation menu updated successfully."
+msgstr "解决方案导航更新成功"
+
+msgid "Solutions Description"
+msgstr "解决方案概述"
+
+msgid " can't remove."
+msgstr "未移除"
+
+msgid "Solution Title"
+msgstr "解决方案标题"
+
+msgid "Solution Summery"
+msgstr "解决方案摘要"
+
+msgid "Solution Content"
+msgstr "解决方案内容"
+
+msgid "App Description"
+msgstr "模块描述"
+
+msgid "Solution Description"
+msgstr "解决方案描述"
+
+msgid "Solution List"
+msgstr "解决方案列表"
+
+msgid "Add a Solution"
+msgstr "添加解决方案"
+
+msgid "Cases"
+msgstr "案例"
