@@ -1,0 +1,102 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Admin\n"
+"POT-Creation-Date: 2014-09-16 11:30+0800\n"
+"PO-Revision-Date: 2014-09-16 11:31+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _a\n"
+"X-Poedit-SearchPath-0: D:\\wamp\\www\\Platform-Service\\usr\\module"
+"\\resource\n"
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/config/module.php:14
+#: D:\wamp\www\Platform-Service\usr\module\resource/config/module.php:16
+msgid "White paper"
+msgstr "白皮书"
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Controller/Admin/IndexController.php:69
+msgid "Form submitted successfully."
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Controller/Admin/IndexController.php:92
+msgid "Resource data saved successfully"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Controller/Admin/IndexController.php:197
+msgid "Resource data saved successfully."
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Controller/Admin/IndexController.php:202
+msgid "Invalid data, please check and re-submit."
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Controller/Admin/IndexController.php:223
+msgid "Resource edit"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Controller/Admin/IndexController.php:295
+msgid "Resource deleted successfully."
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:31
+msgid "Icon file name"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:135
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:147
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:159
+msgid "To be used for HTML head meta."
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/template/admin/product_module-add.phtml:16
+msgid "Icon"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/template/admin/product_module-add.phtml:20
+#: D:\wamp\www\Platform-Service\usr\module\resource/template/admin/product_module-edit.phtml:20
+msgid "Click to upload image then add item contents."
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/template/admin/product_module-add.phtml:36
+#: D:\wamp\www\Platform-Service\usr\module\resource/template/admin/product_module-edit.phtml:36
+msgid "Click to remove"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/template/admin/product_module-index.phtml:48
+msgid "Edit"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/template/admin/product_module-index.phtml:49
+msgid "Delete"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/template/admin/product_module-index.phtml:51
+msgid "Disable"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/template/front/index-list.phtml:9
+msgid "Name"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/template/front/index-list.phtml:10
+msgid "Resource Icon"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/template/front/index-list.phtml:11
+msgid "Resource Summery"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/template/front/index-list.phtml:12
+msgid "Action"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/template/front/index-list.phtml:27
+msgid "Download"
+msgstr ""
