@@ -27,6 +27,97 @@ use Pi\File\Transfer\Download;
  *
  * Provides basic utility to manipulate the file system.
  *
+ * Sample code:
+ *
+ * + Download content and files
+ * @see Pi\File\Transfer\Download
+ *
+ * - Download content generated on-fly
+ *
+ * ```
+ *  $source = 'Generated content';
+ *  $options = array(
+ *      // Required
+ *      'type'          => 'raw',
+ *      // Optional
+ *      'filename'      => 'pi-download',
+ *      // Optional
+ *      'content_type   => 'application/octet-stream',
+ *  );
+ *  Pi::service('file')->download($source, $options);
+ * ```
+ *
+ * - Download a file
+ *
+ * ```
+ *  $source = 'path/to/file';
+ *  $options = array(
+ *      // Optional
+ *      'filename'      => 'pi-download',
+ *      // Optional
+ *      'content_type   => 'application/octet-stream',
+ *      // Optional
+ *      'content_length => 1234,
+ *  );
+ *  Pi::service('file')->download($source, options);
+ *
+ * ```
+ *
+ * - Download multiple files, compressed and sent as a zip file
+ *
+ * ```
+ *  $source = array(
+ *      'path/to/file1',
+ *      'path/to/file2',
+ *      'path/to/file3',
+ *  );
+ *  // Or
+ *  $source = array(
+ *      array(
+ *          'filename'  => 'path/to/file1',
+ *          'localname' => 'filea',
+ *      ),
+ *      array(
+ *          'filename'  => 'path/to/file2',
+ *          'localname' => 'fileb',
+ *      ),
+ *      array(
+ *          'filename'  => 'path/to/file3',
+ *          'localname' => 'fileb',
+ *      ),
+ *  );
+ *
+ *  $options = array(
+ *      // Optional
+ *      'filename'      => 'pi-download',
+ *  );
+ *  Pi::service('file')->download($source, $options);
+ * ```
+ *
+ * + Upload a file
+ *
+ * ```
+ *  $options = array(
+ *      'destination'   => '/path/to/upload',
+ *      ...
+ *  );
+ *  Pi::service('file')->upload($options);
+ * ```
+ *
+ * + Get handler to upload a file
+ *
+ * ```
+ *  $options = array(
+ *      'destination'   => '/path/to/upload',
+ *      ...
+ *  );
+ *  $uploader = Pi::service('file')->upload($options, false);
+ *  $upload->setExtension('jpg,png,gif');
+ *  if ($uploader->isValid()) {
+ *      $uploader->receive();
+ *  }
+ * ```
+ *
  * @see https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php
  * @author Taiwen Jiang <taiwenjiang@tsinghua.org.cn>
  */
@@ -41,7 +132,7 @@ class File extends AbstractService
      * @return Upload
      * @see Pi\File\Upload
      */
-    public function upload(array $options = array(), $doUpload = false)
+    public function upload(array $options = array(), $doUpload = true)
     {
         $uploader = new Upload($options);
         if ($doUpload && $uploader->isValid()) {
@@ -657,7 +748,8 @@ class File extends AbstractService
      */
     public function getList($path, $filter = null, $recursive = false)
     {
-        $result = array();
+        $result     = array();
+        $iterator   = null;
         if ($path instanceof DirectoryIterator) {
             $iterator = $path;
         } else {
@@ -666,11 +758,19 @@ class File extends AbstractService
                 $flags = FilesystemIterator::SKIP_DOTS
                     | FilesystemIterator::FOLLOW_SYMLINKS
                     | FilesystemIterator::UNIX_PATHS;
-                $iterator = new RecursiveIteratorIterator(
-                    new RecursiveDirectoryIterator($path, $flags)
-                );
+                try {
+                    $iterator = new RecursiveIteratorIterator(
+                        new RecursiveDirectoryIterator($path, $flags)
+                    );
+                } catch (Exception $e) {
+                    $iterator = null;
+                }
             } else {
-                $iterator = new DirectoryIterator($path);
+                try {
+                    $iterator = new DirectoryIterator($path);
+                } catch (Exception $e) {
+                    $iterator = null;
+                }
             }
         }
         $filter = $filter instanceof Closure ? $filter : function ($fileinfo) {
@@ -679,12 +779,14 @@ class File extends AbstractService
             }
             return $fileinfo->getPathname();
         };
-        foreach ($iterator as $fileinfo) {
-            $filedata = $filter($fileinfo);
-            if (!$filedata) {
-                continue;
+        if ($iterator instanceof DirectoryIterator) {
+            foreach ($iterator as $fileinfo) {
+                $filedata = $filter($fileinfo);
+                if (!$filedata) {
+                    continue;
+                }
+                $result[] = $filedata;
             }
-            $result[] = $filedata;
         }
 
         return $result;
