@@ -51,12 +51,17 @@ class IndexController extends ActionController
             $post = $this->request->getPost();
             $form->setData($post);
             $form->setInputFilter(new BootstrapFilter);
-
+//            if ('overwrite' != $post['rename']) {
+//                $rename = '%random%';
+//            }
             $options = array(
                 'destination' => 'upload/resource/attach',
             );
+
+//            $options['rename']  = $rename;
+//            d($rename);
             $uploader = Pi::service('file')->upload($options, true);
-            $uploader->setExtension('pdf,doc');
+            $uploader->setExtension('pdf');
             if (!$uploader->isValid()) {
                 $uploader->receive();
                 $savedFilename = $uploader->getUploaded('upload');
@@ -102,6 +107,19 @@ class IndexController extends ActionController
             'messages' => $messages,
         ));
         $this->view()->setTemplate('product_module-add');
+    }
+
+    /**
+     * Set upload extensions
+     *
+     * @param string|array $value
+     * @return $this
+     */
+    public function setExtension($value)
+    {
+        $this->getAdapter()->addValidator('extension', false, $value);
+
+        return $this;
     }
 
     protected function setIconPath($list)

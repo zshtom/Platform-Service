@@ -75,6 +75,21 @@ class BootstrapForm extends BaseForm
         ));
 
         $this->add(array(
+            'name'      => 'rename',
+            'type'      => 'radio',
+            'options'   => array(
+                'label' => __('File naming'),
+                'value_options'   => array(
+                    'overwrite' => __('Keep name and overwrite when duplicated'),
+                    'random'    => __('Rename to random'),
+                ),
+            ),
+            'attributes'    => array(
+                'value' => 'random',
+            )
+        ));
+
+        $this->add(array(
             'name'          => 'case_time',
             'attributes'    => array(
                 'type'  => 'hidden',

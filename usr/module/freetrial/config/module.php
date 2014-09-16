@@ -32,9 +32,9 @@ return array(
     // Author information
     'author'    => array(
         // Author full name, required
-        'Name'      => 'Shixin Song',
+        'Name'      => 'Chunhui Li',
         // Email address, optional
-        'Email'     => 'songshixin@social-touch.com',
+        'Email'     => 'lichunhui@social-touch.com',
         // Website link, optional
         'Website'   => 'http://pialog.org',
         // Credits and aknowledgement, optional

@@ -10,12 +10,12 @@ namespace Module\Freetrial\Controller\Admin;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Zend\Db\Sql\Predicate;
+use Pi\File\Transfer\Download;
 
 /**
  * Feature list:
  * 1.Export freetrial user information
- *
- * @author songshixin <[songshixin@social-touch.com]>
+ * @author lichunhui <[lichunhui@social-touch.com]>
  */
 class ExportController extends ActionController
 {
@@ -55,50 +55,37 @@ class ExportController extends ActionController
      */
     public function exportAction()
     {
-        $start =$this->params('start', null);
-        $end = $this->params('end', null);
         $columns = array('id', 'name', 'title','company','email', 'phone','time');
         $model  = $this->getModel('freetrial');
-
         $select = $model->select()
             ->columns($columns)
-           // ->where("time<$end")->where("time>$start")
             ->order('id ASC');
         $data = $model->selectWith($select);
         $value = $data->toArray();
-        $items  = array();
-        $name='down';
-        header( "Cache-Control: public" );
-        header( "Pragma: public" );
-        header("Content-type:application/vnd.ms-excel");
-        header("Content-Disposition:attachment;filename=".$name.".xls");
-        header('Content-Type:APPLICATION/OCTET-STREAM');
-        foreach ($value as $row) {
-            $items[] = array(
-                'id' => $row['id'],
-                'name' => $row['name'],
-                'title' => $row['title'],
-                'company' => $row['company'],
-                'email' => $row['email'],
-                'phone' => $row['phone'],
-                'time' => $row['time']
-            );
-        }
-        echo "<table>";
-        echo "<tr>";
-        echo "<td>","ID","</td>","<td>","Name","</td>","<td>","Title","</td>","<td>","Company","</td>","<td>","Email","</td>","<td>","Phone","</td>","<td>","Time","</td>";
-        echo "</tr>";
-        foreach ($items as $item) {
-            echo "<tr>";
-            echo "<td>",$item['id'],"</td>";
-            echo "<td>",$item['name'],"</td>";
-            echo "<td>",$item['title'],"</td>";
-            echo "<td>",$item['company'],"</td>";
-            echo "<td>",$item['email'],"</td>";
-            echo "<td>",$item['phone'],"</td>";
-            echo "<td>",_date($item['time']),"</td>";
-            echo "</tr>";
-        }
-        echo "</table>";
+            foreach ($value as $v)
+            {
+                $v = implode(",",$v);
+                $temp[] = $v;
+            }
+            $t="";
+            foreach($temp as $v){
+                $t.="'".$v."'"."\n";
+            }
+        $source=substr($t,0,-1);
+        d($value);
+        d($source);
+
+          $options = array(
+       // Required
+       'type'          => 'raw',
+       // Optional
+       'filename'      => 'list.xls',
+       // Optional
+       'content_type'   => 'application/octet-stream',
+   );
+
+//          $downloader = new Download;
+//          $downloader->send($t, $options);
+        Pi::service('file')->download($source,$options);
     }
 }
