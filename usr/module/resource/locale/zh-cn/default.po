@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Resource\n"
-"POT-Creation-Date: 2014-09-17 11:20+0800\n"
-"PO-Revision-Date: 2014-09-17 11:29+0800\n"
+"POT-Creation-Date: 2014-09-17 17:51+0800\n"
+"PO-Revision-Date: 2014-09-17 17:52+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -34,6 +34,11 @@ msgstr "上传最大文件"
 msgid "Upload files types"
 msgstr "上传文件类型"
 
+#: D:\wamp\www\Platform-Service\usr\module\resource/config/config.php:38
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:58
+msgid "Description"
+msgstr "描述"
+
 #: D:\wamp\www\Platform-Service\usr\module\resource/config/config.php:46
 msgid "Icon Upload Path"
 msgstr "图标上传路径"
@@ -59,9 +64,13 @@ msgstr ""
 msgid "Index"
 msgstr "白皮书列表"
 
-#: D:\wamp\www\Platform-Service\usr\module\resource/config/nav.php:18
-msgid "Add"
-msgstr "白皮书添加"
+#: D:\wamp\www\Platform-Service\usr\module\resource/config/nav.php:19
+msgid "Add R"
+msgstr "添加白皮书"
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/config/nav.php:25
+msgid "A"
+msgstr "添加白皮书"
 
 #: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapFilter.php:66
 msgid "Your details"
@@ -75,43 +84,27 @@ msgstr "标题"
 msgid "Sort"
 msgstr "排序"
 
-#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:58
-msgid "Description"
-msgstr "描述"
-
 #: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:72
 msgid "File"
 msgstr "文件"
 
-#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:81
-msgid "File naming"
-msgstr ""
-
-#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:83
-msgid "Keep name and overwrite when duplicated"
-msgstr ""
-
-#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:84
-msgid "Rename to random"
-msgstr ""
-
-#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:128
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:114
 msgid "Submit"
 msgstr "提交"
 
-#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:138
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:124
 msgid "SEO settings"
 msgstr "SEO设置"
 
-#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:146
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:132
 msgid "SEO Title"
 msgstr "SEO标题"
 
-#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:158
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:144
 msgid "SEO Keywords"
 msgstr "SEO关键词"
 
-#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:170
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:156
 msgid "SEO Description"
 msgstr "SEO描述"
 
@@ -147,5 +140,13 @@ msgstr "导航排序"
 msgid "Action"
 msgstr "操作"
 
-#~ msgid "White paper"
+#, fuzzy
+#~ msgid "Add Resource"
+#~ msgstr "白皮书配图"
+
+#~ msgid "Add"
+#~ msgstr "添加白皮书"
+
+#, fuzzy
+#~ msgid "Add Whitepaper"
 #~ msgstr "白皮书"

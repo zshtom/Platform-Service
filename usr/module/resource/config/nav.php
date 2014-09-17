@@ -14,8 +14,10 @@ return array(
                 'controller' => 'index',
                 'action'     => 'index',
             ),
-            'pageb'   => array(
-                'label'      => __('Add'),
+
+
+            'pagec'   => array(
+                'label'      => __('A'),
                 'route'      => 'admin',
                 'controller' => 'index',
                 'action'     => 'add',
