@@ -77,6 +77,7 @@ class IndexController extends ActionController
                 $this->view()->assign('form', $form);
             }
             $data = $form->getData();
+            
             $iconImages = $this->setIconPath(array($data));
 
             if (isset($iconImages[0]['image'])) {
@@ -90,6 +91,9 @@ class IndexController extends ActionController
                 'icon' => $data['icon'],
                 'filename' => $savedFilename,
                 'case_time' => time(),
+                'seo_title' => $data['seo_title'],
+                'seo_keywords' => $data['seo_keywords'],
+                'seo_description' => $data['seo_description']
             );
             $row = $this->getModel('resource')->createRow($values);
             $row->save();

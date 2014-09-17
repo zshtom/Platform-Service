@@ -66,6 +66,29 @@ class BootstrapFilter extends InputFilter
                 'label' => __('Your details'),
             ),
         ));
+
+        // seo_title
+        $this->add(array(
+            'name' => 'seo_title',
+            'required' => false,
+        ));
+
+        // seo_keywords
+        $this->add(array(
+            'name' => 'seo_keywords',
+            'required' => false,
+        ));
+
+        // seo_description
+        $this->add(array(
+            'name' => 'seo_description',
+            'required' => false,
+        ));
+
+        $this->add(array(
+            'name'     => 'id',
+            'required' => false,
+        ));
     }
 
 } 
