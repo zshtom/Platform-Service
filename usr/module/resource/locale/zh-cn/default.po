@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Resource\n"
-"POT-Creation-Date: 2014-09-16 11:24+0800\n"
-"PO-Revision-Date: 2014-09-16 11:28+0800\n"
+"POT-Creation-Date: 2014-09-17 11:20+0800\n"
+"PO-Revision-Date: 2014-09-17 11:29+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -25,42 +25,43 @@ msgstr "图标设置"
 msgid "A attachment upload Path"
 msgstr "附件上传路径"
 
-#: D:\wamp\www\Platform-Service\usr\module\resource/config/config.php:30
-msgid "Icon Upload Path"
-msgstr "图标上传路径"
-
-#: D:\wamp\www\Platform-Service\usr\module\resource/config/config.php:38
+#: D:\wamp\www\Platform-Service\usr\module\resource/config/config.php:29
 msgid "Upload file size limit"
 msgstr "上传最大文件"
 
-#: D:\wamp\www\Platform-Service\usr\module\resource/config/config.php:46
-msgid "Upload picture width limit"
-msgstr ""
-
-#: D:\wamp\www\Platform-Service\usr\module\resource/config/config.php:54
-msgid "Upload picture height limit"
-msgstr ""
-
-#: D:\wamp\www\Platform-Service\usr\module\resource/config/config.php:62
+#: D:\wamp\www\Platform-Service\usr\module\resource/config/config.php:37
+#: D:\wamp\www\Platform-Service\usr\module\resource/config/config.php:78
 msgid "Upload files types"
 msgstr "上传文件类型"
 
-#: D:\wamp\www\Platform-Service\usr\module\resource/config/config.php:63
+#: D:\wamp\www\Platform-Service\usr\module\resource/config/config.php:46
+msgid "Icon Upload Path"
+msgstr "图标上传路径"
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/config/config.php:54
+#, fuzzy
+msgid "Upload icon size limit"
+msgstr "上传最大文件"
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/config/config.php:62
+msgid "Upload picture width limit"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/config/config.php:70
+msgid "Upload picture height limit"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/config/config.php:79
 msgid "Extensions for images to upload, separate `,`."
 msgstr ""
 
-#: D:\wamp\www\Platform-Service\usr\module\resource/config/module.php:14
-#: D:\wamp\www\Platform-Service\usr\module\resource/config/module.php:16
-msgid "White paper"
-msgstr "白皮书"
-
 #: D:\wamp\www\Platform-Service\usr\module\resource/config/nav.php:12
 msgid "Index"
-msgstr "列表"
+msgstr "白皮书列表"
 
 #: D:\wamp\www\Platform-Service\usr\module\resource/config/nav.php:18
 msgid "Add"
-msgstr "添加"
+msgstr "白皮书添加"
 
 #: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapFilter.php:66
 msgid "Your details"
@@ -82,23 +83,35 @@ msgstr "描述"
 msgid "File"
 msgstr "文件"
 
-#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:113
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:81
+msgid "File naming"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:83
+msgid "Keep name and overwrite when duplicated"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:84
+msgid "Rename to random"
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:128
 msgid "Submit"
 msgstr "提交"
 
-#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:123
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:138
 msgid "SEO settings"
 msgstr "SEO设置"
 
-#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:131
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:146
 msgid "SEO Title"
 msgstr "SEO标题"
 
-#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:143
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:158
 msgid "SEO Keywords"
 msgstr "SEO关键词"
 
-#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:155
+#: D:\wamp\www\Platform-Service\usr\module\resource/src/Form/BootstrapForm.php:170
 msgid "SEO Description"
 msgstr "SEO描述"
 
@@ -108,7 +121,7 @@ msgstr "配图"
 
 #: D:\wamp\www\Platform-Service\usr\module\resource/template/admin/product_module-index.phtml:9
 msgid "Resource title"
-msgstr "资源标题"
+msgstr "白皮书标题"
 
 #: D:\wamp\www\Platform-Service\usr\module\resource/template/admin/product_module-index.phtml:10
 msgid "Name"
@@ -116,11 +129,11 @@ msgstr "资源标题"
 
 #: D:\wamp\www\Platform-Service\usr\module\resource/template/admin/product_module-index.phtml:11
 msgid "Resource Icon"
-msgstr "资源配图"
+msgstr "白皮书配图"
 
 #: D:\wamp\www\Platform-Service\usr\module\resource/template/admin/product_module-index.phtml:12
 msgid "Resource Summery"
-msgstr "资源简介"
+msgstr "白皮书简介"
 
 #: D:\wamp\www\Platform-Service\usr\module\resource/template/admin/product_module-index.phtml:13
 msgid "Time Created"
@@ -133,3 +146,6 @@ msgstr "导航排序"
 #: D:\wamp\www\Platform-Service\usr\module\resource/template/admin/product_module-index.phtml:15
 msgid "Action"
 msgstr "操作"
+
+#~ msgid "White paper"
+#~ msgstr "白皮书"

@@ -17,8 +17,7 @@
     $uid = Pi::user()->getId();
 ?>
 <?php
-    echo __("Application Period<br>");
-    echo __("From：　　　　　　　　To： <br>");
+    echo __("From:");              echo __("To： <br>");
 ?>
 <form action="<?php $this->url('admin', array('action' => 'index')) ?>" method="POST">
     <input type="text" id="start" name="start">
