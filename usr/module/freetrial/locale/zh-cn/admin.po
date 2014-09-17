@@ -1,0 +1,31 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Admin\n"
+"POT-Creation-Date: 2014-09-17 17:09+0800\n"
+"PO-Revision-Date: 2014-09-17 17:09+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _a\n"
+"X-Poedit-SearchPath-0: D:\\wamp\\www\\Platform-Service\\usr\\module"
+"\\freetrial\n"
+
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/config/module.php:13
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/config/module.php:15
+msgid "Freetrial"
+msgstr "试用客户管理"
+
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/src/Controller/Admin/IndexController.php:101
+msgid "Page deleted successfully."
+msgstr ""
+
+#: D:\wamp\www\Platform-Service\usr\module\freetrial/template/admin/test-list.phtml:76
+msgid "Delete"
+msgstr ""
