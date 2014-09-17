@@ -7,6 +7,7 @@
             <thead>
             <tr>
                 <!-- <th style="width: 5%;"><?php echo _a('Name'); ?></th> -->
+                <th style="width: 10%;"><?php echo _a('Resource Title'); ?></th>
                 <th style="width: 10%;"><?php echo _a('Resource Icon'); ?></th>
                 <th style="width: 30%;"><?php echo _a('Resource Summery'); ?></th>
                 <th><?php echo _a('Action'); ?></th>
@@ -16,6 +17,9 @@
             <tbody>
             <?php foreach ($items as $item) { ?>
                 <tr>
+                    <td>
+                        <?php echo _escape($item['title']); ?>
+                    </td>
                     <td>
                         <img src="<?php echo _escape($item['icon']); ?>" width="80px" />
                     </td>

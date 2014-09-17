@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: freetrial\n"
-"POT-Creation-Date: 2014-09-17 15:16+0800\n"
-"PO-Revision-Date: 2014-09-17 15:16+0800\n"
+"POT-Creation-Date: 2014-09-17 17:06+0800\n"
+"PO-Revision-Date: 2014-09-17 17:06+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: D:\wamp\www\Platform-Service\usr\module\freetrial/src/Form/IndexFilter.php:82
 #: D:\wamp\www\Platform-Service\usr\module\freetrial/src/Form/IndexForm.php:83
 msgid "Freetrial"
-msgstr "免费试用"
+msgstr "试用客户管理"
 
 #: D:\wamp\www\Platform-Service\usr\module\freetrial/config/config.php:14
 msgid "General"

@@ -35,7 +35,7 @@ return array(
         'file_media' => array(
             'category' => 'file',
             'title' => _t('Upload files types'),
-            'description' => _t(''),
+            'description' => _t('Description'),
             'edit' => 'textarea',
             'filter' => 'text',
             'value' => 'pdf',
