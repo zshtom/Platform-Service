@@ -4,6 +4,7 @@
 body {
     font-family: "微软雅黑";
     font-size: 16px;
+    color: #444444;
     background-color: #f8f8f8;
 }
 /* Base */
@@ -12,6 +13,19 @@ html {
     position: relative;
 }
 
+a{
+    color: #444444;
+    text-decoration: none
+}
+.font14{
+    font-size: 14px;
+}
+.font18{
+    font-size: 18px;
+}
+.font12{
+    font-size: 12px;
+}
 /*设置距离调试控制台的外间距*/
 .pi-main-container {
     padding-bottom: 80px;
@@ -79,6 +93,13 @@ html {
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     border-top: 2px solid #ea5404;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
+    background-color: #ea5404;
+}
+.nav>li>a{
+    padding: 6px 15px;
+    text-align: center;
 }
 /*navigation end*/
 
@@ -259,24 +280,74 @@ html {
 }
 */
 
+/***module start**/
+.module-container .summery-title {
+    font-size: 18px;
+    padding:7px 0 15px;
+}
+.module-container .summery-content {
+    font-size: 12px;
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 25px;
+}
 .module-container{
+    padding: 30px 0;
+}
+.module-container .nav{
+    padding-right: 30px;
+}
+.module-container .list-title
+{
+    padding-top: 30px;
+}
+.module-container .media:first-child{
+    margin-top: 15px;
+}
+.module-container .col-md-10{
+    border-left: 1px solid #cccccc;
+    padding-left: 30px;
+}
+.module-container .app-title{
+    font-size: 14px;
+    padding: 15px 0;
+    width: 88px;
+    text-align: center;
+}
+.module-container .app-container{
+    height: 88px;
+}
+.module-container .app-more{
+    font-size: 12px;
+    text-align: right;
+}
+.module-container .app-more a{
+    color: #007ed0;
+}
+.module-container .app-summary{
+    font-size: 12px;
+}
+/***module end**/
+
+
+/***freetrial module start**/
+.freetrial-container{
     margin-top: 30px;
     background-color: #ffffff;
     padding: 0px 70px;
 }
-.module-container .row .col-md-6 {
+.freetrial-container .row .col-md-6 {
     border-right: 1px solid #eff2f5;
 }
-.module-title{
+.freetrial-container .freetrial-title{
     line-height: 30px;
 }
-.module-container h4{
+.freetrial-container h4{
     line-height: 32px;
     border-bottom: 1px solid #eff2f5;
     padding-bottom: 10px;
     font-weight: bold;
 }
-.module-container .left-prompt{
+.freetrial-container .left-prompt{
     color: #1b2e42;
     font-size: 14px;
     font-weight: bold;
@@ -284,15 +355,17 @@ html {
     display: inline-block;
 }
 
-.module-container .detail-read{
+.freetrial-container .detail-read{
     width: 280px;
     height: 200px;
     margin: 40px auto;
     background: url("../image/detail-read.png");
 }
-.module-container .right-prompt{
+.freetrial-container .right-prompt{
     color: #666666;
 }
-.module-container .right-prompt .prominent{
+.freetrial-container .right-prompt .prominent{
     color: #fc8045;
 }
+
+/***freetrial module start**/

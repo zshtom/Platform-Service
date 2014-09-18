@@ -1,0 +1,20 @@
+.white-paper{
+
+}
+
+.white-paper .media>.pull-left {
+    margin-right: 20px;
+}
+
+.white-paper .media-heading {
+    margin: 0 0 18px;
+    color: #ea5404;
+}
+
+.white-paper .paper-container{
+    height: 158px;
+}
+
+.white-paper .media, .media .media{
+    margin-top: 40px;
+}
