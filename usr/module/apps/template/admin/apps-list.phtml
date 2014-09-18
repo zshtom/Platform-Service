@@ -8,11 +8,11 @@
         <tr>
             <th><?php echo _a('App title'); ?></th>
             <th style="width: 5%;"><?php echo _a('Name'); ?></th>
+            <th style="width: 5%;"><?php echo _a('Icon'); ?></th>
             <th style="width: 5%;"><?php echo _a('App Summery'); ?></th>
             <th style="width: 15%;"><?php echo _a('Time Created'); ?></th>
-            <th style="width: 15%;"><?php echo _a('Last Update'); ?></th>
             <th><?php echo _a('Action'); ?></th>
-            <th style="width: 5%;"></th>
+            <th style="width: 5%;"><?php echo _a('Nav Order'); ?></th>
         </tr>
         </thead>
         <tbody>
@@ -27,13 +27,13 @@
                     <?php echo _escape($app['name']); ?>
                 </td>
                 <td>
+                    <img src="<?php echo _escape($app['icon']); ?>" style="width: 80px;"/>
+                </td>
+                <td>
                     <?php echo _escape($app['summery']); ?>
                 </td>
                 <td>
                     <?php echo _date($app['time_created']); ?>
-                </td>
-                <td>
-                    <?php echo $app['time_updated'] ? _date($app['time_updated']) : ''; ?>
                 </td>
                 <td>
                     <div class="btn-group">
@@ -54,7 +54,7 @@
         </tbody>
     </table>
         <div class="text-right">
-        <input type="submit" value="<?php echo _a('Add to menu'); ?>" class="btn btn-primary">
+        <input type="submit" value="<?php echo _a('Nav Order'); ?>" class="btn btn-primary">
         </div>
     </form>
 </div>
