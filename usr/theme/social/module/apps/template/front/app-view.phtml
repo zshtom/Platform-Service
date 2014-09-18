@@ -1,0 +1,128 @@
+<?php
+$this->css($this->assetTheme('css/app.css'));
+/*
+$nav= array(
+    array("active"=>"1","url"=>"#","title"=>"信息发布"),
+    array("active"=>"0","url"=>"#","title"=>"产品概述"),
+    array("active"=>"0","url"=>"#","title"=>"用户管理"),
+    array("active"=>"0","url"=>"#","title"=>"二维码管理"),
+    array("active"=>"0","url"=>"#","title"=>"资源管理"),
+    array("active"=>"0","url"=>"#","title"=>"消息管理")
+);
+$url = Pi::service('asset')->getAssetUrl('theme/social', 'image/weixin.png');
+//d($url);
+$apps_list= array(
+    array("icon"=>$url,"url"=>"#","title"=>"信息发布","summery"=>"安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机"),
+    array("icon"=>$url,"url"=>"#","title"=>"产品概述","summery"=>"安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机"),
+    array("icon"=>$url,"url"=>"#","title"=>"用户管理","summery"=>"安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机"),
+    array("icon"=>$url,"url"=>"#","title"=>"二维码管理","summery"=>"安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机"),
+    array("icon"=>$url,"url"=>"#","title"=>"资源管理","summery"=>"安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机"),
+    array("icon"=>$url,"url"=>"#","title"=>"消息管理","summery"=>"安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机"),
+);
+*/
+?>
+
+<div class="module-container clearfix">
+    <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked font14">
+        <?php foreach ($nav as $id => $item) { ?>
+            <li <?php if (!empty($item['active'])) { echo ' class="active"'; }?>>
+                <a href="<?php echo $item['url']; ?>"><?php echo _escape($item['title']); ?></a>
+            </li>
+        <?php } ?>
+        </ul>
+    </div>
+    <div class="col-md-10">
+            <div class = "row">
+                <div class="col-md-12">
+                    <div class="summery-title"><?php echo $this->escape($title); ?></div>
+                    <p class="summery-content">时趣帮助着超过500家企业和近2000万的消费者通过社会化媒体进行着沟通。在时趣
+                       的管理下，企业每天和消费者在社会化媒体上会发生超过10万次的互动</p>
+                </div>
+            </div>
+            <div class = "row">
+                <div class="col-md-12">
+                    <div class="list-title">产品模块</div>
+                    <div class="row">
+                        <?php foreach ($apps_list as $item) { ?>
+                                <div class="media col-md-6">
+                                    <div class="app-title">
+                                        <a href="<?php echo $this->escape($item['url']); ?>">
+                                            <?php echo $this->escape($item['title']); ?>
+                                        </a>
+                                    </div>
+                                    <a class="pull-left" href="<?php echo $this->escape($item['url']); ?>">
+                                        <img style="width: 88px; height: 88px;" class="media-object" src="<?php echo $this->escape($item['icon']); ?>">
+                                    </a>
+                                    <div class="media-body app-container">
+                                        <p class="app-summary">
+                                            <?php echo $this->escape($item['summery']); ?>安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机
+                                        </p>
+                                    </div>
+                                    <div class="app-more"><a href="<?php echo $this->escape($item['url']); ?>">了解更多</a></div>
+                                </div>
+                        <?php } ?>
+                    </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<!--
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><?php echo $this->escape($title); ?></h3>
+            </div>
+            <div class="panel-body clearfix">
+                <?php echo $content; ?>
+
+                <div class="app-body">
+                    <?php //print('Apps list: <pre>' . print_r($apps_list, TRUE) . '</pre>');?>
+
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="row">
+                        <?php foreach ($apps_list as $item) { ?>
+                          <div class="col-xs-8 col-sm-6">
+                            <div class="media">
+                                <img style="width: 80px; height: 80px;" class="pull-left" src="<?php echo $this->escape($item['icon']); ?>">
+                                <div class="media-body">
+                                    <a href="<?php echo $this->escape($item['url']); ?>" class="app-front-title">
+                                        <?php echo $this->escape($item['title']); ?>
+                                    </a>
+                                    <div class="muted app-size12" style="margin-top: 5px;">
+                                        <?php echo $this->escape($item['summery']); ?>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        <?php } ?>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="social-list text-left">
+                    <ul class="list-inline">
+                        <?php if(!empty($config['social_facebook'])) { ?>
+                        <li class="social-facebook"><?php echo $this->facebook(); ?></li>
+                        <?php } ?>
+                        <?php if(!empty($config['social_twitter'])) { ?>
+                        <li class="social-twitter"><?php echo $this->twitter(); ?></li>
+                        <?php } ?>
+                        <?php if(!empty($config['social_gplus'])) { ?>
+                        <li class="social-gplus"><?php echo $this->plusone(); ?></li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    <?php if (!empty($nav)) { ?>
+    </div>
+    <?php } ?>-->
+
+

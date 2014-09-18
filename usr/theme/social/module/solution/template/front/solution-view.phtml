@@ -1,0 +1,30 @@
+<?php
+$this->css($this->assetTheme('css/white-paper.css'));
+/**/
+$url = Pi::service('asset')->getAssetUrl('theme/social', 'image/detail-read.png');
+//d($url);
+$solutions_list= array(
+    array("icon"=>$url,"url"=>"#","title"=>"白皮书标题","summery"=>"安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机"),
+    array("icon"=>$url,"url"=>"#","title"=>"白皮书标题","summery"=>"安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机"),
+    array("icon"=>$url,"url"=>"#","title"=>"白皮书标题","summery"=>"安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机")
+);
+
+?>
+<div class="white-paper module-container clearfix">
+    <div class="row">
+        <?php foreach ($solutions_list as $item) { ?>
+                <div class="media col-md-12">
+                    <a class="pull-left" href="<?php echo $this->escape($item['url']); ?>">
+                        <img style="width: 260px; height: 160px;" class="media-object" src="<?php echo $this->escape($item['icon']); ?>">
+                    </a>
+                    <div class="media-body paper-container">
+                        <h4 class="media-heading"><?php echo $this->escape($item['title']); ?></h3>
+                        <p class="app-summary">
+                            <?php echo $this->escape($item['summery']); ?>安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机
+                        </p>
+                    </div>
+                </div>
+        <?php } ?>
+    </div>
+</div>
+<div class="clearfix"></div>
