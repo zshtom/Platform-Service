@@ -32,7 +32,7 @@ class IndexController extends ActionController
         $solutionList = Pi::api('api', 'solution')->getSolutionList();
         if(!empty($solutionList)){
             foreach ($solutionList as &$solution) {
-                $solution['url'] = $this->url('', array('action' => 'index','solution_id' => $solution['id']));
+                $solution['url'] = $this->url('', array('action' => 'getList','solution_id' => $solution['id']));
                 if(!empty($solutionId) && $solution['id'] == $solutionId){
                     $solution['active'] = true;
                 }
@@ -62,7 +62,6 @@ class IndexController extends ActionController
         $this->view()->assign(array(
             'solutionList'  => $solutionList,
             'caseList'      => $caseList,
-            'iconPath'      => $iconPath,
         ));
     }
     /**
@@ -78,5 +77,38 @@ class IndexController extends ActionController
             'title'      => $caseInfo->title,
             'content'    => $caseInfo->content,
         ));
+    }
+
+    /**
+     * ajax get case list
+     *
+     * @return json
+     */
+    public function getListAction()
+    {
+        $solutionId = $this->params('solution_id');
+        $solutionList = Pi::api('api', 'solution')->getSolutionList();        
+        if(empty($solutionId)) {
+            $solutionId = current(array_keys($solutionList));
+            $solutionList[$solutionId]['active'] = true;
+        }
+        $caseList = array();
+        $casesIdList = Pi::api('api', 'solution')->getCasesList($solutionId);
+        $iconPath = Pi::url('upload') . '/' . $this->getModule(); 
+        if(!empty($casesIdList)){
+            $model  = $this->getModel('cases');
+            $where = array('id' => array_keys($casesIdList));
+            $select = $model->select()->where($where);
+            $list = $model->selectWith($select);
+            if(!empty($list)){
+                foreach ($list as $item) {
+                    $item = $item->toArray();
+                    $item['url'] = $this->url('', array('action' => 'getList','id' => $item['id']));
+                    $item['icon'] = $iconPath . $item['icon'];
+                    $caseList[] = $item;
+                }
+            }
+        }
+        echo json_encode($caseList);
     }
 }
