@@ -9,6 +9,8 @@
                     <th style="width:25%;">
                     <?php echo _a('Title'); ?></th>
                     <th style="width: 15%"><?php echo _a('Icon'); ?></th>
+                    <th style="width:25%;">
+                    <?php echo _a('Cases Summery'); ?></th>
                     <th><?php echo _a('Time Created'); ?></th>
                 </tr>
                 <?php $now = time(); ?>
@@ -44,8 +46,8 @@
                 $caseElementIconUrl = $form->get($caseIconUrl);
 
                 // Get description.
-//                 $caseDescription = 'solution_case[' . $case_key . '][description]';
-//                 $caseElementDescription = $form->get($caseDescription);
+                $caseSummery = 'solution_case[' . $case_key . '][summery]';
+                $caseElementSummery = $form->get($caseSummery);
 
                 // Get publish.
                 $casePublish = 'solution_case[' . $case_key . '][publish]';
@@ -70,6 +72,11 @@
                     <td>
                         <?php
                         echo $this->formElement($caseElementIcon);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        echo $this->formElement($caseElementSummery);
                         ?>
                     </td>
                     <td>

@@ -111,3 +111,12 @@ msgstr "产品概述内容维护"
 
 msgid "App data saved successfully."
 msgstr "成功保存产品模块数据."
+
+msgid "Click to upload image then add item contents."
+msgstr "点击上传图片"
+
+msgid "Click to remove"
+msgstr "点击移除"
+
+msgid "Delete it?"
+msgstr "确认删除？"
