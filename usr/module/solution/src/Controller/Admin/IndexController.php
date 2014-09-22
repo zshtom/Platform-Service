@@ -815,6 +815,21 @@ class IndexController extends ActionController
                 ),
 
                 array(
+                    'class'      => 'self-class',
+                    'name'       => SOLUTION_CASE . '[' . $key . '][summery]',
+                    'options'    => array(
+                        'class' => 'inline',
+                        'label'     => ' ',
+                    ),
+                    'attributes' => array(
+                        'value' => _escape($case['summery']),
+                        'class' => 'inline',
+                        'readonly'  => 'readonly',
+                    ),
+                    'type'          => 'html',
+                ),
+
+                array(
                     'name'       => SOLUTION_CASE . '[' . $key . '][icon]',
                     'options'    => array(
                         'class' => 'inline',
