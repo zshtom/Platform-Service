@@ -1,30 +1,240 @@
 <?php
-$this->css($this->assetTheme('css/white-paper.css'));
-/**/
-$url = Pi::service('asset')->getAssetUrl('theme/social', 'image/detail-read.png');
+$this->css($this->assetTheme('css/solution.css'));
+/*
+$nav= array(
+    array("active"=>"1","url"=>"#","title"=>"解决方案简介"),
+    array("active"=>"0","url"=>"#","title"=>"o2o营销活动"),
+    array("active"=>"0","url"=>"#","title"=>"社会化客服"),
+    array("active"=>"0","url"=>"#","title"=>"社会化舆情"),
+    array("active"=>"0","url"=>"#","title"=>"会员管理"),
+    array("active"=>"0","url"=>"#","title"=>"渠道管理")
+);
+$url = Pi::service('asset')->getAssetUrl('theme/social', 'image/weixin.png');
 //d($url);
 $solutions_list= array(
-    array("icon"=>$url,"url"=>"#","title"=>"白皮书标题","summery"=>"安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机"),
-    array("icon"=>$url,"url"=>"#","title"=>"白皮书标题","summery"=>"安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机"),
-    array("icon"=>$url,"url"=>"#","title"=>"白皮书标题","summery"=>"安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机")
+    array("icon"=>$url,"url"=>"#","title"=>"o2o营销活动","summery"=>"安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机"),
+    array("icon"=>$url,"url"=>"#","title"=>"社会化客服","summery"=>"安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机"),
+    array("icon"=>$url,"url"=>"#","title"=>"社会化舆情","summery"=>"安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机")
 );
 
+d($solution_apps);
+d($solutions_list);
+d($solution_cases);
+*/
 ?>
-<div class="white-paper module-container clearfix">
-    <div class="row">
-        <?php foreach ($solutions_list as $item) { ?>
-                <div class="media col-md-12">
-                    <a class="pull-left" href="<?php echo $this->escape($item['url']); ?>">
-                        <img style="width: 260px; height: 160px;" class="media-object" src="<?php echo $this->escape($item['icon']); ?>">
-                    </a>
-                    <div class="media-body paper-container">
-                        <h4 class="media-heading"><?php echo $this->escape($item['title']); ?></h3>
-                        <p class="app-summary">
-                            <?php echo $this->escape($item['summery']); ?>安静了快点放假啦地方安静了卡机的法律安静的弗兰克爱的解放路口阿的说法刻录机
-                        </p>
+
+<div class="module-container clearfix">
+    <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked nav-font">
+        <?php foreach ($nav as $id => $item) { ?>
+            <li <?php if (!empty($item['active'])) { echo ' class="active"'; }?>>
+                <a href="<?php echo $item['url']; ?>"><?php echo _escape($item['title']); ?></a>
+            </li>
+        <?php } ?>
+        </ul>
+    </div>
+    <div class="col-md-10">
+            <div class = "row">
+                <div class="col-md-12">
+                    <div class="summery-title"><?php echo $this->escape($title); ?></div>
+                    <div class="summery-content"><?php echo $content; ?></div>
+                </div>
+            </div>
+            <!--解决方案列表-->
+            <?php if (!empty($solutions_list)) { ?>
+                <div class = "row">
+                    <div class="col-md-12">
+                        <div class="list-title">
+                            解决方案简介
+                        </div>
+                        <div class="row">
+                            <?php foreach ($solutions_list as $item) { ?>
+                                    <div class="media col-md-12">
+                                        <div class="app-title">
+                                            <a href="<?php echo $this->escape($item['url']); ?>">
+                                                <?php echo $this->escape($item['title']); ?>
+                                            </a>
+                                        </div>
+                                        <a class="pull-left" href="<?php echo $this->escape($item['url']); ?>">
+                                            <img style="width: 88px; height: 88px;" class="media-object" src="<?php echo $this->escape($item['icon']); ?>">
+                                        </a>
+                                        <div class="media-body app-container">
+                                            <p class="app-summary">
+                                                <?php echo $this->escape($item['summery']); ?>
+                                            </p>
+                                        </div>
+                                        <div class="app-more"><a href="<?php echo $this->escape($item['url']); ?>">了解更多</a></div>
+                                    </div>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
-        <?php } ?>
+            <?php } ?>
+            <!--产品列表-->
+            <?php if (!empty($solution_apps)) { ?>
+                <div class = "row">
+                    <div class="col-md-12">
+                        <div class="list-title">
+                            产品列表
+                        </div>
+                        <div class="row">
+                            <?php foreach ($solution_apps as $item) { ?>
+                                    <div class="media col-md-12">
+                                        <div class="app-title">
+                                            <a href="<?php echo $this->escape($item['url']); ?>">
+                                                <?php echo $this->escape($item['title']); ?>
+                                            </a>
+                                        </div>
+                                        <a class="pull-left" href="<?php echo $this->escape($item['url']); ?>">
+                                            <img style="width: 88px; height: 88px;" class="media-object" src="<?php echo $this->escape($item['icon']); ?>">
+                                        </a>
+                                        <div class="media-body app-container">
+                                            <p class="app-summary">
+                                                <?php echo $this->escape($item['summery']); ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <!--案例列表-->
+            <?php if (!empty($solution_cases)) { ?>
+                <div class = "row case-list">
+                    <div class="col-md-12">
+                    <div class = "row">
+                        <div class="list-title">案例</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-11 col-md-offset-1">
+
+                            <div class="row">
+                                <?php foreach ($solution_cases as $item) { ?>
+                                        <div class="media col-md-3">
+                                            <a class="pull-left" href="<?php echo $this->escape($item['url']); ?>">
+                                                <img style="width: 225px; height: 121px;" class="media-object" src="<?php echo $this->escape($item['icon']); ?>">
+                                            </a>
+                                            <div class="app-title">
+                                                <a href="<?php echo $this->escape($item['url']); ?>">
+                                                    <?php echo $this->escape($item['title']); ?>
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                 <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
     </div>
 </div>
 <div class="clearfix"></div>
+
+<!--
+<div class="page">
+    <?php if (!empty($nav)) { ?>
+    <div class="col-md-2">
+        <ul class="nav nav-pills">
+        <?php foreach ($nav as $id => $item) { ?>
+            <li <?php if (!empty($item['active'])) { echo ' class="active col-md-12"'; } else { echo ' class="col-md-12" '; }?>>
+                <a href="<?php echo $item['url']; ?>"><?php echo _escape($item['title']); ?></a>
+            </li>
+        <?php } ?>
+        </ul>
+    </div>
+    <div class="col-md-10">
+    <?php } ?>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><?php echo $this->escape($title); ?></h3>
+            </div>
+            <div class="panel-body clearfix">
+                <?php echo $content; ?>
+
+                <div class="solution-body">
+
+                    <div class="row">
+                      <div class="col-sm-12">
+
+                        <?php foreach ($solutions_list as $item) { ?>
+                          <div class="col-xs-8 col-sm-6">
+                            <div class="media">
+                                <img style="width: 80px; height: 80px;" class="pull-left" src="<?php echo $this->escape($item['icon']); ?>">
+                                <div class="media-body">
+                                    <a href="<?php echo $this->escape($item['url']); ?>" class="solution-front-title">
+                                        <?php echo $this->escape($item['title']); ?>
+                                    </a>
+                                    <div class="muted solution-size12" style="margin-top: 5px;">
+                                        <?php echo $this->escape($item['summery']); ?>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        <?php } ?>
+
+                        <?php
+                        if ($solution_apps) {
+                            echo '<h2>' . __('Apps') . '</h2>';
+                        }
+                        ?>
+                        <?php foreach ($solution_apps as $app) { ?>
+                        <div class="row">
+                               <div class="col-md-2">
+                                    <img style="width: 80px; height: 80px;" class="pull-left" src="<?php echo $this->escape($app['icon']); ?>">
+                               </div>
+                               <div class="col-md-10">
+                                    <h3><?php echo $this->escape($app['title']); ?></h3>
+                                    <p>
+                                        <?php echo $this->escape($app['description']); ?>
+                                    </p>
+                               </div>
+                       </div>
+                        <?php } ?>
+
+                        <?php
+                        if ($solution_cases) {
+                            echo '<h2>' . __('Cases') . '</h2>';
+                        }
+                        ?>
+                        <?php foreach ($solution_cases as $case) { ?>
+                          <div class="col-xs-8 col-sm-6">
+                            <div class="media">
+                                <div class="media-body">
+                                    <a title="<?php echo $this->escape($case['title']); ?>" href="<?php echo $this->escape($case['url']); ?>" class="solution-front-title">
+                                        <img style="width: 80px; height: 80px;" class="pull-left" src="<?php echo $this->escape($case['icon']); ?>">
+                                    </a>
+                                </div>
+                            </div>
+                          </div>
+                        <?php } ?>
+
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="social-list text-left">
+                    <ul class="list-inline">
+                        <?php if(!empty($config['social_facebook'])) { ?>
+                        <li class="social-facebook"><?php echo $this->facebook(); ?></li>
+                        <?php } ?>
+                        <?php if(!empty($config['social_twitter'])) { ?>
+                        <li class="social-twitter"><?php echo $this->twitter(); ?></li>
+                        <?php } ?>
+                        <?php if(!empty($config['social_gplus'])) { ?>
+                        <li class="social-gplus"><?php echo $this->plusone(); ?></li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    <?php if (!empty($nav)) { ?>
+    </div>
+    <?php } ?>
+</div>
+<div class="clearfix"></div>
+-->

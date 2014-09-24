@@ -12,19 +12,12 @@ html {
     min-height: 100%;
     position: relative;
 }
-
 a{
     color: #444444;
     text-decoration: none
 }
-.font14{
+.nav-font{
     font-size: 14px;
-}
-.font18{
-    font-size: 18px;
-}
-.font12{
-    font-size: 12px;
 }
 /*设置距离调试控制台的外间距*/
 .pi-main-container {
@@ -60,6 +53,10 @@ a{
 .navbar{
     min-height: 50px;
     margin-bottom: 0px;
+}
+.navbar-nav>li>span{
+    padding: 10px;
+    line-height: 30px;
 }
 .navbar-brand {
     float: left;
@@ -177,26 +174,25 @@ a{
 
 
 /* tab start*/
-.indexTab{
+.pi-tab{
     font-size: 12px;
 }
-.indexTab h4{
+.pi-tab h4{
     padding-bottom: 20px;
     padding-top: 25px;
 }
 .nav-tabs {
-    margin-bottom: 70px;
     border:  none;
     background-color: #f8f8f8;
     font-size: 18px;
 }
-.indexTab .tab-content p{
+.pi-tab .tab-content p{
     width: 299px;
     display: inline-block;
 }
 .nav-tabs > li.active > a,
-.indexTab .nav-tabs > li.active > a:hover,
-.indexTab .nav-tabs > li.active > a:focus{
+.pi-tab .nav-tabs > li.active > a:hover,
+.pi-tab .nav-tabs > li.active > a:focus{
     background-color: transparent;
     border: none;
     color: #FF0000;
@@ -209,7 +205,6 @@ a{
 .nav-tabs > li > a {
     color: #444444;
     text-decoration: none;
-    padding: 15px 100px;
 }
 /*
 选项卡选中状态 红色三角形
@@ -246,7 +241,7 @@ a{
 
 #pi-logger-output {
     position: relative;
-    top: -60px;
+    top: 60px;
 }
 /* Footer end*/
 
@@ -279,7 +274,12 @@ a{
     color: #000000;
 }
 */
-
+.app-title{
+    font-size: 14px;
+}
+.app-summary{
+    font-size: 12px;
+}
 /***module start**/
 .module-container .summery-title {
     font-size: 18px;
@@ -296,9 +296,9 @@ a{
 .module-container .nav{
     padding-right: 30px;
 }
-.module-container .list-title
-{
+.module-container .list-title{
     padding-top: 30px;
+    font-size: 18px;
 }
 .module-container .media:first-child{
     margin-top: 15px;
@@ -308,7 +308,6 @@ a{
     padding-left: 30px;
 }
 .module-container .app-title{
-    font-size: 14px;
     padding: 15px 0;
     width: 88px;
     text-align: center;
@@ -322,9 +321,6 @@ a{
 }
 .module-container .app-more a{
     color: #007ed0;
-}
-.module-container .app-summary{
-    font-size: 12px;
 }
 /***module end**/
 

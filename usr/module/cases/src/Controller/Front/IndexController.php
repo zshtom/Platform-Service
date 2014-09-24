@@ -14,6 +14,7 @@ use Pi\Mvc\Controller\ActionController;
 use Pi\Db\RowGateway\RowGateway;
 use Zend\Mvc\MvcEvent;
 use Zend\Db\Sql\Expression;
+use Zend\View\Model\JsonModel;
 
 /**
  * Index controller
@@ -109,6 +110,6 @@ class IndexController extends ActionController
                 }
             }
         }
-        echo json_encode($caseList);
+        return New JsonModel($caseList);
     }
 }

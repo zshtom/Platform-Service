@@ -1,0 +1,77 @@
+<?php
+$url = Pi::service('asset')->getAssetUrl('theme/social', 'image/index_tab1.png');
+$this->css($this->assetTheme('css/case.css'));
+/*
+$block = array(
+    'items' => array(
+        array("icon"=>$url,"url"=>"#","title"=>"o2o营销活动"),
+        array("icon"=>$url,"url"=>"#","title"=>"社会化客服"),
+        array("icon"=>$url,"url"=>"#","title"=>"社会化舆情"),
+        array("icon"=>$url,"url"=>"#","title"=>"o2o营销活动"),
+        array("icon"=>$url,"url"=>"#","title"=>"o2o营销活动"),
+        array("icon"=>$url,"url"=>"#","title"=>"o2o营销活动"),
+        array("icon"=>$url,"url"=>"#","title"=>"o2o营销活动"),
+        array("icon"=>$url,"url"=>"#","title"=>"o2o营销活动"),
+        array("icon"=>$url,"url"=>"#","title"=>"o2o营销活动"),
+        array("icon"=>$url,"url"=>"#","title"=>"o2o营销活动"),
+        array("icon"=>$url,"url"=>"#","title"=>"o2o营销活动"),
+        array("icon"=>$url,"url"=>"#","title"=>"o2o营销活动"),
+        array("icon"=>$url,"url"=>"#","title"=>"o2o营销活动"),
+        array("icon"=>$url,"url"=>"#","title"=>"o2o营销活动"),
+        array("icon"=>$url,"url"=>"#","title"=>"o2o营销活动"),
+        array("icon"=>$url,"url"=>"#","title"=>"o2o营销活动"),
+    )
+);
+*/
+d($block['items']);
+?>
+
+<div class="row case-block">
+    <div class="col-md-12">
+        <div class="carousel-title">我们的客户</div>
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+          <!-- Indicators
+          <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+          </ol>
+          -->
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+            <?php
+                for($i=0; $i < count($block['items']); $i++){
+                    if($i%10 == 0 ){
+            ?>
+                        <div class="item <?php if($i == 0){ echo 'active' ;} ?>">
+                            <div class="img-item">
+                                <a href="<?php echo $block['items'][$i]['url'] ?>"><img src="<?php echo $block['items'][$i]['icon'] ?>" title="<?php echo _escape($block['items'][$i]['title']); ?>"></a>
+            <?php
+                    }else if($i%10 == 9 || $i == count($block['items'])-1){
+            ?>
+                                <a href="<?php echo $block['items'][$i]['url'] ?>"><img src="<?php echo $block['items'][$i]['icon'] ?>" title="<?php echo _escape($block['items'][$i]['title']); ?>"></a>
+                            </div>
+                        </div>
+            <?php
+                    }else{
+            ?>
+                       <a href="<?php echo $block['items'][$i]['url'] ?>"><img src="<?php echo $block['items'][$i]['icon'] ?>" title="<?php echo _escape($block['items'][$i]['title']); ?>"></a>
+            <?php
+                    }
+
+                }
+            ?>
+
+          </div>
+
+          <!-- Controls -->
+          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="icon-prev fa fa-chevron-left"></span>
+          </a>
+          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+           <span class="icon-next fa fa-chevron-right"></span>
+          </a>
+        </div>
+    </div>
+</div>
