@@ -14,28 +14,38 @@ use Pi;
 use Zend\View\Helper\AbstractHelper;
 
 /**
- * Helper for theme template inclusion
+ * Helper for template rendering context
  *
  * Usage inside a phtml template
  *
  * ```
- *  include $this->templateTheme('header.phtml');
+ *  // Set context
+ *  $this->context(<context-name>);
+ *  // Get context
+ *  $context = $this->context();
  * ```
  *
  * @see Pi\View\Resolver\ThemeTemplate
  * @author Taiwen Jiang <taiwenjiang@tsinghua.org.cn>
  */
-class TemplateTheme extends AbstractHelper
+class Context extends AbstractHelper
 {
+    /** @var string Context name */
+    protected $context = '';
+
     /**
-     * Get full path to a theme template
+     * Set/get context
      *
-     * @param   string  $template
-     * @param   string|null $theme, not implemented yet
-     * @return  string
+     * @param   string|null  $context
+     * @return  string|this
      */
-    public function __invoke($template, $theme = null)
+    public function __invoke($context = null)
     {
-        return $this->getView()->resolver($template, $this->view);
+        if (null === $context) {
+            return $this->context;
+        }
+        $this->context = $context;
+
+        return $this;
     }
 }

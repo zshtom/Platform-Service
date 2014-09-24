@@ -337,7 +337,10 @@ class File extends AbstractService
         $files = array_reverse($files);
         foreach ($files as $file) {
             if (!file_exists($file) && !is_link($file)) {
-                continue;
+                throw new Exception(
+                    sprintf('File "%s" not found', $file)
+                );
+                //continue;
             }
 
             // hard directory
@@ -346,7 +349,7 @@ class File extends AbstractService
 
                 if (true !== @rmdir($file)) {
                     throw new Exception(
-                        sprintf('Failed to remove directory %s', $file)
+                        sprintf('Failed to remove directory "%s"', $file)
                     );
                 }
             } else {
@@ -355,14 +358,14 @@ class File extends AbstractService
                 if (defined('PHP_WINDOWS_VERSION_MAJOR') && is_dir($file)) {
                     if (true !== @rmdir($file)) {
                         throw new Exception(
-                            sprintf('Failed to remove file %s', $file)
+                            sprintf('Failed to remove file "%s"', $file)
                         );
                     }
                 // symbolic directory or file
                 } else {
                     if (true !== @unlink($file)) {
                         throw new Exception(
-                            sprintf('Failed to remove file %s', $file)
+                            sprintf('Failed to remove file "%s"', $file)
                         );
                     }
                 }

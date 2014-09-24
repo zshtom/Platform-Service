@@ -11,9 +11,8 @@
             <th style="width: 10%;"><?php echo _a('Icon'); ?></th>
             <th style="width: 30%;"><?php echo _a('Solution Summery'); ?></th>
             <th style="width: 10%;"><?php echo _a('Time Created'); ?></th>
-            <th style="width: 10%;"><?php echo _a('Nav Order'); ?></th>
             <th><?php echo _a('Action'); ?></th>
-            <th style="width: 5%;"></th>
+            <th style="width: 10%;"><?php echo _a('Nav Order'); ?></th>
         </tr>
         </thead>
         <tbody>
@@ -39,15 +38,10 @@
                     <?php echo _date($solution['time_created'], null, 'NULL', 'NULL',
                             null, null, null, 'Y-m-d'); ?>
                 </td>
-
-                <td width="2%">
-                    <input type="text" name="order[<?php echo $solution['id']; ?>]" value="<?php echo $solution['nav_order']; ?>" size="5" class="form-control">
-                </td>
-
                 <td>
                     <div class="btn-group">
                         <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'edit', 'id' => $solution['id'])); ?>"><?php echo _a('Edit'); ?></a>
-                        <a onclick="return confirm('<?php print _t('Delete it?')?>')" class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $solution['id'])); ?>"><?php echo _a('Delete'); ?></a>
+                        <a onclick="return confirm('<?php print _a('Delete it?')?>')" class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $solution['id'])); ?>"><?php echo _a('Delete'); ?></a>
                         <?php if ($solution['active']) { ?>
                         <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'activate', 'id' => $solution['id'])); ?>"><?php echo _a('Disable'); ?></a>
                         <?php } else { ?>
@@ -55,12 +49,15 @@
                         <?php }?>
                     </div>
                 </td>
+                <td width="2%">
+                    <input type="text" name="order[<?php echo $solution['id']; ?>]" value="<?php echo $solution['nav_order']; ?>" size="5" class="form-control">
+                </td>
             </tr>
         <?php } ?>
         </tbody>
     </table>
         <div class="text-right">
-        <input type="submit" value="<?php echo _a('Add to menu'); ?>" class="btn btn-primary">
+        <input type="submit" value="<?php echo _a('Nav Order'); ?>" class="btn btn-primary">
         </div>
     </form>
 </div>

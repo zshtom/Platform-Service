@@ -168,3 +168,15 @@ msgstr "添加解决方案"
 
 msgid "Cases"
 msgstr "案例"
+
+msgid "Cases Summery"
+msgstr "案例摘要"
+
+msgid "Click to upload image then add item contents."
+msgstr "点击上传图片"
+
+msgid "Click to remove"
+msgstr "点击移除"
+
+msgid "Delete it?"
+msgstr "确认删除？"
