@@ -1,0 +1,168 @@
+<?php
+$url = Pi::service('asset')->getAssetUrl('theme/social', 'image/weixin.png');
+$this->css($this->assetTheme('css/case.css'));
+$prefix = 'tab';
+$solutions = json_encode($solutionList);
+d($caseList);
+?>
+<div class="pi-tab case">
+     <?php if (!empty($solutionList)) { ?>
+        <ul class="nav nav-tabs" role="tablist" id="indexTab">
+            <?php for ($x=1; $x<=count($solutionList); $x++) { ?>
+              <li <?php if ($x == 1){ echo 'class="active"'; } ?> >
+                <a href="#<?php echo $prefix.$solutionList[$x]['id']; ?>" role="tab" data-toggle="tab"><?php echo _escape($solutionList[$x]['title']); ?></a>
+              </li>
+            <?php } ?>
+        </ul>
+
+         <div class="tab-content">
+            <?php for ($x=1; $x<=count($solutionList); $x++) { ?>
+                 <div class="tab-pane fade in active" id="tab<?php echo $solutionList[$x]['id']; ?>">
+
+                     <?php
+                        if ($x == 1 && !empty($caseList)) {
+                            foreach ($caseList as $item) {
+                     ?>
+
+                             <div class="media col-md-4">
+                                <a href="<?php echo $this->escape($item['url']); ?>">
+                                    <img style="width: 320px; height: 220px;" class="media-object" src="<?php echo $this->_escape($item['icon']); ?>">
+                                </a>
+                                <div class="media-body col-md-12" style="height: 60px" >
+                                    <p class="app-title">
+                                       <a href="<?php echo $this->escape($item['url']); ?>"><?php echo $this->_escape($item['title']); ?></a>
+                                    </p>
+                                    <p class="app-summary">
+                                       <?php echo $this->_escape($item['summery']); ?>
+                                    </p>
+                                </div>
+                             </div>
+                      <?php
+                            }
+                         }
+                      ?>
+                </div>
+            <?php } ?>
+         </div>
+     <?php } ?>
+</div>
+<script>
+  $(function () {
+      var solutions =<?=$solutions;?>;
+
+      var prefix = "<?php echo $prefix ?>";
+
+      $('#indexTab a:first').tab('show');
+
+      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        //e.target // activated tab
+        //e.relatedTarget // previous tab
+
+        var id = $(this).attr("href").substr(1);
+        var num = id.substr(prefix.length);
+        var tabNode = $("#"+id).get(0);
+        if(!tabNode.children.length && num!=1 ){
+            fillTabContent(num,tabNode);
+        }else{
+            console.log("数据已加载");
+        }
+      });
+
+      /**
+       * 填充选项卡
+       * num: 列表坐标
+       * tabNode: 选项卡dom节点
+       */
+      function fillTabContent(num,tabNode){
+        $.ajax({
+            cache: false,
+            url: solutions[num].url,
+            dataType: "json",
+            success: function(datas){
+                console.log("success data:",datas);
+                rend(datas,tabNode);
+            },
+            error: function(e){
+                console.log("获取选项卡数据失败");
+            }
+        });
+      }
+
+      /**
+       * 渲染选项卡
+       * datas: 数据包
+       * tabNode: 选项卡dom节点
+       */
+      function rend(datas,tabNode){
+        var htmlStr = getTabHTML(datas);
+        tabNode.innerHTML = htmlStr;
+      }
+
+      /**
+       * 获取选项卡html字符串
+       * datas: 数据包
+       */
+      function getTabHTML(datas){
+        var tmpl = new Array();
+        for(var x in datas){
+            tmpl.push("<div class='media col-md-4'>");
+            tmpl.push("<a href='"+datas[x].url+"'>");
+            tmpl.push("<img style='width: 320px; height: 220px;' class='media-object' src='"+datas[x].icon+"'>");
+            tmpl.push("</a>");
+            tmpl.push("<div class='media-body col-md-12' style='height: 60px'>");
+            tmpl.push("<p class='app-title'>"+datas[x].title+"</p>");
+            tmpl.push("<p class='app-summary'>"+datas[x].summery+"</p>");
+            tmpl.push("</div></div>");
+        }
+        return tmpl.join("");
+      }
+  })
+</script>
+
+
+<!--
+<div class="page">
+    <?php if (!empty($solutionList)) { ?>
+    <div>
+        <ul class="nav nav-pills">
+        <?php foreach ($solutionList as $id => $item) { ?>
+            <li <?php if (!empty($item['active'])) { echo ' class="active col-md-12"'; } else { echo ' class="col-md-12" '; }?>>
+                <a href="<?php echo $item['url']; ?>"><?php echo _escape($item['title']); ?></a>
+            </li>
+        <?php } ?>
+        </ul>
+    </div>
+    <?php } ?>
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-body clearfix">
+                <div class="app-body">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="row">
+                        <?php foreach ($caseList as $item) { ?>
+                          <div class="col-xs-8 col-sm-6">
+                            <div class="media">
+                                <img style="width: 80px; height: 80px;" class="pull-left" src="<?php echo $this->_escape($item['icon']); ?>">
+                                <div class="media-body">
+                                    <a href="<?php echo $this->_escape($item['url']); ?>" class="app-front-title">
+                                        <?php echo $this->_escape($item['title']); ?>
+                                    </a>
+                                    <div class="muted app-size12" style="margin-top: 5px;">
+                                        <?php echo $this->_escape($item['summery']); ?>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        <?php } ?>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="clearfix"></div>
+-->

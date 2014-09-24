@@ -1,0 +1,22 @@
+<h2 class="page-header">contact list</h2>
+<table>
+    <tr>
+        <th><?php echo __('id') ?></th>
+        <th><?php echo __('company') ?></th>
+        <th><?php echo __('address') ?></th>
+        <th><?php echo __('phone') ?></th>
+        <th><?php echo __('email') ?></th>
+    </tr>
+    <?php foreach ($items as $item) { ?>
+    <tr>
+        <td><?php echo $item['id'] ?></td>
+        <td><?php echo $item['company'] ?></td>
+        <td><?php echo $item['address'] ?></td>
+        <td><?php echo $item['phone'] ?></td>
+        <td><?php echo $item['email'] ?></td>
+        <td>
+            <a href="<?php echo $this->url('admin', array('action' => 'delete', 'id' => $item['id'])) ?>"><?php echo __('Delete') ?></a>
+        </td>
+    </tr>
+    <?php } ?>
+</table>

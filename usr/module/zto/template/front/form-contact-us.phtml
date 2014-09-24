@@ -1,0 +1,7 @@
+<h2 class="page-header"><?php echo $title ?> ( my first Form)</h2>
+<span style="margin-left: 197px; margin-bottom: 17px;display: inline-block;">
+<?php if (isset($error)) {
+    echo $error;
+} ?>
+</span>
+<?php include $this->templateComponent('form'); ?>

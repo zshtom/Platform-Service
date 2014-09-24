@@ -17,6 +17,10 @@ class Block
                         ->order('order DESC');
         $rows    = $model->selectWith($select)->toArray();
 
+        foreach ($rows as $key => $value) {
+            $rows[$key]['icon'] = Pi::url('upload') . '/' . $module.'/'.$rows[$key]['icon'];
+            $rows[$key]['url'] = Pi::url('').'/'.$module.'/index/detail/id-'.$rows[$key]['id'];
+        }
         $result  = array(
             'items'   => $rows,
         );
