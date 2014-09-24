@@ -24,7 +24,7 @@ $apps_list= array(
 
 <div class="module-container clearfix">
     <div class="col-md-2">
-        <ul class="nav nav-pills nav-stacked font14">
+        <ul class="nav nav-pills nav-stacked nav-font">
         <?php foreach ($nav as $id => $item) { ?>
             <li <?php if (!empty($item['active'])) { echo ' class="active"'; }?>>
                 <a href="<?php echo $item['url']; ?>"><?php echo _escape($item['title']); ?></a>
@@ -36,13 +36,14 @@ $apps_list= array(
             <div class = "row">
                 <div class="col-md-12">
                     <div class="summery-title"><?php echo $this->escape($title); ?></div>
-                    <p class="summery-content">时趣帮助着超过500家企业和近2000万的消费者通过社会化媒体进行着沟通。在时趣
-                       的管理下，企业每天和消费者在社会化媒体上会发生超过10万次的互动</p>
+                    <div class="summery-content"><?php echo $content; ?></div>
                 </div>
             </div>
             <div class = "row">
                 <div class="col-md-12">
-                    <div class="list-title">产品模块</div>
+                    <div class="list-title">
+                        <?php if (!empty($apps_list)) { echo '产品模块'; }?>
+                    </div>
                     <div class="row">
                         <?php foreach ($apps_list as $item) { ?>
                                 <div class="media col-md-6">
@@ -70,59 +71,6 @@ $apps_list= array(
 </div>
 <div class="clearfix"></div>
 
-<!--
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->escape($title); ?></h3>
-            </div>
-            <div class="panel-body clearfix">
-                <?php echo $content; ?>
 
-                <div class="app-body">
-                    <?php //print('Apps list: <pre>' . print_r($apps_list, TRUE) . '</pre>');?>
-
-                    <div class="row">
-                      <div class="col-sm-12">
-                        <div class="row">
-                        <?php foreach ($apps_list as $item) { ?>
-                          <div class="col-xs-8 col-sm-6">
-                            <div class="media">
-                                <img style="width: 80px; height: 80px;" class="pull-left" src="<?php echo $this->escape($item['icon']); ?>">
-                                <div class="media-body">
-                                    <a href="<?php echo $this->escape($item['url']); ?>" class="app-front-title">
-                                        <?php echo $this->escape($item['title']); ?>
-                                    </a>
-                                    <div class="muted app-size12" style="margin-top: 5px;">
-                                        <?php echo $this->escape($item['summery']); ?>
-                                    </div>
-                                </div>
-                            </div>
-                          </div>
-                        <?php } ?>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel-footer">
-                <div class="social-list text-left">
-                    <ul class="list-inline">
-                        <?php if(!empty($config['social_facebook'])) { ?>
-                        <li class="social-facebook"><?php echo $this->facebook(); ?></li>
-                        <?php } ?>
-                        <?php if(!empty($config['social_twitter'])) { ?>
-                        <li class="social-twitter"><?php echo $this->twitter(); ?></li>
-                        <?php } ?>
-                        <?php if(!empty($config['social_gplus'])) { ?>
-                        <li class="social-gplus"><?php echo $this->plusone(); ?></li>
-                        <?php } ?>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-    <?php if (!empty($nav)) { ?>
-    </div>
-    <?php } ?>-->
 
 

@@ -1,7 +1,13 @@
-.indexTab .tab-pane img {
+.pi-tab .tab-pane img {
     float: left;
 }
-.indexTab .tab-pane h3{
+.pi-tab .tab-pane h3{
     padding-top: 22px;
     margin-bottom: 20px;
+}
+.pi-tab .tab-content {
+    margin: 55px 0;
+}
+.nav-tabs > li > a{
+    padding: 15px 100px;
 }

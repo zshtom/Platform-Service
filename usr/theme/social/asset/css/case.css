@@ -1,0 +1,57 @@
+.app-title{
+   padding: 10px 0px 6px;
+}
+.app-summary{
+
+}
+.case p{
+    margin-bottom: 0px;
+}
+.case .tab-content {
+    margin-top: 15px;
+}
+.case .media{
+    margin-top: 25px;
+}
+.case .nav-tabs > li > a{
+    margin-right: 20px;
+    padding: 15px 25px;
+}
+.case-block .carousel-control .glyphicon-chevron-left, .case-block .carousel-control .glyphicon-chevron-right, .case-block .carousel-control .icon-prev, .case-block .carousel-control .icon-next{
+    font-size: 50px;
+}
+
+.case-block{
+    background-color: #f8f8f8;
+}
+.case-block .carousel{
+    margin-bottom: 80px;
+}
+.case-block .carousel-control{
+    color: #33a9e0;
+}
+.case-block .carousel-control.left{
+    background: none;
+}
+.case-block .carousel-control.right{
+    background: none;
+}
+.case-block .carousel-title{
+    line-height: 80px;
+    font-size: 18px;
+}
+.case-block .carousel-inner{
+    margin: 0 auto;
+    width: 70%;
+}
+.case-block .carousel-inner .img-item img{
+    float: left;
+    padding: 20px 12px;
+    width: 150px;
+    height: 106px;
+}
+.case-block .carousel-inner .img-item{
+    width: 780px;
+    height: 212px;
+    margin: 0 auto;
+}
