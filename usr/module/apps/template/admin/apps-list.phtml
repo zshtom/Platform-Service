@@ -7,7 +7,6 @@
         <thead>
         <tr>
             <th><?php echo _a('App title'); ?></th>
-            <th style="width: 5%;"><?php echo _a('Name'); ?></th>
             <th style="width: 5%;"><?php echo _a('Icon'); ?></th>
             <th style="width: 5%;"><?php echo _a('App Summery'); ?></th>
             <th style="width: 15%;"><?php echo _a('Time Created'); ?></th>
@@ -22,9 +21,6 @@
                     <a href="<?php echo $app['url']; ?>" target="_blank">
                     <?php echo _escape($app['title']); ?>
                     </a>
-                </td>
-                <td>
-                    <?php echo _escape($app['name']); ?>
                 </td>
                 <td>
                     <img src="<?php echo _escape($app['icon']); ?>" style="width: 80px;"/>
