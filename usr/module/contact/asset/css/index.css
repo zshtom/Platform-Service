@@ -1,0 +1,114 @@
+
+
+.contact-address-map {
+    margin-top: 40px;
+}
+.contact-address-map img {
+    width: 100%;
+}
+
+.contact-social-intro {
+    background-color: #eee;
+    margin-top: 30px;
+}
+
+.contact-social-intro p {
+    padding: 20px 15px;
+    font-size: 12px;
+
+}
+
+.contact-method-box {
+    margin-top: 40px;
+}
+
+.contact-method-box .box-header p {
+    font-size: 18px;
+    font-family: arial;
+}
+
+.contact-method-box .box-header span {
+    margin-right: 18px;
+    font-weight: bolder;
+}
+
+
+.contact-method-box .detail-list {
+    margin-top: 20px;
+    padding: 0;
+    font-size: 14px;
+    color: #444;
+}
+
+.contact-method-box .detail-list li {
+    list-style: none;
+    padding-left: 35px;
+    height: 28px;
+    line-height: 30px;
+}
+
+.contact-method-box .detail-list li.location {
+    background: url("../image/i_location.png") no-repeat left;
+}
+.contact-method-box .detail-list li.phone {
+    background: url("../image/i_phone.png") no-repeat left;
+}
+.contact-method-box .detail-list li.email {
+    background: url("../image/i_email.png") no-repeat left;
+}
+
+.contact-method-box .detail-list li.email a {
+    color: #f13004;;
+    text-decoration: underline;
+}
+
+.contact-consult-box {
+    margin-top: 30px;
+}
+
+.contact-consult-box .box-header p {
+    font-size: 18px;
+    font-family: arial;
+}
+
+.contact-consult-box .box-header span {
+    padding-right: 10px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.contact-consult-box ul {
+    margin-top: 15px;
+    padding: 0;
+    font-size: 14px;
+    color: #444;
+}
+
+.contact-consult-box ul li {
+    list-style: none;
+    height: 28px;
+    line-height: 28px;
+}
+
+.contact-platform-media {
+    margin-top: 20px;
+}
+
+.contact-platform-media span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.contact-platform-media .media-method {
+    margin-top: 30px;
+}
+
+.contact-platform-media img {
+    margin-right: 44px;
+}
+.contact-platform-media .media-code {
+    float: right;
+    margin-top: -150px;
+    margin-right: 600px;
+}
+

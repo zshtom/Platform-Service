@@ -1,0 +1,46 @@
+<?php
+$this->css($this->assetModule('css/index.css', 'about', false));
+
+?>
+
+<div class="about-intro-box">
+    <div class="box-header">
+        <span><?php _e('Who we are'); ?></span>
+    </div>
+    <div class="box-content">
+        <div class="box-img">
+            <img src="<?php echo Pi::service('asset')->getAssetUrl('module/about', 'image/who.png'); ?>">
+        </div>
+        <div class="box-txt">
+            <div class="box-txt-header"><span><?php _e('Who we are'); ?></span></div>
+             <div class="box-txt-content">
+                 <p><?php echo $content ?></p>
+             </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="about-goal-box">
+    <div class="box-header">
+        <span><?php _e('Our vision and goals'); ?></span>
+    </div>
+    <div class="box-content">
+        <div class="box-img">
+            <img src="<?php echo Pi::service('asset')->getAssetUrl('module/about', 'image/goal.png'); ?>">
+        </div>
+        <div class="box-txt">
+            <div class="box-txt-header"><span><?php _e('Our vision'); ?></span></div>
+            <div class="box-txt-content">
+                <p><?php echo $content ?></p></div>
+        </div>
+        <div class="box-txt">
+             <div class="box-txt-header"><span><?php _e('Our goal'); ?></span></div>
+               <div class="box-txt-content">
+                   <p><?php echo $content ?></p></div>
+        </div>
+    </div>
+</div>
+
+
+

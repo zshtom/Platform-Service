@@ -1,0 +1,59 @@
+<?php
+$this->css($this->assetModule('css/index.css'));
+?>
+
+
+    <div class="contact-address-map">
+        <img src="<?php echo Pi::service('asset')->getAssetUrl('module/contact', 'image/address.jpg'); ?>"
+             alt="address">
+    </div>
+
+    <div class="contact-social-intro">
+        <p><?php echo $socialintro; ?></p>
+    </div>
+
+    <div class="contact-method-box">
+
+        <div class="box-header">
+            <p><span>CONTACT</span><?php _e('Contact Method'); ?></p>
+        </div>
+
+        <ul class="detail-list">
+            <li class="location"><?php echo $address; ?></li>
+            <li class="post-code"><?php _e('Post Code'); ?><?php echo $contactpost; ?></li>
+            <li class="phone"><?php echo $contactphone; ?></li>
+            <li class="email"><a href="#"><?php echo $contactemail; ?></a></li>
+        </ul>
+
+
+    </div>
+
+
+    <div class="contact-consult-box">
+        <div class="box-header">
+            <p><span>COOPERATION&CONSULTING</span><?php echo __('Cooperation and Consulting'); ?></p>
+        </div>
+
+        <ul>
+            <li><?php echo  __("Consult People"); ?><?php echo $people; ?></li>
+            <li><?php  echo  __("Consult Phone"); ?><?php echo $phone; ?></li>
+            <li><?php echo $consultemail; ?></li>
+        </ul>
+    </div>
+
+
+    <div class="contact-platform-media">
+        <span><?php _e('Social Media Platform'); ?></span>
+        <div class="media-method">
+            <img src="<?php echo Pi::service('asset')->getAssetUrl('module/contact', 'image/weibo.png'); ?>" alt="weibo">
+            <img src="<?php echo Pi::service('asset')->getAssetUrl('module/contact', 'image/weixin.jpg'); ?>" alt="wechat">
+        </div>
+        <div class="media-code">
+            <img src="<?php echo Pi::service('asset')->getAssetUrl('module/contact', 'image/2code.png'); ?>" alt="2code">
+        </div>
+    </div>
+
+
+
+
+
