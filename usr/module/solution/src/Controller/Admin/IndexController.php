@@ -959,7 +959,12 @@ class IndexController extends ActionController
 
         // Add case list.
         $form = $this->_casesListForm($form, $data);
-        $exist_form_elements = $formGroups['general'] + $formGroups['apps'];
+        if(isset($formGroups['apps'])){
+            $exist_form_elements = $formGroups['general'] + $formGroups['apps'];
+        }
+        else{
+            $exist_form_elements = $formGroups['general'];
+        }
         foreach ($form as $ele) {
             $eleAttributes = $ele->getAttributes();
             if (isset($eleAttributes['type'])) {
