@@ -1,0 +1,63 @@
+<?php
+//$this->css($this->assetModule('admin/admin.css', 'system'));
+?>
+<div class="table-responsive">
+    <form action="<?php echo $this->url('', array('action' => 'menu')); ?>">
+    <table class="table">
+        <thead>
+        <tr>
+            <th><?php echo _a('Solution Title'); ?></th>
+            <!-- <th style="width: 5%;"><?php echo _a('Name'); ?></th> -->
+            <th style="width: 10%;"><?php echo _a('Icon'); ?></th>
+            <th style="width: 30%;"><?php echo _a('Solution Summery'); ?></th>
+            <th style="width: 10%;"><?php echo _a('Time Created'); ?></th>
+            <th><?php echo _a('Action'); ?></th>
+            <th style="width: 10%;"><?php echo _a('Nav Order'); ?></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($solutions as $solution) { ?>
+            <tr>
+                <td>
+                    <a href="<?php echo $solution['url']; ?>" target="_blank">
+                    <?php echo _escape($solution['title']); ?>
+                    </a>
+                </td>
+                <!--
+                <td>
+                    <?php echo _escape($solution['name']); ?>
+                </td>
+                -->
+                <td>
+                    <img src="<?php echo _escape($solution['icon']); ?>" width="80px" />
+                </td>
+                <td>
+                    <?php echo _escape($solution['summery']); ?>
+                </td>
+                <td>
+                    <?php echo _date($solution['time_created'], null, 'NULL', 'NULL',
+                            null, null, null, 'Y-m-d'); ?>
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'edit', 'id' => $solution['id'])); ?>"><?php echo _a('Edit'); ?></a>
+                        <a onclick="return confirm('<?php print _a('Delete it?')?>')" class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $solution['id'])); ?>"><?php echo _a('Delete'); ?></a>
+                        <?php if ($solution['active']) { ?>
+                        <a class="btn btn-sm btn-primary" href="<?php echo $this->url('', array('action' => 'activate', 'id' => $solution['id'])); ?>"><?php echo _a('Disable'); ?></a>
+                        <?php } else { ?>
+                            <a class="btn btn-sm btn-warning" href="<?php echo $this->url('', array('action' => 'activate', 'id' => $solution['id'])); ?>"><?php echo _a('Enable'); ?></a>
+                        <?php }?>
+                    </div>
+                </td>
+                <td width="2%">
+                    <input type="text" name="order[<?php echo $solution['id']; ?>]" value="<?php echo $solution['nav_order']; ?>" size="5" class="form-control">
+                </td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+        <div class="text-right">
+        <input type="submit" value="<?php echo _a('Nav Order'); ?>" class="btn btn-primary">
+        </div>
+    </form>
+</div>
