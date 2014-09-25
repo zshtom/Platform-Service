@@ -1,0 +1,97 @@
+<hr/>
+<div class="row-fluid">
+    <div class="col-md-12">
+        <div id="pi-js-list">
+            <legend>
+                <label for="extra_seo"><?php echo __('Apps');?></label>
+            </legend>
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th style="width:25%;">
+                    <?php echo _a('Title'); ?></th>
+                    <th style="width: 15%"><?php echo _a('Icon'); ?></th>
+                    <th style="width: 40%"><?php echo _a('App Description'); ?></th>
+                    <th><?php echo _a('Time Created'); ?></th>
+                </tr>
+                <?php $now = time(); ?>
+                <?php //for ($i = 1; $i <= $appsCont; $i++) { ?>
+
+                <?php foreach ($apps_list as $app_key => $solution_app) {?>
+
+                <?php
+                // Get Id.
+                $appId = 'solution_app[' . $app_key . '][id]';
+                $appElementId = $form->get($appId);
+                $appElementId->setAttribute("class", "check-one");
+
+                // App Id.
+                $appSolutionApp = 'solution_app[' . $app_key . '][solution_app_id]';
+                $appElementSolutionApp = $form->get($appSolutionApp);
+
+                // App Id.
+                $appApp = 'solution_app[' . $app_key . '][app]';
+                $appElementApp = $form->get($appApp);
+
+                $appIdValue = (int)$appElementApp->getValue();
+
+                // App title.
+                $appTitle = 'solution_app[' . $app_key . '][title]';
+                $appElementTitle = $form->get($appTitle);
+
+                // Get Icon.
+                $appIcon = 'solution_app[' . $app_key . '][icon]';
+                $appElementIcon = $form->get($appIcon);
+                // App Icon Url.
+                $appIconUrl = 'solution_app[' . $app_key . '][icon_url]';
+                $appElementIconUrl = $form->get($appIconUrl);
+
+                // Get description.
+                $appDescription = 'solution_app[' . $app_key . '][description]';
+                $appElementDescription = $form->get($appDescription);
+
+                // Get publish.
+                $appPublish = 'solution_app[' . $app_key . '][publish]';
+                $appElementPublish = $form->get($appPublish);
+
+                if (in_array($appIdValue, $solution_apps_keys)) {
+d($solution_apps[$appIdValue]);
+                    $appElementId->setValue(1);
+                    $appElementDescription->setValue($solution_apps[$appIdValue]['description']);
+                }
+
+                ?>
+                <tr data-id="<?php echo $appIdValue; ?>">
+                    <td>
+                        <?php echo $this->formElement($appElementId);?>
+
+                        <?php
+                        echo $this->formElement($appElementApp);
+                        echo $this->formElement($appElementTitle);
+                        echo $this->formElement($appElementIconUrl);
+                        echo $this->formElement($appElementSolutionApp);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        echo $this->formElement($appElementIcon);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        $appElementDescription->setAttribute("style", "width: 100%;");
+                        echo $this->formElement($appElementDescription);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        echo $this->formElement($appElementPublish);
+                        ?>
+                    </td>
+                </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

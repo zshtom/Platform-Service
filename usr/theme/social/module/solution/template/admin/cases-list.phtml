@@ -1,0 +1,93 @@
+<hr/>
+<div class="row-fluid">
+    <div class="col-md-12">
+        <div id="pi-js-list">
+        <h2><?php echo __('Cases');?></h2>
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th style="width:25%;">
+                    <?php echo _a('Title'); ?></th>
+                    <th style="width: 15%"><?php echo _a('Icon'); ?></th>
+                    <th style="width:25%;">
+                    <?php echo _a('Cases Summery'); ?></th>
+                    <th><?php echo _a('Time Created'); ?></th>
+                </tr>
+                <?php $now = time(); ?>
+                <?php //for ($i = 1; $i <= $casesCont; $i++) { ?>
+
+                <?php foreach ($cases_list as $case_key => $solution_case) {?>
+
+                <?php
+                // Get Id.
+                $caseId = 'solution_case[' . $case_key . '][id]';
+                $caseElementId = $form->get($caseId);
+                $caseElementId->setAttribute("class", "check-one");
+
+                // App Id.
+                $caseSolutionApp = 'solution_case[' . $case_key . '][solution_case_id]';
+                $caseElementSolutionApp = $form->get($caseSolutionApp);
+
+                // App Id.
+                $caseApp = 'solution_case[' . $case_key . '][case]';
+                $caseElementApp = $form->get($caseApp);
+
+                $caseIdValue = (int)$caseElementApp->getValue();
+
+                // App title.
+                $caseTitle = 'solution_case[' . $case_key . '][title]';
+                $caseElementTitle = $form->get($caseTitle);
+
+                // Get Icon.
+                $caseIcon = 'solution_case[' . $case_key . '][icon]';
+                $caseElementIcon = $form->get($caseIcon);
+                // App Icon Url.
+                $caseIconUrl = 'solution_case[' . $case_key . '][icon_url]';
+                $caseElementIconUrl = $form->get($caseIconUrl);
+
+                // Get description.
+                $caseSummery = 'solution_case[' . $case_key . '][summery]';
+                $caseElementSummery = $form->get($caseSummery);
+
+                // Get publish.
+                $casePublish = 'solution_case[' . $case_key . '][publish]';
+                $caseElementPublish = $form->get($casePublish);
+
+                if (in_array($caseIdValue, $solution_cases_keys)) {
+                    $caseElementId->setValue(1);
+                }
+
+                ?>
+                <tr data-id="<?php echo $caseIdValue; ?>">
+                    <td>
+                        <?php echo $this->formElement($caseElementId);?>
+
+                        <?php
+                        echo $this->formElement($caseElementApp);
+                        echo $this->formElement($caseElementTitle);
+                        echo $this->formElement($caseElementIconUrl);
+                        echo $this->formElement($caseElementSolutionApp);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        echo $this->formElement($caseElementIcon);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        echo $this->formElement($caseElementSummery);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        echo $this->formElement($caseElementPublish);
+                        ?>
+                    </td>
+                </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
