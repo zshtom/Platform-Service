@@ -18,7 +18,7 @@ class IndexController extends ActionController
         $this->view()->assign('address','中国北京市朝阳区广渠路38号北京一轻大厦');
         $this->view()->assign('contactpost',('：10000'));
         $this->view()->assign('contactphone','400-691-1961');
-        $this->view()->assign('contactemail','wangshengyu@social-touch.com');
+        $this->view()->assign('contactemail','weiwei@social-touch.com');
         $this->view()->assign('people','：魏威');
         $this->view()->assign('phone','：13202054678');
         $this->view()->assign('consultphone','Consult Phone');

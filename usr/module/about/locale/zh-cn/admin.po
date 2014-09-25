@@ -1,0 +1,24 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: about\n"
+"POT-Creation-Date: 2014-09-24 17:58+0800\n"
+"PO-Revision-Date: 2014-09-24 17:59+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.8\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-KeywordsList: _a\n"
+"X-Poedit-SearchPath-0: D:\\wamp\\www\\Platform-Service\\usr\\module\\about\n"
+
+#: D:\wamp\www\Platform-Service\usr\module\about/config/module.php:6
+msgid "about"
+msgstr "关于我们"
+
+#: D:\wamp\www\Platform-Service\usr\module\about/config/module.php:7
+msgid "About us."
+msgstr "关于我们"

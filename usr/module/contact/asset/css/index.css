@@ -103,8 +103,10 @@
     margin-top: 30px;
 }
 
-.contact-platform-media img {
+.contact-platform-media .media-method img {
     margin-right: 44px;
+    width: 73px;
+    height: 73px;
 }
 .contact-platform-media .media-code {
     float: right;
