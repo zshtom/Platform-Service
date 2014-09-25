@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: about\n"
-"POT-Creation-Date: 2014-09-23 18:05+0800\n"
-"PO-Revision-Date: 2014-09-23 18:05+0800\n"
+"POT-Creation-Date: 2014-09-25 16:32+0800\n"
+"PO-Revision-Date: 2014-09-25 16:37+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh\n"
@@ -16,19 +16,33 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SearchPath-0: D:\\wamp\\www\\Platform-Service\\usr\\module\\about\n"
 
+#: D:\wamp\www\Platform-Service\usr\module\about/src/Controller/Front/IndexController.php:15
+msgid "What is Social-touch"
+msgstr ""
+"时趣SCRM是国内领先的、大数据驱动的微信社会化关系管理平台，主要服务对象为品牌"
+"客户和大中型企业客户。通过时趣微信SCRM的多维度标签系以及活跃度、忠诚度等社会"
+"化属性分析，让您360°掌握粉丝信息。同时，结合时趣强大的数据洞察和预测技术，企"
+"业可以以数据为导向，制定品牌营销策略，开展精准互动营销，并对营销结果进行监控"
+"和衡量，从而全面提升企业社会化营销水平。"
+
 #: D:\wamp\www\Platform-Service\usr\module\about/template/front/about-index.phtml:8
 #: D:\wamp\www\Platform-Service\usr\module\about/template/front/about-index.phtml:15
+#: D:\wamp\www\Platform-Service\usr\module\about/template/front/about-index.phtml:26
+#: D:\wamp\www\Platform-Service\usr\module\about/template/front/about-index.phtml:32
 msgid "Who we are"
 msgstr "我们是谁"
 
-#: D:\wamp\www\Platform-Service\usr\module\about/template/front/about-index.phtml:26
+#: D:\wamp\www\Platform-Service\usr\module\about/template/front/about-index.phtml:42
+#: D:\wamp\www\Platform-Service\usr\module\about/template/front/about-index.phtml:59
 msgid "Our vision and goals"
 msgstr "我们的愿景和目标"
 
-#: D:\wamp\www\Platform-Service\usr\module\about/template/front/about-index.phtml:33
+#: D:\wamp\www\Platform-Service\usr\module\about/template/front/about-index.phtml:48
+#: D:\wamp\www\Platform-Service\usr\module\about/template/front/about-index.phtml:66
 msgid "Our vision"
 msgstr "我们的愿景"
 
-#: D:\wamp\www\Platform-Service\usr\module\about/template/front/about-index.phtml:38
+#: D:\wamp\www\Platform-Service\usr\module\about/template/front/about-index.phtml:52
+#: D:\wamp\www\Platform-Service\usr\module\about/template/front/about-index.phtml:71
 msgid "Our goal"
 msgstr "我们的目标"

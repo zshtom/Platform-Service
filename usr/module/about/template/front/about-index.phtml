@@ -3,7 +3,7 @@ $this->css($this->assetModule('css/index.css', 'about', false));
 
 ?>
 
-<div class="about-intro-box">
+<!--<div class="about-intro-box">
     <div class="box-header">
         <span><?php _e('Who we are'); ?></span>
     </div>
@@ -19,9 +19,42 @@ $this->css($this->assetModule('css/index.css', 'about', false));
         </div>
     </div>
 
+</div>-->
+
+<div class="media about-intro-box">
+    <div class="box-header">
+        <span><?php _e('Who we are'); ?></span>
+    </div>
+    <a class="pull-left" href="#">
+        <img src="<?php echo Pi::service('asset')->getAssetUrl('module/about', 'image/who.png'); ?>">
+    </a>
+    <div class="media-body">
+        <div class="media-heading"><span><?php _e('Who we are'); ?></span></div>
+        <p><?php echo $content ?></p>
+    </div>
 </div>
 
-<div class="about-goal-box">
+
+
+
+<div class="media about-goal-box">
+    <div class="box-header">
+        <span><?php _e('Our vision and goals'); ?></span>
+    </div>
+    <a class="pull-left" href="#">
+        <img src="<?php echo Pi::service('asset')->getAssetUrl('module/about', 'image/goal.png'); ?>">
+    </a>
+    <div class="media-body">
+        <div class="media-heading"><span><?php _e('Our vision'); ?></span></div>
+        <p><?php echo $content ?></p>
+    </div>
+    <div class="media-body goal">
+        <div class="media-heading"><span><?php _e('Our goal'); ?></span></div>
+        <p><?php echo $content ?></p>
+    </div>
+</div>
+
+<!--<div class="about-goal-box">
     <div class="box-header">
         <span><?php _e('Our vision and goals'); ?></span>
     </div>
@@ -40,7 +73,7 @@ $this->css($this->assetModule('css/index.css', 'about', false));
                    <p><?php echo $content ?></p></div>
         </div>
     </div>
-</div>
+</div>-->
 
 
 
