@@ -1,0 +1,96 @@
+
+
+    <?php foreach ($formGroups as $key => $group) {
+        if ($key == 'general') {
+    ?>
+    <table>
+        <tbody>
+    <?php   foreach ($group as $el) { ?>
+        <tr>
+        <?php
+            if ($el == 'submit' || $el == 'active') {
+                continue;
+            }
+
+            $element = $form->get($el);
+            $attributes = $element->getAttributes();
+            $options = $element->getOptions();
+
+            $type = $attributes['type'];
+            if ($type == 'hidden') {
+                echo $this->formElement($element);
+                continue;
+            }
+
+        ?>
+            <td>
+                <label class="control-label">
+                    <?php
+                    if (isset($options['label'])) {
+                        echo $this->formLabel($element);
+                    }
+                    ?>
+                </label>
+            </td>
+            <td>
+                <div class="form-group col-md-8">
+                <?php
+
+                    switch ($type) {
+                        case 'text':
+                        case 'textarea':
+                        case 'editor':
+                            $element->setAttribute("class", "form-control control-word");
+                            $element->setAttribute("style", "width: 100%");
+                            break;
+                    }
+
+                    echo $this->formElement($element);
+
+                ?>
+                </div>
+                <div class="col-md-4 help-block">
+                    <?php echo $this->formElementErrors($element); ?>
+                </div>
+            </td>
+        </tr>
+    <?php   } ?>
+    </tr>
+    </tbody>
+    </table>
+
+    <?php
+        }
+        elseif ($key == 'apps') {
+
+            foreach ($group as $akey => $solu_app) {
+                preg_match('/^solution_app\[([0-9])\]/i', $akey, $matchs);
+                if (isset($matchs[1])) {
+                    $apps['solution_app'][$matchs[1]][] = $solu_app;
+                }
+            }
+
+            $apps_list = $apps['solution_app'];
+            $solution_apps_keys = array_keys($solution_apps);
+
+
+            // Apps list form.
+            include('apps-list.phtml');
+
+        }
+        elseif ($key == 'cases') {
+
+            foreach ($group as $ckey => $solu_case) {
+                preg_match('/^solution_case\[([0-9])\]/i', $ckey, $matchs);
+                if (isset($matchs[1])) {
+                    $cases['solution_case'][$matchs[1]][] = $solu_case;
+                }
+            }
+
+            $cases_list = $cases['solution_case'];
+            $solution_cases_keys = array_keys($solution_cases);
+
+            // Apps list form.
+            include('cases-list.phtml');
+        }
+    } ?>
