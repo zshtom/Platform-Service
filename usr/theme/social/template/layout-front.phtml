@@ -86,12 +86,13 @@ $module = Pi::service('module')->current();
     <!-- Header: brand, slogan, user bar -->
     <div class="social-header">
         <div class="container">
+              <a href="<?php echo Pi::url('www').'/freetrial'; ?>" class="navbar-right btn btn-danger freetrial-btn">免费试用</a>
               <div class="navbar-right">
                   <?php echo $this->widget('search-search'); ?>
               </div>
-              <p class="control-label">
+              <p class="control-label contact">
                  <span class="fa fa-phone"></span>
-                 <span class="contact">400-691-1961</span>
+                 <span>400-691-1961</span>
               </p>
         </div>
     </div>
@@ -100,9 +101,7 @@ $module = Pi::service('module')->current();
     <div class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="<?php echo $this->url('home'); ?>"
-                   title="<?php echo _escape($slogan); ?>">
-                   <!--<?php echo _escape($sitename); ?>-->
+                <a class="navbar-brand" href="<?php echo $this->url('home'); ?>" title="<?php echo _escape($slogan); ?>">
                    <img src="<?php echo Pi::service('asset')->getAssetUrl('theme/social', 'image/logo.png');?>" alt="logo" />
                 </a>
                 <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -110,9 +109,10 @@ $module = Pi::service('module')->current();
                 </button>
             </div>
             <div class="navbar-collapse collapse">
+
                 <?php
                 $navigation = $this->nav('front');
-                echo $navigation->menu()->setUlClass('nav navbar-nav pi-navbar-nav navbar-right');
+                echo $navigation->menu()->setUlClass('nav navbar-nav pi-navbar-nav');
                 ?>
             </div>
         </div>

@@ -19,6 +19,10 @@ a{
 .nav-font{
     font-size: 14px;
 }
+.freetrial-btn{
+    margin: 8px 0 0 8px;
+    font-size: 16px;
+}
 /*设置距离调试控制台的外间距*/
 .pi-main-container {
     padding-bottom: 80px;
@@ -38,10 +42,18 @@ a{
     margin-bottom: 0px;
 }
 .social-header .contact{
-    padding: 0 5px;
+    padding: 0 22px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.social-header .contact .fa{
+    font-size: x-large;
 }
 .social-header form{
     padding: 9px 0;
+}
+.social-header .input-group{
+    width:220px;
 }
 .social-header .input-group-btn{
     width: 17%;
@@ -60,13 +72,13 @@ a{
 }
 .navbar-brand {
     float: left;
-    padding: 10px 15px
+    padding: 15px 15px 0px;
     font-size: 18px;
     line-height: 0;
-    height: 0;
+    height: 100%;
 }
 .navbar-collapse.collapse{
-    padding: 26px 0;
+    padding: 18px 0;
 }
 .navbar-default {
     background-color: #ffffff;
@@ -75,8 +87,10 @@ a{
 .navbar-default .navbar-nav>.active>a,
 .navbar-default .navbar-nav>.active>a:hover,
 .navbar-default .navbar-nav>.active>a:focus{
-    color: #FFF;
-    background-color: #7ca500;
+    /*color: #FFF;*/
+    /*background-color: #7ca500;*/
+    color: #ea5404;
+    background-color: #ffffff;
 }
 .navbar-toggle{
     margin-top: 20px;
@@ -99,7 +113,7 @@ a{
     background-color: #ea5404;
 }
 .nav>li>a{
-    padding: 6px 15px;
+    padding: 6px 0px;
     text-align: center;
 }
 /*navigation end*/
@@ -127,8 +141,11 @@ a{
         margin-right: 0px;
     }
 
-    .pi-navbar-nav li {
-        position: relative;
+    .pi-navbar-nav >li {
+        /*position: relative;*/
+        /*padding-bottom: 8px;*/
+
+        margin: 12px 16px 0px 16px;
         padding-bottom: 8px;
     }
 
