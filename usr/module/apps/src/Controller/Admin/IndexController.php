@@ -218,7 +218,7 @@ class IndexController extends ActionController
             $id = $this->params('id');
             $row = $this->getModel('apps')->find($id);
             $data = $row->toArray();
-            $form = new AppsForm('app-form');
+            $form = new AppsForm('app-form', $row->markup);
             $form->setData($data);
             $form->setAttribute(
                 'action',
@@ -230,7 +230,6 @@ class IndexController extends ActionController
             $data['image'] = $rootUrl . '/' . $data['icon'];
             $json_data = json_encode($data);
         }
-
         $this->view()->assign('form', $form);
         $this->view()->assign('content', $json_data);
         $this->view()->assign('title', _a('App edit'));
