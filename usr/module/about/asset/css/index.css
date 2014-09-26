@@ -1,14 +1,14 @@
 
-.media.about-intro-box,
-.media.about-goal-box {
+.about-intro-box,
+.about-goal-box {
     height: 262px;
 }
 
-.media.about-intro-box {
+.about-intro-box {
     margin-top: 45px;
 }
 
-.media.about-goal-box {
+.about-goal-box {
     margin-top: 54px;
 }
 
@@ -19,11 +19,11 @@
     color: #444;
 }
 
-.media a.pull-left {
+.pull-left {
     margin-right: 15px;
 }
 
-.media a.pull-left,
+.pull-left,
 .media-body{
     margin-top: 17px;
 }
