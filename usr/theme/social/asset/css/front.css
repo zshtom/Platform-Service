@@ -92,6 +92,11 @@ a{
     color: #ea5404;
     background-color: #ffffff;
 }
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    background-color: transparent;
+    color: #ea5404;
+}
 .navbar-toggle{
     margin-top: 20px;
     margin-bottom: 20px;
