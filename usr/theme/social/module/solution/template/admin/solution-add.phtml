@@ -39,8 +39,8 @@ $this->Backbone();
     <?php echo $this->form()->openTag($form) ?>
     <?php include ('solution-form.phtml');?>
 
-    <div>
-    <?php $activeElement = $form->get('active'); ?>
+    <div class="solution-sub">
+    <?php $activeElement = $form->get('active');?>
     <?php $element = $form->get('submit'); ?>
         <div>
         <?php echo $this->formElement($activeElement) ?>
