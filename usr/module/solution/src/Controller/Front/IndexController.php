@@ -100,6 +100,9 @@ class IndexController extends ActionController
 
         // Solution nav list.
         $nav = Pi::registry('nav', $this->getModule())->read();
+        foreach ($nav as $key => $value) {
+            $nav[$key]['url'] = $value['url'].'/'.$value['id'];
+        }
         // Add home page ontop list.
         $nav = $nav_main + $nav;
 
@@ -111,7 +114,6 @@ class IndexController extends ActionController
         // Get solution apps list.
         $solution_apps = $this->_getAppsListBySolution($case_row);
 
-
         if ($row && $row->active) {
             if (isset($nav[$row->id])) {
                 $nav[$row->id]['active'] = 1;
@@ -120,6 +122,7 @@ class IndexController extends ActionController
         } else {
             $nav[0]['active'] = 1;
         }
+        // var_dump($nav);exit;
 
         $this->view()->assign('solution_cases', $solution_cases);
         $this->view()->assign('solution_apps', $solution_apps);
