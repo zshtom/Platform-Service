@@ -122,7 +122,6 @@ class IndexController extends ActionController
         } else {
             $nav[0]['active'] = 1;
         }
-        // var_dump($nav);exit;
 
         $this->view()->assign('solution_cases', $solution_cases);
         $this->view()->assign('solution_apps', $solution_apps);
