@@ -95,13 +95,13 @@ class IndexController extends ActionController
         $nav_main[0] = array(
             'id'       => 0,
             'title'    => __('Solutions Description'),
-            'url'      => '/' . $this->getModule(),
+            'url'      => Pi::url($this->getModule()),
         );
 
         // Solution nav list.
         $nav = Pi::registry('nav', $this->getModule())->read();
         foreach ($nav as $key => $value) {
-            $nav[$key]['url'] = $value['url'].'/'.$value['id'];
+            $nav[$key]['url'] = Pi::url($this->getModule()).'/'.$value['id'];
         }
         // Add home page ontop list.
         $nav = $nav_main + $nav;
