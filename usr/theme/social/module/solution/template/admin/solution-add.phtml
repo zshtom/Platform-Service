@@ -38,7 +38,7 @@ $this->Backbone();
 <div style="clear: left">
     <?php echo $this->form()->openTag($form) ?>
     <?php include ('solution-form.phtml');?>
-
+    <?php  //include $this->templateModule('admin/solution-form.phtml'); ?>
     <div class="solution-sub">
     <?php $activeElement = $form->get('active');?>
     <?php $element = $form->get('submit'); ?>
