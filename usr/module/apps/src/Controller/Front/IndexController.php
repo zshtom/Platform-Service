@@ -30,6 +30,9 @@ class IndexController extends ActionController
                     $description,
                     'html'
             );
+            foreach ($apps_list as $key => $value) {
+                $apps_list[$key]['url'] = Pi::url().$value['url'];
+            }
 
             $title      = __('Apps Description');
             $content    = $content;
@@ -92,6 +95,9 @@ class IndexController extends ActionController
 
         // Apps nav list.
         $nav = Pi::registry('nav', $this->getModule())->read();
+        foreach ($nav as $key => $value) {
+            $nav[$key]['url'] = Pi::url($this->getModule()).'/'.$value['id'];
+        }
 
         // Add home page ontop list.
         $nav = $nav_main + $nav;
