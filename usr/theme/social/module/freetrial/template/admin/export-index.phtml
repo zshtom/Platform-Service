@@ -1,7 +1,7 @@
 <?php
     $this->jQuery('extension/fileupload-min.js');
     $locale = Pi::config('locale');
-    if (false !== strpos('-', $locale)) {
+    if (strpos($locale, '-')) {
         $list = explode('-', $locale, 2);
         $locale = $list[0] . '-' . strtoupper($list[1]);
     }
@@ -12,8 +12,6 @@
         $datepickerLocale,
         'js/bootstrap-typeahead.js',
     ));
-    $this->css($this->assetModule('script/front.css'));
-    $this->Backbone();
     $uid = Pi::user()->getId();
 ?>
 <?php

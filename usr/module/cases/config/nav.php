@@ -8,13 +8,14 @@
  */
 
 return array(
-    'meta'  => array(
-        'site'  => array(
-            'title'     => _t('Custom site navigation'),
-            'section'   => 'front',
-        ),
-    ),
+    // 'meta'  => array(
+    //     'site'  => array(
+    //         'title'     => _t('Custom site navigation'),
+    //         'section'   => 'front',
+    //     ),
+    // ),
     'item'  => array(
+        'front'     => true,
         'admin'     => array(
             'list'     => array(
                 'label'         => _t('Case list'),

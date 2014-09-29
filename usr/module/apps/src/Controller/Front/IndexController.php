@@ -30,6 +30,9 @@ class IndexController extends ActionController
                     $description,
                     'html'
             );
+            foreach ($apps_list as $key => $value) {
+                $apps_list[$key]['url'] = $value['url'];
+            }
 
             $title      = __('Apps Description');
             $content    = $content;
