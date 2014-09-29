@@ -125,7 +125,7 @@ class Navigation
         $nav = array(
             'pages'     => array(),
             'route'     => 'default',
-            'module'    => 'solution',
+            'module'    => 'cases',
             'label'     => __('Cases'),
         );
 
