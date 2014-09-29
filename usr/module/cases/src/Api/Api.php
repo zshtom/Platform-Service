@@ -60,7 +60,8 @@ class Api extends AbstractApi
      */
     public function caseList()
     {
-        $config  = Pi::config('', $this->module);
+        $module = $this->getModule();
+        $config  = Pi::config('', $module);
         $model  = Pi::model('cases', $this->getModule());
         $select = $model->select();
         $select->columns(array('id', 'title', 'summery', 'icon', 'time_created'));
@@ -77,15 +78,13 @@ class Api extends AbstractApi
                     'summery'   => $row['summery'],
                     'icon'      => $upload_path . $row['icon'],
                     'time_created' => $row['time_created'],
-                    'url'       => Pi::service('url')->assemble(
-                                    '',
-                                    array($this->getModule(), 'id' => $row['id'])
-                               ),
+                    'url'       => Pi::url('').'/'.$this->module.'/index/detail/id-'.$row['id'],
                     'time_created'  => $row['time_created'],
                 );
                 $list[$id] = $item;
             }
         }
+
         return $list;
     }
 

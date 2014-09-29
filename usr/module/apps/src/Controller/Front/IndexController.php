@@ -31,7 +31,7 @@ class IndexController extends ActionController
                     'html'
             );
             foreach ($apps_list as $key => $value) {
-                $apps_list[$key]['url'] = Pi::url().$value['url'];
+                $apps_list[$key]['url'] = $value['url'];
             }
 
             $title      = __('Apps Description');

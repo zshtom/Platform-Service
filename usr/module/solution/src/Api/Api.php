@@ -107,10 +107,7 @@ class Api extends AbstractApi
                 'summery'   => $row['summery'],
                 'slug'      => $row['slug'],
                 'icon'      => $upload_path . $row['icon'],
-                'url'       => Pi::service('url')->assemble(
-                    $module,
-                    array($this->module, 'id' => $row['id'])
-                ),
+                'url'       => Pi::url('').'/'.$this->module.'/'.$id,
             );
             $list[$id] = $item;
         }
@@ -128,7 +125,6 @@ class Api extends AbstractApi
     public function getCasesList($solution = 0)
     {
         $list = array();
-
         $where = array(
             'solution'  => $solution,
         );
@@ -137,13 +133,22 @@ class Api extends AbstractApi
 
         $model  = Pi::model('solution_case', $this->getModule());
         $select = $model->select()->order(array('id DESC'));
-        $select = $model->select()->where($where);
+        if($solution != -1) {
+            $select = $model->select()->where($where);
+        }
+
         $rowset = $model->selectWith($select);
 
         foreach ($rowset as $row) {
             $id = (int) $row['case'];
+            $model = Pi::model('cases', 'cases')->find($id);
+            $case = $model->toArray();
             $item = array(
-                'id' => $id,
+                'id'        => $id,
+                'title'     => $case['title'],
+                'summery'   => $case['summery'],
+                'content'   => $case['content'],
+                'icon'      => Pi::url('upload') . '/cases/' . $case['icon'],
             );
             $list[$id] = $item;
         }
