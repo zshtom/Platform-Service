@@ -92,6 +92,9 @@ class IndexController extends ActionController
 
         // Apps nav list.
         $nav = Pi::registry('nav', $this->getModule())->read();
+        foreach ($nav as $key => $value) {
+            $nav[$key]['url'] = Pi::url($this->getModule()).'/'.$value['id'];
+        }
 
         // Add home page ontop list.
         $nav = $nav_main + $nav;
