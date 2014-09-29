@@ -8,12 +8,12 @@
  */
 
 return array(
-    'meta'  => array(
-        'site'  => array(
-            'title'     => _t('Custom site navigation in Solution module'),
-            'section'   => 'front',
-        ),
-    ),
+    // 'meta'  => array(
+    //     'site'  => array(
+    //         'title'     => _t('Custom site navigation in Solution module'),
+    //         'section'   => 'front',
+    //     ),
+    // ),
     'item'  => array(
         'front'     => true,
         'admin'     => array(
@@ -36,5 +36,15 @@ return array(
                 'action'        => 'add',
             ),
         ),
+//         'site' => array(
+//             'solution'          => array(
+//                 'label'         => _a('Solution'),
+// //                 'uri'           => '/solution',
+//                 'route'         => 'solution',
+//                 'controller'    => 'index',
+//                 'action'        => 'index',
+//                 'callback'      => array('navigation', 'solutions'),
+//             ),
+//         ),
     ),
 );

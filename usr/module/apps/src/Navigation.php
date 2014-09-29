@@ -13,26 +13,65 @@ use Pi;
 
 class Navigation
 {
+    public static function front($module)
+    {
+        $nav = array(
+            'parent' => array(),
+        );
+
+        $modules = Pi::registry('modulelist')->read('active');
+        unset($modules['system']);
+        unset($modules['common']);
+        foreach ($modules as $key => $data) {
+            $node = Pi::registry('navigation')->read($key.'-front');
+            if (!is_array($node)) {
+                continue;
+            }
+
+            $nav['parent'][$key] = array(
+                'label'     => $data['title'],
+                'route'     => 'default',
+                'module'    => $key,
+                'pages'     => $node,
+            );
+        }
+        if(isset($modules['apps'])){
+            $nav['parent']['apps'] = Navigation::apps();
+        }
+        if(isset($modules['solution'])){
+            $nav['parent']['solution'] = Navigation::solutions();
+        }
+        if(isset($modules['cases'])){
+            $nav['parent']['cases'] = Navigation::cases();
+        }
+        if (empty($nav['parent'])) {
+            $nav['visible'] = 0;
+        }
+
+        return $nav;
+    }
     public static function apps($module)
     {
         $nav = array(
-            'pages' => array(),
+            'pages'     => array(),
+            'route'     => 'default',
+            'module'    => 'apps',
+            'label'     => __('Apps'),
         );
 
-        // Get the nav from list because active not set in registry.
+        $nav_list = array();
+
         try {
-            $apps_list  = Pi::api('api', $module)->getAppsList(1);
+            $nav_list = Pi::api('api', 'apps')->getAppsList(1);
         } catch (\Exception $exception) {
-            return '';
+            return false;
         }
 
-//         $apps_list = Pi::registry($module, $module)->read();
-
-        foreach ($apps_list as $key => $data) {
+        foreach ($nav_list as $key => $data) {
             $nav['pages'][$key] = array(
                 'label'     => $data['title'],
                 'module'    => 'apps',
-                'uri'     => $data['url'],
+                'uri'     => Pi::url('').$data['url'],
             );
         }
 
@@ -54,7 +93,10 @@ class Navigation
     public static function solutions($module)
     {
         $nav = array(
-            'pages' => array(),
+            'pages'     => array(),
+            'route'     => 'default',
+            'module'    => 'solution',
+            'label'     => __('Solution'),
         );
 
         $nav_list = array();
@@ -70,8 +112,36 @@ class Navigation
         foreach ($nav_list as $key => $data) {
             $nav['pages'][$key] = array(
                 'label'     => $data['title'],
-                'module'    => 'apps',
-                'uri'     => $data['url'],
+                'module'    => 'solution',
+                'uri'     => Pi::url('').$data['url'],
+            );
+        }
+
+        return $nav;
+    }
+
+    public static function cases($module)
+    {
+        $nav = array(
+            'pages'     => array(),
+            'route'     => 'default',
+            'module'    => 'solution',
+            'label'     => __('Cases'),
+        );
+
+        $nav_list = array();
+
+        try {
+            $nav_list = Pi::api('api', 'cases')->caseList();
+        } catch (\Exception $exception) {
+            return false;
+        }
+
+        foreach ($nav_list as $key => $data) {
+            $nav['pages'][$key] = array(
+                'label'     => $data['title'],
+                'module'    => 'cases',
+                'uri'     => Pi::url('').$data['url'],
             );
         }
 
