@@ -289,8 +289,12 @@ $module = Pi::service('module')->current();
             <?php } ?>
         </div>    
     </div>
-
+    <div class="back-to-top">
+        <span class="caret"></span>
+        <a class="back-btn">回到顶部</a>
+    </div>
     <?php $this->footScript()->appendFile($this->assetTheme('js/front.js')); ?>
+    <?php $this->footScript()->appendFile($this->assetTheme('js/back-to-top.js')); ?>
     <script>
         $(function(){
             $('#weixin').popover({
@@ -298,7 +302,7 @@ $module = Pi::service('module')->current();
                 content:"<img src= '<?php echo Pi::service('asset')->getAssetUrl('theme/social', 'image/s-erWm.jpg');?>'/>",
                 html: true,
                 placement: "top",
-                trigger: "click hover",
+                trigger: "click hover"
             }).on("mouseout",function(){
                 $(this).popover('hide');
             });

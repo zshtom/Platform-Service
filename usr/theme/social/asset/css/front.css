@@ -14,9 +14,41 @@ html {
 }
 a{
     color: #444444;
-    text-decoration: none
+    text-decoration: none;
+    cursor: pointer;
 }
-.nav-font{
+a:hover{
+    color: #fff;
+    text-decoration: none;
+}
+
+/******************回到顶部 start*******************/
+.back-to-top{
+    bottom: 60px;
+    display: none;
+    position: fixed;
+    right: 50px;
+
+}
+.back-to-top .back-btn{
+    background-color: #ed5e18;
+    padding: 16px 12px;
+    width: 38px;
+    display: block;
+    border-radius: 3px;
+}
+.back-to-top .caret{
+    border-color: transparent transparent #ed5e18;
+    border-style: solid;
+    border-width: 6px 17px 10px;
+    bottom: 0;
+    z-index: 1001;
+}
+.back-to-top a{
+    color: #fff;
+}
+/******************回到顶部 end*******************/
+.nav-font,.back-to-top{
     font-size: 14px;
 }
 .freetrial-btn{
