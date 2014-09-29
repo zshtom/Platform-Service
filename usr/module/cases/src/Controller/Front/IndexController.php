@@ -42,7 +42,7 @@ class IndexController extends ActionController
 
         if(empty($solutionId)) {
             $solutionId = current(array_keys($solutionList));
-            $solutionList[$solutionId]['active'] = true;
+            //$solutionList[$solutionId]['active'] = true;
         }
 
         $solutionList = array_values($solutionList);
