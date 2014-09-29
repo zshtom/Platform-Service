@@ -22,6 +22,7 @@ class Navigation
         $modules = Pi::registry('modulelist')->read('active');
         unset($modules['system']);
         unset($modules['common']);
+        unset($modules['freetrial']);
         foreach ($modules as $key => $data) {
             $node = Pi::registry('navigation')->read($key.'-front');
             if (!is_array($node)) {
@@ -32,6 +33,7 @@ class Navigation
                 'label'     => $data['title'],
                 'route'     => 'default',
                 'module'    => $key,
+                'uri'       => Pi::url('').'/'.$key,
                 'pages'     => $node,
             );
         }
@@ -50,13 +52,14 @@ class Navigation
 
         return $nav;
     }
-    public static function apps($module)
+    public static function apps()
     {
         $nav = array(
             'pages'     => array(),
             'route'     => 'default',
             'module'    => 'apps',
             'label'     => __('Apps'),
+            'uri'       =>  Pi::url('').'/apps/',
         );
 
         $nav_list = array();
@@ -71,7 +74,7 @@ class Navigation
             $nav['pages'][$key] = array(
                 'label'     => $data['title'],
                 'module'    => 'apps',
-                'uri'     => Pi::url('').$data['url'],
+                'uri'     => $data['url'],
             );
         }
 
@@ -90,13 +93,14 @@ class Navigation
      * @return array
      *   - <multitype:multitype: , multitype:string unknown >
      */
-    public static function solutions($module)
+    public static function solutions()
     {
         $nav = array(
             'pages'     => array(),
             'route'     => 'default',
             'module'    => 'solution',
             'label'     => __('Solution'),
+            'uri'       => Pi::url('').'/solution/',
         );
 
         $nav_list = array();
@@ -113,20 +117,21 @@ class Navigation
             $nav['pages'][$key] = array(
                 'label'     => $data['title'],
                 'module'    => 'solution',
-                'uri'     => Pi::url('').$data['url'],
+                'uri'     => $data['url'],
             );
         }
 
         return $nav;
     }
 
-    public static function cases($module)
+    public static function cases()
     {
         $nav = array(
             'pages'     => array(),
             'route'     => 'default',
             'module'    => 'cases',
             'label'     => __('Cases'),
+            'uri'       => Pi::url('').'/cases/',
         );
 
         $nav_list = array();
@@ -138,13 +143,12 @@ class Navigation
         }
 
         foreach ($nav_list as $key => $data) {
-            $nav['pages'][$key] = array(
+            $nav['pages'][] = array(
                 'label'     => $data['title'],
                 'module'    => 'cases',
-                'uri'     => Pi::url('').$data['url'],
+                'uri'       => Pi::url('').'/cases/index/detail/id-'.$data['id'],
             );
         }
-
         return $nav;
     }
 }
