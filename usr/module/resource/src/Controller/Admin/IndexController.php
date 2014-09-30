@@ -62,7 +62,7 @@ class IndexController extends ActionController
 //            d($rename);
             $uploader = Pi::service('file')->upload($options, true);
             $uploader->setExtension('pdf');
-            if (!$uploader->isValid()) {
+            if ($uploader->isValid()) {
                 $uploader->receive();
                 $savedFilename = $uploader->getUploaded('upload');
             } else {
