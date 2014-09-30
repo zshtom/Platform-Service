@@ -8,6 +8,12 @@ html {
 body {
  padding-top: 50px;
 }
+.btn:focus, .btn:active:focus, .btn.active:focus{
+     outline: none;
+ }
+*:focus, *:active:focus, *.active:focus{
+    outline: none;
+}
 
 a {
   cursor: pointer;
