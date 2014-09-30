@@ -13,16 +13,67 @@ use Pi;
 
 class Navigation
 {
-    public static function front($module)
+    public static function front()
     {
         $nav = array(
             'parent' => array(),
         );
 
+        $nav['parent']['nav-home'] = array(
+            'order'         => -100,
+            'label'         => __('Nav Home'),
+            'route'         => 'home',
+
+            'pages'         => array(
+                'account'   => array(
+                    'label'         => __('Profile'),
+                    'route'         => 'sysuser',
+                    'controller'    => 'profile',
+
+                    'pages'         => array(
+                        'login'     => array(
+                            'label'         => __('Login'),
+                            'route'         => 'sysuser',
+                            'controller'    => 'login',
+                            'visible'       => 0,
+                        ),
+
+                        'register'     => array(
+                            'label'         => __('Register'),
+                            'route'         => 'sysuser',
+                            'controller'    => 'register',
+                            'visible'       => 0,
+                        ),
+
+                        'password'     => array(
+                            'label'         => __('Password'),
+                            'route'         => 'sysuser',
+                            'controller'    => 'password',
+                            'visible'       => 0,
+                        ),
+                    ),
+                ),
+                'admin'     => array(
+                    'label'     => __('Admin Stage'),
+                    'route'     => 'home',
+                    'section'   => 'admin',
+                    'target'    => '_blank',
+                ),
+                'feed'     => array(
+                    'label'     => __('RSS Feed'),
+                    'route'     => 'feed',
+                    'section'   => 'feed',
+                    'target'    => '_blank',
+                ),
+            ),
+        );
+
+
         $modules = Pi::registry('modulelist')->read('active');
         unset($modules['system']);
         unset($modules['common']);
         unset($modules['freetrial']);
+        unset($modules['search']);
         foreach ($modules as $key => $data) {
             $node = Pi::registry('navigation')->read($key.'-front');
             if (!is_array($node)) {
@@ -39,12 +90,15 @@ class Navigation
         }
         if(isset($modules['apps'])){
             $nav['parent']['apps'] = Navigation::apps();
+            $nav['parent']['apps']['label'] = $modules['apps']['title'];
         }
         if(isset($modules['solution'])){
             $nav['parent']['solution'] = Navigation::solutions();
+            $nav['parent']['solution']['label'] = $modules['solution']['title'];
         }
         if(isset($modules['cases'])){
             $nav['parent']['cases'] = Navigation::cases();
+            $nav['parent']['cases']['label'] = $modules['cases']['title'];
         }
         if (empty($nav['parent'])) {
             $nav['visible'] = 0;
@@ -58,7 +112,6 @@ class Navigation
             'pages'     => array(),
             'route'     => 'default',
             'module'    => 'apps',
-            'label'     => __('Apps'),
             'uri'       =>  Pi::url('').'/apps/',
         );
 
@@ -99,7 +152,6 @@ class Navigation
             'pages'     => array(),
             'route'     => 'default',
             'module'    => 'solution',
-            'label'     => __('Solution'),
             'uri'       => Pi::url('').'/solution/',
         );
 
@@ -130,7 +182,6 @@ class Navigation
             'pages'     => array(),
             'route'     => 'default',
             'module'    => 'cases',
-            'label'     => __('Cases'),
             'uri'       => Pi::url('').'/cases/',
         );
 
