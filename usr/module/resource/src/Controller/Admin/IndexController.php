@@ -44,7 +44,6 @@ class IndexController extends ActionController
 
     public function addAction()
     {
-        $messages = array();
         $form = new BootstrapForm('bootstrap');
 
         if ($this->request->isPost()) {
@@ -62,53 +61,50 @@ class IndexController extends ActionController
 //            d($rename);
             $uploader = Pi::service('file')->upload($options, true);
             $uploader->setExtension('pdf');
-            if (!$uploader->isValid()) {
+            if ($uploader->isValid()) {
                 $uploader->receive();
                 $savedFilename = $uploader->getUploaded('upload');
             } else {
                 $errorMessages = $uploader->getMessages();
             }
 
+            if(isset($savedFilename)) {         
+                if ($form->isValid()) {
+                    $data = $form->getData();
+                    $iconImages = $this->setIconPath(array($data));
 
-            if ($form->isValid()) {
-                $messages[] = _a('Form submitted successfully.');
-            }
-            if (!$form->isValid()) {
-                $this->view()->assign('form', $form);
-            }
-            $data = $form->getData();
-            
-            $iconImages = $this->setIconPath(array($data));
+                    if (isset($iconImages[0]['image'])) {
+                        $data['icon'] = $iconImages[0]['image'];
+                    }
 
-            if (isset($iconImages[0]['image'])) {
-                $data['icon'] = $iconImages[0]['image'];
-            }
+                    $values = array(
+                        'sid' => $data['sid'],
+                        'title' => $data['title'],
+                        'description' => $data['description'],
+                        'icon' => $data['icon'],
+                        'filename' => $savedFilename,
+                        'case_time' => time(),
+                        'seo_title' => $data['seo_title'],
+                        'seo_keywords' => $data['seo_keywords'],
+                        'seo_description' => $data['seo_description']
+                    );
+                    $row = $this->getModel('resource')->createRow($values);
+                    $row->save();
 
-            $values = array(
-                'sid' => $data['sid'],
-                'title' => $data['title'],
-                'description' => $data['description'],
-                'icon' => $data['icon'],
-                'filename' => $savedFilename,
-                'case_time' => time(),
-                'seo_title' => $data['seo_title'],
-                'seo_keywords' => $data['seo_keywords'],
-                'seo_description' => $data['seo_description']
-            );
-            $row = $this->getModel('resource')->createRow($values);
-            $row->save();
-            if ($row) {
-                $message = _a('Resource data saved successfully');
-                return $this->jump(array('action' => 'index'), $message);
-            }
-            $form = new BootstrapForm('bootstrap');
-            if (!$row->id) {
-                return false;
-            }
+                    if ($row->id) {
+                        $message = _a('Resource data saved successfully');
+                        return $this->jump(array('action' => 'index'), $message);
+                    } else {
+                        $message = _a('Resource data cannot be saved');
+                    }
+                }
+            } else {
+                $message = _a('There is no file to be uploaded');
+            } 
         }
         $this->view()->assign(array(
             'form' => $form,
-            'messages' => $messages,
+            'messages' => $message,
         ));
         $this->view()->setTemplate('product_module-add');
     }
