@@ -5,23 +5,17 @@
         $list = explode('-', $locale, 2);
         $locale = $list[0] . '-' . strtoupper($list[1]);
     }
-    $datepickerLocale = sprintf('datepicker/locales/bootstrap-datepicker.%s.js', $locale);
-    $this->bootstrap(array(
+    //$datepickerLocale = sprintf('datepicker/locales/bootstrap-datepicker.%s.js', $locale);
+    /*$this->bootstrap(array(
         'datepicker/datepicker.css',
         'datepicker/bootstrap-datepicker.js',
         $datepickerLocale,
         'js/bootstrap-typeahead.js',
-    ));
-    $uid = Pi::user()->getId();
+    ));*/
+    $this->css(Pi::service('asset')->getPublicUrl('vendor/bootstrap/datepicker/datepicker.css'));
+    $this->js(Pi::service('asset')->getPublicUrl('vendor/bootstrap/datepicker/bootstrap-datepicker.js'));
+    $this->js(Pi::service('asset')->getPublicUrl('vendor/bootstrap/datepicker/locales/bootstrap-datepicker.zh-CN.js'));
 ?>
-<?php
-    echo __("From:");              echo __("To： <br>");
-?>
-<form action="<?php $this->url('admin', array('action' => 'index')) ?>" method="POST">
-    <input type="text" id="start" name="start">
-    <input type="text" id="end" name="end">
-    <input name="submit" type="submit" value="<?php echo __('Search'); ?>"  onclick=""/>
-</form>
 <script>
    $(document).ready(function(){
      $('#start').datepicker({
@@ -50,8 +44,15 @@
      });
    });
 </script>
-<a href="<?php echo $this->url('admin', array('action' => 'export')) ?>"><?php echo __('Export') ?></a>
-<table>
+<form action="<?php $this->url('admin', array('action' => 'index')) ?>" method="POST" class="form-inline">
+    <?php echo __("From:");?>
+    <input type="text" id="start" name="start" class="form-control">
+    <?php echo __("To： <br>");?>
+    <input type="text" id="end" name="end" class="form-control">
+    <input class="btn btn-primary" name="submit" type="submit" value="<?php echo __('Search'); ?>"  onclick=""/>
+    <a class="btn btn-primary" href="<?php echo $this->url('admin', array('action' => 'export')) ?>"><?php echo __('Export') ?></a>
+</form>
+<table class="table table-striped">
     <tr>
         <th><?php echo __('Id') ?></th>
         <th><?php echo __('Name') ?></th>
@@ -70,6 +71,5 @@
             <td><?php echo $item['email'] ?></td>
             <td><?php echo $item['phone'] ?></td>
         </tr>
-    <?php }
-    ?>
+    <?php }?>
 </table>

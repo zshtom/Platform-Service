@@ -1,29 +1,27 @@
 <?php
-$this->jquery();
+$this->css($this->assetTheme('css/freetrial.css'));
 ?>
-<!--<script  type="text/javascript" src="jquery-2.1.1.min.js"></script>-->
 <script language="JavaScript">
-    $("document").ready(function(){
-        $("#btn1").click(function(){
-            $("input[name='checkbox']").each(function(){
-//                this.checked = true;
-                $(this).attr("checked",true);
-            })
+    $(function(){
+        $("#select-group").on("click","a",function(e){
+            var ckList = $("input[name='checkbox']");
+            if(this.innerHTML == "全选"){
+                ckList.each(function(){
+                    $(this).prop("checked",true);
+                })
+            }else{
+                ckList.each(function(){
+                    $(this).prop("checked",false);
+                })
+            }
         })
-        $("#btn2").click(function(){
-            $("input[name='checkbox']").each(function(){
-               $(this).attr("checked",false);
-            })
-        })
-        $("#btn3").click(function(){
+        $("#del-all").click(function(){
             var str="";
-            var ids="";
             var url="<?php echo $this->url("home") ?>";
             $("[name='checkbox'][checked]").each(function(){
                 str+=$(this).val()+",";
             })
-            //alert(usr) ;
-
+            //alert(url) ;
             $.post(
                 url + 'freetrial/index/batchdelete/',
                 {
@@ -38,23 +36,31 @@ $this->jquery();
         })
     })
 </script>
-
-<form action="<?php $this->url('admin', array('action' => 'index')) ?>" method="POST">
-    <select name="type">
+<div class="row freetrail">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <ul class="nav nav-pills pull-left" role="tablist" id="select-group">
+                    <li role="presentation"><a href="#" role="tab" data-toggle="tab">全选</a></li>
+                    <li role="presentation"><a href="#"  role="tab" data-toggle="tab">反选</a></li>
+                </ul>
+                <input id="del-all" type="button" class="btn btn-link" value="批量删除">
+            </div>
+        </div>
+    </div>
+</div>
+<form action="<?php $this->url('admin', array('action' => 'index')) ?>" method="POST" role="form" class="form-inline">
+    <select name="type" class="form-control">
         <option value="name" <?php echo $type == 'name' ? 'selected' : ''; ?>><?php echo __('Name') ?></option>
         <option value="company" <?php echo $type == 'company' ? 'selected' : ''; ?>><?php echo __('Company') ?></option>
         <option value="phone" <?php echo $type == 'phone' ? 'selected' : ''; ?>><?php echo __('Phone') ?></option>
     </select>
-
-    <input name="keyword" type="text" value="<?php echo $keyword ?>" />
-    <input name="submit" type="submit" value="<?php echo __('Search'); ?>" /><br>
-
-    <input type="button" id="btn1" value="全选">
-    <input type="button" id="btn2" value="反选">
-   <input type="button" id="btn3" value="批量删除">
+    <input class="form-control" name="keyword" type="text" value="<?php echo $keyword ?>" />
+    <input class="btn btn-primary" name="submit" type="submit" value="<?php echo __('Search'); ?>" /><br>
 </form>
-<table>
+<table class="table table-striped">
     <tr>
+        <th></th>
         <th><?php echo __('Id') ?></th>
         <th><?php echo __('Name') ?></th>
         <th><?php echo __('Title') ?></th>
@@ -62,6 +68,7 @@ $this->jquery();
         <th><?php echo __('Email') ?></th>
         <th><?php echo __('Phone') ?></th>
         <th><?php echo __('Time') ?></th>
+        <th>操作</th>
     </tr>
     <?php foreach ($pages as $page) { ?>
         <tr>
