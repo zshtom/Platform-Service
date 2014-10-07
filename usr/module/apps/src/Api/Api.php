@@ -110,7 +110,7 @@ class Api extends AbstractApi
                 'time_created'  => $row['time_created'],
                 'name'          => $row['name'],
                 'title'         => $row['title'],
-                'summery'       => $row['summery'],
+                'summary'       => $row['summary'],
                 'icon'          => $upload_path . '/' .$row['icon'],
                 'slug'          => $row['slug'],
                 'url'           => Pi::url('').'/'.$module.'/'.$id,

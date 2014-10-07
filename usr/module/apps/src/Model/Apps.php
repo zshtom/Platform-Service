@@ -25,6 +25,6 @@ class Apps extends Model
         'id', 'name', 'title', 'slug', 'content', 'markup', 'active',
         'uid', 'time_created', 'time_updated', 'seo_title', 'seo_keywords', 'seo_description',
         'nav_order', 'theme', 'layout',
-        'icon', 'summery', 'time_release',
+        'icon', 'summary', 'time_release',
     );
 }
