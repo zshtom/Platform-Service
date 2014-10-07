@@ -4,14 +4,14 @@
 -- Table structure for table `solution`
 --
 
-CREATE TABLE IF NOT EXISTS `{solution}` (
+CREATE TABLE `{solution}` (
   `id`              int(10)     unsigned    NOT NULL AUTO_INCREMENT,
   `uid`             int(10)     unsigned    NOT NULL DEFAULT '0',
   `name`            varchar(64)             DEFAULT NULL,
   `title`           varchar(255)            NOT NULL DEFAULT '',
   `time_release`    int(10)     unsigned    NOT NULL DEFAULT '0',
   `icon`            varchar(255)            NOT NULL,
-  `summery`         varchar(255)            NOT NULL,
+  `summary`         varchar(255)            NOT NULL,
   `content`         text,
   `nav_order`       smallint(5) unsigned    NOT NULL DEFAULT '0',
   `time_created`    int(10)     unsigned    NOT NULL DEFAULT '0',
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `{solution}` (
   UNIQUE KEY `name` (`name`)
 );
 
-CREATE TABLE IF NOT EXISTS `{solution_app}` (
+CREATE TABLE `{solution_app}` (
   `id`              int(10)                 NOT NULL AUTO_INCREMENT,
   `solution`        int(10)                 NOT NULL DEFAULT '0',
   `app`             int(10)                 NOT NULL DEFAULT '0',
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `{solution_app}` (
   PRIMARY KEY (`id`)
 );
 
-CREATE TABLE IF NOT EXISTS `{solution_case}` (
+CREATE TABLE `{solution_case}` (
   `id`              int(10)                 NOT NULL AUTO_INCREMENT,
   `solution`        int(10)                 NOT NULL DEFAULT '0',
   `case`            int(10)                 NOT NULL DEFAULT '0',

@@ -4,14 +4,14 @@
 -- Table structure for table `apps`
 --
 
-CREATE TABLE IF NOT EXISTS `{apps}` (
+CREATE TABLE `{apps}` (
   `id`              int(10)     unsigned    NOT NULL AUTO_INCREMENT,
   `uid`             int(10)     unsigned    NOT NULL DEFAULT '0',
   `name`            varchar(64)             DEFAULT NULL,
   `title`           varchar(255)            NOT NULL DEFAULT '',
   `time_release`    int(10)     unsigned    NOT NULL DEFAULT '0',
   `icon`            varchar(255)            NOT NULL,
-  `summery`         varchar(255)            NOT NULL,
+  `summary`         varchar(255)            NOT NULL,
   `content`         text,
   `markup`          varchar(64)             NOT NULL DEFAULT 'html',
   `nav_order`       smallint(5) unsigned    NOT NULL DEFAULT '0',

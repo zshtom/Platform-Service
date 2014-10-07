@@ -2,7 +2,7 @@ CREATE TABLE `{cases}` (
   `id`              INT(10)                 NOT NULL AUTO_INCREMENT,
   `uid`             INT(10)                 unsigned NOT NULL DEFAULT '0' COMMENT 'Operatior ID',
   `title`           VARCHAR(255)            NOT NULL DEFAULT '' COMMENT 'Case Title',
-  `summery`         VARCHAR(255)            NOT NULL DEFAULT '' COMMENT 'Case summery',
+  `summary`         VARCHAR(255)            NOT NULL DEFAULT '' COMMENT 'Case summary',
   `content`         TEXT                    COMMENT 'Case description',
   `icon`            VARCHAR(255)            NOT NULL COMMENT 'thumb pic file name',
   `order`           INT(2)                  unsigned NOT NULL DEFAULT '0' COMMENT 'Case order',
