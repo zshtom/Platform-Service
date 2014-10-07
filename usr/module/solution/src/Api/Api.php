@@ -104,7 +104,7 @@ class Api extends AbstractApi
                 'id'        => $id,
                 'name'      => $row['name'],
                 'title'     => $row['title'],
-                'summery'   => $row['summery'],
+                'summary'   => $row['summary'],
                 'slug'      => $row['slug'],
                 'icon'      => $upload_path . $row['icon'],
                 'url'       => Pi::url('').'/'.$this->module.'/'.$id,
@@ -146,7 +146,7 @@ class Api extends AbstractApi
             $item = array(
                 'id'        => $id,
                 'title'     => $case['title'],
-                'summery'   => $case['summery'],
+                'summary'   => $case['summary'],
                 'content'   => $case['content'],
                 'icon'      => Pi::url('upload') . '/cases/' . $case['icon'],
             );

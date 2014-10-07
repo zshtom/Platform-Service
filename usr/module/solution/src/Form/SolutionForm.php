@@ -38,7 +38,7 @@ class SolutionForm extends BaseForm
     }
 
     public function getInputElements(){
-        return array('title', 'nav_order', 'name', 'slug', 'summery', 'content');
+        return array('title', 'nav_order', 'name', 'slug', 'summary', 'content');
     }
 
     public function getSeoElements(){
@@ -112,9 +112,9 @@ class SolutionForm extends BaseForm
         ));
 
         $this->add(array(
-            'name'          => 'summery',
+            'name'          => 'summary',
             'options'       => array(
-                'label' => _a('Solution Summery'),
+                'label' => _a('Solution Summary'),
             ),
             'attributes'    => array(
                 'type'  => 'textarea',

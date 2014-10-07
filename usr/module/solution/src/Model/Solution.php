@@ -25,6 +25,6 @@ class Solution extends Model
         'id', 'name', 'title', 'slug', 'content', 'active',
         'uid', 'time_created', 'time_updated', 'seo_title', 'seo_keywords', 'seo_description',
         'nav_order',
-        'icon', 'summery', 'time_release',
+        'icon', 'summary', 'time_release',
     );
 }

@@ -9,7 +9,7 @@
             <th><?php echo _a('Solution Title'); ?></th>
             <!-- <th style="width: 5%;"><?php echo _a('Name'); ?></th> -->
             <th style="width: 10%;"><?php echo _a('Icon'); ?></th>
-            <th style="width: 30%;"><?php echo _a('Solution Summery'); ?></th>
+            <th style="width: 30%;"><?php echo _a('Solution Summary'); ?></th>
             <th style="width: 10%;"><?php echo _a('Time Created'); ?></th>
             <th><?php echo _a('Action'); ?></th>
             <th style="width: 10%;"><?php echo _a('Nav Order'); ?></th>
@@ -32,7 +32,7 @@
                     <img src="<?php echo _escape($solution['icon']); ?>" width="80px" />
                 </td>
                 <td>
-                    <?php echo _escape($solution['summery']); ?>
+                    <?php echo _escape($solution['summary']); ?>
                 </td>
                 <td>
                     <?php echo _date($solution['time_created'], null, 'NULL', 'NULL',
