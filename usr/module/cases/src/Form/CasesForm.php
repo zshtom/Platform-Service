@@ -58,9 +58,9 @@ class CasesForm extends BaseForm
         ));
 
         $this->add(array(
-            'name'          => 'summery',
+            'name'          => 'summary',
             'options'       => array(
-                'label' => _a('Case Summery'),
+                'label' => _a('Case Summary'),
             ),
             'attributes'    => array(
                 'type'  => 'textarea',

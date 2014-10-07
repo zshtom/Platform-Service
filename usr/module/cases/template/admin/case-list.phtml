@@ -7,7 +7,7 @@
         <tr>
             <th><?php echo _a('Case title'); ?></th>
             <th style="width: 10%;"><?php echo _a('Case Icon'); ?></th>
-            <th style="width: 30%;"><?php echo _a('Case Summery'); ?></th>
+            <th style="width: 30%;"><?php echo _a('Case Summary'); ?></th>
             <th style="width: 10%;"><?php echo _a('Time Created'); ?></th>
             <th style="width: 10%;"><?php echo _a('Order'); ?></th>
             <th><?php echo _a('Action'); ?></th>
@@ -26,7 +26,7 @@
                     <img src="<?php echo _escape($case['icon']); ?>" width="80px" />
                 </td>
                 <td>
-                    <?php echo _escape($case['summery']); ?>
+                    <?php echo _escape($case['summary']); ?>
                 </td>
                 <td>
                     <?php echo _date($case['time_created'], null, 'NULL', 'NULL',

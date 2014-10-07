@@ -64,7 +64,7 @@ class Api extends AbstractApi
         $config  = Pi::config('', $module);
         $model  = Pi::model('cases', $this->getModule());
         $select = $model->select();
-        $select->columns(array('id', 'title', 'summery', 'icon', 'time_created'));
+        $select->columns(array('id', 'title', 'summary', 'icon', 'time_created'));
         $select->order(array('order ASC'));
         $rowset = $model->selectWith($select);
         $upload_path = Pi::url('upload') . '/' . $this->getModule();
@@ -75,7 +75,7 @@ class Api extends AbstractApi
                 $item = array(
                     'id'        => $row['id'],
                     'title'     => $row['title'],
-                    'summery'   => $row['summery'],
+                    'summary'   => $row['summary'],
                     'icon'      => $upload_path . $row['icon'],
                     'time_created' => $row['time_created'],
                     'url'       => Pi::url('').'/'.$this->module.'/index/detail/id-'.$row['id'],

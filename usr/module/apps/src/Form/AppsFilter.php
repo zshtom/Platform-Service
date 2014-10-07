@@ -64,7 +64,7 @@ class AppsFilter extends InputFilter
         ));
 
         $this->add(array(
-            'name'          => 'summery',
+            'name'          => 'summary',
             'required'      => false,
             'filters'       => array(
                 array(

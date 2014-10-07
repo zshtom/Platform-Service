@@ -94,9 +94,9 @@ class AppsForm extends BaseForm
         ));
 
         $this->add(array(
-            'name'          => 'summery',
+            'name'          => 'summary',
             'options'       => array(
-                'label' => _a('App Summery'),
+                'label' => _a('App Summary'),
             ),
             'attributes'    => array(
                 'type'  => 'textarea',

@@ -33,7 +33,7 @@ class Solution extends AbstractRegistry
         $model  = Pi::model('solution', $this->module);
         $select = $model->select();
         $select->where(array('active' => 1));
-        $select->columns(array('id', 'name', 'title', 'summery', 'icon', 'slug'));
+        $select->columns(array('id', 'name', 'title', 'summary', 'icon', 'slug'));
 
         // Add order by.
         $select->order(array('nav_order ASC', 'id DESC'));
@@ -46,7 +46,7 @@ class Solution extends AbstractRegistry
                 'id'        => $id,
                 'name'      => $row['name'],
                 'title'     => $row['title'],
-                'summery'   => $row['summery'],
+                'summary'   => $row['summary'],
                 'icon'      => $row['icon'],
                 'url'       => Pi::service('url')->assemble(
                     'solution',

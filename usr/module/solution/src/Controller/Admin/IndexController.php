@@ -816,13 +816,13 @@ class IndexController extends ActionController
 
                 array(
                     'class'      => 'self-class',
-                    'name'       => SOLUTION_CASE . '[' . $key . '][summery]',
+                    'name'       => SOLUTION_CASE . '[' . $key . '][summary]',
                     'options'    => array(
                         'class' => 'inline',
                         'label'     => ' ',
                     ),
                     'attributes' => array(
-                        'value' => _escape($case['summery']),
+                        'value' => _escape($case['summary']),
                         'class' => 'inline',
                         'readonly'  => 'readonly',
                     ),

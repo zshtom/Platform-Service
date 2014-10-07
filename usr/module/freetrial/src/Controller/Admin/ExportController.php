@@ -31,7 +31,7 @@ class ExportController extends ActionController
         $end = strtotime($end);
         $start= strtotime($start);
         if (empty($start)&&empty($end)) {
-           $end=134217727;
+           $end=time();
            $start=0;
         }
         $columns = array('id', 'name', 'title','company','email', 'phone','time');
@@ -55,6 +55,7 @@ class ExportController extends ActionController
      */
     public function exportAction()
     {
+        $response = $this->getEvent()->getResponse();
         $columns = array('id', 'name', 'title','company','email', 'phone','time');
         $model  = $this->getModel('freetrial');
         $select = $model->select()
@@ -62,30 +63,44 @@ class ExportController extends ActionController
             ->order('id ASC');
         $data = $model->selectWith($select);
         $value = $data->toArray();
-            foreach ($value as $v)
-            {
-                $v = implode(",",$v);
-                $temp[] = $v;
-            }
-            $t="";
-            foreach($temp as $v){
-                $t.="'".$v."'"."\n";
-            }
-        $source=substr($t,0,-1);
-        d($value);
-        d($source);
 
-          $options = array(
-       // Required
-       'type'          => 'raw',
-       // Optional
-       'filename'      => 'list.xls',
-       // Optional
-       'content_type'   => 'application/octet-stream',
-   );
+        $fp = fopen('php://temp', 'a');
+        fputcsv($fp,array(
+            __('Id'),
+            __('Name'),
+            __('Title'),
+            __('Company'),
+            __('Email'),
+            __('Phone'),
+            __('Time'),
+        ));
 
-//          $downloader = new Download;
-//          $downloader->send($t, $options);
-        Pi::service('file')->download($source,$options);
+        foreach ($value as $v)
+        {
+            fputcsv($fp, array(
+                $v['id'],
+                $v['name'],
+                $v['title'],
+                $v['company'],
+                $v['email'],
+                $v['phone'],
+                date('Y-m-d H:i:s', $v['time']),
+            ));
+        }
+
+        rewind($fp);
+        $output = stream_get_contents($fp);
+        $output=mb_convert_encoding($output, "gbk", "UTF-8");
+        
+        $options = array(
+           // Required
+           'type'          => 'raw',
+           // Optional
+           'filename'      => 'list.csv',
+           // Optional
+           'content_type'   => 'application/octet-stream',
+        );
+
+        Pi::service('file')->download($output,$options);
     }
 }
